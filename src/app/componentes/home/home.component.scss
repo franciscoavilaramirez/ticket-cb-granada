@@ -1,0 +1,60 @@
+
+.container{
+  height:150%;
+  width: 100%;
+  display: grid;
+  padding: 100px;
+
+  &__wrapper{
+    display: flex;
+    flex-direction: column;
+    padding: 50px,50px,0px,50px;
+
+
+      // &__buttons{
+      //       /* bottom: 50px; */
+      //       height: 50px;
+      //       width: 50%;
+      //       display: flex;
+      //       flex-direction: row;
+      //       align-items: center;
+      //       column-gap: 10px;
+      //       justify-content: space-around;
+      //       font-size: 20px;
+      //       margin-bottom: 20px;
+      // }
+
+      &__content-wrapper{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        .buttons{
+          height: 50px;
+          width: 100%;
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          column-gap: 10px;
+          justify-content: flex-start;
+          font-size: 20px;
+          margin-bottom: 20px;
+    }
+
+        .demo-inline-calendar-card {
+          width: 300px;
+        }
+
+      }
+.mdc-data-table__table {
+    min-width: 10%;
+    border: 0;
+    white-space: nowrap;
+    border-spacing: 0;
+    table-layout: fixed;
+    width: 60%;
+    background-color: #b8b3b81f;
+}
+  }
+
+}
