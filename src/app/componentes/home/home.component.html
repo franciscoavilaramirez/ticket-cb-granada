@@ -16,16 +16,17 @@
     </div>
     <div class="container__wrapper__content-wrapper" >
       <button mat-raised-button color="primary" (click)="openSnackBar()">Enviar correo confirmación</button>
-    </div>
+    </div> -->
     <div class="container__wrapper__content-wrapper" >
       <h1>Próximos Partidos</h1>
-<mat-card class="demo-inline-calendar-card" >
-        <mat-calendar [(selected)]="selected"></mat-calendar>
-      </mat-card>
+        <mat-card class="demo-inline-calendar-card fechas-marcadas" >
+          <mat-calendar [(selected)]="fechasMarcadas" >
+
+          </mat-calendar>
+        </mat-card>
 
     </div>
-    <p>Selected date: {{selected}}</p> -->
-    <!-- <div class="container__wrapper" #TABLE > -->
+    <p>Selected date: {{fechasMarcadas}}</p>
       <div class="buttons">
       <button mat-raised-button class="container__wrapper__buttons" color="primary" (click)="userList()" >Mostrar Listado Usuarios</button>
       <button mat-raised-button class="container__wrapper__buttons" color="primary" (click)="hiddenUserList()" >Ocultar Listado</button>
@@ -33,30 +34,91 @@
     <div class="container__wrapper" #TABLE>
       <table mat-table [dataSource]="usuarios" class="mat-elevation-z8" #table *ngIf="hiddenList">
 
-        <ng-container matColumnDef="id">
+        <!-- <ng-container matColumnDef="id">
           <th mat-header-cell *matHeaderCellDef> Id </th>
           <td mat-cell *matCellDef="let element"> {{element.userId}} </td>
+        </ng-container> -->
+        <ng-container matColumnDef="no">
+          <th mat-header-cell *matHeaderCellDef> No </th>
+          <td mat-cell *matCellDef="let element let i = index" > {{i+1}} </td>
         </ng-container>
         <ng-container matColumnDef="nombre">
           <th mat-header-cell *matHeaderCellDef> Nombre </th>
-          <td mat-cell *matCellDef="let element"> {{element.nombre}} </td>
+          <td mat-cell *matCellDef="let element" > {{element.nombre}} </td>
         </ng-container>
+        <ng-container matColumnDef="apellido">
+          <th mat-header-cell *matHeaderCellDef> Apellido </th>
+          <td mat-cell *matCellDef="let element"> {{element.apellido}} </td>
+        </ng-container>
+
         <ng-container matColumnDef="email">
           <th mat-header-cell *matHeaderCellDef> Email </th>
-          <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+          <td mat-cell *matCellDef="let element"> {{element.email}}</td>
         </ng-container>
+
+        <ng-container matColumnDef="botones">
+          <th mat-header-cell *matHeaderCellDef></th>
+          <td mat-cell *matCellDef="let element" >
+            <button mat-raised-button class="container__wrapper__table-buttons"
+                      color="primary"
+                      type="submit"><mat-icon>edit</mat-icon>
+                      Modificar
+              </button>
+             <button mat-raised-button class="container__wrapper__table-buttons"
+                      color="warn"
+                      type="submit"
+                      (click)="deleteUser(element)"><mat-icon>delete_forever</mat-icon>
+                      Eliminar
+              </button>
+            </td>
+        </ng-container>
+
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 
       </table>
-      <div class="buttons">
-      <button mat-raised-button class="container__wrapper__buttons" color="primary" (click)="ExportTOExcel()" *ngIf="exportCsv">Exportar a XLSX
-        <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="description" ></mat-icon>
+        <div class="buttons">
+        <button mat-raised-button class="container__wrapper__buttons" color="primary" (click)="ExportTOExcel()" *ngIf="exportCsv">Exportar a XLSX
+          <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="description" ></mat-icon>
+        </button>
+        <button mat-raised-button class="container__wrapper__buttons" color="primary">Realizar sorteo</button>
+        </div>
+    </div>
 
-      </button>
-      </div>
-    </div>
-    </div>
+      <form class="formLogin" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <h1>Login</h1>
+        <mat-form-field >
+          <mat-label>Nombre</mat-label>
+          <input type="text" matInput formControlName ="nombre" >
+        </mat-form-field>
+        <mat-form-field >
+          <mat-label>Apellido</mat-label>
+          <input type="text" matInput formControlName ="apellido" >
+        </mat-form-field>
+        <mat-form-field >
+          <mat-label>Email</mat-label>
+          <input matInput formControlName ="email" >
+        </mat-form-field>
+        <!-- <mat-form-field>
+          <mat-label>Contraseña</mat-label>
+          <input matInput [type]="hide ? 'password' : 'text'" formControlName="contraseña">
+          <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+        </mat-form-field> -->
+        <button mat-raised-button class="container__wrapper__buttons" color="primary" type="submit" [disabled]="loginForm.invalid">Enviar</button>
+      </form>
+      <p>form value:{{loginForm.value | json}}</p>
+
+      <!-- <button mat-raised-button class="container__wrapper__buttons"
+                color="primary"
+                type="submit"
+                >
+                Eliminar Usuario
+        </button> -->
+
+
+  </div>
 </div>
 

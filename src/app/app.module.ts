@@ -15,9 +15,8 @@ import {MatInputModule} from '@angular/material/input';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatTableModule} from '@angular/material/table';
 import {MatIconModule} from '@angular/material/icon'
-
-
-
+import { ReactiveFormsModule } from '@angular/forms';
+import {MatDialogModule} from '@angular/material/dialog';
 
 
 import { HttpClientModule } from '@angular/common/http';
@@ -45,7 +44,9 @@ import { HomeComponent } from './componentes/home/home.component';
     MatInputModule,
     MatSnackBarModule,
     MatTableModule,
-    MatIconModule
+    MatIconModule,
+    ReactiveFormsModule,
+    MatDialogModule
 
   ],
   providers: [],

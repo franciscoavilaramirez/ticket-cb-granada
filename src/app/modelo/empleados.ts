@@ -1,5 +1,10 @@
 export class Usuario{
-  userId:number | undefined;
-  nombre?:string;
-  email?:string;
+  userId?: string
+  nombre:string;
+  email:string;
+  apellido:string;
+  asistenciaPrevia?:number;
+  entrada?:string;
+  isAdmin:boolean;
+
 }
