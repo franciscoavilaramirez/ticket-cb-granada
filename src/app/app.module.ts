@@ -17,17 +17,20 @@ import {MatTableModule} from '@angular/material/table';
 import {MatIconModule} from '@angular/material/icon'
 import { ReactiveFormsModule } from '@angular/forms';
 import {MatDialogModule} from '@angular/material/dialog';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 
 import { HttpClientModule } from '@angular/common/http';
 import { HomeComponent } from './componentes/home/home.component';
+import { UpdateUserComponent } from './componentes/update-user/update-user.component';
 
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent
+    HomeComponent,
+    UpdateUserComponent
   ],
   imports: [
     HttpClientModule,
@@ -46,7 +49,8 @@ import { HomeComponent } from './componentes/home/home.component';
     MatTableModule,
     MatIconModule,
     ReactiveFormsModule,
-    MatDialogModule
+    MatDialogModule,
+    MatCheckboxModule
 
   ],
   providers: [],

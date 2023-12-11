@@ -3,13 +3,14 @@
   height:150%;
   width: 100%;
   display: grid;
-  padding: 100px;
+  //padding: 100px;
 
   &__wrapper{
     display: flex;
     flex-direction: column;
-    padding: 50px,50px,0px,50px;
+    //padding: 50px,50px,0px,50px;
     width: auto;
+    justify-content: center;
 
     &__table-buttons{
       margin-right: 20px;
@@ -34,7 +35,7 @@
         }
 
 
-        .formLogin{
+        .formUpdateUser{
           display: flex;
           flex-direction: column;
           border: solid 2px deeppink;
@@ -45,19 +46,22 @@
         .demo-inline-calendar-card {
           width: 300px;
         }
+        .mdc-dialog__actions {
+          display: flex;
+          position: relative;
+          flex-shrink: 0;
+          box-sizing: border-box;
+          min-height: 52px;
+          margin: 0;
+          padding: 8px;
+          border-top: 1px solid rgba(0,0,0,0);
+          align-items: center;
+          align-content: center;
+          flex-direction: column;
+      }
 
       }
-.mdc-data-table__table {
-    min-width: 10%;
-    border: 0;
-    white-space: nowrap;
-    border-spacing: 0;
-    table-layout: fixed;
-    //width: 60%;
-    width: auto;
-    background-color: #b8b3b81f;
-    margin-bottom: 20px;
-}
+
   }
 
 }

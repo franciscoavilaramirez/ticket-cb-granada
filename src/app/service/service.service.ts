@@ -16,6 +16,7 @@ export class ServiceService {
   UrlGlobal = 'http://localhost:9191/cbgranada-api/v1/';
   UrlInsertLogin = 'http://localhost:9191/cbgranada-api/v1/addUser';
   UrlDeleteUser = 'http://localhost:9191/cbgranada-api/v1/borrarUsuario';
+  UrlUpdateUser = 'http://localhost:9191/cbgranada-api/v1/modificarUsuario';
 
 
   getUsers(){
@@ -24,18 +25,9 @@ export class ServiceService {
   insertLogin(usuario: Usuario): Observable<Usuario> {
     return this.http.post<Usuario>(this.UrlInsertLogin, usuario);
   }
-  modifyUser(){
-
+  modifyUser(usuario: Usuario): Observable<Usuario>{
+    return this.http.put<Usuario>(`${this.UrlUpdateUser}/${usuario.userId}`,usuario);
   }
-  // deleteUser(id: number){
-  //   this.http.delete<Usuario>(`${this.UrlDeleteUser}/${id}`);
-  // }
-
-  // deleteUser(email: string){
-  //   return this.http.delete<Usuario>(this.UrlGlobal + email,{
-  //     observe:'response'
-  //   });
-  // }
   deleteUser(user: Usuario): Observable<Usuario> {
     return this.http.delete<Usuario>(`${this.UrlDeleteUser}/${user.userId}`);
   }

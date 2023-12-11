@@ -1,24 +1,40 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ServiceService } from '../../service/service.service';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { HomeComponent } from '../home/home.component';
+import {MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { Usuario } from '../../modelo/empleados';
+
 
 @Component({
   selector: 'app-update-user',
   templateUrl: './update-user.component.html',
-  styleUrl: './update-user.component.css'
+  styleUrl: './update-user.component.scss'
 })
 export class UpdateUserComponent {
 
   updateUserForm:FormGroup;
 
 
-constructor(private service:ServiceService){}
+
+
+constructor(private service:ServiceService,public dialog: MatDialog,
+            public dialogRef: MatDialogRef<HomeComponent>,
+            @Inject(MAT_DIALOG_DATA) public userModify: Usuario){
+              this.createFormUpdateUser();
+            }
+
+
+
 
 createFormUpdateUser(){
   this.updateUserForm = new FormGroup({
-    nombre: new FormControl(""),
-    email: new FormControl("",Validators.email),
-    apellido: new FormControl("")
+    nombre: new FormControl(this.userModify.nombre),
+    apellido: new FormControl(this.userModify.apellido),
+    email: new FormControl(this.userModify.email,Validators.email),
+    isAdmin: new FormControl(Boolean(this.userModify.isAdmin)),
+    userId:new FormControl(this.userModify.userId)
 
   });
 }
@@ -26,26 +42,17 @@ createFormUpdateUser(){
 
 onSubmit(){
   if(this.updateUserForm.valid){
-    const nombre = this.updateUserForm.get("nombre")?.value;
-    const email = this.updateUserForm.get("email")?.value;
-    const apellido = this.updateUserForm.get("apellido")?.value;
 
-    //const contraseña = this.loginForm.get("contraseña")?.value;
-    console.log("nombre", nombre,"email",email);
-
-    this.bodyResponse = {
-
-      nombre:nombre,
-      email:email,
-      apellido: apellido,
-      isAdmin: false
-
-    }
-    this.service.insertLogin(this.bodyResponse).subscribe(data => {
-      console.log("insert", data);
+    const bodyResponse = this.updateUserForm.value;
+    console.log("bodyResponse",bodyResponse);
+    this.service.modifyUser(bodyResponse).subscribe(data =>{
+      alert("Usuario modificado correctamente");
     });
-
+    this.service.getUsers()
   }
 }
 
+  closedModal(): void {
+    this.dialogRef.close();
+  }
 }

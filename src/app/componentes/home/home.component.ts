@@ -6,6 +6,8 @@ import { ServiceService } from './../../service/service.service';
 import { Router } from '@angular/router';
 import * as XLSX from 'xlsx';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { UpdateUserComponent } from '../update-user/update-user.component';
 
 
 
@@ -26,7 +28,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 export class HomeComponent {
 
 
-  constructor(private snackBar: MatSnackBar,private service: ServiceService, private router: Router) {
+  constructor(private snackBar: MatSnackBar,private service: ServiceService, private router: Router,public dialog: MatDialog) {
     this.createLoginForm();
   }
   // nombre: string;
@@ -83,13 +85,7 @@ export class HomeComponent {
 
     }
   }
-  // deleteUser(email: string): void {
-  //   this.service.deleteUser(email).subscribe(data => {
-  //     console.log("deleteeeeeeeee");
-  //     this.getUsers();
 
-  //   });
-  // }
   deleteUser(user: Usuario): void {
     this.service.deleteUser(user).subscribe(data => {
       console.log("Usuario eliminado");
@@ -127,10 +123,19 @@ export class HomeComponent {
   /* save to file */
   XLSX.writeFile(wb, 'Listado_Usuarios.xlsx');
 }
-  fecha1 = new Date('2023-11-01');
-  fecha2 = new Date('2023-11-15');
-  fecha3 = new Date('2023-11-28');
+openDialog(usuario:Usuario) {
+  this.dialog.open(UpdateUserComponent,{
+    data: usuario ,
+    width:'450px',
+    height:'600px'
 
-  fechasMarcadas = [this.fecha1,this.fecha2,this.fecha3];
+  });
+
+  ;
+
+
+  }
 
 }
+
+
