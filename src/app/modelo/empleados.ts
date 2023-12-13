@@ -6,5 +6,6 @@ export class Usuario{
   asistenciaPrevia?:number;
   entrada?:string;
   isAdmin:boolean;
+  contrasena:string;
 
 }
