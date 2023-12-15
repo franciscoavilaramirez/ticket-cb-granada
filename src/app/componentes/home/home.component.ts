@@ -41,7 +41,7 @@ export class HomeComponent {
   usuarios!: Usuario[];
   loginForm: FormGroup;
   bodyResponse: Usuario;
-  currentUser: Usuario
+  currentUser: Usuario;
 
   @ViewChild('TABLE')table!: ElementRef;
 
@@ -89,6 +89,12 @@ export class HomeComponent {
 
     }
   }
+
+  getProximosPartidos(){
+    return this.service.getProximosPartidos();
+  }
+
+
 
   Login(){
     if(this.loginForm.valid){
@@ -148,7 +154,7 @@ export class HomeComponent {
   }
 
   isAdmin(){
-    this.currentUser.isAdmin
+    return this.currentUser.isAdmin;
   }
 
 

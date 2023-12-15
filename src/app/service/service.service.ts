@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {  Usuario } from '../modelo/empleados';
+import { Partido } from '../modelo/partidos';
 import { Observable } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 
@@ -23,6 +24,11 @@ export class ServiceService {
   getUsers(){
     return this.http.get<Usuario[]>(this.UrlGlobal + 'getAllUsers');
   }
+
+  getUserss(partido: Partido){
+    return new Partido;
+  }
+
   insertLogin(usuario: Usuario): Observable<Usuario> {
     return this.http.post<Usuario>(this.UrlInsertLogin, usuario);
   }
@@ -36,6 +42,10 @@ export class ServiceService {
   Login(usuario: Usuario): Usuario{
     this.http.post<Usuario>(this.UrlLogin, usuario);
     return new Usuario;
+  }
+
+  getProximosPartidos(){
+    return this.http.get<Partido[]>(this.UrlGlobal + 'getProximosPartidos');
   }
 
 }
