@@ -1,5 +1,5 @@
 export class Partido{
     userId?: string;
-    fechaPartido : string;
-    
+    fecha : Date;
+    nombre : string;
   }

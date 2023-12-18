@@ -44,8 +44,8 @@ export class ServiceService {
     return new Usuario;
   }
 
-  getProximosPartidos(){
-    return this.http.get<Partido[]>(this.UrlGlobal + 'getProximosPartidos');
+  getPartidos(){
+    return  this.http.get<Partido[]>(this.UrlGlobal + 'getPartidos');
   }
 
 }

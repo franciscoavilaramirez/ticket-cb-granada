@@ -2,12 +2,14 @@ import { Component, ViewChild, AfterViewInit, ElementRef } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatCalendar, MatDateRangeSelectionStrategy } from '@angular/material/datepicker';
 import { Usuario } from '../../modelo/empleados';
+import { Partido } from '../../modelo/partidos';
 import { ServiceService } from './../../service/service.service';
 import { Router } from '@angular/router';
 import * as XLSX from 'xlsx';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { UpdateUserComponent } from '../update-user/update-user.component';
+
 import Swal from 'sweetalert2';
 
 
@@ -34,23 +36,7 @@ export class HomeComponent {
   loginForm: FormGroup;
   bodyResponse: Usuario;
   currentUser: Usuario;
-
-   partidos = [
-    {
-      "nombre": "CB.Granada-R.Madrid",
-      "fecha": "10/12/2023",
-    },
-    {
-      "nombre": "CB.Granada-Barcelona",
-      "fecha": "21/05/2023",
-    },
-    {
-      "nombre": "CB.Granada-Barcelona",
-      "fecha": "21/05/2023",
-    }
-
-
-  ]
+  partidos!: Partido[];
 
   @ViewChild('TABLE')table!: ElementRef;
 
@@ -64,6 +50,19 @@ export class HomeComponent {
       console.log('data', this.usuarios);
     });
   }
+  
+  getProximosPartidos(){
+    this.service.getPartidos().subscribe(data =>{
+      this.partidos = data
+      console.log('data', this.partidos);  });
+
+
+
+  }
+
+
+
+
   createLoginForm(){
     this.loginForm = new FormGroup({
       nombre: new FormControl("", Validators.required),
@@ -97,10 +96,6 @@ export class HomeComponent {
 
 
     }
-  }
-
-  getProximosPartidos(){
-    return this.service.getProximosPartidos();
   }
 
 
