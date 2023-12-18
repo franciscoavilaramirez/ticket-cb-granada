@@ -25,7 +25,10 @@ constructor(private service:ServiceService,public dialog: MatDialog,
               this.createFormUpdateUser();
             }
 
+ngOnInit(){
+  this.service.getUsers();
 
+}
 
 
 createFormUpdateUser(){
@@ -46,9 +49,10 @@ onSubmit(){
     const bodyResponse = this.updateUserForm.value;
     console.log("bodyResponse",bodyResponse);
     this.service.modifyUser(bodyResponse).subscribe(data =>{
-      alert("Usuario modificado correctamente");
+      //alert("Usuario modificado correctamente");
+      this.closedModal();
     });
-    this.service.getUsers()
+
   }
 }
 
