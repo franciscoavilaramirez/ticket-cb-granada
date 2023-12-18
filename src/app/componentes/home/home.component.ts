@@ -33,6 +33,7 @@ export class HomeComponent {
   usuarios!: Usuario[];
   loginForm: FormGroup;
   bodyResponse: Usuario;
+  currentUser: Usuario;
 
    partidos = [
     {
@@ -75,7 +76,7 @@ export class HomeComponent {
     if(this.loginForm.valid){
       const nombre = this.loginForm.get("nombre")?.value;
       const email = this.loginForm.get("email")?.value;
-      const apellido = this.loginForm.get("apellido")?.value;
+      const contrasena = this.loginForm.get("contrasena")?.value;
 
       //const contraseña = this.loginForm.get("contraseña")?.value;
       console.log("nombre", nombre,"email",email);
@@ -84,15 +85,51 @@ export class HomeComponent {
 
         nombre:nombre,
         email:email,
-        apellido: apellido,
-        isAdmin: false
+        apellido: 'lopez',
+        isAdmin: false,
+        contrasena: contrasena
 
       }
       this.service.insertLogin(this.bodyResponse).subscribe(data => {
         console.log("insert", data);
       });
 
+
+
     }
+  }
+
+  getProximosPartidos(){
+    return this.service.getProximosPartidos();
+  }
+
+
+
+  Login(){
+    if(this.loginForm.valid){
+      const nombre = this.loginForm.get("nombre")?.value;
+      const email = this.loginForm.get("email")?.value;
+      const contrasena = this.loginForm.get("contrasena")?.value;
+
+      //const contraseña = this.loginForm.get("contraseña")?.value;
+      console.log("nombre", nombre,"email",email);
+
+      this.bodyResponse = {
+
+        nombre:nombre,
+        email:email,
+        apellido: 'lopez',
+        isAdmin: false,
+        contrasena: contrasena
+
+      }
+    }
+
+    
+      //creo que la funcion onsubmit en vez de log in lo que hace es añadir un usuario. voy a intentar pedir el usuario al servicio para
+      //después cargar la variable currentUser como ese.
+
+      this.currentUser = this.service.Login(this.bodyResponse)
   }
 
   deleteUser(user: Usuario): void {
@@ -136,6 +173,12 @@ export class HomeComponent {
     this.exportCsv = false;
 
   }
+
+  isAdmin(){
+    return this.currentUser.isAdmin;
+  }
+
+
   ExportTOExcel()
 {
   const ws: XLSX.WorkSheet=XLSX.utils.table_to_sheet(this.table.nativeElement);

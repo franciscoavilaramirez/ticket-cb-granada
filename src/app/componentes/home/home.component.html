@@ -1,4 +1,10 @@
 
+<ul>
+  <li><a class="active" href="#home">Home</a></li>
+  <li *ngIf="isAdmin()"><a href="#newPartido">Agregar Partido</a></li>
+  <li><a href="#contact">Contact</a></li>
+  <li><a href="#about">About</a></li>
+</ul>
 
 <div class="container">
   <div class="container__wrapper">
@@ -25,6 +31,7 @@
           </mat-calendar>
         </mat-card>
     </div>
+
     <p>Selected date:{{ selected | date:'short' }}</p> -->
     <!-- @for (user of users; track user.id) {
       {{ user.name }}
@@ -46,6 +53,7 @@
       </div>
 
       <div class="buttons">
+
       <button mat-raised-button class="container__wrapper__buttons" color="primary" (click)="userList()" >Mostrar Listado Usuarios</button>
       <button mat-raised-button class="container__wrapper__buttons" color="primary" (click)="hiddenUserList()" >Ocultar Listado</button>
     </div>
@@ -112,8 +120,8 @@
           <input type="text" matInput formControlName ="nombre" >
         </mat-form-field>
         <mat-form-field >
-          <mat-label>Apellido</mat-label>
-          <input type="text" matInput formControlName ="apellido" >
+          <mat-label>Contraseña</mat-label>
+          <input type="text" matInput formControlName ="contrasena" >
         </mat-form-field>
         <mat-form-field >
           <mat-label>Email</mat-label>
