@@ -8,17 +8,8 @@ import * as XLSX from 'xlsx';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { UpdateUserComponent } from '../update-user/update-user.component';
+import Swal from 'sweetalert2';
 
-
-
-
-// const ELEMENT_DATA: Empleado[] = [
-//   {id: 1, nombre: 'Hydrogen', apellido: 'Perez', email: 'H'},
-//   {id: 2, nombre: 'Helium',   apellido: 'Perez', email: 'He'},
-//   {id: 3, nombre: 'Lithium',  apellido: 'Perez', email: 'Li'},
-//   {id: 4, nombre: 'Beryllium',apellido: 'Perez', email: 'Be'},
-//   {id: 5, nombre: 'Boron',    apellido: 'Perez', email: 'B'},
-// ];
 
 @Component({
   selector: 'app-home',
@@ -26,6 +17,7 @@ import { UpdateUserComponent } from '../update-user/update-user.component';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent {
+[x: string]: any;
 
 
   constructor(private snackBar: MatSnackBar,private service: ServiceService, private router: Router,public dialog: MatDialog) {
@@ -42,6 +34,23 @@ export class HomeComponent {
   loginForm: FormGroup;
   bodyResponse: Usuario;
   currentUser: Usuario;
+
+   partidos = [
+    {
+      "nombre": "CB.Granada-R.Madrid",
+      "fecha": "10/12/2023",
+    },
+    {
+      "nombre": "CB.Granada-Barcelona",
+      "fecha": "21/05/2023",
+    },
+    {
+      "nombre": "CB.Granada-Barcelona",
+      "fecha": "21/05/2023",
+    }
+
+
+  ]
 
   @ViewChild('TABLE')table!: ElementRef;
 
@@ -124,11 +133,23 @@ export class HomeComponent {
   }
 
   deleteUser(user: Usuario): void {
-    this.service.deleteUser(user).subscribe(data => {
-      console.log("Usuario eliminado");
+
+    this.service.deleteUser(user).subscribe(async data => {
+      const dataUser = await Swal.fire({
+        title: '¿Seguro que desea eliminar este usuario?',
+        showDenyButton: true,
+        denyButtonText: `Cancelar`,
+        confirmButtonText: 'Eliminar',
+      });
+      if (dataUser.isConfirmed) {
+        Swal.fire("Usuario Eliminado", "", "success");      }
+      else if (dataUser.isDismissed) {
+        //Swal.fire("Changes are not saved", "", "info");
+      }
       this.getUsers();
     });
   }
+
 
   openSnackBar() {
     this.snackBar.open('Correo enviado satisfactoriamente', 'Cerrar', {
