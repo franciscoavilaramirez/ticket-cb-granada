@@ -36,6 +36,7 @@ export class HomeComponent {
   loginForm: FormGroup;
   bodyResponse: Usuario;
   currentUser: Usuario;
+  partidos!: Partido[];
 
   @ViewChild('TABLE')table!: ElementRef;
 
@@ -53,7 +54,7 @@ export class HomeComponent {
   getProximosPartidos(){
     this.service.getPartidos().subscribe(data =>{
       this.partidos = data
-  });
+      console.log('data', this.partidos);  });
 
 
 
