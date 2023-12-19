@@ -68,14 +68,11 @@ export class HomeComponent {
         return 0;
         
       })
-
-
       
       for (var index in this.partidos) {
         if(this.partidos[index].fecha.getTime() < this.todayDate.getTime()){
-          return this.partidos.slice(+index - 3, +index);
-        }else{
-          return this.partidos.slice(0, 0);
+          var mostrados = Math.min(3, +index)
+          return this.partidos.slice(+index - mostrados, +index);
         }
       }
       return this.partidos.slice(0, 0);
