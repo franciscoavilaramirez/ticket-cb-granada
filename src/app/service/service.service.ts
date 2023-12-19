@@ -25,10 +25,6 @@ export class ServiceService {
     return this.http.get<Usuario[]>(this.UrlGlobal + 'getAllUsers');
   }
 
-  getUserss(partido: Partido){
-    return new Partido;
-  }
-
   insertLogin(usuario: Usuario): Observable<Usuario> {
     return this.http.post<Usuario>(this.UrlInsertLogin, usuario);
   }

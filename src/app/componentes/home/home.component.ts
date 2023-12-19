@@ -11,6 +11,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { UpdateUserComponent } from '../update-user/update-user.component';
 
 import Swal from 'sweetalert2';
+import { of } from 'rxjs';
 
 
 @Component({
@@ -56,7 +57,25 @@ export class HomeComponent {
       this.partidos = data
       console.log('data', this.partidos);  });
 
+      this.partidos = this.partidos.sort((n1, n2) => {
+        if (n1.fecha.getTime() > n2.fecha.getTime()){
+          return 1;
+        }
+        if (n1.fecha.getTime() < n2.fecha.getTime()){
+          return -1;
+        }
 
+        return 0;
+        
+      })
+      
+      for (var index in this.partidos) {
+        if(this.partidos[index].fecha.getTime() < this.todayDate.getTime()){
+          var mostrados = Math.min(3, +index)
+          return this.partidos.slice(+index - mostrados, +index);
+        }
+      }
+      return this.partidos.slice(0, 0);
 
   }
 
