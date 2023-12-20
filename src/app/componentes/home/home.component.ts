@@ -2,14 +2,20 @@ import { Component, ViewChild, AfterViewInit, ElementRef } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatCalendar, MatDateRangeSelectionStrategy } from '@angular/material/datepicker';
 import { Usuario } from '../../modelo/empleados';
+import { Partido } from '../../modelo/partidos';
 import { ServiceService } from './../../service/service.service';
 import { Router } from '@angular/router';
 import * as XLSX from 'xlsx';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { UpdateUserComponent } from '../update-user/update-user.component';
+
 import Swal from 'sweetalert2';
+
+import { of } from 'rxjs';
+
 import { Partido } from '../../modelo/partidos';
+
 
 
 @Component({
@@ -39,6 +45,7 @@ export class HomeComponent {
   partidosFran!: Partido[];
   variable = "holaaaa";
 
+
   @ViewChild('TABLE')table!: ElementRef;
 
   ngOnInit(){
@@ -52,6 +59,37 @@ export class HomeComponent {
       console.log('data', this.usuarios);
     });
   }
+  
+  getProximosPartidos(){
+    this.service.getPartidos().subscribe(data =>{
+      this.partidos = data
+      console.log('data', this.partidos);  });
+
+      this.partidos = this.partidos.sort((n1, n2) => {
+        if (n1.fecha.getTime() > n2.fecha.getTime()){
+          return 1;
+        }
+        if (n1.fecha.getTime() < n2.fecha.getTime()){
+          return -1;
+        }
+
+        return 0;
+        
+      })
+      
+      for (var index in this.partidos) {
+        if(this.partidos[index].fecha.getTime() < this.todayDate.getTime()){
+          var mostrados = Math.min(3, +index)
+          return this.partidos.slice(+index - mostrados, +index);
+        }
+      }
+      return this.partidos.slice(0, 0);
+
+  }
+
+
+
+
   createLoginForm(){
     this.loginForm = new FormGroup({
       nombre: new FormControl("", Validators.required),
@@ -64,7 +102,7 @@ export class HomeComponent {
     if(this.loginForm.valid){
       const nombre = this.loginForm.get("nombre")?.value;
       const email = this.loginForm.get("email")?.value;
-      const apellido = this.loginForm.get("apellido")?.value;
+      const contrasena = this.loginForm.get("contrasena")?.value;
 
       //const contraseña = this.loginForm.get("contraseña")?.value;
       console.log("nombre", nombre,"email",email);
@@ -73,17 +111,40 @@ export class HomeComponent {
 
         nombre:nombre,
         email:email,
-        apellido: apellido,
-        isAdmin: false
+        apellido: 'lopez',
+        isAdmin: false,
+        contrasena: contrasena
 
       }
       this.service.insertLogin(this.bodyResponse).subscribe(data => {
         console.log("insert", data);
       });
-
-
-
     }
+  }
+  Login(){
+    if(this.loginForm.valid){
+      const nombre = this.loginForm.get("nombre")?.value;
+      const email = this.loginForm.get("email")?.value;
+      const contrasena = this.loginForm.get("contrasena")?.value;
+
+      //const contraseña = this.loginForm.get("contraseña")?.value;
+      console.log("nombre", nombre,"email",email);
+
+      this.bodyResponse = {
+
+        nombre:nombre,
+        email:email,
+        apellido: 'lopez',
+        isAdmin: false,
+        contrasena: contrasena
+
+      }
+    }
+
+      //creo que la funcion onsubmit en vez de log in lo que hace es añadir un usuario. voy a intentar pedir el usuario al servicio para
+      //después cargar la variable currentUser como ese.
+
+      this.currentUser = this.service.Login(this.bodyResponse)
   }
 
   deleteUser(user: Usuario): void {
@@ -127,6 +188,12 @@ export class HomeComponent {
     this.exportCsv = false;
 
   }
+
+  isAdmin(){
+    return this.currentUser.isAdmin;
+  }
+
+
   ExportTOExcel()
 {
   const ws: XLSX.WorkSheet=XLSX.utils.table_to_sheet(this.table.nativeElement);
