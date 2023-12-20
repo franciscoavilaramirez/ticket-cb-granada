@@ -1,8 +1,5 @@
 export class Pdf {
-    id!:number;
-    pdfbase!:string;
-    titulo!:string;
+    file!:string;
+    tituloPartido!:string;
     fechaPartido!:string;
-    id_user!:number;
-    assigned!:boolean;
 }

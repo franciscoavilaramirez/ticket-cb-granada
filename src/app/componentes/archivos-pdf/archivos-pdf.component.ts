@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { LoginUserService } from '../../login-user.service';
 import { Observable, Subscriber } from 'rxjs';
 import { Pdf } from './pdf';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-archivos-pdf',
@@ -10,12 +11,32 @@ import { Pdf } from './pdf';
 })
 export class ArchivosPDFComponent implements OnInit {
 
+  public formArchivos: FormGroup;
   private b64: String = "";
   pdf:Pdf = new Pdf();
 
-  constructor(private userservice: LoginUserService) { }
+  constructor(private userservice: LoginUserService, private fb:FormBuilder) { }
 
   ngOnInit() {
+    this.formArchivos = this.createMyForm();
+  }
+
+
+  private createMyForm():FormGroup{
+    return this.fb.group({
+      titulo:[''],
+      fecha:[''],
+      archivosSubir:[]
+    });
+  }
+
+  send(){
+    this.pdf.tituloPartido = this.formArchivos.value.titulo;
+    this.pdf.fechaPartido = this.formArchivos.value.fecha;
+    
+    this.userservice.subirTickets(this.pdf).subscribe(data=>{
+      alert("Tickets repartidos a las usuarios con exito")
+    }, error=> alert("Error al repartir los tickets a los usuaroios"));
   }
 
   subirArchivo(event: any): any{
@@ -30,16 +51,7 @@ export class ArchivosPDFComponent implements OnInit {
       this.b64 = new String(base64).valueOf();
 
       this.pdf = new Pdf();
-      this.pdf.id = 0;
-      this.pdf.pdfbase = "" + this.b64;
-      this.pdf.titulo = "";
-      this.pdf.fechaPartido = "";
-      this.pdf.id_user = 0;
-      this.pdf.assigned = false;
-      
-      this.userservice.subirTickets(this.pdf).subscribe(data=>{
-        alert("Tickets repartidos a las usuarios con exito")
-      }, error=> alert("Error al repartir los tickets a los usuaroios"));
+      this.pdf.file = "" + this.b64;
     })
 
   }

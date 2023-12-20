@@ -9,7 +9,7 @@ import { Pdf } from './componentes/archivos-pdf/pdf';
 })
 export class LoginUserService {
 
-  private baseUrlpdf = 'http://localhost:8081/user/subirArchivos';
+  private baseUrlpdf = 'http://localhost:9191/cbgranada-api/v1/uploadFile';
   constructor(private httpClient: HttpClient) { }
   
   subirTickets(pdf: Pdf):Observable<object>{

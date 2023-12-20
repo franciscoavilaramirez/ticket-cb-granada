@@ -1,6 +1,6 @@
 <div class="container col-md-5">
 
-  <form >
+  <form [formGroup]="formArchivos" (submit)="send()">
 
     <br><br>
     <h1>Subir Tickets Basket</h1>
@@ -8,14 +8,14 @@
 
     <div class="mb-3">
       <label for="titulo" class="form-label">Titulo Partido: </label>
-      <input required type="text" [(ngModel)]="pdf.titulo" class="form-control" id="titulo" name="titulo">
+      <input type="text" class="form-control" id="titulo" name="titulo" formControlName="titulo" required>
     </div>
 
     <br>
 
     <div class="mb-3">
       <label for="fecha" class="form-label">Fecha Partido: </label>
-      <input required type="text" [(ngModel)]="pdf.fechaPartido" class="form-control" id="fecha" name="fecha">
+      <input type="date" class="form-control" id="fecha" name="fecha" formControlName="fecha" required>
     </div>
     
     <br><br>
@@ -23,13 +23,14 @@
     <a>Subir Entradas Baloncesto: </a>
     <br><br>
     <div class="input-group mb-3">
-      <input type="file" (change)="subirArchivo($event)" class="form-control" id="archivosSubir">
+      <input type="file" (change)="subirArchivo($event)" class="form-control" id="archivosSubir" name="archivosSubir" formControlName="archivosSubir" required>
       <label class="input-group-text" for="archivosSubir">Upload</label>
     </div>
 
     <br><br>
 
-    <button type="submit" class="btn btn-primary">Login</button>
+    <button type="submit" class="btn btn-primary" [disabled]="!formArchivos.valid">Upload</button>
 
   </form>
+  
 </div>
