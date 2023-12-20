@@ -1,5 +1,7 @@
 export class Partido{
-    userId?: string;
-    fecha : Date;
-    nombre : string;
+
+    id?: string;
+    fechaPartido : Date;
+    nombrePartido : string;
   }
+

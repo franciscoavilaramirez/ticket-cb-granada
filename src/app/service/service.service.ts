@@ -4,6 +4,7 @@ import {  Usuario } from '../modelo/empleados';
 import { Partido } from '../modelo/partidos';
 import { Observable } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
+import { Partido } from '../modelo/partidos';
 
 
 @Injectable({
@@ -21,9 +22,11 @@ export class ServiceService {
   UrlLogin = 'http://localhost:9191/cbgranada-api/v1/Login'
 
 
+
   getUsers(){
     return this.http.get<Usuario[]>(this.UrlGlobal + 'getAllUsers');
   }
+
 
   insertLogin(usuario: Usuario): Observable<Usuario> {
     return this.http.post<Usuario>(this.UrlInsertLogin, usuario);
@@ -41,7 +44,7 @@ export class ServiceService {
   }
 
   getPartidos(){
-    return  this.http.get<Partido[]>(this.UrlGlobal + 'getPartidos');
+    return this.http.get<Partido[]>(this.UrlGlobal + 'getPartidos');
   }
 
 }

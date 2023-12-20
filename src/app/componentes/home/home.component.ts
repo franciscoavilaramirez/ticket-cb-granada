@@ -11,7 +11,11 @@ import { MatDialog } from '@angular/material/dialog';
 import { UpdateUserComponent } from '../update-user/update-user.component';
 
 import Swal from 'sweetalert2';
+
 import { of } from 'rxjs';
+
+import { Partido } from '../../modelo/partidos';
+
 
 
 @Component({
@@ -23,7 +27,7 @@ export class HomeComponent {
 [x: string]: any;
 
 
-  constructor(private snackBar: MatSnackBar,private service: ServiceService, private router: Router,public dialog: MatDialog) {
+  constructor(private snackBar: MatSnackBar,public service: ServiceService, private router: Router,public dialog: MatDialog) {
     this.createLoginForm();
   }
   // nombre: string;
@@ -38,11 +42,15 @@ export class HomeComponent {
   bodyResponse: Usuario;
   currentUser: Usuario;
   partidos!: Partido[];
+  partidosFran!: Partido[];
+  variable = "holaaaa";
+
 
   @ViewChild('TABLE')table!: ElementRef;
 
   ngOnInit(){
     this.getUsers();
+    this.getPartidos();
 
   }
   getUsers(){
@@ -111,14 +119,8 @@ export class HomeComponent {
       this.service.insertLogin(this.bodyResponse).subscribe(data => {
         console.log("insert", data);
       });
-
-
-
     }
   }
-
-
-
   Login(){
     if(this.loginForm.valid){
       const nombre = this.loginForm.get("nombre")?.value;
@@ -139,7 +141,6 @@ export class HomeComponent {
       }
     }
 
-    
       //creo que la funcion onsubmit en vez de log in lo que hace es añadir un usuario. voy a intentar pedir el usuario al servicio para
       //después cargar la variable currentUser como ese.
 
@@ -209,10 +210,14 @@ openDialog(usuario:Usuario) {
 
   });
 
-  ;
-
-
   }
+  getPartidos(){
+    this.service.getPartidos().subscribe(data =>{
+      this.partidosFran = data;
+      console.log('Partidos',this.partidosFran);
+    })
+  }
+
 
 }
 
