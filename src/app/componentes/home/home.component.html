@@ -40,30 +40,18 @@
     } @empty {
       Empty list of users
     } -->
-    <!-- @for (task of tasks; track task.id) {
-      <li>
-        {{ task.title }} - {{ task.completed }}
-      li>
-    } @empty {
-      <li>No tasks!li>
-      <button (click)="loadTasks()">Load tasksbutton>
-    } -->
+
     <div class="cards-wrapper">
-      <!-- <mat-card  class="card" *ngFor="let partido of partidos" > -->
         @for (partido of partidosFran; track $index) {
-        <!-- <mat-card  class="card" *ngFor="let partido of partidosFran" > -->
-          <mat-card  class="card" >
-
-
-          <mat-card-header>
+          <mat-card  class="card" *ngIf="$index < 3" >
+          <mat-card-header  >
             <mat-card-title>Apuntarse al partido con fecha:</mat-card-title>
             <mat-card-subtitle>{{partido.nombrePartido}}</mat-card-subtitle>
             <mat-card-subtitle>{{partido.fechaPartido}}</mat-card-subtitle>
           </mat-card-header>
           <mat-card-actions>
-            <button mat-raised-button color="primary" >Ver Inscritos</button>
+            <button mat-raised-button color="primary" (click)="getUsuariosSorteo('fechaSorteo')" >Ver Inscritos</button>
             <button mat-raised-button color="primary" >Añadir Usuario</button>
-            <button mat-raised-button color="warn" >Eliminar Usuario</button>
           </mat-card-actions>
         </mat-card>
       }
@@ -113,11 +101,8 @@
               </button>
             </td>
         </ng-container>
-
-
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-
       </table>
         <div class="buttons">
         <button mat-raised-button class="container__wrapper__buttons" color="primary" (click)="ExportTOExcel()" *ngIf="exportCsv">Exportar a XLSX

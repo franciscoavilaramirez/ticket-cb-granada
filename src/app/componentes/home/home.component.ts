@@ -14,7 +14,6 @@ import Swal from 'sweetalert2';
 
 import { of } from 'rxjs';
 
-import { Partido } from '../../modelo/partidos';
 
 
 
@@ -43,7 +42,6 @@ export class HomeComponent {
   currentUser: Usuario;
   partidos!: Partido[];
   partidosFran!: Partido[];
-  variable = "holaaaa";
 
 
   @ViewChild('TABLE')table!: ElementRef;
@@ -56,29 +54,29 @@ export class HomeComponent {
   getUsers(){
     this.service.getUsers().subscribe(data =>{
       this.usuarios = data
-      console.log('data', this.usuarios);
+      console.log('Usuarios', this.usuarios);
     });
   }
-  
+
   getProximosPartidos(){
     this.service.getPartidos().subscribe(data =>{
       this.partidos = data
       console.log('data', this.partidos);  });
 
       this.partidos = this.partidos.sort((n1, n2) => {
-        if (n1.fecha.getTime() > n2.fecha.getTime()){
+        if (n1.fechaPartido.getTime() > n2.fechaPartido.getTime()){
           return 1;
         }
-        if (n1.fecha.getTime() < n2.fecha.getTime()){
+        if (n1.fechaPartido.getTime() < n2.fechaPartido.getTime()){
           return -1;
         }
 
         return 0;
-        
+
       })
-      
+
       for (var index in this.partidos) {
-        if(this.partidos[index].fecha.getTime() < this.todayDate.getTime()){
+        if(this.partidos[index].fechaPartido.getTime() < this.todayDate.getTime()){
           var mostrados = Math.min(3, +index)
           return this.partidos.slice(+index - mostrados, +index);
         }
@@ -112,7 +110,7 @@ export class HomeComponent {
         nombre:nombre,
         email:email,
         apellido: 'lopez',
-        isAdmin: false,
+        is_admin: false,
         contrasena: contrasena
 
       }
@@ -135,7 +133,7 @@ export class HomeComponent {
         nombre:nombre,
         email:email,
         apellido: 'lopez',
-        isAdmin: false,
+        is_admin: false,
         contrasena: contrasena
 
       }
@@ -153,14 +151,20 @@ export class HomeComponent {
       const dataUser = await Swal.fire({
         title: '¿Seguro que desea eliminar este usuario?',
         showDenyButton: true,
-        denyButtonText: `Cancelar`,
         confirmButtonText: 'Eliminar',
+        denyButtonText: 'Cancelar',
+        confirmButtonColor:'red',
+        denyButtonColor:'grey',
+
+        //showCancelButton:true,
+        //showConfirmButton:true
+        //showCloseButton:true
       });
       if (dataUser.isConfirmed) {
         Swal.fire("Usuario Eliminado", "", "success");      }
-      else if (dataUser.isDismissed) {
-        //Swal.fire("Changes are not saved", "", "info");
-      }
+      // else if (dataUser.isDenied) {
+      //   Swal.fire("Changes are not saved", "", "info");
+      // }
       this.getUsers();
     });
   }
@@ -190,7 +194,7 @@ export class HomeComponent {
   }
 
   isAdmin(){
-    return this.currentUser.isAdmin;
+    return this.currentUser.is_admin;
   }
 
 
@@ -216,6 +220,11 @@ openDialog(usuario:Usuario) {
       this.partidosFran = data;
       console.log('Partidos',this.partidosFran);
     })
+  }
+  getUsuariosSorteo(fechaSorteo:string){
+    this.service.getUsuariosSorteo(fechaSorteo).subscribe(data =>{
+      console.log('fecha sorteo', data);
+    });
   }
 
 
