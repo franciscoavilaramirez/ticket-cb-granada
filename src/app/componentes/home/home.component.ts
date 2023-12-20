@@ -42,7 +42,6 @@ export class HomeComponent {
   currentUser: Usuario;
   partidos!: Partido[];
   partidosFran!: Partido[];
-  variable = "holaaaa";
 
 
   @ViewChild('TABLE')table!: ElementRef;
@@ -55,7 +54,7 @@ export class HomeComponent {
   getUsers(){
     this.service.getUsers().subscribe(data =>{
       this.usuarios = data
-      console.log('data', this.usuarios);
+      console.log('Usuarios', this.usuarios);
     });
   }
 
@@ -111,7 +110,7 @@ export class HomeComponent {
         nombre:nombre,
         email:email,
         apellido: 'lopez',
-        isAdmin: false,
+        is_admin: false,
         contrasena: contrasena
 
       }
@@ -134,7 +133,7 @@ export class HomeComponent {
         nombre:nombre,
         email:email,
         apellido: 'lopez',
-        isAdmin: false,
+        is_admin: false,
         contrasena: contrasena
 
       }
@@ -152,14 +151,20 @@ export class HomeComponent {
       const dataUser = await Swal.fire({
         title: '¿Seguro que desea eliminar este usuario?',
         showDenyButton: true,
-        denyButtonText: `Cancelar`,
         confirmButtonText: 'Eliminar',
+        denyButtonText: 'Cancelar',
+        confirmButtonColor:'red',
+        denyButtonColor:'grey',
+
+        //showCancelButton:true,
+        //showConfirmButton:true
+        //showCloseButton:true
       });
       if (dataUser.isConfirmed) {
         Swal.fire("Usuario Eliminado", "", "success");      }
-      else if (dataUser.isDismissed) {
-        //Swal.fire("Changes are not saved", "", "info");
-      }
+      // else if (dataUser.isDenied) {
+      //   Swal.fire("Changes are not saved", "", "info");
+      // }
       this.getUsers();
     });
   }
@@ -189,7 +194,7 @@ export class HomeComponent {
   }
 
   isAdmin(){
-    return this.currentUser.isAdmin;
+    return this.currentUser.is_admin;
   }
 
 
@@ -215,6 +220,11 @@ openDialog(usuario:Usuario) {
       this.partidosFran = data;
       console.log('Partidos',this.partidosFran);
     })
+  }
+  getUsuariosSorteo(fechaSorteo:string){
+    this.service.getUsuariosSorteo(fechaSorteo).subscribe(data =>{
+      console.log('fecha sorteo', data);
+    });
   }
 
 

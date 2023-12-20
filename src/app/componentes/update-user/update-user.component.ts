@@ -36,8 +36,8 @@ createFormUpdateUser(){
     nombre: new FormControl(this.userModify.nombre),
     apellido: new FormControl(this.userModify.apellido),
     email: new FormControl(this.userModify.email,Validators.email),
-    isAdmin: new FormControl(Boolean(this.userModify.isAdmin)),
-    userId:new FormControl(this.userModify.userId)
+    isAdmin: new FormControl(Boolean(this.userModify.is_admin)),
+    userId:new FormControl(this.userModify.user_id)
 
   });
 }
