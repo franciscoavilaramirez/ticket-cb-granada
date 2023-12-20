@@ -14,7 +14,6 @@ import Swal from 'sweetalert2';
 
 import { of } from 'rxjs';
 
-import { Partido } from '../../modelo/partidos';
 
 
 
@@ -59,26 +58,26 @@ export class HomeComponent {
       console.log('data', this.usuarios);
     });
   }
-  
+
   getProximosPartidos(){
     this.service.getPartidos().subscribe(data =>{
       this.partidos = data
       console.log('data', this.partidos);  });
 
       this.partidos = this.partidos.sort((n1, n2) => {
-        if (n1.fecha.getTime() > n2.fecha.getTime()){
+        if (n1.fechaPartido.getTime() > n2.fechaPartido.getTime()){
           return 1;
         }
-        if (n1.fecha.getTime() < n2.fecha.getTime()){
+        if (n1.fechaPartido.getTime() < n2.fechaPartido.getTime()){
           return -1;
         }
 
         return 0;
-        
+
       })
-      
+
       for (var index in this.partidos) {
-        if(this.partidos[index].fecha.getTime() < this.todayDate.getTime()){
+        if(this.partidos[index].fechaPartido.getTime() < this.todayDate.getTime()){
           var mostrados = Math.min(3, +index)
           return this.partidos.slice(+index - mostrados, +index);
         }

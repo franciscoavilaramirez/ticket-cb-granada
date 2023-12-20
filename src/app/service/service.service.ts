@@ -4,7 +4,6 @@ import {  Usuario } from '../modelo/empleados';
 import { Partido } from '../modelo/partidos';
 import { Observable } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
-import { Partido } from '../modelo/partidos';
 
 
 @Injectable({
