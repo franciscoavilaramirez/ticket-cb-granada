@@ -222,9 +222,10 @@ openDialog(usuario:Usuario) {
     })
   }
   getUsuariosSorteo(fechaSorteo:string){
-    this.service.getUsuariosSorteo(fechaSorteo).subscribe(data =>{
-      console.log('fecha sorteo', data);
+    this.service.getUsuariosSorteo('10-05-2023').subscribe(data =>{
+      console.log('fecha sorteo',data );
     });
+
   }
 
 
