@@ -59,11 +59,11 @@ export class ServiceService {
   }
 
   modifyPartido(partido: Partido): Observable<Partido> {
-    return this.http.put<Partido>(`${this.UrlUpdatePartido}/${partido.userId}`, partido);
+    return this.http.put<Partido>(`${this.UrlUpdatePartido}/${partido.id}`, partido);
   }
 
   deletePartido(partido: Partido): Observable<Partido> {
-    return this.http.delete<Partido>(`${this.UrlDeletePartido}/${partido.userId}`);
+    return this.http.delete<Partido>(`${this.UrlDeletePartido}/${partido.id}`);
   }
 
 }
