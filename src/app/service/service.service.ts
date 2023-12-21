@@ -20,7 +20,7 @@ export class ServiceService {
   UrlUpdateUser = 'http://localhost:9191/cbgranada-api/v1/modificarUsuario';
   UrlUpdatePartido = 'http://localhost:9191/cbgranada-api/v1/modificarPartido';
   UrlLogin = 'http://localhost:9191/cbgranada-api/v1/Login'
-
+  UrlDeletePartido = 'http://localhost:9191/cbgranada-api/v1/borrarPartido';
 
   getUsers(){
     return this.http.get<Usuario[]>(this.UrlGlobal + 'getAllUsers');
@@ -54,7 +54,7 @@ export class ServiceService {
   }
 
   deletePartido(partido: Partido): Observable<Partido> {
-    return this.http.delete<Partido>(`${this.UrlDeleteUser}/${partido.userId}`);
+    return this.http.delete<Partido>(`${this.UrlDeletePartido}/${partido.userId}`);
   }
 
 }
