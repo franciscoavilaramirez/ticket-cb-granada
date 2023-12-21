@@ -18,25 +18,27 @@ export class ServiceService {
   UrlInsertLogin = 'http://localhost:9191/cbgranada-api/v1/addUser';
   UrlDeleteUser = 'http://localhost:9191/cbgranada-api/v1/borrarUsuario';
   UrlUpdateUser = 'http://localhost:9191/cbgranada-api/v1/modificarUsuario';
+  UrlUpdatePartido = 'http://localhost:9191/cbgranada-api/v1/modificarPartido';
   UrlLogin = 'http://localhost:9191/cbgranada-api/v1/Login'
+
+  UrlDeletePartido = 'http://localhost:9191/cbgranada-api/v1/borrarPartido';
+  UrlGetUsuariosPartido = 'http://localhost:9191/cbgranada-api/v1/getUsuariosSorteo';
+
 
 
   getUsers(){
     return this.http.get<Usuario[]>(this.UrlGlobal + 'getAllUsers');
   }
 
-  getUserss(partido: Partido){
-    return new Partido;
-  }
 
   insertLogin(usuario: Usuario): Observable<Usuario> {
     return this.http.post<Usuario>(this.UrlInsertLogin, usuario);
   }
   modifyUser(usuario: Usuario): Observable<Usuario>{
-    return this.http.put<Usuario>(`${this.UrlUpdateUser}/${usuario.userId}`,usuario);
+    return this.http.put<Usuario>(`${this.UrlUpdateUser}/${usuario.user_id}`,usuario);
   }
   deleteUser(user: Usuario): Observable<Usuario> {
-    return this.http.delete<Usuario>(`${this.UrlDeleteUser}/${user.userId}`);
+    return this.http.delete<Usuario>(`${this.UrlDeleteUser}/${user.user_id}`);
   }
 
   Login(usuario: Usuario): Usuario{
@@ -44,8 +46,24 @@ export class ServiceService {
     return new Usuario;
   }
 
-  getProximosPartidos(){
-    return this.http.get<Partido[]>(this.UrlGlobal + 'getProximosPartidos');
+  getPartidos(){
+    return this.http.get<Partido[]>(this.UrlGlobal + 'getPartidos');
+  }
+  getUsuariosSorteo(fecha: string){
+    return this.http.get<Usuario[]>(`${this.UrlGetUsuariosPartido}/${fecha}`);
+
+  }
+
+  addPartido(partido: Partido): Observable<Partido> {
+    return this.http.post<Partido>(this.UrlGlobal + 'addPartido', partido);
+  }
+
+  modifyPartido(partido: Partido): Observable<Partido> {
+    return this.http.put<Partido>(`${this.UrlUpdatePartido}/${partido.id}`, partido);
+  }
+
+  deletePartido(partido: Partido): Observable<Partido> {
+    return this.http.delete<Partido>(`${this.UrlDeletePartido}/${partido.id}`);
   }
 
 }

@@ -25,7 +25,10 @@ constructor(private service:ServiceService,public dialog: MatDialog,
               this.createFormUpdateUser();
             }
 
+ngOnInit(){
+  this.service.getUsers();
 
+}
 
 
 createFormUpdateUser(){
@@ -33,8 +36,8 @@ createFormUpdateUser(){
     nombre: new FormControl(this.userModify.nombre),
     apellido: new FormControl(this.userModify.apellido),
     email: new FormControl(this.userModify.email,Validators.email),
-    isAdmin: new FormControl(Boolean(this.userModify.isAdmin)),
-    userId:new FormControl(this.userModify.userId)
+    isAdmin: new FormControl(Boolean(this.userModify.is_admin)),
+    userId:new FormControl(this.userModify.user_id)
 
   });
 }
@@ -46,9 +49,10 @@ onSubmit(){
     const bodyResponse = this.updateUserForm.value;
     console.log("bodyResponse",bodyResponse);
     this.service.modifyUser(bodyResponse).subscribe(data =>{
-      alert("Usuario modificado correctamente");
+      //alert("Usuario modificado correctamente");
+      this.closedModal();
     });
-    this.service.getUsers()
+
   }
 }
 
