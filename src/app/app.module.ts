@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { RouterModule, Routes } from '@angular/router';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -19,18 +20,25 @@ import { ReactiveFormsModule } from '@angular/forms';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 
-
+import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { HomeComponent } from './componentes/home/home.component';
 import { UpdateUserComponent } from './componentes/update-user/update-user.component';
 
+import { ArchivosPDFComponent } from './componentes/archivos-pdf/archivos-pdf.component'
 
+const app_routes: Routes = [
+  {path: 'tickets', component: ArchivosPDFComponent}
+]
+
+export const app_routing = RouterModule.forRoot(app_routes);
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    UpdateUserComponent
+    UpdateUserComponent,
+    ArchivosPDFComponent
   ],
   imports: [
     HttpClientModule,
@@ -50,7 +58,9 @@ import { UpdateUserComponent } from './componentes/update-user/update-user.compo
     MatIconModule,
     ReactiveFormsModule,
     MatDialogModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    FormsModule,
+    app_routing
 
   ],
   providers: [],
