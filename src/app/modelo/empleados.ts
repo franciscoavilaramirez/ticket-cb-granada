@@ -1,11 +1,16 @@
 export class Usuario{
   user_id?: string
+  is_admin:boolean;
   nombre:string;
   email:string;
   apellido:string;
-  asistenciaPrevia?:number;
-  entrada?:string;
-  is_admin:boolean;
-  contrasena:string;
+  entrada:string;
+  //partidos:[]=[];
+
+  password:string;
+  //entrada?:string;
+  //asistenciaPrevia?:number;
+
+
 
 }

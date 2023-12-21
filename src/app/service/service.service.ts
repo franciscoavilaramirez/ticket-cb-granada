@@ -24,6 +24,7 @@ export class ServiceService {
 
 
   getUsers(){
+    console.log('holaaa');
     return this.http.get<Usuario[]>(this.UrlGlobal + 'getAllUsers');
   }
 

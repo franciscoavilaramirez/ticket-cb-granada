@@ -111,7 +111,8 @@ export class HomeComponent {
         email:email,
         apellido: 'lopez',
         is_admin: false,
-        contrasena: contrasena
+        password: contrasena,
+        entrada:''
 
       }
       this.service.insertLogin(this.bodyResponse).subscribe(data => {
@@ -134,7 +135,8 @@ export class HomeComponent {
         email:email,
         apellido: 'lopez',
         is_admin: false,
-        contrasena: contrasena
+        password: contrasena,
+        entrada:''
 
       }
     }
@@ -168,14 +170,11 @@ export class HomeComponent {
       this.getUsers();
     });
   }
-
-
   openSnackBar() {
     this.snackBar.open('Correo enviado satisfactoriamente', 'Cerrar', {
       duration: 3000
     });
   }
-
   onDateInput(event: any) {
     const selectedDate = new Date(event.target.value);
     this.todayDate = selectedDate;
@@ -198,14 +197,13 @@ export class HomeComponent {
   }
 
 
-  ExportTOExcel()
-{
-  const ws: XLSX.WorkSheet=XLSX.utils.table_to_sheet(this.table.nativeElement);
-  const wb: XLSX.WorkBook = XLSX.utils.book_new();
-  XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
-  /* save to file */
-  XLSX.writeFile(wb, 'Listado_Usuarios.xlsx');
-}
+  ExportTOExcel(){
+      const ws: XLSX.WorkSheet=XLSX.utils.table_to_sheet(this.table.nativeElement);
+      const wb: XLSX.WorkBook = XLSX.utils.book_new();
+      XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+      /* save to file */
+      XLSX.writeFile(wb, 'Listado_Usuarios.xlsx');
+  }
 openDialog(usuario:Usuario) {
   this.dialog.open(UpdateUserComponent,{
     data: usuario ,
@@ -222,7 +220,7 @@ openDialog(usuario:Usuario) {
     })
   }
   getUsuariosSorteo(fechaSorteo:string){
-    this.service.getUsuariosSorteo(fechaSorteo).subscribe(data =>{
+      this.service.getUsuariosSorteo(fechaSorteo).subscribe(data =>{
       console.log('fecha sorteo', data);
     });
   }
