@@ -11,7 +11,10 @@ import { MatDialog } from '@angular/material/dialog';
 import { UpdateUserComponent } from '../update-user/update-user.component';
 
 import Swal from 'sweetalert2';
+
 import { of } from 'rxjs';
+
+
 
 
 @Component({
@@ -23,7 +26,7 @@ export class HomeComponent {
 [x: string]: any;
 
 
-  constructor(private snackBar: MatSnackBar,private service: ServiceService, private router: Router,public dialog: MatDialog) {
+  constructor(private snackBar: MatSnackBar,public service: ServiceService, private router: Router,public dialog: MatDialog) {
     this.createLoginForm();
   }
   // nombre: string;
@@ -38,39 +41,42 @@ export class HomeComponent {
   bodyResponse: Usuario;
   currentUser: Usuario;
   partidos!: Partido[];
+  partidosFran!: Partido[];
+
 
   @ViewChild('TABLE')table!: ElementRef;
 
   ngOnInit(){
     this.getUsers();
+    this.getPartidos();
 
   }
   getUsers(){
     this.service.getUsers().subscribe(data =>{
       this.usuarios = data
-      console.log('data', this.usuarios);
+      console.log('Usuarios', this.usuarios);
     });
   }
-  
+
   getProximosPartidos(){
     this.service.getPartidos().subscribe(data =>{
       this.partidos = data
       console.log('data', this.partidos);  });
 
       this.partidos = this.partidos.sort((n1, n2) => {
-        if (n1.fecha.getTime() > n2.fecha.getTime()){
+        if (n1.fechaPartido.getTime() > n2.fechaPartido.getTime()){
           return 1;
         }
-        if (n1.fecha.getTime() < n2.fecha.getTime()){
+        if (n1.fechaPartido.getTime() < n2.fechaPartido.getTime()){
           return -1;
         }
 
         return 0;
-        
+
       })
-      
+
       for (var index in this.partidos) {
-        if(this.partidos[index].fecha.getTime() < this.todayDate.getTime()){
+        if(this.partidos[index].fechaPartido.getTime() < this.todayDate.getTime()){
           var mostrados = Math.min(3, +index)
           return this.partidos.slice(+index - mostrados, +index);
         }
@@ -104,21 +110,15 @@ export class HomeComponent {
         nombre:nombre,
         email:email,
         apellido: 'lopez',
-        isAdmin: false,
+        is_admin: false,
         contrasena: contrasena
 
       }
       this.service.insertLogin(this.bodyResponse).subscribe(data => {
         console.log("insert", data);
       });
-
-
-
     }
   }
-
-
-
   Login(){
     if(this.loginForm.valid){
       const nombre = this.loginForm.get("nombre")?.value;
@@ -133,13 +133,12 @@ export class HomeComponent {
         nombre:nombre,
         email:email,
         apellido: 'lopez',
-        isAdmin: false,
+        is_admin: false,
         contrasena: contrasena
 
       }
     }
 
-    
       //creo que la funcion onsubmit en vez de log in lo que hace es añadir un usuario. voy a intentar pedir el usuario al servicio para
       //después cargar la variable currentUser como ese.
 
@@ -152,14 +151,20 @@ export class HomeComponent {
       const dataUser = await Swal.fire({
         title: '¿Seguro que desea eliminar este usuario?',
         showDenyButton: true,
-        denyButtonText: `Cancelar`,
         confirmButtonText: 'Eliminar',
+        denyButtonText: 'Cancelar',
+        confirmButtonColor:'red',
+        denyButtonColor:'grey',
+
+        //showCancelButton:true,
+        //showConfirmButton:true
+        //showCloseButton:true
       });
       if (dataUser.isConfirmed) {
         Swal.fire("Usuario Eliminado", "", "success");      }
-      else if (dataUser.isDismissed) {
-        //Swal.fire("Changes are not saved", "", "info");
-      }
+      // else if (dataUser.isDenied) {
+      //   Swal.fire("Changes are not saved", "", "info");
+      // }
       this.getUsers();
     });
   }
@@ -189,7 +194,7 @@ export class HomeComponent {
   }
 
   isAdmin(){
-    return this.currentUser.isAdmin;
+    return this.currentUser.is_admin;
   }
 
 
@@ -209,10 +214,19 @@ openDialog(usuario:Usuario) {
 
   });
 
-  ;
-
-
   }
+  getPartidos(){
+    this.service.getPartidos().subscribe(data =>{
+      this.partidosFran = data;
+      console.log('Partidos',this.partidosFran);
+    })
+  }
+  getUsuariosSorteo(fechaSorteo:string){
+    this.service.getUsuariosSorteo(fechaSorteo).subscribe(data =>{
+      console.log('fecha sorteo', data);
+    });
+  }
+
 
 }
 

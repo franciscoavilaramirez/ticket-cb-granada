@@ -20,21 +20,25 @@ export class ServiceService {
   UrlUpdateUser = 'http://localhost:9191/cbgranada-api/v1/modificarUsuario';
   UrlUpdatePartido = 'http://localhost:9191/cbgranada-api/v1/modificarPartido';
   UrlLogin = 'http://localhost:9191/cbgranada-api/v1/Login'
+
   UrlDeletePartido = 'http://localhost:9191/cbgranada-api/v1/borrarPartido';
   UrlGetUsuariosPartido = 'http://localhost:9191/cbgranada-api/v1/getUsuariosSorteo';
+
+
 
   getUsers(){
     return this.http.get<Usuario[]>(this.UrlGlobal + 'getAllUsers');
   }
 
+
   insertLogin(usuario: Usuario): Observable<Usuario> {
     return this.http.post<Usuario>(this.UrlInsertLogin, usuario);
   }
   modifyUser(usuario: Usuario): Observable<Usuario>{
-    return this.http.put<Usuario>(`${this.UrlUpdateUser}/${usuario.userId}`,usuario);
+    return this.http.put<Usuario>(`${this.UrlUpdateUser}/${usuario.user_id}`,usuario);
   }
   deleteUser(user: Usuario): Observable<Usuario> {
-    return this.http.delete<Usuario>(`${this.UrlDeleteUser}/${user.userId}`);
+    return this.http.delete<Usuario>(`${this.UrlDeleteUser}/${user.user_id}`);
   }
 
   Login(usuario: Usuario): Usuario{
@@ -43,7 +47,11 @@ export class ServiceService {
   }
 
   getPartidos(){
-    return  this.http.get<Partido[]>(this.UrlGlobal + 'getPartidos');
+    return this.http.get<Partido[]>(this.UrlGlobal + 'getPartidos');
+  }
+  getUsuariosSorteo(fecha: string){
+    return this.http.get<Usuario[]>(`${this.UrlGetUsuariosPartido}/${fecha}`);
+
   }
 
   addPartido(partido: Partido): Observable<Partido> {
