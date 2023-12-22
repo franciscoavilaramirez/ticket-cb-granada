@@ -34,6 +34,7 @@ export class HomeComponent {
   todayDate: Date = new Date();
   selected: Date | null | undefined;
   hiddenList = false;
+  hiddenListUsuariosPartidos = false;
   hide = true;
   exportCsv = false;
   usuarios!: Usuario[];
@@ -42,9 +43,13 @@ export class HomeComponent {
   currentUser: Usuario;
   partidos!: Partido[];
   partidosFran!: Partido[];
+  usuariosPartido!: Usuario[];
+  fechaPartido:string;
 
 
   @ViewChild('TABLE')table!: ElementRef;
+  @ViewChild('TABLEUSUARIOSPARTIDO')tableUsuariosPartido!: ElementRef;
+
 
   ngOnInit(){
     this.getUsers();
@@ -58,32 +63,32 @@ export class HomeComponent {
     });
   }
 
-  getProximosPartidos(){
-    this.service.getPartidos().subscribe(data =>{
-      this.partidos = data
-      console.log('data', this.partidos);  });
+  // getProximosPartidos(){
+  //   this.service.getPartidos().subscribe(data =>{
+  //     this.partidos = data
+  //     console.log('data', this.partidos);  });
 
-      this.partidos = this.partidos.sort((n1, n2) => {
-        if (n1.fechaPartido.getTime() > n2.fechaPartido.getTime()){
-          return 1;
-        }
-        if (n1.fechaPartido.getTime() < n2.fechaPartido.getTime()){
-          return -1;
-        }
+  //     this.partidos = this.partidos.sort((n1, n2) => {
+  //       if (n1.fechaPartido.getTime() > n2.fechaPartido.getTime()){
+  //         return 1;
+  //       }
+  //       if (n1.fechaPartido.getTime() < n2.fechaPartido.getTime()){
+  //         return -1;
+  //       }
 
-        return 0;
+  //       return 0;
 
-      })
+  //     })
 
-      for (var index in this.partidos) {
-        if(this.partidos[index].fechaPartido.getTime() < this.todayDate.getTime()){
-          var mostrados = Math.min(3, +index)
-          return this.partidos.slice(+index - mostrados, +index);
-        }
-      }
-      return this.partidos.slice(0, 0);
+  //     for (var index in this.partidos) {
+  //       if(this.partidos[index].fechaPartido.getTime() < this.todayDate.getTime()){
+  //         var mostrados = Math.min(3, +index)
+  //         return this.partidos.slice(+index - mostrados, +index);
+  //       }
+  //     }
+  //     return this.partidos.slice(0, 0);
 
-  }
+  // }
 
 
 
@@ -182,6 +187,8 @@ export class HomeComponent {
   }
 
   displayedColumns: string[] = ['no','nombre','apellido','email','botones'];
+  ColumnsInscritos: string[] = ['no','nombre','apellido','email','botones'];
+
 
   userList(){
     this.hiddenList = true;
@@ -190,7 +197,9 @@ export class HomeComponent {
   hiddenUserList(){
     this.hiddenList = false;
     this.exportCsv = false;
-
+  }
+  usuarioPartidoList(){
+    this.hiddenListUsuariosPartidos = true;
   }
 
   isAdmin(){
@@ -222,11 +231,13 @@ openDialog(usuario:Usuario) {
     })
   }
   getUsuariosSorteo(fechaSorteo:string){
-    this.service.getUsuariosSorteo('10-05-2023').subscribe(data =>{
-      console.log('fecha sorteo',data );
+    this.service.getUsuariosSorteo(fechaSorteo).subscribe(data =>{
+      this.usuariosPartido = data;
+      console.log('fecha sorteo',this.usuariosPartido );
     });
-
+    this.usuarioPartidoList();
   }
+
 
 
 }

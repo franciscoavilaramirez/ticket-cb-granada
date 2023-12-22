@@ -1,7 +1,7 @@
 export class Partido{
 
     id?: string;
-    fechaPartido : Date;
+    fechaPartido : string;
     nombrePartido : string;
 
   }

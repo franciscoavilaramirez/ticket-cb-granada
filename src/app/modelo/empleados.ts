@@ -6,6 +6,6 @@ export class Usuario{
   asistenciaPrevia?:number;
   entrada?:string;
   is_admin:boolean;
-  contrasena:string;
+  contrasena?:string;
 
 }
