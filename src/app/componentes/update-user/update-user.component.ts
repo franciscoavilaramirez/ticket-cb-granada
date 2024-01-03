@@ -5,6 +5,7 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { HomeComponent } from '../home/home.component';
 import {MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { Usuario } from '../../modelo/empleados';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -19,7 +20,7 @@ export class UpdateUserComponent {
 
 
 
-constructor(private service:ServiceService,public dialog: MatDialog,
+constructor(private service:ServiceService,public dialog: MatDialog,  private router: Router,
             public dialogRef: MatDialogRef<HomeComponent>,
             @Inject(MAT_DIALOG_DATA) public userModify: Usuario){
               this.createFormUpdateUser();

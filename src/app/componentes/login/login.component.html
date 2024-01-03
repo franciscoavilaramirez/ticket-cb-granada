@@ -1,0 +1,16 @@
+<form class="formLogin" [formGroup]="loginForm" (ngSubmit)="Login()">
+        <h1>Login</h1>
+        <mat-form-field >
+          <mat-label>Nombre</mat-label>
+          <input type="text" matInput formControlName ="nombre" >
+        </mat-form-field>
+        <mat-form-field >
+          <mat-label>Contraseña</mat-label>
+          <input type="text" matInput formControlName ="contrasena" >
+        </mat-form-field>
+        <mat-form-field >
+          <mat-label>Email</mat-label>
+          <input matInput formControlName ="email" >
+        </mat-form-field>
+          <button mat-raised-button class="container__wrapper__buttons" color="primary" type="submit" [disabled]="loginForm.invalid">Enviar</button>
+      </form>

@@ -23,6 +23,8 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import { HttpClientModule } from '@angular/common/http';
 import { HomeComponent } from './componentes/home/home.component';
 import { UpdateUserComponent } from './componentes/update-user/update-user.component';
+import { LoginComponent } from './componentes/login/login.component';
+import { NuevoPartidoComponent } from './componentes/nuevo-partido/nuevo-partido.component';
 
 
 
@@ -30,7 +32,9 @@ import { UpdateUserComponent } from './componentes/update-user/update-user.compo
   declarations: [
     AppComponent,
     HomeComponent,
-    UpdateUserComponent
+    UpdateUserComponent,
+    LoginComponent,
+    NuevoPartidoComponent
   ],
   imports: [
     HttpClientModule,
