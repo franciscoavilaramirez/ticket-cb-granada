@@ -19,6 +19,8 @@ import {MatIconModule} from '@angular/material/icon'
 import { ReactiveFormsModule } from '@angular/forms';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatListModule} from '@angular/material/list';
+
 
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
@@ -60,7 +62,8 @@ export const app_routing = RouterModule.forRoot(app_routes);
     MatDialogModule,
     MatCheckboxModule,
     FormsModule,
-    app_routing
+    MatListModule
+
 
   ],
   providers: [],

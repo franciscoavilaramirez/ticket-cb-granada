@@ -50,6 +50,8 @@ export class HomeComponent {
   @ViewChild('TABLE')table!: ElementRef;
   @ViewChild('TABLEUSUARIOSPARTIDO')tableUsuariosPartido!: ElementRef;
 
+  displayedColumns: string[] = ['no','nombre','apellido','email','botones'];
+  ColumnsInscritos: string[] = ['no','nombre','apellido','email'];
 
   ngOnInit(){
     this.getUsers();
@@ -186,8 +188,7 @@ export class HomeComponent {
     this.todayDate = selectedDate;
   }
 
-  displayedColumns: string[] = ['no','nombre','apellido','email','botones'];
-  ColumnsInscritos: string[] = ['no','nombre','apellido','email','botones'];
+
 
 
   userList(){
@@ -199,7 +200,7 @@ export class HomeComponent {
     this.exportCsv = false;
   }
   usuarioPartidoList(){
-    this.hiddenListUsuariosPartidos = true;
+    this.hiddenListUsuariosPartidos = !this.hiddenListUsuariosPartidos;
   }
 
   isAdmin(){
@@ -236,7 +237,7 @@ openDialog(usuario:Usuario) {
       console.log('fecha sorteo',this.usuariosPartido );
     });
     this.usuarioPartidoList();
-  }
+    }
 
 
 
