@@ -6,7 +6,7 @@ import { LoginComponent } from './componentes/login/login.component';
 import { NuevoPartidoComponent } from './componentes/nuevo-partido/nuevo-partido.component';
 
 const routes: Routes = [
-  //{path: '', redirectTo: 'home', pathMatch: 'full' },
+  {path: '', redirectTo: 'home', pathMatch: 'full' },
   {path:'home', component: HomeComponent},
   {path:'updateuser', component: UpdateUserComponent}, 
   {path:'login', component: LoginComponent},
