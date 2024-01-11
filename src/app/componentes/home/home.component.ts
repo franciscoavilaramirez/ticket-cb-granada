@@ -133,7 +133,7 @@ export class HomeComponent {
         nombre:nombre,
         email:email,
         apellido: 'lopez',
-        is_admin: true,
+        is_admin: false,
         contrasena: contrasena
 
       }
