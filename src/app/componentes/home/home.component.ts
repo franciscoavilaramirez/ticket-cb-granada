@@ -142,10 +142,6 @@ export class HomeComponent {
       //creo que la funcion onsubmit en vez de log in lo que hace es añadir un usuario. voy a intentar pedir el usuario al servicio para
       //después cargar la variable currentUser como ese.
 
-      //prueba
-
-      this.currentUser = this.bodyResponse;
-
       this.currentUser = this.service.Login(this.bodyResponse)
   }
 
