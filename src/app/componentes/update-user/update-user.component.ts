@@ -16,9 +16,6 @@ export class UpdateUserComponent {
 
 updateUserForm:FormGroup;
 
-
-
-
 constructor(private service:ServiceService,public dialog: MatDialog,
             public dialogRef: MatDialogRef<HomeComponent>,
             @Inject(MAT_DIALOG_DATA) public userModify: Usuario){
@@ -29,7 +26,6 @@ ngOnInit(){
   this.service.getUsers();
 
 }
-
 
 createFormUpdateUser(){
   this.updateUserForm = new FormGroup({
@@ -42,17 +38,14 @@ createFormUpdateUser(){
   });
 }
 
-
 onSubmit(){
   if(this.updateUserForm.valid){
 
     const bodyResponse: Usuario = this.updateUserForm.value;
     console.log("bodyResponse",bodyResponse);
     this.service.modifyUser(bodyResponse).subscribe(data =>{
-      //alert("Usuario modificado correctamente");
-      data = bodyResponse
-      console.log("dataaaa", data);
       this.closedModal();
+
     });
 
   }

@@ -4,55 +4,24 @@
 <div class="container">
   <div class="container__wrapper">
     <div class="container__wrapper__content-wrapper">
-      <!-- MOSTRAR CALENDARIO AL CLICAR EN EL ICONO -->
-      <!-- <h1>Próximos Partidos</h1>
-      <mat-form-field  >
-      <input matInput [matDatepicker]="picker" placeholder="Selecciona una fecha" (dateInput)="onDateInput($event)"  >
-      <mat-datepicker-toggle matIconSuffix [for]="picker" ></mat-datepicker-toggle>
-      <mat-datepicker #picker></mat-datepicker>
-    </mat-form-field>
-    <p *ngIf="todayDate">Fecha seleccionada formateada: {{ todayDate | date:'short' }}</p>
-    </div>
-    <div class="container__wrapper__content-wrapper" >
-      <button mat-raised-button color="primary" (click)="openSnackBar()">Enviar correo confirmación</button>
-    </div> -->
-
-        <!-- CALENDARIO DATAPICKER DESPLEGADO DIRECTAMENTE -->
-
-    <!-- <div class="container__wrapper__content-wrapper" >
-      <h1>Próximos Partidos</h1>
-        <mat-card class="demo-inline-calendar-card fechas-marcadas" >
-          <mat-calendar [(selected)]="selected" >
-          </mat-calendar>
-        </mat-card>
-    </div>
-
-    <p>Selected date:{{ selected | date:'short' }}</p> -->
-    <!-- @for (user of users; track user.id) {
-      {{ user.name }}
-    } @empty {
-      Empty list of users
-    } -->
-
-    <div class="cards-wrapper">
-        @for (partido of partidosFran; track $index) {
-          <mat-card  class="card" *ngIf="$index < 3" >
-          <mat-card-header  >
-            <mat-card-title>Apuntarse al partido con fecha:</mat-card-title>
-            <mat-card-subtitle>{{partido.nombrePartido}}</mat-card-subtitle>
-            <mat-card-subtitle>{{partido.fechaPartido}}</mat-card-subtitle>
-          </mat-card-header>
-          <mat-card-actions>
-            <button mat-raised-button color="primary" (click)="getUsuariosSorteo(partido.fechaPartido)" >Mostrar/Ocultar Inscritos</button>
-            <button mat-raised-button color="primary" >Añadir Usuario</button>
-          </mat-card-actions>
-        </mat-card>
-      }
-      </div>
+      <div class="cards-wrapper">
+          @for (partido of partidosFran; track $index) {
+            <mat-card  class="card" *ngIf="$index < 3" >
+            <mat-card-header  >
+              <mat-card-title>Apuntarse al partido con fecha:</mat-card-title>
+              <mat-card-subtitle>{{partido.nombrePartido}}</mat-card-subtitle>
+              <mat-card-subtitle>{{partido.fechaPartido}}</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-actions>
+              <button mat-raised-button color="primary" (click)="getUsuariosSorteo(partido.fechaPartido)" >Mostrar/Ocultar Inscritos</button>
+              <button mat-raised-button color="primary" >Añadir Usuario</button>
+              </mat-card-actions>
+            </mat-card>
+          }
+        </div>
 
       <!-- LISTA DE USUARIOS INSCRITOS A UN PARTIDO -->
       <div class="container__wrapper" #TABLEUSUARIOSPARTIDO>
-
         <table mat-table [dataSource]="usuariosPartido" class="mat-elevation-z8" #tableUsuariosPartido *ngIf="hiddenListUsuariosPartidos" >
 
           <ng-container matColumnDef="no">
@@ -131,10 +100,9 @@
         <button mat-raised-button class="container__wrapper__buttons" color="primary" (click)="hiddenUserList()" >Ocultar Listado</button>
       </div>
         <div class="buttons">
-        <button mat-raised-button class="container__wrapper__buttons" color="primary" (click)="ExportTOExcel()" *ngIf="exportCsv">Exportar a XLSX
+        <button mat-raised-button class="container__wrapper__buttons" color="primary" (click)="ExportTOExcel()" *ngIf="exportCsv">Exportar Usuarios a XLSX
           <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="description" ></mat-icon>
         </button>
-        <button mat-raised-button class="container__wrapper__buttons" color="primary">Realizar sorteo</button>
         </div>
     </div>
 
@@ -164,8 +132,6 @@
             <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
           </button>
         </mat-form-field> -->
-
-
   </div>
 </div>
 

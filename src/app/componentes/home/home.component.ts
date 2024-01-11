@@ -162,10 +162,6 @@ export class HomeComponent {
         denyButtonText: 'Cancelar',
         confirmButtonColor:'red',
         denyButtonColor:'grey',
-
-        //showCancelButton:true,
-        //showConfirmButton:true
-        //showCloseButton:true
       });
       if (dataUser.isConfirmed) {
         Swal.fire("Usuario Eliminado", "", "success");      }
@@ -175,7 +171,6 @@ export class HomeComponent {
       this.getUsers();
     });
   }
-
 
   openSnackBar() {
     this.snackBar.open('Correo enviado satisfactoriamente', 'Cerrar', {
@@ -187,9 +182,6 @@ export class HomeComponent {
     const selectedDate = new Date(event.target.value);
     this.todayDate = selectedDate;
   }
-
-
-
 
   userList(){
     this.hiddenList = true;
@@ -207,7 +199,6 @@ export class HomeComponent {
     return this.currentUser.is_admin;
   }
 
-
   ExportTOExcel()
 {
   const ws: XLSX.WorkSheet=XLSX.utils.table_to_sheet(this.table.nativeElement);
@@ -216,13 +207,13 @@ export class HomeComponent {
   /* save to file */
   XLSX.writeFile(wb, 'Listado_Usuarios.xlsx');
 }
-openDialog(usuario:Usuario) {
-  this.dialog.open(UpdateUserComponent,{
-    data: usuario ,
-    width:'450px',
-    height:'600px'
+  openDialog(usuario:Usuario) {
+    this.dialog.open(UpdateUserComponent,{
+      data: usuario ,
+      width:'450px',
+      height:'600px'
 
-  });
+    });
 
   }
   getPartidos(){
@@ -236,7 +227,7 @@ openDialog(usuario:Usuario) {
       this.usuariosPartido = data;
       console.log('fecha sorteo',this.usuariosPartido );
     });
-    this.usuarioPartidoList();
+      this.usuarioPartidoList();
     }
 
 

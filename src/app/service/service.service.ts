@@ -34,9 +34,7 @@ export class ServiceService {
   insertLogin(usuario: Usuario): Observable<Usuario> {
     return this.http.post<Usuario>(this.UrlInsertLogin, usuario);
   }
-  // modifyUser(usuario: Usuario): Observable<Usuario>{
-  //   return this.http.put<Usuario>(`${this.UrlUpdateUser}/${usuario.user_id}`,usuario);
-  // }
+
   modifyUser(usuario: Usuario): Observable<Usuario>{
     return this.http.put<Usuario>(`${this.UrlUpdateUser}/${usuario.user_id}`,usuario);
   }

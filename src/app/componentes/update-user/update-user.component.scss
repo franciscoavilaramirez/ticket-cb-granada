@@ -46,21 +46,22 @@
         .demo-inline-calendar-card {
           width: 300px;
         }
-        .mdc-dialog__actions {
-          display: flex;
-          position: relative;
-          flex-shrink: 0;
-          box-sizing: border-box;
-          min-height: 52px;
-          margin: 0;
-          padding: 8px;
-          border-top: 1px solid rgba(0,0,0,0);
-          align-items: center;
-          align-content: center;
-          flex-direction: column;
-      }
+
 
       }
+      .mdc-dialog__actions {
+        display: flex;
+        position: relative;
+        flex-shrink: 0;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        box-sizing: border-box;
+        min-height: 52px;
+        margin: 0;
+        padding: 8px;
+        border-top: 1px solid rgba(0,0,0,0);
+    }
 
   }
 
