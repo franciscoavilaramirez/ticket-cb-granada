@@ -29,11 +29,11 @@ import { UpdateUserComponent } from './componentes/update-user/update-user.compo
 
 import { ArchivosPDFComponent } from './componentes/archivos-pdf/archivos-pdf.component'
 
-const app_routes: Routes = [
-  {path: 'tickets', component: ArchivosPDFComponent}
-]
+// const app_routes: Routes = [
+//   {path: 'tickets', component: ArchivosPDFComponent}
+// ]
 
-export const app_routing = RouterModule.forRoot(app_routes);
+// export const app_routing = RouterModule.forRoot(app_routes);
 
 @NgModule({
   declarations: [

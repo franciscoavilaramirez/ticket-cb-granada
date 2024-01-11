@@ -4,7 +4,7 @@ import { ServiceService } from '../../service/service.service';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { HomeComponent } from '../home/home.component';
 import {MAT_DIALOG_DATA} from '@angular/material/dialog';
-import { Usuario } from '../../modelo/empleados';
+import { Usuario } from '../../modelo/usuarios';
 
 
 @Component({
@@ -14,7 +14,7 @@ import { Usuario } from '../../modelo/empleados';
 })
 export class UpdateUserComponent {
 
-  updateUserForm:FormGroup;
+updateUserForm:FormGroup;
 
 
 
@@ -36,8 +36,8 @@ createFormUpdateUser(){
     nombre: new FormControl(this.userModify.nombre),
     apellido: new FormControl(this.userModify.apellido),
     email: new FormControl(this.userModify.email,Validators.email),
-    isAdmin: new FormControl(Boolean(this.userModify.is_admin)),
-    userId:new FormControl(this.userModify.user_id)
+    //isAdmin: new FormControl(Boolean(this.userModify.is_admin)),
+    user_id:new FormControl(this.userModify.user_id)
 
   });
 }
@@ -46,10 +46,12 @@ createFormUpdateUser(){
 onSubmit(){
   if(this.updateUserForm.valid){
 
-    const bodyResponse = this.updateUserForm.value;
+    const bodyResponse: Usuario = this.updateUserForm.value;
     console.log("bodyResponse",bodyResponse);
     this.service.modifyUser(bodyResponse).subscribe(data =>{
       //alert("Usuario modificado correctamente");
+      data = bodyResponse
+      console.log("dataaaa", data);
       this.closedModal();
     });
 

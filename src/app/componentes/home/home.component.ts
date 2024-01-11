@@ -1,7 +1,7 @@
 import { Component, ViewChild, AfterViewInit, ElementRef } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatCalendar, MatDateRangeSelectionStrategy } from '@angular/material/datepicker';
-import { Usuario } from '../../modelo/empleados';
+import { Usuario } from '../../modelo/usuarios';
 import { Partido } from '../../modelo/partidos';
 import { ServiceService } from './../../service/service.service';
 import { Router } from '@angular/router';

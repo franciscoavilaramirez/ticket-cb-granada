@@ -5,7 +5,7 @@ export class Usuario{
   apellido:string;
   asistenciaPrevia?:number;
   entrada?:string;
-  is_admin:boolean;
+  is_admin?:boolean;
   contrasena?:string;
 
 }

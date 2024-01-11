@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import {  Usuario } from '../modelo/empleados';
+import {  Usuario } from '../modelo/usuarios';
 import { Partido } from '../modelo/partidos';
 import { Observable } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
@@ -34,6 +34,9 @@ export class ServiceService {
   insertLogin(usuario: Usuario): Observable<Usuario> {
     return this.http.post<Usuario>(this.UrlInsertLogin, usuario);
   }
+  // modifyUser(usuario: Usuario): Observable<Usuario>{
+  //   return this.http.put<Usuario>(`${this.UrlUpdateUser}/${usuario.user_id}`,usuario);
+  // }
   modifyUser(usuario: Usuario): Observable<Usuario>{
     return this.http.put<Usuario>(`${this.UrlUpdateUser}/${usuario.user_id}`,usuario);
   }
