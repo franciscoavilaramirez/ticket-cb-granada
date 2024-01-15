@@ -20,8 +20,9 @@
       <input type="email" id="email" formControlName="email" class="input">
       <label for="pwd">Password:</label>
       <input type="password" id="pwd" formControlName="password" class="input">
-      <input type="submit" value="Login" class="submit-button">
+      <button type="submit" class="submit-button">Enviar</button>
     </form>
     <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+    <div *ngIf="successMessage" class="success-message">{{ successMessage }}</div>
   </div>
 </div>
