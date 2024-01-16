@@ -16,7 +16,7 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatTableModule} from '@angular/material/table';
 import {MatIconModule} from '@angular/material/icon'
 import { ReactiveFormsModule } from '@angular/forms';
-import {MatDialogModule} from '@angular/material/dialog';
+import {MatDialogModule, MatDialogRef} from '@angular/material/dialog';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 
 
@@ -24,13 +24,16 @@ import { HttpClientModule } from '@angular/common/http';
 import { HomeComponent } from './componentes/home/home.component';
 import { UpdateUserComponent } from './componentes/update-user/update-user.component';
 
+import { AddUserComponent } from './componentes/add-user/add-user.component'
+
 
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    UpdateUserComponent
+    UpdateUserComponent,
+    AddUserComponent
   ],
   imports: [
     HttpClientModule,
@@ -53,7 +56,9 @@ import { UpdateUserComponent } from './componentes/update-user/update-user.compo
     MatCheckboxModule
 
   ],
-  providers: [],
+  providers: [
+    {provide: MatDialogRef, useValue:{}}
+    ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

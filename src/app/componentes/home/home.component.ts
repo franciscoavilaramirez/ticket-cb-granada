@@ -13,6 +13,7 @@ import { UpdateUserComponent } from '../update-user/update-user.component';
 import Swal from 'sweetalert2';
 
 import { of } from 'rxjs';
+import { AddUserComponent } from '../add-user/add-user.component';
 
 
 
@@ -29,8 +30,7 @@ export class HomeComponent {
   constructor(private snackBar: MatSnackBar,public service: ServiceService, private router: Router,public dialog: MatDialog) {
     this.createLoginForm();
   }
-  // nombre: string;
-  // email: string;
+
   todayDate: Date = new Date();
   selected: Date | null | undefined;
   hiddenList = false;
@@ -42,6 +42,9 @@ export class HomeComponent {
   currentUser: Usuario;
   partidos!: Partido[];
   partidosFran!: Partido[];
+  usuariosPartido!: Usuario[];
+  fechaPartido:string;
+  parentMessage = "hola desde el padre";
 
 
   @ViewChild('TABLE')table!: ElementRef;
@@ -115,7 +118,7 @@ export class HomeComponent {
         entrada:''
 
       }
-      this.service.insertLogin(this.bodyResponse).subscribe(data => {
+      this.service.addUser(this.bodyResponse).subscribe(data => {
         console.log("insert", data);
       });
     }
@@ -211,6 +214,15 @@ openDialog(usuario:Usuario) {
     height:'600px'
 
   });
+
+  }
+  openDialogAddUser() {
+    this.dialog.open(AddUserComponent,{
+      //data: usuario ,
+      width:'450px',
+      height:'600px'
+
+    });
 
   }
   getPartidos(){
