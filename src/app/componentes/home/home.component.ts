@@ -1,19 +1,15 @@
-import { Component, ViewChild, AfterViewInit, ElementRef } from '@angular/core';
+import { Component, ViewChild, ElementRef } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { MatCalendar, MatDateRangeSelectionStrategy } from '@angular/material/datepicker';
 import { Usuario } from '../../modelo/usuarios';
 import { Partido } from '../../modelo/partidos';
 import { ServiceService } from './../../service/service.service';
 import { Router } from '@angular/router';
 import * as XLSX from 'xlsx';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { UpdateUserComponent } from '../update-user/update-user.component';
 
 import Swal from 'sweetalert2';
-
-import { of } from 'rxjs';
-
 
 
 
