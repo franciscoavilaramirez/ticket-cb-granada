@@ -24,24 +24,6 @@ export class LoginPageComponent implements OnInit {
   }
 
   onSubmit(): void {
-    if (this.loginForm.valid) {
-      // Lógica para manejar el envío del formulario correctamente
-      this.successMessage = 'Formulario enviado correctamente.';
-
-      // guardar sesion localstorage
-      localStorage.setItem('user', JSON.stringify(this.loginForm.value));
-      console.log("localstorage ==>",localStorage.getItem('user') || '{}');
-
-    // guardar un valor específico en el localstorage
-    let email = this.loginForm.get('email')?.value;
-    localStorage.setItem('userEmail', email);
-    console.log("localstorage email ==>",localStorage.getItem('userEmail'));
-
-    let userId = this.loginForm.get('user_id')?.value;
-    localStorage.setItem('userId', userId);
-    console.log("localstorage ID ==>",localStorage.getItem('userId'));
-    }
-
     const observer = {
       next: (response: LoginResponse) => {
         console.log('Success!', response);
@@ -54,8 +36,8 @@ export class LoginPageComponent implements OnInit {
           tickets: response.tickets,
           isAdmin: response._admin
         }
-        let user1 = JSON.stringify(user);
-        localStorage.setItem('user', user1);
+        let userJson = JSON.stringify(user);
+        localStorage.setItem('user', userJson);
         console.log("localstorage ID ==>",localStorage.getItem('user'));
       },
       error: (error: any) => {
