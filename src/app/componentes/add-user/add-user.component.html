@@ -1,0 +1,30 @@
+
+<div class="container">
+  <div class="container__wrapper">
+
+    <div mat-dialog-actions>
+      <form  [formGroup]="addUserForm" >
+        <h1>Modificar Usuario</h1>
+        <mat-dialog-actions>
+        <mat-form-field >
+          <mat-label>Nombre</mat-label>
+          <input type="text" matInput formControlName ="nombre" >
+        </mat-form-field>
+        <mat-form-field >
+          <mat-label>Apellido</mat-label>
+          <input type="text" matInput formControlName ="apellido" >
+        </mat-form-field>
+        <mat-form-field >
+          <mat-label>Email</mat-label>
+          <input type="email" matInput formControlName ="email" >
+        </mat-form-field>
+
+      </mat-dialog-actions>
+
+      </form>
+      <button mat-raised-button class="container__wrapper__buttons" color="primary"(click)="onSubmit()" >Guardar Cambios</button>
+      <button mat-raised-button class="container__wrapper__buttons" color="primary"(click)="closedModal()">Cancelar</button>
+
+    </div>
+  </div>
+</div>

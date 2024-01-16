@@ -14,7 +14,7 @@
             </mat-card-header>
             <mat-card-actions>
               <button mat-raised-button color="primary" (click)="getUsuariosSorteo(partido.fechaPartido)" >Mostrar/Ocultar Inscritos</button>
-              <button mat-raised-button color="primary" >Añadir Usuario</button>
+              <button mat-raised-button color="primary" (click)="openAddUser()" >Añadir Usuario</button>
               </mat-card-actions>
             </mat-card>
           }
@@ -106,7 +106,7 @@
         </div>
     </div>
 
-      <form class="formLogin" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <!-- <form class="formLogin" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
         <h1>Login</h1>
         <mat-form-field >
           <mat-label>Nombre</mat-label>
@@ -122,7 +122,7 @@
         </mat-form-field>
           <button mat-raised-button class="container__wrapper__buttons" color="primary" type="submit" [disabled]="loginForm.invalid">Enviar</button>
       </form>
-          <p>form value:{{loginForm.value | json}}</p>
+          <p>form value:{{loginForm.value | json}}</p> -->
 
         <!-- INPUT PARA INTRODUCIR CONTRASEÑA Y PODER MOSTRARLA SI ES NECESARIO -->
         <!-- <mat-form-field>

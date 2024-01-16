@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import {  Usuario } from '../modelo/usuarios';
+import {  Usuario } from '../modelo/usuario';
 import { Partido } from '../modelo/partidos';
 import { Observable } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';

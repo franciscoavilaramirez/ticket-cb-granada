@@ -1,7 +1,7 @@
 import { Component, ViewChild, AfterViewInit, ElementRef } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatCalendar, MatDateRangeSelectionStrategy } from '@angular/material/datepicker';
-import { Usuario } from '../../modelo/usuarios';
+import { Usuario } from '../../modelo/usuario';
 import { Partido } from '../../modelo/partidos';
 import { ServiceService } from './../../service/service.service';
 import { Router } from '@angular/router';
@@ -13,6 +13,7 @@ import { UpdateUserComponent } from '../update-user/update-user.component';
 import Swal from 'sweetalert2';
 
 import { of } from 'rxjs';
+import { AddUserComponent } from '../add-user/add-user.component';
 
 
 
@@ -210,6 +211,14 @@ export class HomeComponent {
   openDialog(usuario:Usuario) {
     this.dialog.open(UpdateUserComponent,{
       data: usuario ,
+      width:'450px',
+      height:'600px'
+
+    });
+
+  }
+  openAddUser() {
+    this.dialog.open(AddUserComponent,{
       width:'450px',
       height:'600px'
 

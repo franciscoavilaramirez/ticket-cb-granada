@@ -4,7 +4,7 @@ import { ServiceService } from '../../service/service.service';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { HomeComponent } from '../home/home.component';
 import {MAT_DIALOG_DATA} from '@angular/material/dialog';
-import { Usuario } from '../../modelo/usuarios';
+import { Usuario } from '../../modelo/usuario';
 
 
 @Component({

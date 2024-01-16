@@ -27,7 +27,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { HomeComponent } from './componentes/home/home.component';
 import { UpdateUserComponent } from './componentes/update-user/update-user.component';
 
-import { ArchivosPDFComponent } from './componentes/archivos-pdf/archivos-pdf.component'
+import { ArchivosPDFComponent } from './componentes/archivos-pdf/archivos-pdf.component';
+import { AddUserComponent } from './componentes/add-user/add-user.component'
 
 
 
@@ -36,7 +37,8 @@ import { ArchivosPDFComponent } from './componentes/archivos-pdf/archivos-pdf.co
     AppComponent,
     HomeComponent,
     UpdateUserComponent,
-    ArchivosPDFComponent
+    ArchivosPDFComponent,
+    AddUserComponent
   ],
   imports: [
     HttpClientModule,
