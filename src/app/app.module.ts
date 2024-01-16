@@ -28,7 +28,9 @@ import { HomeComponent } from './componentes/home/home.component';
 import { UpdateUserComponent } from './componentes/update-user/update-user.component';
 
 import { ArchivosPDFComponent } from './componentes/archivos-pdf/archivos-pdf.component';
-import { LoginPageComponent } from './componentes/login-page/login-page.component'
+import { LoginPageComponent } from './componentes/login-page/login-page.component';
+import { RegisterPageComponent } from '../pages/register-page/register-page.component';
+import { ErrorAlertFormComponent } from './componentes/error-alert-form/error-alert-form.component'
 
 
 
@@ -38,7 +40,9 @@ import { LoginPageComponent } from './componentes/login-page/login-page.componen
     HomeComponent,
     UpdateUserComponent,
     ArchivosPDFComponent,
-    LoginPageComponent
+    LoginPageComponent,
+    RegisterPageComponent,
+    ErrorAlertFormComponent
   ],
   imports: [
     HttpClientModule,
