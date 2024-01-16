@@ -1,0 +1,37 @@
+<form [formGroup]="registerForm" (ngSubmit)="register()" class="form-container">
+  <div class="form-field">
+    <label for="nombre">Nombre:</label>
+    <input id="nombre" type="text" formControlName="nombre" class="form-input">
+    <app-error-alert-form [errorMessage]="registerForm.get('nombre')?.invalid && registerForm.get('nombre')?.touched ? 'El nombre es requerido.' : ''"></app-error-alert-form>
+  </div>
+
+  <div class="form-field">
+    <label for="apellidos">Apellidos:</label>
+    <input id="apellidos" type="text" formControlName="apellidos" class="form-input">
+    <app-error-alert-form [errorMessage]="registerForm.get('apellidos')?.invalid && registerForm.get('apellidos')?.touched ? 'El apellido es requerido.' : ''"></app-error-alert-form>
+  </div>
+
+  <div class="form-field">
+    <label for="email">Email:</label>
+    <input id="email" type="email" formControlName="email" class="form-input">
+    <app-error-alert-form [errorMessage]="registerForm.get('email')?.invalid && registerForm.get('email')?.touched ? 'El email es requerido.' : ''"></app-error-alert-form>
+  </div>
+
+  <div class="form-field">
+    <label for="password">Contraseña:</label>
+    <input id="password" type="password" formControlName="password" class="form-input">
+    <app-error-alert-form [errorMessage]="registerForm.get('password')?.invalid && registerForm.get('password')?.touched ? 'Debes poner una contraseña.' : ''"></app-error-alert-form>
+  </div>
+
+  <div class="form-field">
+    <label for="repeatPassword">Repite la contraseña:</label>
+    <input id="repeatPassword" type="password" formControlName="repeatPassword" class="form-input">
+    <app-error-alert-form [errorMessage]="registerForm.errors?.['notSame'] ? 'Las contraseñas no coinciden.' : ''" ></app-error-alert-form>
+
+    <div *ngIf="registerForm.errors?.['notSame'] ? 'Las contraseñas no coinciden.' : ''" class="error-message">
+      Las contraseñas no coinciden
+    </div>
+  <button type="submit" class="submit-button">Registrarse</button>
+  </div>
+
+</form>
