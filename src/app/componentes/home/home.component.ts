@@ -104,54 +104,54 @@ export class HomeComponent {
 
     });
   }
-  onSubmit(){
-    if(this.loginForm.valid){
-      const nombre = this.loginForm.get("nombre")?.value;
-      const email = this.loginForm.get("email")?.value;
-      const contrasena = this.loginForm.get("contrasena")?.value;
+  // onSubmit(){
+  //   if(this.loginForm.valid){
+  //     const nombre = this.loginForm.get("nombre")?.value;
+  //     const email = this.loginForm.get("email")?.value;
+  //     const contrasena = this.loginForm.get("contrasena")?.value;
 
-      //const contraseña = this.loginForm.get("contraseña")?.value;
-      console.log("nombre", nombre,"email",email);
+  //     //const contraseña = this.loginForm.get("contraseña")?.value;
+  //     console.log("nombre", nombre,"email",email);
 
-      this.bodyResponse = {
+  //     this.bodyResponse = {
 
-        nombre:nombre,
-        email:email,
-        apellido: 'lopez',
-        is_admin: false,
-        contrasena: contrasena
+  //       nombre:nombre,
+  //       email:email,
+  //       apellido: 'lopez',
+  //       is_admin: false,
+  //       contrasena: contrasena
 
-      }
-      this.service.insertLogin(this.bodyResponse).subscribe(data => {
-        console.log("insert", data);
-      });
-    }
-  }
-  Login(){
-    if(this.loginForm.valid){
-      const nombre = this.loginForm.get("nombre")?.value;
-      const email = this.loginForm.get("email")?.value;
-      const contrasena = this.loginForm.get("contrasena")?.value;
+  //     }
+  //     this.service.insertLogin(this.bodyResponse).subscribe(data => {
+  //       console.log("insert", data);
+  //     });
+  //   }
+  // }
+  // Login(){
+  //   if(this.loginForm.valid){
+  //     const nombre = this.loginForm.get("nombre")?.value;
+  //     const email = this.loginForm.get("email")?.value;
+  //     const contrasena = this.loginForm.get("contrasena")?.value;
 
-      //const contraseña = this.loginForm.get("contraseña")?.value;
-      console.log("nombre", nombre,"email",email);
+  //     //const contraseña = this.loginForm.get("contraseña")?.value;
+  //     console.log("nombre", nombre,"email",email);
 
-      this.bodyResponse = {
+  //     this.bodyResponse = {
 
-        nombre:nombre,
-        email:email,
-        apellido: 'lopez',
-        is_admin: false,
-        contrasena: contrasena
+  //       nombre:nombre,
+  //       email:email,
+  //       apellido: 'lopez',
+  //       is_admin: false,
+  //       contrasena: contrasena
 
-      }
-    }
+  //     }
+  //   }
 
-      //creo que la funcion onsubmit en vez de log in lo que hace es añadir un usuario. voy a intentar pedir el usuario al servicio para
-      //después cargar la variable currentUser como ese.
+  //     //creo que la funcion onsubmit en vez de log in lo que hace es añadir un usuario. voy a intentar pedir el usuario al servicio para
+  //     //después cargar la variable currentUser como ese.
 
-      this.currentUser = this.service.Login(this.bodyResponse)
-  }
+  //     this.currentUser = this.service.Login(this.bodyResponse)
+  // }
 
   deleteUser(user: Usuario): void {
 
@@ -217,8 +217,9 @@ export class HomeComponent {
     });
 
   }
-  openAddUser() {
+  openAddUser(partido: Partido) {
     this.dialog.open(AddUserComponent,{
+      data: partido,
       width:'450px',
       height:'600px'
 

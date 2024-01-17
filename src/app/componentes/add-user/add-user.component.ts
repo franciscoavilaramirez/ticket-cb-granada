@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { ServiceService } from '../../service/service.service';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { HomeComponent } from '../home/home.component';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Usuario } from '../../modelo/usuario';
+import { Partido } from '../../modelo/partidos';
 
 @Component({
   selector: 'app-add-user',
@@ -12,35 +13,67 @@ import { Usuario } from '../../modelo/usuario';
 })
 export class AddUserComponent {
 
-  addUserForm: FormGroup;
+  // addUserForm: FormGroup;
+  // partidos: Partido[];
+
+
+      //crear array usuariosPartido
+    //  revisar metodo onchange del matcheckbox para añadir o quitar usuarios al array usuariosPartidos
+   // crear boton guardar que recorra usuariosPartido y por cada usuario que haya en el array lanzar peticion addUserMatch
+usuarios: Usuario[];
+usuariosPartido: string[]= [];
 
   constructor(private service:ServiceService,public dialog: MatDialog,
-    public dialogRef: MatDialogRef<HomeComponent>,
+    public dialogRef: MatDialogRef<HomeComponent>,@Inject(MAT_DIALOG_DATA) public partido: Partido
     ){}
 
     ngOnInit(){
-      this.createFormAddUser();
+     this.getUsers();
     }
-    createFormAddUser(){
-      this.addUserForm = new FormGroup({
-        nombre: new FormControl('',Validators.required),
-        apellido: new FormControl('',Validators.required),
-        email: new FormControl('',Validators.email),
+    getUsers(){
+      this.service.getUsers().subscribe(data=>{
+        this.usuarios = data;
+       });
+    }
 
-      });
-    }
     onSubmit(){
-      if(this.addUserForm.valid){
+      this.usuariosPartido.forEach(usuPartido =>{
+        this.service.addUserMatch(usuPartido,this.partido).subscribe(data =>{
 
-        const bodyResponse: Usuario = this.addUserForm.value;
-        console.log("bodyResponse",bodyResponse);
-        this.service.modifyUser(bodyResponse).subscribe(data =>{
-          this.closedModal();
+        this.closedModal();
         });
+      })
+
+      //}
+    }
+    addUserToSorteo(userId: string) {
+      const index = this.usuariosPartido.indexOf(userId);
+
+      if (index === -1) {
+        // El usuario no está en el array, agregarlo
+        this.usuariosPartido.push(userId);
+      } else {
+        // El usuario está en el array, quitarlo
+        this.usuariosPartido.splice(index, 1);
       }
+      console.log('usuariosPartido', this.usuariosPartido);
     }
-    closedModal(): void {
-        this.dialogRef.close();
-    }
+
+  //   addUserToSorteo(userId: any, isChecked: boolean){
+  //   if (isChecked) {
+  //     // Agregar usuario al array si está marcado
+  //     this.usuariosPartido = [...this.usuariosPartido, userId];
+  //   } else {
+  //     // Quitar usuario del array si está desmarcado
+  //     this.usuariosPartido = this.usuariosPartido.filter(id => id !== userId);
+  //   }
+  //   console.log("array usuariosPartido",this.usuariosPartido);
+  // }
+
+
+
+      closedModal(): void {
+          this.dialogRef.close();
+      }
 
 }
