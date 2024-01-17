@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
+import { environment } from '../../enviroments/environment';
 
 @Component({
   selector: 'app-register-page',
@@ -38,12 +39,14 @@ export class RegisterPageComponent implements OnInit {
 
   register() {
     if (this.registerForm.valid) {
-      this.http.post('http://localhost:8080/cbgranada-api/v1/addUser', this.registerForm.value).subscribe({
+      this.http.post(environment.apiUrl+'addUser', this.registerForm.value).subscribe({
         next: () => {
           // Maneja la respuesta exitosa aquí
+          console.log("Usuario registrado correctamente", this.registerForm.value);
         },
         error: error => {
           // Maneja el error aquí
+          console.log("Error al registrar el usuario", error);
         }
       });
     }

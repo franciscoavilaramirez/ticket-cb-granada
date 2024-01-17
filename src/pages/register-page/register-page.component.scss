@@ -1,3 +1,5 @@
+@import '../../styles/palette';
+
 .form-container {
   display: flex;
   flex-direction: column;
@@ -18,34 +20,42 @@
 
 .form-input {
   padding: 10px;
-  border: 1px solid #ccc;
+  border: 1px solid $primary-600;
   border-radius: 5px;
+  &:focus {
+    border-color: $primary-800;
+    outline: none;
+  }
 }
 
 .form-header {
   display: flex;
   flex-direction: column;
   width: 100%;
-  margin-bottom: 15px;
+  margin-top: 1.5rem; /* mt-6 */
+  font-size: 1.875rem; /* text-3xl */
+  font-weight: 800; /* font-extrabold */
+  color: #1a202c; /* text-gray-900 */
 }
 
 .form-description {
-  background-color: #f0f0f0;
-
+  margin-top: 1.5rem; /* mt-6 */
+  font-size: 1.125rem; /* text-md */
+  color: #718096; /* text-gray-600 */
 }
 
 .form-description > a {
-  color: #007bff;
+  color: $primary-600;
   text-decoration: none;
 }
 
 .form-description > a:hover {
-  color: #0056b3;
+  color: $primary-700;
 }
 
 /* Logo de la empresa para hacerlo mas grande o mas pequeño */
 .logo {
-  max-width: 50%;
+  max-width: 73%;
   height: auto;
 }
 
@@ -54,11 +64,11 @@
   padding: 10px;
   border: none;
   border-radius: 5px;
-  background-color: #007bff;
+  background-color: $primary-600;
   color: white;
   cursor: pointer;
 }
 
 .submit-button:hover {
-  background-color: #0056b3;
+  background-color: $primary-700;
 }
