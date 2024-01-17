@@ -1,4 +1,16 @@
 <form [formGroup]="registerForm" (ngSubmit)="register()" class="form-container">
+
+  <div class="form-field">
+    <div>
+      <img src="../../assets/T-SYSTEMS-LOGO.svg" alt="Logo" class="logo">
+    </div>
+    <h2 class="form-header">
+      Registrate para crearte una cuenta
+    </h2>
+    <p class="form-description">
+      Ya tienes una cuenta? <a routerLink="/login">Inicia sesión</a>
+    </p>
+  </div>
   <div class="form-field">
     <label for="nombre">Nombre:</label>
     <input id="nombre" type="text" formControlName="nombre" class="form-input">
@@ -26,7 +38,6 @@
   <div class="form-field">
     <label for="repeatPassword">Repite la contraseña:</label>
     <input id="repeatPassword" type="password" formControlName="repeatPassword" class="form-input">
-    <app-error-alert-form [errorMessage]="registerForm.errors?.['notSame'] ? 'Las contraseñas no coinciden.' : ''" ></app-error-alert-form>
 
     <div *ngIf="registerForm.errors?.['notSame'] ? 'Las contraseñas no coinciden.' : ''" class="error-message">
       Las contraseñas no coinciden

@@ -7,9 +7,6 @@
   max-width: 500px;
   margin: 0 auto;
   padding: 20px;
-  border-radius: 5px;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-  background-color: white;
 }
 
 .form-field {
@@ -25,7 +22,35 @@
   border-radius: 5px;
 }
 
+.form-header {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+.form-description {
+  background-color: #f0f0f0;
+
+}
+
+.form-description > a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.form-description > a:hover {
+  color: #0056b3;
+}
+
+/* Logo de la empresa para hacerlo mas grande o mas pequeño */
+.logo {
+  max-width: 50%;
+  height: auto;
+}
+
 .submit-button {
+  margin-top: 20px;
   padding: 10px;
   border: none;
   border-radius: 5px;
