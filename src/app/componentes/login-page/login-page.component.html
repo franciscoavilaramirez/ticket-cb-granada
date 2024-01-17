@@ -1,18 +1,18 @@
-<div class="container">
+<div class="form-container">
   <div class=" center-form">
-    <div>
+    <div class="form center">
       <div>
         <img class="logo" src="../../../assets/T-SYSTEMS-LOGO.svg" alt="logo">
       </div>
-      <h2 class="title">
+      <h2 class="form-title">
         Welcome to Magenta Events!
       </h2>
-      <p class="desc">
+      <p class="form-description">
         Find all the events in our company, have fun and make new friends!
       </p>
-      <p class="desc">
+      <p class="form-redirect">
         "Don't have an account yet? "
-        <a href="">signup</a>
+        <a routerLink="/signup">Sign up</a>
       </p>
     </div>
     <form (ngSubmit)="onSubmit()" [formGroup]="loginForm" class="form center">
