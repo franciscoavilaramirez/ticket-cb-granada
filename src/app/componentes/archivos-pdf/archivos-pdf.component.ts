@@ -7,7 +7,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 @Component({
   selector: 'app-archivos-pdf',
   templateUrl: './archivos-pdf.component.html',
-  styleUrls: ['./archivos-pdf.component.css']
+  styleUrls: ['./archivos-pdf.component.scss']
 })
 export class ArchivosPDFComponent implements OnInit {
 
@@ -24,8 +24,8 @@ export class ArchivosPDFComponent implements OnInit {
 
   private createMyForm():FormGroup{
     return this.fb.group({
-      titulo:[''],
-      fecha:[''],
+      titulo:['',Validators.required],
+      fecha:['',Validators.required],
       archivosSubir:[]
     });
   }
@@ -33,20 +33,20 @@ export class ArchivosPDFComponent implements OnInit {
   send(){
     this.pdf.tituloPartido = this.formArchivos.value.titulo;
     this.pdf.fechaPartido = this.formArchivos.value.fecha;
-    
+
     this.userservice.subirTickets(this.pdf).subscribe(data=>{
       alert("Tickets repartidos a las usuarios con exito")
     }, error=> alert("Error al repartir los tickets a los usuaroios"));
   }
 
   subirArchivo(event: any): any{
-    
+
     const file:File = (event.target.files as FileList)[0];
 
     const obserbable = new Observable((subscriber: Subscriber<any>) => {
       this.readFile(file, subscriber);
     })
-  
+
     obserbable.subscribe((base64) => {
       this.b64 = new String(base64).valueOf();
 
@@ -60,7 +60,7 @@ export class ArchivosPDFComponent implements OnInit {
     const fileReader = new FileReader();
     fileReader.readAsDataURL(file);
     fileReader.onload = () => {
-      
+
       subscriber.next(fileReader.result);
       subscriber.complete();
     }

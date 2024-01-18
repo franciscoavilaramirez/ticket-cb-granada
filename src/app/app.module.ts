@@ -22,6 +22,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { HomeComponent } from './componentes/home/home.component';
 import { UpdateUserComponent } from './componentes/update-user/update-user.component';
+import {MatDatepickerModule} from '@angular/material/datepicker';
 
 import { ArchivosPDFComponent } from './componentes/archivos-pdf/archivos-pdf.component';
 import { AddUserComponent } from './componentes/add-user/add-user.component'
@@ -53,7 +54,7 @@ import { AddUserComponent } from './componentes/add-user/add-user.component'
     MatDialogModule,
     MatCheckboxModule,
     FormsModule,
-
+    MatDatepickerModule
 
   ],
   providers: [],
