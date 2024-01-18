@@ -29,19 +29,10 @@ export class LoginPageComponent implements OnInit {
       next: (response: LoginResponse) => {
         console.log('Success!', response);
 
-        let user= {
-          nombre: response.nombre,
-          apellido: response.apellido,
-          email: response.email,
-          user_id: response.user_id,
-          tickets: response.tickets,
-          isAdmin: response._admin
-        }
-        let userJson = JSON.stringify(user);
+        let userJson = JSON.stringify(response);
         localStorage.setItem('user', userJson);
         console.log("localstorage ID ==>",localStorage.getItem('user'));
         // Redirige a la página de inicio
-        this.router.navigate(['/home']);
       },
       error: (error: any) => {
         console.error('Error!', error);
