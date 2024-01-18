@@ -1,8 +1,7 @@
-export class Partido{
-
-    id?: string;
-    fechaPartido : string;
-    nombrePartido : string;
-
+export interface Partido {
+  id: number,
+  fecha : string,
+  nombre : string,
+  tengoEntrada: boolean
   }
 
