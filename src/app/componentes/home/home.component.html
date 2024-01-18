@@ -44,11 +44,8 @@
             <td mat-cell *matCellDef="let inscritos"> {{inscritos.email}}</td>
           </ng-container>
 
-          <!-- <ng-container matColumnDef="botones">
-          </ng-container> -->
-
           <tr mat-header-row *matHeaderRowDef="ColumnsInscritos"></tr>
-        <tr mat-row *matRowDef="let row; columns: ColumnsInscritos;"></tr>
+          <tr mat-row *matRowDef="let row; columns: ColumnsInscritos;"></tr>
         </table>
       </div>
 
@@ -82,7 +79,7 @@
                       type="submit"
                       (click)="openDialog(element)"><mat-icon>edit</mat-icon>
                       Modificar
-              </button>
+            </button>
              <button mat-raised-button class="container__wrapper__table-buttons"
                       color="warn"
                       type="submit"
@@ -105,24 +102,6 @@
         </button>
         </div>
     </div>
-
-      <!-- <form class="formLogin" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-        <h1>Login</h1>
-        <mat-form-field >
-          <mat-label>Nombre</mat-label>
-          <input type="text" matInput formControlName ="nombre" >
-        </mat-form-field>
-        <mat-form-field >
-          <mat-label>Contraseña</mat-label>
-          <input type="text" matInput formControlName ="contrasena" >
-        </mat-form-field>
-        <mat-form-field >
-          <mat-label>Email</mat-label>
-          <input matInput formControlName ="email" >
-        </mat-form-field>
-          <button mat-raised-button class="container__wrapper__buttons" color="primary" type="submit" [disabled]="loginForm.invalid">Enviar</button>
-      </form>
-          <p>form value:{{loginForm.value | json}}</p> -->
 
         <!-- INPUT PARA INTRODUCIR CONTRASEÑA Y PODER MOSTRARLA SI ES NECESARIO -->
         <!-- <mat-form-field>

@@ -3,9 +3,9 @@
   <div class="container__wrapper">
     <div class="container__wrapper__content-wrapper" *ngFor="let usuario of usuarios" >
         <section>
-        <mat-checkbox [value]="usuario.user_id"
+        <mat-checkbox
           (change)="addUserToSorteo(usuario.user_id)"
-          [checked]="usuariosPartido.includes(usuario.user_id)">
+          >
             {{usuario.nombre}}
             {{usuario.apellido}}
             ({{usuario.email}})
