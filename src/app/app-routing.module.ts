@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './componentes/home/home.component';
 import { ArchivosPDFComponent } from './componentes/archivos-pdf/archivos-pdf.component';
-import { LoginPageComponent } from './componentes/login-page/login-page.component';
+import { LoginPageComponent } from '../pages/login-page/login-page.component';
 import { RegisterPageComponent } from '../pages/register-page/register-page.component';
 
 const routes: Routes = [
