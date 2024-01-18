@@ -35,17 +35,6 @@
         }
 
 
-        // .formUpdateUser{
-        //   display: flex;
-        //   flex-direction: column;
-        //   border: solid 2px deeppink;
-        //   padding: 130px;
-        //   border-radius: 50px;
-        //   background-color:#ff00ff08;
-        // }
-
-
-
       }
     //   .mdc-dialog__actions {
     //     display: flex;
@@ -60,7 +49,21 @@
     //     padding: 8px;
     //     border-top: 1px solid rgba(0,0,0,0);
     // }
-
+    // .mdc-list {
+    //   margin: 3px;
+    //   /* padding: 8px 0; */
+    //   list-style-type: none;
+    // }
+  }
+   .mat-typography h2  {
+    font: 500 20px/32px Roboto, sans-serif;
+    letter-spacing: .0125em;
+    margin: 0 0 17px;
+  }
+  .mdc-list {
+    margin: 0px;
+    padding: 0px 0;
+    list-style-type: none;
   }
 
 }

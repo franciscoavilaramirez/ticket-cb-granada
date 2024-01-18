@@ -14,6 +14,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class AddUserComponent {
 
+  usuariosYaInscritos: Usuario[];
   // addUserForm: FormGroup;
   // partidos: Partido[];
 
@@ -22,7 +23,7 @@ export class AddUserComponent {
     //  revisar metodo onchange del matcheckbox para añadir o quitar usuarios al array usuariosPartidos
    // crear boton guardar que recorra usuariosPartido y por cada usuario que haya en el array lanzar peticion addUserMatch
 usuarios: Usuario[];
-usuariosPartido: string[]= [];
+usuariosParaAnadirAlPartido: string[]= [];
 
   constructor(private service:ServiceService,public dialog: MatDialog,
     public dialogRef: MatDialogRef<HomeComponent>,@Inject(MAT_DIALOG_DATA) public partido: Partido,
@@ -30,24 +31,35 @@ usuariosPartido: string[]= [];
     ){}
 
     ngOnInit(){
-     this.getUsers();
+     this.getUsuariosSorteo(this.partido.fechaPartido);
+
     }
     getUsers(){
       this.service.getUsers().subscribe(data=>{
-        this.usuarios = data;
+        //this.usuarios = data;
+        this.usuarios = [];
+        data.forEach(usu =>{
+          const user = this.usuariosYaInscritos.find(usuInscrito =>{
+           return  usu.user_id === usuInscrito.user_id
+          })
+          console.log('userrrr',user);
+          if(!Boolean(user)){
+            this.usuarios.push(usu)
+          }
+        })
        });
     }
     addUserToSorteo(userId: string) {
-      const index = this.usuariosPartido.indexOf(userId);
+      const index = this.usuariosParaAnadirAlPartido.indexOf(userId);
 
       if (index === -1) {
         // El usuario no está en el array, agregarlo
-        this.usuariosPartido.push(userId);
+        this.usuariosParaAnadirAlPartido.push(userId);
       } else {
         // El usuario está en el array, quitarlo
-        this.usuariosPartido.splice(index, 1);
+        this.usuariosParaAnadirAlPartido.splice(index, 1);
       }
-      console.log('usuariosPartido', this.usuariosPartido);
+      console.log('usuariosPartido', this.usuariosParaAnadirAlPartido);
     }
 
 
@@ -68,18 +80,21 @@ usuariosPartido: string[]= [];
 
     onSubmit() {
       debugger
-      this.usuariosPartido.forEach(userId => {
+      this.usuariosParaAnadirAlPartido.forEach(userId => {
         // Verifica si el usuario ya está en el array
-        if (!this.isUsuarioAlreadyAdded(userId)) {
+        if (this.isUsuarioAlreadyAdded(userId)) {
           console.log('Agregando usuario al partido:', userId);
-          // Simula la llamada al servicio
-          // this.service.addUserMatch(userId, this.partido).subscribe(data => {
-          //   console.log("Usuario agregado a partido correctamente", data);
-          //   this.closedModal();
-          // });
+          //llamada al servicio
+          this.service.addUserMatch(userId, this.partido).subscribe(data => {
+            console.log("Usuario agregado a partido correctamente", data);
+            this.closedModal();
+            this.snackBar.open('Usuario añadido a partido', 'Cerrar', {
+            duration: 5000,
+          });
+          });
 
           // Agrega el usuario al array solo si aún no está presente
-          this.usuariosPartido.push(userId);
+          this.usuariosParaAnadirAlPartido.push(userId);
         } else {
           console.log('El usuario ya está en el partido:', userId);
           // Muestra un MatSnackBar indicando que el usuario ya está en el partido
@@ -94,12 +109,21 @@ usuariosPartido: string[]= [];
 
     // Función para verificar si el usuario ya está en el array
     isUsuarioAlreadyAdded(userId: string): boolean {
-      return this.usuariosPartido.includes(userId);
+      return this.usuariosParaAnadirAlPartido.includes(userId);
     }
 
 
       closedModal(): void {
           this.dialogRef.close();
       }
+      getUsuariosSorteo(fechaSorteo:string){
+        this.service.getUsuariosSorteo(fechaSorteo).subscribe(data =>{
+          this.usuariosYaInscritos = data;
+          console.log('fecha sorteo',this.usuariosYaInscritos );
+          this.getUsers();
+        });
+
+          //this.usuarioPartidoList();
+        }
 
 }
