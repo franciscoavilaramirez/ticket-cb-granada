@@ -13,6 +13,7 @@ import { Router } from '@angular/router';
 })
 export class RegisterPageComponent implements OnInit {
   registerForm: FormGroup;
+  errorMessage: string = '';
 
   constructor(private formBuilder: FormBuilder, private http: HttpClient, private router: Router) { }
 
@@ -46,12 +47,13 @@ export class RegisterPageComponent implements OnInit {
         next: () => {
           // Maneja la respuesta exitosa aquí
           console.log("Usuario registrado correctamente", this.registerForm.value);
-        // Redirige a la página de inicio
-        this.router.navigate(['/home']);
+          // Redirige a la página de inicio
+          this.router.navigate(['/home']);
         },
         error: error => {
           // Maneja el error aquí
           console.log("Error al registrar el usuario", error);
+          this.errorMessage = 'Error al registrar el usuario. Email ya está en uso. Por favor, inténtalo de nuevo.';
         }
       });
     }
