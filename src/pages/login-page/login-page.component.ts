@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { LoginResponse } from '../../app/modelo/LoginResponse';
 import { environment } from '../../enviroments/environment';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login-page',
@@ -14,7 +15,7 @@ export class LoginPageComponent implements OnInit {
   errorMessage: string = '';
   successMessage: string;
 
-  constructor(private formBuilder: FormBuilder, private http: HttpClient) { }
+  constructor(private formBuilder: FormBuilder, private http: HttpClient, private router: Router) { }
 
   ngOnInit(): void {
     this.loginForm = this.formBuilder.group({
@@ -39,6 +40,8 @@ export class LoginPageComponent implements OnInit {
         let userJson = JSON.stringify(user);
         localStorage.setItem('user', userJson);
         console.log("localstorage ID ==>",localStorage.getItem('user'));
+        // Redirige a la página de inicio
+        this.router.navigate(['/home']);
       },
       error: (error: any) => {
         console.error('Error!', error);
