@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../enviroments/environment';
+import { Router } from '@angular/router';
+
+
 
 @Component({
   selector: 'app-register-page',
@@ -11,7 +14,7 @@ import { environment } from '../../enviroments/environment';
 export class RegisterPageComponent implements OnInit {
   registerForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private http: HttpClient) { }
+  constructor(private formBuilder: FormBuilder, private http: HttpClient, private router: Router) { }
 
   ngOnInit() {
     this.registerForm = this.formBuilder.group({
@@ -43,6 +46,8 @@ export class RegisterPageComponent implements OnInit {
         next: () => {
           // Maneja la respuesta exitosa aquí
           console.log("Usuario registrado correctamente", this.registerForm.value);
+        // Redirige a la página de inicio
+        this.router.navigate(['/home']);
         },
         error: error => {
           // Maneja el error aquí
