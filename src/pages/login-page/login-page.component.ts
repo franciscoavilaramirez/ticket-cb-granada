@@ -27,18 +27,18 @@ export class LoginPageComponent implements OnInit {
   onSubmit(): void {
     const observer = {
       next: (response: LoginResponse) => {
-        console.log('Success!', response);
+        // console.log('Success!', response);
 
         let userJson = JSON.stringify(response);
         localStorage.setItem('user', userJson);
         console.log("localstorage ID ==>",localStorage.getItem('user'));
         // Redirige a la página de inicio
+        this.router.navigate(['/home']);
       },
       error: (error: any) => {
-        console.error('Error!', error);
+        // console.error('Error!', error);
         this.errorMessage = 'Error al iniciar sesión. Por favor, inténtalo de nuevo.';
       }
-
     };
 
     this.http.post<LoginResponse>(environment.apiUrl+'login', this.loginForm.value).subscribe(observer);
