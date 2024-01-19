@@ -14,15 +14,9 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class AddUserComponent {
 
-  // addUserForm: FormGroup;
-  // partidos: Partido[];
-
-
-      //crear array usuariosPartido
-    //  revisar metodo onchange del matcheckbox para añadir o quitar usuarios al array usuariosPartidos
-   // crear boton guardar que recorra usuariosPartido y por cada usuario que haya en el array lanzar peticion addUserMatch
+usuariosYaInscritos: Usuario[];
 usuarios: Usuario[];
-usuariosPartido: string[]= [];
+usuariosParaAnadirAlPartido: string[]= [];
 
   constructor(private service:ServiceService,public dialog: MatDialog,
     public dialogRef: MatDialogRef<HomeComponent>,@Inject(MAT_DIALOG_DATA) public partido: Partido,
@@ -30,116 +24,79 @@ usuariosPartido: string[]= [];
     ){}
 
     ngOnInit(){
-     this.getUsers();
+     this.getUsuariosSorteo(this.partido.fechaPartido);
+
     }
     getUsers(){
       this.service.getUsers().subscribe(data=>{
-        this.usuarios = data;
+        this.usuarios = [];
+        data.forEach(usu =>{
+          const user = this.usuariosYaInscritos.find(usuInscrito =>{
+           return  usu.user_id === usuInscrito.user_id
+          })
+          console.log('userrrr',user);
+          if(!Boolean(user)){
+            this.usuarios.push(usu)
+          }
+        })
        });
     }
     addUserToSorteo(userId: string) {
-      const index = this.usuariosPartido.indexOf(userId);
+      const index = this.usuariosParaAnadirAlPartido.indexOf(userId);
 
       if (index === -1) {
         // El usuario no está en el array, agregarlo
-        this.usuariosPartido.push(userId);
+        this.usuariosParaAnadirAlPartido.push(userId);
       } else {
         // El usuario está en el array, quitarlo
-        this.usuariosPartido.splice(index, 1);
+        this.usuariosParaAnadirAlPartido.splice(index, 1);
       }
-      console.log('usuariosPartido', this.usuariosPartido);
+      //console.log('usuariosPartido', this.usuariosParaAnadirAlPartido);
     }
+
     onSubmit() {
-      const usuariosAgregados: string[] = [];
-
-      this.usuariosPartido.forEach(usuPartido => {
+      this.usuariosParaAnadirAlPartido.forEach(userId => {
         // Verifica si el usuario ya está en el array
-        if (!this.usuariosPartido.includes(usuPartido)) {
-          usuariosAgregados.push(usuPartido);
-          console.log('usuPartido',usuPartido)
-
-          // Simula la llamada al servicio
-          // this.service.addUserMatch(usuPartido, this.partido).subscribe(data => {
-          //   console.log("Usuario agregado a partido correctamente", data);
-          //   this.closedModal();
-          //   this.snackBar.open('Usuario agregado correctamente', 'Cerrar', {
-          //     duration: 3000,  // Duración del mensaje en milisegundos
-          //   });
-          // });
+        if (this.isUsuarioAlreadyAdded(userId)) {
+          //console.log('Agregando usuario al partido:', userId);
+          //llamada al servicio
+          this.service.addUserMatch(userId, this.partido).subscribe(data => {
+            //console.log("Usuario agregado a partido correctamente", data);
+            this.closedModal();
+            this.snackBar.open('Usuario añadido a partido', 'Cerrar', {
+            duration: 5000,
+          });
+          });
+          // Agrega el usuario al array solo si aún no está presente
+          this.usuariosParaAnadirAlPartido.push(userId);
         }
       });
-
-      if (usuariosAgregados.length > 0) {
-        console.log('Usuarios agregados:', usuariosAgregados);
-        // this.closedModal();
-        // this.snackBar.open('Usuarios agregados correctamente', 'Cerrar', {
-        //   duration: 3000,  // Duración del mensaje en milisegundos
-        // });
-      } else {
-        console.log('Ningún usuario nuevo para agregar');
-      }
     }
 
+    // Función para verificar si el usuario ya está en el array
+    isUsuarioAlreadyAdded(userId: string): boolean {
+      return this.usuariosParaAnadirAlPartido.includes(userId);
+    }
 
-    //ESTE ES EL METODO ONSUBMIT QUE AGREGA BIEN UN USUARIO
-    // onSubmit(){
-    //   this.usuariosPartido.forEach(usuPartido =>{
-    //     this.service.addUserMatch(usuPartido,this.partido).subscribe(data =>{
-    //       console.log("usuario agregado a partido correctamente",data)
-    //     this.closedModal();
-    //     this.snackBar.open('Usuario agregado correctamente', 'Cerrar', {
-    //       duration: 3000,  // Duración del mensaje en milisegundos
-    //     });
-    //     });
-    //   })
-    // }
-
-    // onSubmit() {
-    //   this.usuariosPartido.forEach(userId => {
-    //     // Verifica si el usuario ya está en el array
-    //     if (!this.isUsuarioAlreadyAdded(userId)) {
-    //       console.log('se agrega user',userId)
-    //       // this.service.addUserMatch(userId, this.partido).subscribe(data => {
-    //       //   console.log("Usuario agregado a partido correctamente", data);
-    //       //   this.closedModal();
-    //       // });
-    //     } else {
-    //       console.log('ya está agregado user',userId)
-    //       // Muestra un MatSnackBar indicando que el usuario ya está agregado
-    //       // this.snackBar.open('¡Este usuario ya está agregado!', 'Cerrar', {
-    //       //   duration: 5000,
-    //       // });
-    //     }
-    //   });
-    // }
-    // // Función para verificar si el usuario ya está en el array
-    //  isUsuarioAlreadyAdded(userId: string): boolean {
-    //   return this.usuariosPartido.includes(userId);
-    // }
-    // onSubmit() {
-    //   for (const userId of this.usuariosPartido) {
-    //     // Verifica si el usuario ya está en el array
-    //     const isUsuarioAlreadyAdded = this.usuariosPartido.includes(userId);
-
-    //     if (!isUsuarioAlreadyAdded) {
-    //       console.log('Agregando usuario:', userId);
-    //       // Simula la llamada al servicio
-    //       // this.service.addUserMatch(userId, this.partido).subscribe(data => {
-    //       //   console.log("Usuario agregado a partido correctamente", data);
-    //       //   this.closedModal();
-    //       // });
-    //     } else {
-    //       // Muestra un MatSnackBar indicando que el usuario ya está agregado
-    //       console.log('Usuario ya está agregado:', userId);
-    //       // this.snackBar.open('¡Este usuario ya está agregado!', 'Cerrar', {
-    //       //   duration: 5000,
-    //       // });
-    //     }
-    //   }
-    // }
 
       closedModal(): void {
           this.dialogRef.close();
+      }
+      getUsuariosSorteo(fechaSorteo:string){
+        this.service.getUsuariosSorteo(fechaSorteo).subscribe(data =>{
+          this.usuariosYaInscritos = data;
+          console.log('fecha sorteo',this.usuariosYaInscritos );
+          this.getUsers();
+        });
+      }
+      deleteUserInscrito(userId: string){
+        const index = this.usuariosYaInscritos.findIndex(user => user.user_id === userId);
+        console.log('user delete', index)
+        if (index !== -1) {
+          // El usuario está en el array, quitarlo
+          this.usuariosYaInscritos.splice(index, 1);
+          this.getUsers();
+        }
       }
 
 }

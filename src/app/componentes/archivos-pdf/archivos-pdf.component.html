@@ -1,36 +1,56 @@
-<div class="container col-md-5">
 
-  <form [formGroup]="formArchivos" (submit)="send()">
+<div class="container">
+  <div class="container__wrapper">
+    <div class="container__wrapper__content-wrapper">
 
-    <br><br>
-    <h1>Subir Tickets Basket</h1>
-    <br><br>
 
-    <div class="mb-3">
-      <label for="titulo" class="form-label">Titulo Partido: </label>
-      <input type="text" class="form-control" id="titulo" name="titulo" formControlName="titulo" required>
+
+        <form [formGroup]="formArchivos" (submit)="send()">
+
+          <br><br>
+          <h1>Subir Tickets Basket</h1>
+          <br>
+
+          <!-- <div class="mb-3">
+            <label for="titulo" class="form-label">Titulo Partido: </label>
+            <input type="text" class="form-control" id="titulo" name="titulo" formControlName="titulo" required>
+          </div> -->
+          <div class="div">
+          <p>Titulo Partido</p>
+          <mat-form-field class="example-full-width">
+            <mat-label>Titulo Partido</mat-label>
+            <input matInput id="titulo" name="titulo" formControlName="titulo">
+          </mat-form-field>
+        </div>
+
+          <br>
+
+          <!-- <div class="mb-3">
+            <label for="fecha" class="form-label">Fecha Partido: </label>
+            <input type="date" class="form-control" id="fecha" name="fecha" formControlName="fecha" required>
+          </div> -->
+          <div class="div">
+            <p>Fecha Partido</p>
+            <input matInput [matDatepicker]="picker">
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </div>
+
+          <br><br>
+
+          <a>Subir Entradas Baloncesto: </a>
+          <br><br>
+          <div class="input-group mb-3">
+            <input type="file" (change)="subirArchivo($event)" class="form-control" id="archivosSubir" name="archivosSubir" formControlName="archivosSubir" required>
+            <label class="input-group-text" for="archivosSubir">Upload</label>
+          </div>
+
+          <br><br>
+
+          <button type="submit" class="btn btn-primary" [disabled]="!formArchivos.valid">Upload</button>
+
+        </form>
+
     </div>
-
-    <br>
-
-    <div class="mb-3">
-      <label for="fecha" class="form-label">Fecha Partido: </label>
-      <input type="date" class="form-control" id="fecha" name="fecha" formControlName="fecha" required>
-    </div>
-    
-    <br><br>
-
-    <a>Subir Entradas Baloncesto: </a>
-    <br><br>
-    <div class="input-group mb-3">
-      <input type="file" (change)="subirArchivo($event)" class="form-control" id="archivosSubir" name="archivosSubir" formControlName="archivosSubir" required>
-      <label class="input-group-text" for="archivosSubir">Upload</label>
-    </div>
-
-    <br><br>
-
-    <button type="submit" class="btn btn-primary" [disabled]="!formArchivos.valid">Upload</button>
-
-  </form>
-  
+  </div>
 </div>
