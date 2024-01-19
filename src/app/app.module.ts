@@ -24,7 +24,8 @@ import { HomeComponent } from './componentes/home/home.component';
 import { UpdateUserComponent } from './componentes/update-user/update-user.component';
 
 import { ArchivosPDFComponent } from './componentes/archivos-pdf/archivos-pdf.component';
-import { AddUserComponent } from './componentes/add-user/add-user.component'
+import { AddUserComponent } from './componentes/add-user/add-user.component';
+import { SubirEntradasComponent } from './pages/admin/subir-entradas/subir-entradas.component'
 
 
 
@@ -34,7 +35,8 @@ import { AddUserComponent } from './componentes/add-user/add-user.component'
     HomeComponent,
     UpdateUserComponent,
     ArchivosPDFComponent,
-    AddUserComponent
+    AddUserComponent,
+    SubirEntradasComponent
   ],
   imports: [
     HttpClientModule,
