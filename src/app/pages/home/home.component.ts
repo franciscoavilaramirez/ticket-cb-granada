@@ -15,15 +15,21 @@ export class HomeComponent {
     this.renderer.setStyle(document.body, 'background-repeat', 'no-repeat');
     this.renderer.setStyle(document.body, 'background-attachment', 'fixed');
   }
-  idUsuario = 1; //TODO: coger id de variable global
-  // idUsuario = localStorage.getItem('user');
 
   partidos = [{ id: 1, nombre: "Granada - Madrid", fecha: "11-01-24", tengoEntrada: false }, { id: 2, nombre: "Granada - Málaga", fecha: "21-03-24", tengoEntrada: false },
   { id: 3, nombre: "Granada - Mallorca", fecha: "24-01-24", tengoEntrada: false }, { id: 4, nombre: "Granada - Valencia", fecha: "24-01-24", tengoEntrada: false },
   { id: 5, nombre: "Granada - Barça", fecha: "24-01-24", tengoEntrada: false }];
   misPartidosIds = [1, 2]
-
+  
+  idUsuario:number
   ngOnInit() {
+    this.idUsuario = 1; //TODO: coger id de variable global
+    // let user = localStorage.getItem('user');
+    // let idUsuario: number
+    // if(user == null)
+    //   idUsuario = -1
+    // else
+    //   idUsuario = parseInt(user)
     //this.apiService.getProximosPartidos().subscribe(response => {this.partidos = response});
     //this.apiService.getMisPartidosIds(this.idUsuario).subscribe(response => {this.misPartidosIds = response});
     this.partidos.forEach(partido => {

@@ -4,8 +4,6 @@ import { Usuario } from '../modelo/usuarios';
 import { Partido } from '../modelo/partidos';
 import { Observable } from 'rxjs';
 
-
-
 @Injectable({
   providedIn: 'root'
 })
@@ -14,15 +12,6 @@ export class ApiService {
   constructor(private http:HttpClient) { }
 
   apiUrl = 'http://localhost:9191/cbgranada-api/v1/';
-  UrlInsertLogin = 'http://localhost:9191/cbgranada-api/v1/addUser';
-  UrlDeleteUser = 'http://localhost:9191/cbgranada-api/v1/borrarUsuario';
-  UrlUpdateUser = 'http://localhost:9191/cbgranada-api/v1/modificarUsuario';
-  UrlUpdatePartido = 'http://localhost:9191/cbgranada-api/v1/modificarPartido';
-  UrlLogin = 'http://localhost:9191/cbgranada-api/v1/Login'
-
-  UrlDeletePartido = 'http://localhost:9191/cbgranada-api/v1/borrarPartido';
-  UrlGetUsuariosPartido = 'http://localhost:9191/cbgranada-api/v1/getUsuariosSorteo';
-
 
   //Partidos cuya fecha sea posterior a la actual
   //Cada partido tiene un campo extra que indica si quedan entradas disponibles
@@ -54,38 +43,37 @@ export class ApiService {
 
 
   insertLogin(usuario: Usuario): Observable<Usuario> {
-    return this.http.post<Usuario>(this.UrlInsertLogin, usuario);
+    return this.http.post<Usuario>(this.apiUrl+'addUser', usuario);
   }
 
-  modifyUser(usuario: Usuario): Observable<Usuario>{
-    return this.http.put<Usuario>(`${this.UrlUpdateUser}/${usuario.id}`,usuario);
+  modifyUser(usuario: Usuario): Observable<Usuario>{   
+    return this.http.put<Usuario>(`${this.apiUrl+'modificarUsuario'}/${usuario.id}`,usuario);
   }
-  deleteUser(user: Usuario): Observable<Usuario> {
-    return this.http.delete<Usuario>(`${this.UrlDeleteUser}/${user.id}`);
+  deleteUser(user: Usuario): Observable<Usuario> { 
+    return this.http.delete<Usuario>(`${this.apiUrl+'borrarUsuario'}/${user.id}`);
   }
 
   Login(usuario: Usuario): Observable<Usuario> {
-    return this.http.post<Usuario>(this.UrlLogin, usuario);
+    return this.http.post<Usuario>(this.apiUrl+'Login', usuario);
   }
 
   getPartidos(){
     return this.http.get<Partido[]>(this.apiUrl + 'getPartidos');
   }
-  getUsuariosSorteo(fecha: string){
-    return this.http.get<Usuario[]>(`${this.UrlGetUsuariosPartido}/${fecha}`);
-
+  getUsuariosSorteo(fecha: string){ 
+    return this.http.get<Usuario[]>(`${this.apiUrl+'getUsuariosSorteo'}/${fecha}`);
   }
 
   addPartido(partido: Partido): Observable<Partido> {
     return this.http.post<Partido>(this.apiUrl + 'addPartido', partido);
   }
 
-  modifyPartido(partido: Partido): Observable<Partido> {
-    return this.http.put<Partido>(`${this.UrlUpdatePartido}/${partido.id}`, partido);
+  modifyPartido(partido: Partido): Observable<Partido> { 
+    return this.http.put<Partido>(`${this.apiUrl+'modificarPartido'}/${partido.id}`, partido);
   }
 
   deletePartido(partido: Partido): Observable<Partido> {
-    return this.http.delete<Partido>(`${this.UrlDeletePartido}/${partido.id}`);
+    return this.http.delete<Partido>(`${this.apiUrl+'borrarPartido'}/${partido.id}`);
   }
 
 }
