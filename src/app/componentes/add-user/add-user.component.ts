@@ -88,7 +88,15 @@ usuariosParaAnadirAlPartido: string[]= [];
           console.log('fecha sorteo',this.usuariosYaInscritos );
           this.getUsers();
         });
-
+      }
+      deleteUserInscrito(userId: string){
+        const index = this.usuariosYaInscritos.findIndex(user => user.user_id === userId);
+        console.log('user delete', index)
+        if (index !== -1) {
+          // El usuario está en el array, quitarlo
+          this.usuariosYaInscritos.splice(index, 1);
+          this.getUsers();
         }
+      }
 
 }
