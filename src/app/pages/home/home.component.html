@@ -2,10 +2,11 @@
 
 <div *ngFor="let partido of partidos" style="display: inline-block;">
     <div class="entrada" *ngIf="!partido.tengoEntrada">
-        <div class="nombre">{{partido.nombre}}</div>
+        <div class="nombre">{{partido.nombrePartido}}</div>
         <div class="fecha">
             <div>Fecha:</div>
-            {{partido.fecha}}
+            {{partido.fechaPartido | date:'dd-MM-yy'}} <br>
+            {{partido.fechaPartido | date:'HH:mm'}}
         </div>
         <button class="boton" (click)="apuntarse(partido.id)">Apuntarse</button>
     </div>
@@ -15,10 +16,11 @@
 
 <div *ngFor="let partido of partidos">
     <div class="entrada" *ngIf="partido.tengoEntrada">
-        <div class="nombre">{{partido.nombre}}</div>
+        <div class="nombre">{{partido.nombrePartido}}</div>
         <div class="fecha">
             <div>Fecha:</div>
-            {{partido.fecha}}
+            {{partido.fechaPartido | date:'dd-MM-yy'}} <br>
+            {{partido.fechaPartido | date:'HH:mm'}}
         </div>
         <button class="boton" (click)="descargar(partido.id)">Descargar</button>
         <button class="boton" (click)="desapuntarse(partido.id)">Devolver</button>

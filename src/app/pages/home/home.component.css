@@ -16,7 +16,8 @@
 }
 .fecha {
     position: relative;
-    left: 325px;   
+    left: 325px; 
+    top: -10px;  
     font-weight: bold; 
     text-align: center;
     width: fit-content;
@@ -25,10 +26,11 @@
 .boton {
     position: relative;
     left: 314px;   
+    top: -12px;
     font-weight: bold; 
     width: fit-content;
     display: block;
-    margin-top: 8px;
+    margin-bottom: 5px;
 }
 
 h2 {

@@ -1,7 +1,7 @@
 export interface Partido {
   id: number,
-  fecha : string,
-  nombre : string,
+  fechaPartido : string,
+  nombrePartido : string,
   tengoEntrada: boolean
   }
 

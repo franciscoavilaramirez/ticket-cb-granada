@@ -16,25 +16,22 @@ export class ApiService {
   //Partidos cuya fecha sea posterior a la actual
   //Cada partido tiene un campo extra que indica si quedan entradas disponibles
   getProximosPartidos(): Observable<Partido[]> {
-    //TODO: url api
-    return new Observable<Partido[]>;
+    return this.http.get<Partido[]>(this.apiUrl + 'getProximosPartidos');
   }
   //Ids de los partidos donde tengo entrada
   getMisPartidosIds(userId: number): Observable<number[]> {
-    //TODO: url api
-    return new Observable<number[]>;
+    return this.http.get<number[]>(this.apiUrl + 'getMisPartidosIds/'+1); // getMisPartidosIds/{user_id}
   }
 
-  asignarEntrada(idUsuario:number, idPartido:number) {
-    //TODO: url api
+  asignarEntrada(idUsuario:number, idPartido:number) { //saveUsuarioPartido/{userID}/{partidoId}
+    return this.http.post(this.apiUrl + 'saveUsuarioPartido/'+idUsuario+'/'+idPartido, {});
   }
   desasignarEntrada(idUsuario:number, idPartido:number) {
-    //TODO: url api
+    return this.http.delete(this.apiUrl + 'deleteUsuarioFromPartido/'+idUsuario+'/'+idPartido, {});
   }
 
-  getEntradaBase64(idPartido:number, idUsuario:number): Observable<string> {
-    //TODO: url api
-    return new Observable<string>;
+  getEntradaBase64(idUsuario:number, idPartido:number): Observable<any> { //enviarEntrada/{userID}/{partidoId}
+    return this.http.get<any>(this.apiUrl + 'enviarEntrada/'+idUsuario+'/'+idPartido, {});
   }
 
   getUsers(){
