@@ -1,24 +1,24 @@
 import { Component, ViewChild, AfterViewInit, ElementRef } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Usuario } from '../../modelo/usuario';
-import { Partido } from '../../modelo/partidos';
-import { ServiceService } from './../../service/service.service';
+import { Partido } from '../../../modelo/partidos';
+import { ServiceService } from '../../../service/service.service';
 import { Router } from '@angular/router';
 import * as XLSX from 'xlsx';
 import { MatDialog } from '@angular/material/dialog';
-import { UpdateUserComponent } from '../update-user/update-user.component';
 import Swal from 'sweetalert2';
-import { AddUserComponent } from '../add-user/add-user.component';
+import { Usuario } from '../../../modelo/usuario';
+import { UpdateUserComponent } from '../../../componentes/update-user/update-user.component';
+import { AddUserComponent } from '../../../componentes/add-user/add-user.component';
 
 
 
 
 @Component({
   selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
+  templateUrl: './admin-home.component.html',
+  styleUrls: ['./admin-home.component.scss']
 })
-export class HomeComponent {
+export class AdminHomeComponent {
 [x: string]: any;
 
 

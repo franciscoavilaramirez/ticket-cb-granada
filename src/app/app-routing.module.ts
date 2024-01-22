@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { HomeComponent } from './componentes/home/home.component';
 import { ArchivosPDFComponent } from './componentes/archivos-pdf/archivos-pdf.component';
+import { AdminHomeComponent } from './pages/admin/admin-home/admin-home.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'home', pathMatch: 'full' },
-  { path:'home', component: HomeComponent },
+  { path: '', redirectTo: 'Admin-home', pathMatch: 'full' },
+  { path:'Admin-home', component: AdminHomeComponent },
   { path: 'tickets', component: ArchivosPDFComponent}
 ];
 
