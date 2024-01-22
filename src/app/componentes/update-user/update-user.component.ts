@@ -2,9 +2,9 @@ import { Component, Inject } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ServiceService } from '../../service/service.service';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { HomeComponent } from '../home/home.component';
 import {MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { Usuario } from '../../modelo/usuario';
+import { AdminHomeComponent } from '../../pages/admin/admin-home/admin-home.component';
 
 
 @Component({
@@ -17,7 +17,7 @@ export class UpdateUserComponent {
 updateUserForm:FormGroup;
 
 constructor(private service:ServiceService,public dialog: MatDialog,
-            public dialogRef: MatDialogRef<HomeComponent>,
+            public dialogRef: MatDialogRef<AdminHomeComponent>,
             @Inject(MAT_DIALOG_DATA) public userModify: Usuario){
               this.createFormUpdateUser();
             }

@@ -1,11 +1,11 @@
 import { Component, Inject } from '@angular/core';
 import { ServiceService } from '../../service/service.service';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { HomeComponent } from '../home/home.component';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Usuario } from '../../modelo/usuario';
 import { Partido } from '../../modelo/partidos';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { AdminHomeComponent } from '../../pages/admin/admin-home/admin-home.component';
 
 @Component({
   selector: 'app-add-user',
@@ -19,7 +19,7 @@ usuarios: Usuario[];
 usuariosParaAnadirAlPartido: string[]= [];
 
   constructor(private service:ServiceService,public dialog: MatDialog,
-    public dialogRef: MatDialogRef<HomeComponent>,@Inject(MAT_DIALOG_DATA) public partido: Partido,
+    public dialogRef: MatDialogRef<AdminHomeComponent>,@Inject(MAT_DIALOG_DATA) public partido: Partido,
     public snackBar: MatSnackBar
     ){}
 
