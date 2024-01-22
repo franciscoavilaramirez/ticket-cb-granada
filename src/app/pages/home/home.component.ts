@@ -1,6 +1,6 @@
 import { Component, Renderer2 } from '@angular/core';
 import { ApiService } from '../../service/api.service';
-import { Partido } from '../../modelo/partidos';
+import { Partido } from '../../modelo/partido';
 
 @Component({
   selector: 'app-home',

@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Usuario } from '../modelo/usuarios';
-import { Partido } from '../modelo/partidos';
+import { Usuario } from '../modelo/usuario';
+import { Partido } from '../modelo/partido';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -73,4 +73,7 @@ export class ApiService {
     return this.http.delete<Partido>(`${this.apiUrl+'borrarPartido'}/${partido.id}`);
   }
 
+  addUserMatch(usuarioId: string,partido: Partido){
+    return this.http.post<Usuario>(`${this.apiUrl+'saveUsuarioSorteo'}/${usuarioId}/${partido.fechaPartido}`,null);
+  }
 }
