@@ -9,7 +9,7 @@
     display: flex;
     flex-direction: column;
     padding: 50px,50px,0px,50px;
-    width: auto;
+    //width: 81px;
 
     &__table-buttons{
       margin-right: 20px;
@@ -90,6 +90,7 @@
     table-layout: fixed;
     //width: 60%;
     width: auto;
+    height: 90%;
     background-color: #b8b3b81f;
     margin-bottom: 20px;
   }

@@ -30,7 +30,7 @@ ngOnInit(){
 createFormUpdateUser(){
   this.updateUserForm = new FormGroup({
     nombre: new FormControl(this.userModify.nombre),
-    apellido: new FormControl(this.userModify.apellido),
+    apellidos: new FormControl(this.userModify.apellidos),
     email: new FormControl(this.userModify.email,Validators.email),
     //isAdmin: new FormControl(Boolean(this.userModify.is_admin)),
     user_id:new FormControl(this.userModify.user_id)

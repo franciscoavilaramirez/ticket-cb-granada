@@ -34,16 +34,17 @@ export class AdminHomeComponent {
   bodyResponse: Usuario;
   currentUser: Usuario;
   //partidos!: Partido[];
-  partidosFran!: Partido[];
+  partido!: Partido[];
   usuariosPartido!: Usuario[];
   fechaPartido:string;
+  idPartido!: string;
 
 
   @ViewChild('TABLE')table!: ElementRef;
   @ViewChild('TABLEUSUARIOSPARTIDO')tableUsuariosPartido!: ElementRef;
 
-  displayedColumns: string[] = ['no','nombre','apellido','email','botones'];
-  ColumnsInscritos: string[] = ['no','nombre','apellido','email'];
+  displayedColumns: string[] = ['no','nombre','apellidos','email','botones'];
+  ColumnsInscritos: string[] = ['no','nombre','apellidos','email'];
 
   ngOnInit(){
     this.getUsers();
@@ -128,14 +129,15 @@ export class AdminHomeComponent {
   }
   getPartidos(){
     this.service.getPartidos().subscribe(data =>{
-      this.partidosFran = data;
-      console.log('Partidos',this.partidosFran);
+      this.partido = data;
+      console.log('Partidos',this.partido);
     })
   }
-  getUsuariosSorteo(fechaSorteo:string){
-    this.service.getUsuariosSorteo(fechaSorteo).subscribe(data =>{
+  getUsuariosPartido(idPartido:string){
+    debugger
+    this.service.getUsuariosPartido(idPartido).subscribe(data =>{
       this.usuariosPartido = data;
-      console.log('fecha sorteo',this.usuariosPartido );
+      //console.log('id del Partido',this.usuariosPartido );
     });
       this.usuarioPartidoList();
     }

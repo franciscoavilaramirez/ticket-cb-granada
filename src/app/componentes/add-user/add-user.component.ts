@@ -24,7 +24,7 @@ usuariosParaAnadirAlPartido: string[]= [];
     ){}
 
     ngOnInit(){
-     this.getUsuariosSorteo(this.partido.fechaPartido);
+     this.getUsuariosPartido(this.partido.id);
 
     }
     getUsers(){
@@ -58,10 +58,11 @@ usuariosParaAnadirAlPartido: string[]= [];
       this.usuariosParaAnadirAlPartido.forEach(userId => {
         // Verifica si el usuario ya está en el array
         if (this.isUsuarioAlreadyAdded(userId)) {
-          //console.log('Agregando usuario al partido:', userId);
+          //console.log('Agregando usuario con Id:', userId);
+          debugger
           //llamada al servicio
           this.service.addUserMatch(userId, this.partido).subscribe(data => {
-            //console.log("Usuario agregado a partido correctamente", data);
+            console.log("Usuario agregado a partido correctamente", data);
             this.closedModal();
             this.snackBar.open('Usuario añadido a partido', 'Cerrar', {
             duration: 5000,
@@ -82,8 +83,8 @@ usuariosParaAnadirAlPartido: string[]= [];
       closedModal(): void {
           this.dialogRef.close();
       }
-      getUsuariosSorteo(fechaSorteo:string){
-        this.service.getUsuariosSorteo(fechaSorteo).subscribe(data =>{
+      getUsuariosPartido(idPartido:string){
+        this.service.getUsuariosPartido(idPartido).subscribe(data =>{
           this.usuariosYaInscritos = data;
           console.log('fecha sorteo',this.usuariosYaInscritos );
           this.getUsers();

@@ -1,6 +1,6 @@
 export class Partido{
 
-    id?: string;
+    id: string;
     fechaPartido : string;
     nombrePartido : string;
 

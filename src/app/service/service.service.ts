@@ -21,8 +21,8 @@ export class ServiceService {
   UrlUpdatePartido = 'http://localhost:9191/cbgranada-api/v1/modificarPartido';
   UrlLogin = 'http://localhost:9191/cbgranada-api/v1/Login'
   UrlDeletePartido = 'http://localhost:9191/cbgranada-api/v1/borrarPartido';
-  UrlGetUsuariosPartido = 'http://localhost:9191/cbgranada-api/v1/getUsuariosSorteo';
-  UrlAddUserMatch = 'http://localhost:9191/cbgranada-api/v1/saveUsuarioSorteo';
+  UrlGetUsuariosPartido = 'http://localhost:9191/cbgranada-api/v1/getUsuariosPartido';
+  UrlAddUserMatch = 'http://localhost:9191/cbgranada-api/v1/saveUsuarioPartido';
 
 
 
@@ -50,8 +50,8 @@ export class ServiceService {
   getPartidos(){
     return this.http.get<Partido[]>(this.UrlGlobal + 'getPartidos');
   }
-  getUsuariosSorteo(fecha: string){
-    return this.http.get<Usuario[]>(`${this.UrlGetUsuariosPartido}/${fecha}`);
+  getUsuariosPartido(idPartido: string){
+    return this.http.get<Usuario[]>(`${this.UrlGetUsuariosPartido}/${idPartido}`);
 
   }
 
@@ -66,8 +66,8 @@ export class ServiceService {
   deletePartido(partido: Partido): Observable<Partido> {
     return this.http.delete<Partido>(`${this.UrlDeletePartido}/${partido.id}`);
   }
-  addUserMatch(usuarioId: string,partido: Partido){
-    return this.http.post<Usuario>(`${this.UrlAddUserMatch}/${usuarioId}/${partido.fechaPartido}`,null);
+  addUserMatch(usuarioId: string,partidoId: Partido){
+    return this.http.post<Usuario>(`${this.UrlAddUserMatch}/${usuarioId}/${partidoId.id}`,null);
   }
 
 }

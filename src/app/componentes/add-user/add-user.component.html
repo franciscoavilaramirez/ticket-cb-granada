@@ -7,7 +7,7 @@
       <mat-list role="list">
         <mat-list-item role="listitem">
           {{usuarioYaInscrito.nombre }}
-          {{usuarioYaInscrito.apellido }}
+          {{usuarioYaInscrito.apellidos }}
           ({{usuarioYaInscrito.email}})
           <button mat-raised-button color="warn" (click)="deleteUserInscrito(usuarioYaInscrito.user_id)" >Eliminar</button>
         </mat-list-item>
@@ -20,7 +20,7 @@
           (change)="addUserToSorteo(usuario.user_id)"
           >
             {{usuario.nombre}}
-            {{usuario.apellido}}
+            {{usuario.apellidos}}
             ({{usuario.email}})
         </mat-checkbox>
       </section>
