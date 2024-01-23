@@ -22,7 +22,7 @@
             {{partido.fechaPartido | date:'dd-MM-yy'}} <br>
             {{partido.fechaPartido | date:'HH:mm'}}
         </div>
-        <button class="boton" (click)="descargar(partido.id)">Descargar</button>
+        <button class="boton" (click)="descargar(partido.id, partido.nombrePartido)">Descargar</button>
         <button class="boton" (click)="desapuntarse(partido.id)">Devolver</button>
     </div>
 </div>

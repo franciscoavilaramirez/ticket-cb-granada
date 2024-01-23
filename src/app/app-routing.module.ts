@@ -6,10 +6,10 @@ import { HomeComponent} from './pages/home/home.component';
 import { SubirEntradasComponent } from './pages/admin/subir-entradas/subir-entradas.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'tickets', pathMatch: 'full' },
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path:'home', component: HomeComponent },
   { path:'Admin-home', component: AdminHomeComponent },
-  { path: 'tickets', component: SubirEntradasComponent}
+  { path: 'subir-entradas', component: SubirEntradasComponent}
 ];
 
 @NgModule({

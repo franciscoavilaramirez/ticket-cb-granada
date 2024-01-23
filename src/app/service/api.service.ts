@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Usuario } from '../modelo/usuario';
 import { Partido } from '../modelo/partido';
@@ -30,8 +30,9 @@ export class ApiService {
     return this.http.delete(this.apiUrl + 'deleteUsuarioFromPartido/'+idUsuario+'/'+idPartido, {});
   }
 
-  getEntradaBase64(idUsuario:number, idPartido:number): Observable<any> { //enviarEntrada/{userID}/{partidoId}
-    return this.http.get<any>(this.apiUrl + 'enviarEntrada/'+idUsuario+'/'+idPartido, {});
+  getEntradaBase64(idUsuario:number, idPartido:number): Observable<string> { //enviarEntrada/{userID}/{partidoId}
+    const headers = new HttpHeaders().set('Content-Type', 'text/plain; charset=utf-8');
+    return this.http.get(this.apiUrl + 'enviarEntrada/'+idUsuario+'/'+idPartido,{ headers, responseType: 'text'});
   }
 
   getUsers(){
