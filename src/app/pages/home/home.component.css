@@ -1,0 +1,45 @@
+.entrada {
+    background-image: url("/assets/imgs/Entrada.png");
+    background-size: cover;
+    width: 400px;
+    height: 150px;
+    margin: 10px;
+}
+.nombre {
+    position: relative;
+    top: 90px;
+    left: 30px;   
+    font-size: 22px;
+    font-weight: bold; 
+    width: 280px;
+    text-align: center;
+}
+.fecha {
+    position: relative;
+    left: 325px; 
+    top: -10px;  
+    font-weight: bold; 
+    text-align: center;
+    width: fit-content;
+    margin-bottom: 10px;
+}
+.boton {
+    position: relative;
+    left: 314px;   
+    top: -12px;
+    font-weight: bold; 
+    width: fit-content;
+    display: block;
+    margin-bottom: 5px;
+}
+
+h2 {
+    width: fit-content;
+    position: relative;
+    left: 10px;
+    padding: 0 20px;
+    margin: 10px 0;
+    font-weight: bold;
+    font-size: 25px;
+    box-shadow: 0 0 14px black;
+}
