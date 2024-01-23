@@ -22,7 +22,7 @@ export class LoginPageComponent implements OnInit {
     let user = localStorage.getItem('user');
     if (user != null) {
       let userJson = JSON.parse(user);
-      userJson.isAdmin ? this.router.navigate(['/Admin-home']) : this.router.navigate(['/home']);
+      userJson.isAdmin == "true" ? this.router.navigate(['/Admin-home']) : this.router.navigate(['/home']);
     }
 
     this.loginForm = this.formBuilder.group({
