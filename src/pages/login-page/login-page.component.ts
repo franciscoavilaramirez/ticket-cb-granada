@@ -18,6 +18,13 @@ export class LoginPageComponent implements OnInit {
   constructor(private formBuilder: FormBuilder, private http: HttpClient, private router: Router) { }
 
   ngOnInit(): void {
+    // Si el usuario ya ha iniciado sesión, redirige a la página de inicio
+    let user = localStorage.getItem('user');
+    if (user != null) {
+      let userJson = JSON.parse(user);
+      userJson.isAdmin ? this.router.navigate(['/Admin-home']) : this.router.navigate(['/home']);
+    }
+
     this.loginForm = this.formBuilder.group({
       email: ['', Validators.required],
       password: ['', Validators.required]
@@ -31,7 +38,7 @@ export class LoginPageComponent implements OnInit {
 
         let userJson = JSON.stringify(response);
         localStorage.setItem('user', userJson);
-        console.log("localstorage ID ==>",localStorage.getItem('user'));
+        console.log("localstorage ID ==>", localStorage.getItem('user'));
         // Redirige a la página de inicio
         this.router.navigate(['/home']);
       },
@@ -41,6 +48,6 @@ export class LoginPageComponent implements OnInit {
       }
     };
 
-    this.http.post<LoginResponse>(environment.apiUrl+'login', this.loginForm.value).subscribe(observer);
+    this.http.post<LoginResponse>(environment.apiUrl + 'login', this.loginForm.value).subscribe(observer);
   }
 }
