@@ -25,6 +25,7 @@ import {MatListModule} from '@angular/material/list';
 import { ArchivosPDFComponent } from './componentes/archivos-pdf/archivos-pdf.component';
 import { AddUserComponent } from './componentes/add-user/add-user.component';
 import { AdminHomeComponent } from './pages/admin/admin-home/admin-home.component'
+import { SubirEntradasComponent } from './pages/admin/subir-entradas/subir-entradas.component'
 
 
 import { HomeComponent } from './pages/home/home.component';
@@ -36,7 +37,8 @@ import { HomeComponent } from './pages/home/home.component';
     UpdateUserComponent,
     ArchivosPDFComponent,
     AddUserComponent,
-    AdminHomeComponent
+    AdminHomeComponent,
+    SubirEntradasComponent
   ],
   imports: [
     HttpClientModule,

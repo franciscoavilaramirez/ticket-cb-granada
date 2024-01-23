@@ -3,12 +3,13 @@ import { RouterModule, Routes } from '@angular/router';
 import { ArchivosPDFComponent } from './componentes/archivos-pdf/archivos-pdf.component';
 import { AdminHomeComponent } from './pages/admin/admin-home/admin-home.component';
 import { HomeComponent} from './pages/home/home.component';
+import { SubirEntradasComponent } from './pages/admin/subir-entradas/subir-entradas.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'home', pathMatch: 'full' },
+  { path: '', redirectTo: 'tickets', pathMatch: 'full' },
   { path:'home', component: HomeComponent },
   { path:'Admin-home', component: AdminHomeComponent },
-  { path: 'tickets', component: ArchivosPDFComponent}
+  { path: 'tickets', component: SubirEntradasComponent}
 ];
 
 @NgModule({
