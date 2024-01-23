@@ -23,8 +23,8 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatListModule} from '@angular/material/list';
 
 import { ArchivosPDFComponent } from './componentes/archivos-pdf/archivos-pdf.component';
-import { LoginPageComponent } from '../pages/login-page/login-page.component';
-import { RegisterPageComponent } from '../pages/register-page/register-page.component';
+import { LoginPageComponent } from './pages/login-page/login-page.component';
+import { RegisterPageComponent } from './pages/register-page/register-page.component';
 import { ErrorAlertFormComponent } from './componentes/error-alert-form/error-alert-form.component'
 import { AddUserComponent } from './componentes/add-user/add-user.component';
 import { AdminHomeComponent } from './pages/admin/admin-home/admin-home.component'

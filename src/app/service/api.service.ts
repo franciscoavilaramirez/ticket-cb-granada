@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Usuario } from '../modelo/usuario';
 import { Partido } from '../modelo/partido';
 import { Observable } from 'rxjs';
+import { environment } from '../../enviroments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -10,8 +11,7 @@ import { Observable } from 'rxjs';
 export class ApiService {
 
   constructor(private http:HttpClient) { }
-
-  apiUrl = 'http://localhost:9191/cbgranada-api/v1/';
+  apiUrl = environment.apiUrl
 
   //Partidos cuya fecha sea posterior a la actual
   //Cada partido tiene un campo extra que indica si quedan entradas disponibles
