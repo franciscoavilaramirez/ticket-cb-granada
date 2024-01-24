@@ -47,8 +47,13 @@ export class RegisterPageComponent implements OnInit {
         next: () => {
           // Maneja la respuesta exitosa aquí
           console.log("Usuario registrado correctamente", this.registerForm.value);
+          // Guardar usuario en localstorage
+          localStorage.setItem('user', JSON.stringify(this.registerForm.value));
+          console.log("Usuario guardado en localstorage", this.registerForm.value);
+
           // Redirige a la página de inicio
           this.router.navigate(['/home']);
+
         },
         error: error => {
           // Maneja el error aquí
