@@ -15,6 +15,7 @@ import { AdminHomeComponent } from '../../pages/admin/admin-home/admin-home.comp
 export class UpdateUserComponent {
 
 updateUserForm:FormGroup;
+usuarios!: Usuario[];
 
 constructor(private service:ServiceService,public dialog: MatDialog,
             public dialogRef: MatDialogRef<AdminHomeComponent>,
@@ -23,7 +24,7 @@ constructor(private service:ServiceService,public dialog: MatDialog,
             }
 
 ngOnInit(){
-  this.service.getUsers();
+  this.getUsers();
 
 }
 
@@ -37,6 +38,12 @@ createFormUpdateUser(){
 
   });
 }
+getUsers(){
+  this.service.getUsers().subscribe(data =>{
+    this.usuarios = data
+    console.log('Usuarios desde update-users', this.usuarios);
+  });
+}
 
 onSubmit(){
   if(this.updateUserForm.valid){
@@ -45,7 +52,7 @@ onSubmit(){
     console.log("bodyResponse",bodyResponse);
     this.service.modifyUser(bodyResponse).subscribe(data =>{
       this.closedModal();
-
+      this.getUsers();
     });
 
   }

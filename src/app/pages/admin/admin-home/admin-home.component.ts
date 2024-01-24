@@ -110,22 +110,25 @@ export class AdminHomeComponent {
   XLSX.writeFile(wb, 'Listado_Usuarios.xlsx');
 }
   openDialog(usuario:Usuario) {
-    this.dialog.open(UpdateUserComponent,{
+    const dialog = this.dialog.open(UpdateUserComponent,{
       data: usuario ,
       width:'450px',
       height:'600px'
+    });
 
+    dialog.afterClosed().subscribe(result => {
+      this.getUsers();
     });
 
   }
   openAddUser(partido: Partido) {
-    this.dialog.open(AddUserComponent,{
+    const dialog = this.dialog.open(AddUserComponent,{
       data: partido,
-      width:'450px',
-      height:'600px'
-
+      width:'50vw',
+      height:'75vh'
     });
-
+    dialog.afterClosed().subscribe(result => {
+    });
   }
   getPartidos(){
     this.service.getPartidos().subscribe(data =>{

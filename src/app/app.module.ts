@@ -27,6 +27,7 @@ import {MatListModule} from '@angular/material/list';
 import { ArchivosPDFComponent } from './componentes/archivos-pdf/archivos-pdf.component';
 import { AddUserComponent } from './componentes/add-user/add-user.component';
 import { AdminHomeComponent } from './pages/admin/admin-home/admin-home.component'
+import { CommonModule } from '@angular/common';
 
 
 
@@ -56,7 +57,8 @@ import { AdminHomeComponent } from './pages/admin/admin-home/admin-home.componen
     MatCheckboxModule,
     FormsModule,
     MatDatepickerModule,
-    MatListModule
+    MatListModule,
+    CommonModule
 
   ],
   providers: [],

@@ -10,7 +10,7 @@
             <mat-card-header  >
               <mat-card-title>Partido:</mat-card-title>
               <mat-card-subtitle>{{partido.nombrePartido}}</mat-card-subtitle>
-              <mat-card-subtitle>{{partido.fechaPartido}}</mat-card-subtitle>
+              <mat-card-subtitle>{{partido.fechaPartido | date:'dd-MM-yyyy' }}</mat-card-subtitle>
             </mat-card-header>
             <mat-card-actions class="cards-wrapper__buttons">
               <button mat-raised-button color="primary" (click)="getUsuariosPartido(partido.id)" >Mostrar/Ocultar Inscritos</button>

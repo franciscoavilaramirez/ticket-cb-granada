@@ -6,6 +6,7 @@ import { Usuario } from '../../modelo/usuario';
 import { Partido } from '../../modelo/partidos';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AdminHomeComponent } from '../../pages/admin/admin-home/admin-home.component';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-add-user',
@@ -31,7 +32,7 @@ usuariosParaAnadirAlPartido: string[]= [];
       this.service.getUsers().subscribe(data=>{
         this.usuarios = [];
         data.forEach(usu =>{
-          const user = this.usuariosYaInscritos.find(usuInscrito =>{
+          const user = this.usuariosYaInscritos?.find(usuInscrito =>{
            return  usu.user_id === usuInscrito.user_id
           })
           console.log('userrrr',user);
@@ -90,14 +91,23 @@ usuariosParaAnadirAlPartido: string[]= [];
           this.getUsers();
         });
       }
-      deleteUserInscrito(userId: string){
-        const index = this.usuariosYaInscritos.findIndex(user => user.user_id === userId);
-        console.log('user delete', index)
-        if (index !== -1) {
-          // El usuario está en el array, quitarlo
-          this.usuariosYaInscritos.splice(index, 1);
-          this.getUsers();
-        }
+      // deleteUserInscrito(userId: string){
+      //   const index = this.usuariosYaInscritos.findIndex(user => user.user_id === userId);
+      //   console.log('user delete', index)
+      //   if (index !== -1) {
+      //     // El usuario está en el array, quitarlo
+      //     this.usuariosYaInscritos.splice(index, 1);
+      //     this.getUsers();
+      //   }
+      // }
+      deleteUserInscrito(userId:string,partidoId:Partido){
+
+        this.service.deleteUserMatch(userId,partidoId).subscribe(data =>{
+          console.log('delete user',data);
+          Swal.fire("Usuario eliminado correctamente", "", "success");
+          this.getUsuariosPartido(this.partido.id);
+        })
+
       }
 
 }

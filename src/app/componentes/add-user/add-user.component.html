@@ -5,13 +5,16 @@
     <div class="container__wrapper__content-wrapper" *ngFor="let usuarioYaInscrito of usuariosYaInscritos" >
 
       <mat-list role="list">
-        <mat-list-item role="listitem">
+        <mat-list-item  role="listitem">
+          <button mat-icon-button color="warn" (click)="deleteUserInscrito(usuarioYaInscrito.user_id,partido)" title="Eliminar Usuario" ><mat-icon>delete_forever</mat-icon></button>
           {{usuarioYaInscrito.nombre }}
           {{usuarioYaInscrito.apellidos }}
           ({{usuarioYaInscrito.email}})
-          <button mat-raised-button color="warn" (click)="deleteUserInscrito(usuarioYaInscrito.user_id)" >Eliminar</button>
+
+
         </mat-list-item>
       </mat-list>
+
   </div>
 <h2>Usuarios Pendientes por inscribir</h2>
     <div class="container__wrapper__content-wrapper" *ngFor="let usuario of usuarios" >
@@ -25,10 +28,11 @@
         </mat-checkbox>
       </section>
     </div>
-    <div class="container__wrapper__content-wrapper">
-      <div class="buttons">
-      <button mat-raised-button class="buttons" color="primary"(click)="onSubmit()">Guardar</button>
-      <button mat-raised-button class="buttons" color="primary"(click)="closedModal()">Cancelar</button>
-    </div>
+
+  </div>
+  <div class="container__wrapper__content-wrapper">
+    <div class="buttons">
+    <button mat-raised-button class="buttons" color="primary"(click)="onSubmit()">Guardar</button>
+    <button mat-raised-button class="buttons" color="primary"(click)="closedModal()">Cancelar</button>
   </div>
 </div>

@@ -23,6 +23,7 @@ export class ServiceService {
   UrlDeletePartido = 'http://localhost:9191/cbgranada-api/v1/borrarPartido';
   UrlGetUsuariosPartido = 'http://localhost:9191/cbgranada-api/v1/getUsuariosPartido';
   UrlAddUserMatch = 'http://localhost:9191/cbgranada-api/v1/saveUsuarioPartido';
+  UrlDeleteUserMatch = 'http://localhost:9191/cbgranada-api/v1/deleteUsuarioFromPartido';
 
 
 
@@ -68,6 +69,9 @@ export class ServiceService {
   }
   addUserMatch(usuarioId: string,partidoId: Partido){
     return this.http.post<Usuario>(`${this.UrlAddUserMatch}/${usuarioId}/${partidoId.id}`,null);
+  }
+  deleteUserMatch(usuarioId: string,partidoId: Partido) {
+    return this.http.delete<Usuario>(`${this.UrlDeleteUserMatch}/${usuarioId}/${partidoId.id}`);
   }
 
 }
