@@ -20,25 +20,28 @@ export class HomeComponent {
   partidos: Partido[]
   misPartidosIds: number[]
   ngOnInit() {
-    this.idUsuario = 1; //TODO: coger id de variable global
-    // let user = localStorage.getItem('user');
-    // let idUsuario: number
-    // if(user == null)
-    //   idUsuario = -1
-    // else
-    //   idUsuario = parseInt(user)
+    let user = localStorage.getItem('user');
+    if(user == null)
+      this.idUsuario = -1
+    else {
+      let userJson = JSON.parse(user);
+      this.idUsuario = parseInt(userJson.userId)
+      console.log("id usuario: " + this.idUsuario)
+    }
     this.apiService.getMisPartidosIds(this.idUsuario).subscribe(response => {
       this.misPartidosIds = response
       this.apiService.getProximosPartidos().subscribe(response => {
-        this.partidos = response
-        console.log("Proximos partidos: " + this.partidos)
-        console.log("Mis partidos ids: " + this.misPartidosIds)
-        this.partidos.forEach(partido => {
-          if (this.misPartidosIds.includes(partido.id))
-            partido.tengoEntrada = true;
-          else
-            partido.tengoEntrada = false;
-        })
+        if(response != null) {
+          this.partidos = response
+          this.partidos.forEach(partido => {
+            if (this.misPartidosIds != null && this.misPartidosIds.includes(partido.id))
+              partido.tengoEntrada = true;
+            else
+              partido.tengoEntrada = false;
+          })
+        }
+        console.log("Partidos: "+this.partidos)
+        console.log("Mis partidos ids: "+this.misPartidosIds)
       });
     });
   }
@@ -61,8 +64,10 @@ export class HomeComponent {
   desapuntarse(idPartido: number) {
     this.apiService.desasignarEntrada(this.idUsuario, idPartido).subscribe(()=>{
       this.partidos.forEach(partido => {
-        if (partido.id == idPartido)
+        if (partido.id == idPartido) {
           partido.tengoEntrada = false;
+          partido.stockEntradas = true;
+        }
       });
     })
 

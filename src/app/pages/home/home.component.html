@@ -8,7 +8,8 @@
             {{partido.fechaPartido | date:'dd-MM-yy'}} <br>
             {{partido.fechaPartido | date:'HH:mm'}}
         </div>
-        <button class="boton" (click)="apuntarse(partido.id)">Apuntarse</button>
+        <button *ngIf="partido.stockEntradas" class="boton" (click)="apuntarse(partido.id)">Apuntarse</button>
+        <button *ngIf="!partido.stockEntradas" class="boton" disabled>Agotadas</button>
     </div>
 </div>
 
