@@ -43,11 +43,15 @@ export class RegisterPageComponent implements OnInit {
 
   register() {
     if (this.registerForm.valid) {
-      this.http.post(environment.apiUrl+'addUser', this.registerForm.value).subscribe({
-        next: () => {
-          // Maneja la respuesta exitosa aquí
-          console.log("Usuario registrado correctamente", this.registerForm.value);
-          // Redirige a la página de inicio
+      this.http.post(environment.apiUrl + 'addUser', this.registerForm.value).subscribe({
+        next: (response) => {
+          let userString = JSON.stringify(response);
+          let userJson = JSON.parse(userString);
+          let user = { "userEmail": userJson.email, "isAdmin": userJson._admin, "userName": userJson.nombre, "userId": userJson.user_id, "userApellidos": userJson.apellidos }
+          console.log("Usuario registrado correctamente. Response:", response);
+          console.log("User json: ", user)
+          localStorage.setItem('user', JSON.stringify(user));
+
           this.router.navigate(['/home']);
         },
         error: error => {

@@ -35,8 +35,8 @@ export class SubirEntradasComponent {
     this.pdf.fechaPartido = this.formArchivos.value.fecha;
     console.log(this.pdf)
     this.userservice.subirTickets(this.pdf).subscribe(data=>{
-      alert("Tickets repartidos a las usuarios con exito")
-    }, error=> alert("Error al repartir los tickets a los usuaroios"));
+      alert("Entradas subidas con exito")
+    }, error=> alert("Error al subir las entradas"));
   }
 
   subirArchivo(event: any): any{
