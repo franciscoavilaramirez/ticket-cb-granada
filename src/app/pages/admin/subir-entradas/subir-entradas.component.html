@@ -1,21 +1,21 @@
 <div class="container col-md-5">
-    <form [formGroup]="formArchivos" (submit)="send()">
+    <form [formGroup]="form" (submit)="send()">
         <h2>Subir entradas</h2>
-        <div class="mb-3">
-            <label for="titulo" class="form-label">Titulo Partido: </label>
-            <input type="text" class="form-control" id="titulo" name="titulo" formControlName="titulo" required>
+        <div>
+            <mat-form-field appearance="fill" class="form-field">
+                <mat-label>Título</mat-label>
+                <input matInput formControlName="titulo" required>
+            </mat-form-field>
         </div>
-        <div class="mb-3">
-            <label for="fecha" class="form-label">Fecha Partido: </label>
-            <input type="datetime-local" class="form-control" id="fecha" name="fecha" formControlName="fecha" required>
+        <div class="calendar-container">
+            <label for="fecha" [ngStyle]="{color:color}" class="fecha-label">Fecha *</label>
+            <input (focus)="onFocus()" (blur)="onBlur()" type="datetime-local" class="datetime-picker" formControlName="fecha" required>
         </div>
-        <a>Subir entradas del partido: </a>
-        <div class="input-group mb-3">
-            <input type="file" (change)="subirArchivo($event)" class="form-control" id="archivosSubir"
-                name="archivosSubir" formControlName="archivosSubir" required>
-            <label class="input-group-text" for="archivosSubir"></label>
+        <div> 
+            <input type="file" (change)="subirArchivo($event)" class="input-file" formControlName="entradasPdf" required>
         </div>
-
-        <button type="submit" class="btn btn-primary" [disabled]="!formArchivos.valid">Subir</button>
+        <div> 
+            <button mat-raised-button color="primary" type="submit" [disabled]="!form.valid">Subir</button>
+        </div>
     </form>
 </div>

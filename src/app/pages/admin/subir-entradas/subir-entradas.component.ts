@@ -11,31 +11,27 @@ import { Pdf } from '../../../componentes/archivos-pdf/pdf';
   styleUrl: './subir-entradas.component.css'
 })
 export class SubirEntradasComponent {
-  public formArchivos: FormGroup;
+  public form: FormGroup;
   private b64: String = "";
   pdf:Pdf = new Pdf();
-
-  constructor(private userservice: LoginUserService, private fb:FormBuilder) { }
+  
+  constructor(private userservice: LoginUserService, private formBuilder:FormBuilder) { }
 
   ngOnInit() {
-    this.formArchivos = this.createMyForm();
-  }
-
-
-  private createMyForm():FormGroup{
-    return this.fb.group({
+    this.form = this.formBuilder.group({
       titulo:[''],
       fecha:[''],
-      archivosSubir:[]
+      entradasPdf:[]
     });
   }
 
   send(){
-    this.pdf.tituloPartido = this.formArchivos.value.titulo;
-    this.pdf.fechaPartido = this.formArchivos.value.fecha;
+    this.pdf.tituloPartido = this.form.value.titulo;
+    this.pdf.fechaPartido = this.form.value.fecha;
     console.log(this.pdf)
     this.userservice.subirTickets(this.pdf).subscribe(data=>{
       alert("Entradas subidas con exito")
+      window.location.reload()
     }, error=> alert("Error al subir las entradas"));
   }
 
@@ -69,5 +65,13 @@ export class SubirEntradasComponent {
       subscriber.error();
       subscriber.complete();
     }
+  }
+
+  color = "#8f8989" //grey
+  onFocus() {
+    this.color = "#3f51b5"//blue
+  }
+  onBlur() {
+    this.color = "#8f8989"
   }
 }
