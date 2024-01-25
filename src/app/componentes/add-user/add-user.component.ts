@@ -104,7 +104,6 @@ usuariosParaAnadirAlPartido: string[]= [];
 
         this.service.deleteUserMatch(userId,partidoId).subscribe(data =>{
           console.log('delete user',data);
-          Swal.fire("Usuario eliminado correctamente", "", "success");
           this.getUsuariosPartido(this.partido.id);
         })
 

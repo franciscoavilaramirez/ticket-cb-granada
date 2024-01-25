@@ -28,6 +28,7 @@ import { ArchivosPDFComponent } from './componentes/archivos-pdf/archivos-pdf.co
 import { AddUserComponent } from './componentes/add-user/add-user.component';
 import { AdminHomeComponent } from './pages/admin/admin-home/admin-home.component'
 import { CommonModule } from '@angular/common';
+import { ModifyMatchComponent } from './componentes/modify-match/modify-match.component';
 
 
 
@@ -37,7 +38,8 @@ import { CommonModule } from '@angular/common';
     UpdateUserComponent,
     ArchivosPDFComponent,
     AddUserComponent,
-    AdminHomeComponent
+    AdminHomeComponent,
+    ModifyMatchComponent
   ],
   imports: [
     HttpClientModule,

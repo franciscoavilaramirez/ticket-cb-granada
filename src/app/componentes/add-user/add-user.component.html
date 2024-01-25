@@ -6,11 +6,11 @@
 
       <mat-list role="list">
         <mat-list-item  role="listitem">
-          <button mat-icon-button color="warn" (click)="deleteUserInscrito(usuarioYaInscrito.user_id,partido)" title="Eliminar Usuario" ><mat-icon>delete_forever</mat-icon></button>
           {{usuarioYaInscrito.nombre }}
           {{usuarioYaInscrito.apellidos }}
           ({{usuarioYaInscrito.email}})
 
+          <button mat-icon-button color="warn" (click)="deleteUserInscrito(usuarioYaInscrito.user_id,partido)" title="Eliminar Usuario" ><mat-icon>delete_forever</mat-icon></button>
 
         </mat-list-item>
       </mat-list>

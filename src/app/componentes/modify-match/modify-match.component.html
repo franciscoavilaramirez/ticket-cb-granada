@@ -1,0 +1,25 @@
+
+<div class="container">
+  <div class="container__wrapper">
+    <div mat-dialog-actions>
+      <form  [formGroup]="updateMatchForm" >
+        <h1>Modificar Partido</h1>
+        <mat-dialog-actions>
+        <mat-form-field >
+          <mat-label>Título partido</mat-label>
+          <input type="text" matInput formControlName ="titulo">
+        </mat-form-field>
+        <mat-form-field >
+          <mat-label>Fecha partido</mat-label>
+          <input type="text" matInput formControlName ="fecha">
+        </mat-form-field>
+      </mat-dialog-actions>
+      </form>
+      <div class="container__wrapper__buttons">
+      <button mat-raised-button color="primary"(click)="onSubmit()" >Guardar Cambios</button>
+      <button mat-raised-button color="primary"(click)="closedModal()">Cancelar</button>
+      </div>
+    </div>
+  </div>
+</div>
+

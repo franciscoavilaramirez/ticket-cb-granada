@@ -9,6 +9,7 @@ import Swal from 'sweetalert2';
 import { Usuario } from '../../../modelo/usuario';
 import { UpdateUserComponent } from '../../../componentes/update-user/update-user.component';
 import { AddUserComponent } from '../../../componentes/add-user/add-user.component';
+import { ModifyMatchComponent } from '../../../componentes/modify-match/modify-match.component';
 
 
 
@@ -123,6 +124,15 @@ export class AdminHomeComponent {
   }
   openAddUser(partido: Partido) {
     const dialog = this.dialog.open(AddUserComponent,{
+      data: partido,
+      width:'50vw',
+      height:'75vh'
+    });
+    dialog.afterClosed().subscribe(result => {
+    });
+  }
+  openModifyMatch(partido: Partido) {
+    const dialog = this.dialog.open(ModifyMatchComponent,{
       data: partido,
       width:'50vw',
       height:'75vh'
