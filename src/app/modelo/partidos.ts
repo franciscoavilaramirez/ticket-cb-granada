@@ -4,5 +4,6 @@ export class Partido{
     fechaPartido : string;
     nombrePartido : string;
 
+
   }
 

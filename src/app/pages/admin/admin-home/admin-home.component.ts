@@ -138,16 +138,16 @@ export class AdminHomeComponent {
       height:'75vh'
     });
     dialog.afterClosed().subscribe(result => {
+      this.getPartidos();
     });
   }
   getPartidos(){
     this.service.getPartidos().subscribe(data =>{
       this.partido = data;
-      console.log('Partidos',this.partido);
+      //console.log('Partidos',this.partido);
     })
   }
   getUsuariosPartido(idPartido:string){
-    debugger
     this.service.getUsuariosPartido(idPartido).subscribe(data =>{
       this.usuariosPartido = data;
       //console.log('id del Partido',this.usuariosPartido );
