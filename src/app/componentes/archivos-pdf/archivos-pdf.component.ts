@@ -3,7 +3,7 @@ import { LoginUserService } from '../../login-user.service';
 import { Observable, Subscriber } from 'rxjs';
 
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Pdf } from './pdf';
+import { Pdf } from '../../modelo/pdf';
 
 @Component({
   selector: 'app-archivos-pdf',
