@@ -3,21 +3,31 @@
   <div class="container__wrapper">
     <div mat-dialog-actions>
       <form  [formGroup]="updateMatchForm" >
-        <h1>Modificar Partido</h1>
+        <!-- <h1>Modificar Partido</h1> -->
+        <h1>{{"modificarPartido.titulo" | translate }}</h1>
+
         <mat-dialog-actions>
         <mat-form-field >
-          <mat-label>Título partido</mat-label>
+          <mat-label>{{"modificarPartido.inputTitulo" | translate }}</mat-label>
           <input type="text" matInput formControlName ="nombrePartido">
         </mat-form-field>
-        <mat-form-field >
-          <mat-label>Fecha partido</mat-label>
+        <!-- <mat-form-field >
+          <mat-label>{{"modificarPartido.inputFecha" | translate }}</mat-label>
           <input type="text" matInput formControlName ="fechaPartido">
-        </mat-form-field>
+        </mat-form-field> -->
+        <!-- <mat-form-field>
+          <mat-label>{{"modificarPartido.inputFecha" | translate }}</mat-label>
+          <input matInput [matDatepicker]="picker">
+          <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field> -->
+        <input type="datetime-local">
+        
       </mat-dialog-actions>
       </form>
       <div class="container__wrapper__buttons">
-      <button mat-raised-button color="primary"(click)="onSubmit()" >Guardar Cambios</button>
-      <button mat-raised-button color="primary"(click)="closedModal()">Cancelar</button>
+      <button mat-raised-button color="primary"(click)="onSubmit()" >{{"botones.guardarCambios" | translate }}</button>
+      <button mat-raised-button color="primary"(click)="closedModal()">{{"botones.cancelar" | translate }}</button>
       </div>
     </div>
   </div>

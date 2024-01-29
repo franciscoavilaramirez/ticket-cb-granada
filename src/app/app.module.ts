@@ -19,7 +19,7 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 
 
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { UpdateUserComponent } from './componentes/update-user/update-user.component';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatListModule} from '@angular/material/list';
@@ -29,8 +29,14 @@ import { AddUserComponent } from './componentes/add-user/add-user.component';
 import { AdminHomeComponent } from './pages/admin/admin-home/admin-home.component'
 import { CommonModule } from '@angular/common';
 import { ModifyMatchComponent } from './componentes/modify-match/modify-match.component';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { TranslationComponent } from './translation/translation.component';
 
 
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http);
+}
 
 @NgModule({
   declarations: [
@@ -39,7 +45,8 @@ import { ModifyMatchComponent } from './componentes/modify-match/modify-match.co
     ArchivosPDFComponent,
     AddUserComponent,
     AdminHomeComponent,
-    ModifyMatchComponent
+    ModifyMatchComponent,
+    TranslationComponent
   ],
   imports: [
     HttpClientModule,
@@ -60,7 +67,16 @@ import { ModifyMatchComponent } from './componentes/modify-match/modify-match.co
     FormsModule,
     MatDatepickerModule,
     MatListModule,
-    CommonModule
+    CommonModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: (http: HttpClient) => {
+          return new TranslateHttpLoader(http);
+        },
+        deps: [ HttpClient ]
+      }
+    })
 
   ],
   providers: [],

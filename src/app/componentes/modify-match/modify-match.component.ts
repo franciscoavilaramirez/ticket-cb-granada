@@ -4,7 +4,7 @@ import { Partido } from '../../modelo/partidos';
 import { ServiceService } from '../../service/service.service';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { AdminHomeComponent } from '../../pages/admin/admin-home/admin-home.component';
-import { Usuario } from '../../modelo/usuario';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-modify-match',
@@ -18,7 +18,7 @@ export class ModifyMatchComponent {
 
   constructor(private service:ServiceService,public dialog: MatDialog,
     public dialogRef: MatDialogRef<AdminHomeComponent>,
-    @Inject(MAT_DIALOG_DATA) public matchModify: Partido){
+    @Inject(MAT_DIALOG_DATA) public matchModify: Partido,private translate: TranslateService){
       this.createFormUpdateMatch();
   }
   ngOnInit(){

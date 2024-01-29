@@ -134,7 +134,7 @@ export class AdminHomeComponent {
   openModifyMatch(partido: Partido) {
     const dialog = this.dialog.open(ModifyMatchComponent,{
       data: partido,
-      width:'50vw',
+      width:'40vw',
       height:'75vh'
     });
     dialog.afterClosed().subscribe(result => {
