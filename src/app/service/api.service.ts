@@ -4,6 +4,7 @@ import { Usuario } from '../modelo/usuario';
 import { Partido } from '../modelo/partido';
 import { Observable } from 'rxjs';
 import { environment } from '../../enviroments/environment';
+import { Pdf } from '../modelo/pdf';
 
 @Injectable({
   providedIn: 'root'
@@ -35,6 +36,9 @@ export class ApiService {
     return this.http.get(this.apiUrl + 'enviarEntrada/'+idUsuario+'/'+idPartido,{ headers, responseType: 'text'});
   }
 
+  subirTickets(pdf: Pdf): Observable<object>{
+    return this.http.post(this.apiUrl + 'crearPartidoConEntradas', pdf);
+  }
   getUsers(){
     return this.http.get<Usuario[]>(this.apiUrl + 'getAllUsers');
   }

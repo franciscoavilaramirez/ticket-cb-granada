@@ -3,7 +3,8 @@ import { LoginUserService } from '../../../login-user.service';
 import { Observable, Subscriber } from 'rxjs';
 
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Pdf } from '../../../componentes/archivos-pdf/pdf';
+import { Pdf } from '../../../modelo/pdf';
+import { ApiService } from '../../../service/api.service';
 
 @Component({
   selector: 'app-subir-entradas',
@@ -13,36 +14,44 @@ import { Pdf } from '../../../componentes/archivos-pdf/pdf';
 export class SubirEntradasComponent {
   public form: FormGroup;
   private b64: String = "";
-  pdf:Pdf = new Pdf();
-  
-  constructor(private userservice: LoginUserService, private formBuilder:FormBuilder) { }
+  pdf: Pdf = new Pdf();
+
+  constructor(private apiService: ApiService, private formBuilder: FormBuilder) { }
 
   ngOnInit() {
+    let fechaActual = this.getFechaActual()
     this.form = this.formBuilder.group({
-      titulo:[''],
-      fecha:[''],
-      entradasPdf:[]
+      titulo: ['Granada - '],
+      fecha: [''],
+      fechaPublicacion: fechaActual,
+      entradasPdf: []
     });
   }
 
-  send(){
+  send() {
     this.pdf.tituloPartido = this.form.value.titulo;
     this.pdf.fechaPartido = this.form.value.fecha;
-    console.log(this.pdf)
-    this.userservice.subirTickets(this.pdf).subscribe(data=>{
-      alert("Entradas subidas con exito")
-      window.location.reload()
-    }, error=> alert("Error al subir las entradas"));
+    this.pdf.fechaPublicacion = this.form.value.fechaPublicacion
+    console.log("Pdf: ", this.pdf)
+    console.log("Form: ", this.form.value)
+
+    // this.apiService.subirTickets(this.pdf).subscribe({
+    //   next: () => {
+    //     alert("Entradas subidas con exito")
+    //     window.location.reload()
+    //   },
+    //   error: () => alert("Error al subir las entradas")
+    // });
   }
 
-  subirArchivo(event: any): any{
-    
-    const file:File = (event.target.files as FileList)[0];
+  subirArchivo(event: any): any {
+
+    const file: File = (event.target.files as FileList)[0];
 
     const obserbable = new Observable((subscriber: Subscriber<any>) => {
       this.readFile(file, subscriber);
     })
-  
+
     obserbable.subscribe((base64) => {
       this.b64 = new String(base64).valueOf();
 
@@ -52,11 +61,11 @@ export class SubirEntradasComponent {
 
   }
 
-  readFile(file:File, subscriber: Subscriber<any>){
+  readFile(file: File, subscriber: Subscriber<any>) {
     const fileReader = new FileReader();
     fileReader.readAsDataURL(file);
     fileReader.onload = () => {
-      
+
       subscriber.next(fileReader.result);
       subscriber.complete();
     }
@@ -65,6 +74,19 @@ export class SubirEntradasComponent {
       subscriber.error();
       subscriber.complete();
     }
+  }
+
+  getFechaActual() {
+    let fecha = new Date()
+    let mes:any = fecha.getMonth()
+    if(mes<9) {
+      mes = fecha.getMonth()+1
+      mes = '0'+mes
+    }
+    else 
+      mes = fecha.getMonth()+1
+ 
+    return fecha.getFullYear()+"-"+mes+"-"+fecha.getDate()+"T"+fecha.getHours()+":"+fecha.getMinutes()
   }
 
   color = "#8f8989" //grey
