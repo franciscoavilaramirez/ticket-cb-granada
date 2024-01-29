@@ -1,53 +1,48 @@
 import { Component, OnInit } from '@angular/core';
-import { LoginUserService } from '../../login-user.service';
+import { LoginUserService } from '../../../login-user.service';
 import { Observable, Subscriber } from 'rxjs';
 
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Pdf } from './pdf';
+import { Pdf } from '../../../componentes/archivos-pdf/pdf';
 
 @Component({
-  selector: 'app-archivos-pdf',
-  templateUrl: './archivos-pdf.component.html',
-  styleUrls: ['./archivos-pdf.component.scss']
+  selector: 'app-subir-entradas',
+  templateUrl: './subir-entradas.component.html',
+  styleUrl: './subir-entradas.component.css'
 })
-export class ArchivosPDFComponent implements OnInit {
-
-  public formArchivos: FormGroup;
+export class SubirEntradasComponent {
+  public form: FormGroup;
   private b64: String = "";
   pdf:Pdf = new Pdf();
-
-  constructor(private userservice: LoginUserService, private fb:FormBuilder) { }
+  
+  constructor(private userservice: LoginUserService, private formBuilder:FormBuilder) { }
 
   ngOnInit() {
-    this.formArchivos = this.createMyForm();
-  }
-
-
-  private createMyForm():FormGroup{
-    return this.fb.group({
-      titulo:['',Validators.required],
-      fecha:['',Validators.required],
-      archivosSubir:[]
+    this.form = this.formBuilder.group({
+      titulo:[''],
+      fecha:[''],
+      entradasPdf:[]
     });
   }
 
   send(){
-    this.pdf.tituloPartido = this.formArchivos.value.titulo;
-    this.pdf.fechaPartido = this.formArchivos.value.fecha;
-
+    this.pdf.tituloPartido = this.form.value.titulo;
+    this.pdf.fechaPartido = this.form.value.fecha;
+    console.log(this.pdf)
     this.userservice.subirTickets(this.pdf).subscribe(data=>{
-      alert("Tickets repartidos a las usuarios con exito")
-    }, error=> alert("Error al repartir los tickets a los usuaroios"));
+      alert("Entradas subidas con exito")
+      window.location.reload()
+    }, error=> alert("Error al subir las entradas"));
   }
 
   subirArchivo(event: any): any{
-
+    
     const file:File = (event.target.files as FileList)[0];
 
     const obserbable = new Observable((subscriber: Subscriber<any>) => {
       this.readFile(file, subscriber);
     })
-
+  
     obserbable.subscribe((base64) => {
       this.b64 = new String(base64).valueOf();
 
@@ -61,7 +56,7 @@ export class ArchivosPDFComponent implements OnInit {
     const fileReader = new FileReader();
     fileReader.readAsDataURL(file);
     fileReader.onload = () => {
-
+      
       subscriber.next(fileReader.result);
       subscriber.complete();
     }
@@ -72,4 +67,11 @@ export class ArchivosPDFComponent implements OnInit {
     }
   }
 
+  color = "#8f8989" //grey
+  onFocus() {
+    this.color = "#3f51b5"//blue
+  }
+  onBlur() {
+    this.color = "#8f8989"
+  }
 }
