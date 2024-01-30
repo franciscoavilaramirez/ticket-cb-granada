@@ -6,7 +6,9 @@
     <div class="container__wrapper__content-wrapper">
       <div class="cards-wrapper">
           @for (partido of partido; track $index) {
-            <mat-card  class="card" *ngIf="$index < 3" >
+            <mat-card  class="card"  >
+              <!-- <mat-card  class="card" *ngIf="$index < 3" > -->
+
             <mat-card-header  >
               <mat-card-title>{{"card.partido" | translate }}</mat-card-title>
               <mat-card-subtitle>{{partido.nombrePartido}}</mat-card-subtitle>
@@ -16,7 +18,7 @@
               <button mat-raised-button color="primary" (click)="getUsuariosPartido(partido.id)" >{{"card.mostrarOcultar" | translate }}</button>
               <button mat-raised-button color="primary" (click)="openAddUser(partido)" >{{"card.anadirUsuario" | translate }}</button>
               <button mat-raised-button color="primary" (click)="openModifyMatch(partido)" >{{"card.modificarPartido" | translate }}</button>
-              <button mat-raised-button color="warn" >{{"botones.eliminarPartido" | translate }}</button>
+              <button mat-raised-button color="warn" (click)="deleteMatch(partido)" >{{"botones.eliminarPartido" | translate }}</button>
 
               </mat-card-actions>
             </mat-card>
@@ -105,6 +107,11 @@
           <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="description" ></mat-icon>
         </button>
         </div>
+        <div class="buttons">
+          <button mat-raised-button class="container__wrapper__buttons" color="primary" (click)="cambiarLenguaje('en')" > Traducir a Inglés</button>
+          <button mat-raised-button class="container__wrapper__buttons" color="primary" (click)="cambiarLenguaje('es')" > Traducir a Español</button>
+
+          </div>
     </div>
 
         <!-- INPUT PARA INTRODUCIR CONTRASEÑA Y PODER MOSTRARLA SI ES NECESARIO -->

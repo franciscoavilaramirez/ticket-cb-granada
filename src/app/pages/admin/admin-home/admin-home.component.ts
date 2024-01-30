@@ -10,6 +10,7 @@ import { Usuario } from '../../../modelo/usuario';
 import { UpdateUserComponent } from '../../../componentes/update-user/update-user.component';
 import { AddUserComponent } from '../../../componentes/add-user/add-user.component';
 import { ModifyMatchComponent } from '../../../componentes/modify-match/modify-match.component';
+import { TranslateService } from '@ngx-translate/core';
 
 
 
@@ -23,10 +24,13 @@ export class AdminHomeComponent {
 [x: string]: any;
 
 
-  constructor(private snackBar: MatSnackBar,public service: ServiceService, private router: Router,public dialog: MatDialog) {
+  constructor(private snackBar: MatSnackBar,public service: ServiceService,
+              private router: Router,public dialog: MatDialog,
+              private translate: TranslateService) {
+              this.translate.setDefaultLang(this.activeLang);
   }
 
-
+  activeLang = 'es';
   hiddenList = false;
   hiddenListUsuariosPartidos = false;
   hide = true;
@@ -50,8 +54,13 @@ export class AdminHomeComponent {
   ngOnInit(){
     this.getUsers();
     this.getPartidos();
-
+    this.getNextMacht();
   }
+  public cambiarLenguaje(lang: string) {
+    this.activeLang = lang;
+    this.translate.use(lang);
+  }
+
   getUsers(){
     this.service.getUsers().subscribe(data =>{
       this.usuarios = data
@@ -144,7 +153,7 @@ export class AdminHomeComponent {
   getPartidos(){
     this.service.getPartidos().subscribe(data =>{
       this.partido = data;
-      //console.log('Partidos',this.partido);
+      console.log('Partidos',this.partido);
     })
   }
   getUsuariosPartido(idPartido:string){
@@ -154,6 +163,20 @@ export class AdminHomeComponent {
     });
       this.usuarioPartidoList();
     }
+  deleteMatch(partidoId: Partido){
+    this.service.deleteMatch(partidoId).subscribe(data =>{
+      console.log('partido borrado',data);
+      //this.partido = this.partido.filter(partido => partido.id !== partidoId.id);
+      this.getPartidos();
+    });
+  }
+  getNextMacht(){
+    this.service.getNextMatch().subscribe(data =>{
+      console.log('proxims partidos',data);
+      this.getPartidos();
+    });
+
+  }
 
 
 
