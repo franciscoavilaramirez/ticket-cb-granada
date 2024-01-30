@@ -1,0 +1,78 @@
+@import '../../../styles/palette';
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+.form-input {
+  padding: 10px;
+  border: 1px solid $primary-600;
+  border-radius: 5px;
+  &:focus {
+    border-color: $primary-800;
+    outline: none;
+  }
+}
+
+.form-header {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-top: 1.5rem; /* mt-6 */
+  font-size: 1.875rem; /* text-3xl */
+  font-weight: 800; /* font-extrabold */
+  color: #1a202c; /* text-gray-900 */
+}
+
+.form-description {
+  margin-top: 1.5rem; /* mt-6 */
+  font-size: 1.125rem; /* text-md */
+  color: #718096; /* text-gray-600 */
+}
+
+.form-description > a {
+  color: $primary-600;
+  text-decoration: none;
+}
+
+.form-description > a:hover {
+  color: $primary-700;
+}
+
+/* Logo de la empresa para hacerlo mas grande o mas pequeño */
+.logo {
+  max-width: 73%;
+  height: auto;
+}
+
+.submit-button {
+  margin-top: 20px;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: $primary-600;
+  color: white;
+  cursor: pointer;
+}
+
+.submit-button:hover {
+  background-color: $primary-700;
+}
+
+.error-message {
+  color: red;
+}

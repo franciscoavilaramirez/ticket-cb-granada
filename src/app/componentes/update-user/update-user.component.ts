@@ -5,6 +5,7 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import {MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { Usuario } from '../../modelo/usuario';
 import { AdminHomeComponent } from '../../pages/admin/admin-home/admin-home.component';
+import { ApiService } from '../../service/api.service';
 
 
 @Component({
@@ -17,7 +18,7 @@ export class UpdateUserComponent {
 updateUserForm:FormGroup;
 usuarios!: Usuario[];
 
-constructor(private service:ServiceService,public dialog: MatDialog,
+constructor(private service:ApiService,public dialog: MatDialog,
             public dialogRef: MatDialogRef<AdminHomeComponent>,
             @Inject(MAT_DIALOG_DATA) public userModify: Usuario){
               this.createFormUpdateUser();
@@ -34,7 +35,7 @@ createFormUpdateUser(){
     apellidos: new FormControl(this.userModify.apellidos),
     email: new FormControl(this.userModify.email,Validators.email),
     //isAdmin: new FormControl(Boolean(this.userModify.is_admin)),
-    user_id:new FormControl(this.userModify.user_id)
+    user_id:new FormControl(this.userModify.id)
 
   });
 }
@@ -50,7 +51,7 @@ onSubmit(){
 
     const bodyResponse: Usuario = this.updateUserForm.value;
     console.log("bodyResponse",bodyResponse);
-    this.service.modifyUser(bodyResponse).subscribe(data =>{
+    this.service.modifyUser(bodyResponse).subscribe(() =>{
       this.closedModal();
       this.getUsers();
     });

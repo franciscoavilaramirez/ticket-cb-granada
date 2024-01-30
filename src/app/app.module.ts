@@ -1,7 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { RouterModule, Routes } from '@angular/router';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -25,14 +23,18 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatListModule} from '@angular/material/list';
 
 import { ArchivosPDFComponent } from './componentes/archivos-pdf/archivos-pdf.component';
+import { LoginPageComponent } from './pages/login-page/login-page.component';
+import { RegisterPageComponent } from './pages/register-page/register-page.component';
+import { ErrorAlertFormComponent } from './componentes/error-alert-form/error-alert-form.component'
 import { AddUserComponent } from './componentes/add-user/add-user.component';
 import { AdminHomeComponent } from './pages/admin/admin-home/admin-home.component'
+import { SubirEntradasComponent } from './pages/admin/subir-entradas/subir-entradas.component'
 import { CommonModule } from '@angular/common';
 import { ModifyMatchComponent } from './componentes/modify-match/modify-match.component';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { TranslationComponent } from './translation/translation.component';
-
+import { HomeComponent } from './pages/home/home.component'
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -41,10 +43,15 @@ export function HttpLoaderFactory(http: HttpClient) {
 @NgModule({
   declarations: [
     AppComponent,
+    HomeComponent,
     UpdateUserComponent,
     ArchivosPDFComponent,
+    LoginPageComponent,
+    RegisterPageComponent,
+    ErrorAlertFormComponent,
     AddUserComponent,
     AdminHomeComponent,
+    SubirEntradasComponent,
     ModifyMatchComponent,
     TranslationComponent
   ],
@@ -82,4 +89,5 @@ export function HttpLoaderFactory(http: HttpClient) {
   providers: [],
   bootstrap: [AppComponent]
 })
+
 export class AppModule { }

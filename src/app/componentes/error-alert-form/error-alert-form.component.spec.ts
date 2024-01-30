@@ -1,16 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-describe('AddUserComponent', () => {
-  let component: AddUserComponent;
-  let fixture: ComponentFixture<AddUserComponent>;
+import { ErrorAlertFormComponent } from './error-alert-form.component';
+
+describe('ErrorAlertFormComponent', () => {
+  let component: ErrorAlertFormComponent;
+  let fixture: ComponentFixture<ErrorAlertFormComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [AddUserComponent]
+      declarations: [ErrorAlertFormComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(AddUserComponent);
+    fixture = TestBed.createComponent(ErrorAlertFormComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -1,0 +1,29 @@
+<h2>Partidos disponibles</h2>
+
+<div *ngFor="let partido of partidos" style="display: inline-block;">
+    <div class="entrada" *ngIf="!partido.tengoEntrada">
+        <div class="nombre">{{partido.nombrePartido}}</div>
+        <div class="fecha">
+            <div>Fecha:</div>
+            {{partido.fechaPartido | date:'dd-MM-yy'}} <br>
+            {{partido.fechaPartido | date:'HH:mm'}}
+        </div>
+        <button *ngIf="partido.stockEntradas" class="boton" (click)="apuntarse(partido.id)">Apuntarse</button>
+        <button *ngIf="!partido.stockEntradas" class="boton" disabled>Agotadas</button>
+    </div>
+</div>
+
+<h2>Mis entradas</h2>
+
+<div *ngFor="let partido of partidos">
+    <div class="entrada" *ngIf="partido.tengoEntrada">
+        <div class="nombre">{{partido.nombrePartido}}</div>
+        <div class="fecha">
+            <div>Fecha:</div>
+            {{partido.fechaPartido | date:'dd-MM-yy'}} <br>
+            {{partido.fechaPartido | date:'HH:mm'}}
+        </div>
+        <button class="boton" (click)="descargar(partido.id, partido.nombrePartido)">Descargar</button>
+        <button class="boton" (click)="desapuntarse(partido.id)">Devolver</button>
+    </div>
+</div>

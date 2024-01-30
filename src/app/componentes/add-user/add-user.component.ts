@@ -1,12 +1,12 @@
 import { Component, Inject } from '@angular/core';
-import { ServiceService } from '../../service/service.service';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Usuario } from '../../modelo/usuario';
-import { Partido } from '../../modelo/partidos';
+import { Partido } from '../../modelo/partido';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AdminHomeComponent } from '../../pages/admin/admin-home/admin-home.component';
 import Swal from 'sweetalert2';
+import { ApiService } from '../../service/api.service';
 
 @Component({
   selector: 'app-add-user',
@@ -19,7 +19,7 @@ usuariosYaInscritos: Usuario[];
 usuarios: Usuario[];
 usuariosParaAnadirAlPartido: string[]= [];
 
-  constructor(private service:ServiceService,public dialog: MatDialog,
+  constructor(private service:ApiService, public dialog: MatDialog,
     public dialogRef: MatDialogRef<AdminHomeComponent>,@Inject(MAT_DIALOG_DATA) public partido: Partido,
     public snackBar: MatSnackBar
     ){}

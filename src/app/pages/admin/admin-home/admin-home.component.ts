@@ -1,7 +1,6 @@
 import { Component, ViewChild, AfterViewInit, ElementRef } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Partido } from '../../../modelo/partidos';
-import { ServiceService } from '../../../service/service.service';
+import { Partido } from '../../../modelo/partido';
 import { Router } from '@angular/router';
 import * as XLSX from 'xlsx';
 import { MatDialog } from '@angular/material/dialog';
@@ -11,6 +10,7 @@ import { UpdateUserComponent } from '../../../componentes/update-user/update-use
 import { AddUserComponent } from '../../../componentes/add-user/add-user.component';
 import { ModifyMatchComponent } from '../../../componentes/modify-match/modify-match.component';
 import { TranslateService } from '@ngx-translate/core';
+import { ApiService } from '../../../service/api.service';
 
 
 
@@ -24,7 +24,7 @@ export class AdminHomeComponent {
 [x: string]: any;
 
 
-  constructor(private snackBar: MatSnackBar,public service: ServiceService,
+  constructor(private snackBar: MatSnackBar,public apiService: ApiService,
               private router: Router,public dialog: MatDialog,
               private translate: TranslateService) {
               this.translate.setDefaultLang(this.activeLang);
@@ -62,7 +62,7 @@ export class AdminHomeComponent {
   }
 
   getUsers(){
-    this.service.getUsers().subscribe(data =>{
+    this.apiService.getUsers().subscribe(data =>{
       this.usuarios = data
       console.log('Usuarios', this.usuarios);
     });
@@ -70,7 +70,7 @@ export class AdminHomeComponent {
 
   deleteUser(user: Usuario): void {
 
-    this.service.deleteUser(user).subscribe(async data => {
+    this.apiService.deleteUser(user).subscribe(async data => {
       const dataUser = await Swal.fire({
         title: '¿Seguro que desea eliminar este usuario?',
         showDenyButton: true,
@@ -151,13 +151,13 @@ export class AdminHomeComponent {
     });
   }
   getPartidos(){
-    this.service.getPartidos().subscribe(data =>{
-      this.partido = data;
-      console.log('Partidos',this.partido);
+    this.apiService.getPartidos().subscribe(data =>{
+      this.partidosFran = data;
+      console.log('Partidos',this.partidosFran);
     })
   }
   getUsuariosPartido(idPartido:string){
-    this.service.getUsuariosPartido(idPartido).subscribe(data =>{
+    this.apiService.getUsuariosPartido(idPartido).subscribe(data =>{
       this.usuariosPartido = data;
       //console.log('id del Partido',this.usuariosPartido );
     });

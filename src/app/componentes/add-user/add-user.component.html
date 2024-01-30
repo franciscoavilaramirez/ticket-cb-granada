@@ -20,7 +20,7 @@
     <div class="container__wrapper__content-wrapper" *ngFor="let usuario of usuarios" >
         <section>
         <mat-checkbox
-          (change)="addUserToSorteo(usuario.user_id)"
+          (change)="addUserToSorteo(usuario.id)"
           >
             {{usuario.nombre}}
             {{usuario.apellidos}}

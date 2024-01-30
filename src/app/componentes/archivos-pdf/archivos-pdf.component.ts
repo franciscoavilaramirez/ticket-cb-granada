@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { LoginUserService } from '../../login-user.service';
 import { Observable, Subscriber } from 'rxjs';
-import { Pdf } from './pdf';
+
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Pdf } from '../../modelo/pdf';
 
 @Component({
   selector: 'app-archivos-pdf',

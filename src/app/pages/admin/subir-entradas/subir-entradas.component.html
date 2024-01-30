@@ -1,0 +1,25 @@
+<div class="container col-md-5">
+    <form [formGroup]="form" (submit)="send()">
+        <h2>Subir entradas</h2>
+        <div>
+            <mat-form-field appearance="fill" class="form-field">
+                <mat-label>Título partido</mat-label>
+                <input matInput formControlName="titulo" required>
+            </mat-form-field>
+        </div>
+        <div class="calendar-container">
+            <label for="fecha" [ngStyle]="{color:color}" class="fecha-label">Fecha partido*</label>
+            <input (focus)="onFocus()" (blur)="onBlur()" type="datetime-local" class="datetime-picker" formControlName="fecha" required>
+        </div>
+        <div class="calendar-container">
+            <label [ngStyle]="{color:color}" class="fecha-label">Fecha publicación</label>
+            <input type="datetime-local" class="datetime-picker" formControlName="fechaPublicacion">
+        </div>
+        <div> 
+            <input type="file" (change)="subirArchivo($event)" class="input-file" formControlName="entradasPdf" required>
+        </div>
+        <div> 
+            <button mat-raised-button color="primary" type="submit" [disabled]="!form.valid">Subir</button>
+        </div>
+    </form>
+</div>
