@@ -3,7 +3,12 @@
         <h2>Subir entradas</h2>
         <div>
             <mat-form-field appearance="fill" class="form-field">
-                <mat-label>Título partido</mat-label>
+                <mat-label>Equipo local</mat-label>
+                <input matInput formControlName="granada" required>
+            </mat-form-field>
+            VS
+            <mat-form-field appearance="fill" class="form-field">
+                <mat-label>Equipo visitante</mat-label>
                 <input matInput formControlName="titulo" required>
             </mat-form-field>
         </div>

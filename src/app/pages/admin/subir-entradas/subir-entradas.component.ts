@@ -21,7 +21,8 @@ export class SubirEntradasComponent {
   ngOnInit() {
     let fechaActual = this.getFechaActual()
     this.form = this.formBuilder.group({
-      titulo: ['Granada - '],
+      granada: [{ value:'Granada', disabled: true }],
+      titulo: [''],
       fecha: [''],
       fechaPublicacion: fechaActual,
       entradasPdf: []
@@ -35,13 +36,13 @@ export class SubirEntradasComponent {
     console.log("Pdf: ", this.pdf)
     console.log("Form: ", this.form.value)
 
-    // this.apiService.subirTickets(this.pdf).subscribe({
-    //   next: () => {
-    //     alert("Entradas subidas con exito")
-    //     window.location.reload()
-    //   },
-    //   error: () => alert("Error al subir las entradas")
-    // });
+    this.apiService.subirTickets(this.pdf).subscribe({
+      next: () => {
+        alert("Entradas subidas con exito")
+        window.location.reload()
+      },
+      error: () => alert("Error al subir las entradas")
+    });
   }
 
   subirArchivo(event: any): any {
