@@ -22,7 +22,7 @@ export class RegisterPageComponent implements OnInit {
       nombre: ['', Validators.required],
       apellidos: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      password: ['', Validators.required],
+      password: ['', [Validators.required, Validators.pattern("^(?=.*\\d)(?=.*[@#$%^&+=*_-])(?=.*[a-z])(?=.*[A-Z]).{8,}$")]],
       repeatPassword: ['', Validators.required]
     }, { validator: this.checkPasswords });
   }
@@ -52,7 +52,7 @@ export class RegisterPageComponent implements OnInit {
           console.log("User json: ", user)
           localStorage.setItem('user', JSON.stringify(user));
 
-          // Redirige a la página de inicio 
+          // Redirige a la página de inicio
           this.router.navigate(['/']);
 
         },
