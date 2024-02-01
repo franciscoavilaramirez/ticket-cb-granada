@@ -1,7 +1,7 @@
 
 <div class="container">
   <div class="container__wrapper">
-    <h2>{{"modalAnadirUsuario.inscritos" | translate }}</h2>
+    <h1>{{"modalAnadirUsuario.inscritos" | translate }}</h1>
     <div class="container__wrapper__content-wrapper" *ngFor="let usuarioYaInscrito of usuariosYaInscritos" >
 
       <mat-list role="list">
@@ -10,13 +10,13 @@
           {{usuarioYaInscrito.apellidos }}
           ({{usuarioYaInscrito.email}})
 
-          <button mat-icon-button color="warn" (click)="deleteUserInscrito(usuarioYaInscrito.user_id,partido)" title="Eliminar Usuario" ><mat-icon>delete_forever</mat-icon></button>
+          <button mat-icon-button color="warn" (click)="deleteUserInscrito(usuarioYaInscrito.id,partido)" title="Eliminar Usuario" ><mat-icon>delete_forever</mat-icon></button>
 
         </mat-list-item>
       </mat-list>
 
   </div>
-<h2>{{"modalAnadirUsuario.pendientes" | translate }}</h2>
+<h1>{{"modalAnadirUsuario.pendientes" | translate }}</h1>
     <div class="container__wrapper__content-wrapper" *ngFor="let usuario of usuarios" >
         <section>
         <mat-checkbox
@@ -32,7 +32,7 @@
   </div>
   <div class="container__wrapper__content-wrapper">
     <div class="buttons">
-    <button mat-raised-button class="buttons" color="primary"(click)="onSubmit()">{{"botones.guardar" | translate }}</button>
-    <button mat-raised-button class="buttons" color="primary"(click)="closedModal()">{{"botones.cancelar" | translate }}</button>
+    <button mat-raised-button class="buttons__guardar" (click)="onSubmit()">{{"botones.guardar" | translate }}</button>
+    <button mat-raised-button class="buttons__cancelar" (click)="closedModal()">{{"botones.cancelar" | translate }}</button>
   </div>
 </div>

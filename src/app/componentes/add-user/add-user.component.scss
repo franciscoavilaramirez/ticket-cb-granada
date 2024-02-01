@@ -11,6 +11,7 @@
     //padding: 50px,50px,0px,50px;
     width: auto;
     justify-content: center;
+    margin: 20px;
 
     &__table-buttons{
       margin-right: 20px;
@@ -32,28 +33,21 @@
           font-size: 15px;
           justify-content: center;
           margin: 10px 0px 0px 10px;
+
+          &__guardar{
+            background-color: #36bf98;
+            color: #ffffff;
+            font-family: allerta;
+            font-size: 17px;
+          }
+          &__cancelar{
+            background-color: #8c1f1f;
+            color:#ffffff;
+            font-family: allerta;
+            font-size: 17px;
+          }
         }
-
-
       }
-    //   .mdc-dialog__actions {
-    //     display: flex;
-    //     position: relative;
-    //     flex-shrink: 0;
-    //     flex-wrap: wrap;
-    //     align-items: center;
-    //     justify-content: center;
-    //     box-sizing: border-box;
-    //     min-height: 52px;
-    //     margin: 0;
-    //     padding: 8px;
-    //     border-top: 1px solid rgba(0,0,0,0);
-    // }
-    // .mdc-list {
-    //   margin: 3px;
-    //   /* padding: 8px 0; */
-    //   list-style-type: none;
-    // }
 
   h2{
     font: 500 20px/32px Roboto, sans-serif;
@@ -68,6 +62,9 @@
     margin: 0px;
     padding: 0px 0;
     list-style-type: none;
+  }
+  h1{
+    font: 700 30px/30px allerta;
   }
 
 }

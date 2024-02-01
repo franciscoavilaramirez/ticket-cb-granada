@@ -1,10 +1,10 @@
 import { Component, Inject } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { Partido } from '../../modelo/partidos';
-import { ServiceService } from '../../service/service.service';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { AdminHomeComponent } from '../../pages/admin/admin-home/admin-home.component';
 import { TranslateService } from '@ngx-translate/core';
+import { ApiService } from '../../service/api.service';
+import { Partido } from '../../modelo/partido';
 
 @Component({
   selector: 'app-modify-match',
@@ -16,7 +16,7 @@ export class ModifyMatchComponent {
   updateMatchForm:FormGroup;
   partido!: Partido[];
 
-  constructor(private service:ServiceService,public dialog: MatDialog,
+  constructor(private apiService:ApiService,public dialog: MatDialog,
     public dialogRef: MatDialogRef<AdminHomeComponent>,
     @Inject(MAT_DIALOG_DATA) public matchModify: Partido,private translate: TranslateService){
       this.createFormUpdateMatch();
@@ -34,17 +34,17 @@ export class ModifyMatchComponent {
     });
   }
   getPartidos(){
-    this.service.getPartidos().subscribe(data =>{
-      this.partido = data
+    this.apiService.getPartidos().subscribe(data =>{
+      //this.partido = data
       //console.log('Partidos desde modify-match', this.partido);
     });
   }
   onSubmit(){
-    let dataPartido: Partido
+    //let dataPartido: Partido
     if(this.updateMatchForm.valid){
       const bodyResponse: Partido = this.updateMatchForm.value;
       //console.log("bodyResponse",bodyResponse);
-      this.service.updateMatch(bodyResponse).subscribe(data =>{
+      this.apiService.updateMatch(bodyResponse).subscribe(data =>{
         this.closedModal();
       });
 

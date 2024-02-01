@@ -48,13 +48,12 @@ export class AdminHomeComponent {
   @ViewChild('TABLE')table!: ElementRef;
   @ViewChild('TABLEUSUARIOSPARTIDO')tableUsuariosPartido!: ElementRef;
 
-  displayedColumns: string[] = ['no','nombre','apellidos','email','botones'];
-  ColumnsInscritos: string[] = ['no','nombre','apellidos','email'];
+  displayedColumns: string[] = ['id','nombre','apellidos','email','botones','userId'];
+  ColumnsInscritos: string[] = ['id','nombre','apellidos','email'];
 
   ngOnInit(){
     this.getUsers();
     this.getPartidos();
-    this.getNextMacht();
   }
   public cambiarLenguaje(lang: string) {
     this.activeLang = lang;
@@ -68,9 +67,9 @@ export class AdminHomeComponent {
     });
   }
 
-  deleteUser(user: Usuario): void {
+  deleteUser(userId: string): void {
 
-    this.apiService.deleteUser(user).subscribe(async data => {
+    this.apiService.deleteUser(userId).subscribe(async data => {
       const dataUser = await Swal.fire({
         title: '¿Seguro que desea eliminar este usuario?',
         showDenyButton: true,
@@ -119,9 +118,17 @@ export class AdminHomeComponent {
   /* save to file */
   XLSX.writeFile(wb, 'Listado_Usuarios.xlsx');
 }
-  openDialog(usuario:Usuario) {
+  openDialog(usuarioAny:any) {
+
+     let usuario:Usuario = {
+      id:usuarioAny.user_id,
+      nombre:usuarioAny.nombre,
+      apellidos: usuarioAny.apellidos,
+      email:usuarioAny.email
+     }
+    console.log('usuarioAny',usuarioAny, 'usuario',usuario);
     const dialog = this.dialog.open(UpdateUserComponent,{
-      data: usuario ,
+      data: usuario,
       width:'450px',
       height:'600px'
     });
@@ -152,11 +159,11 @@ export class AdminHomeComponent {
   }
   getPartidos(){
     this.apiService.getPartidos().subscribe(data =>{
-      this.partidosFran = data;
-      console.log('Partidos',this.partidosFran);
+      this.partido = data;
+      console.log('Partidos',this.partido);
     })
   }
-  getUsuariosPartido(idPartido:string){
+  getUsuariosPartido(idPartido:number){
     this.apiService.getUsuariosPartido(idPartido).subscribe(data =>{
       this.usuariosPartido = data;
       //console.log('id del Partido',this.usuariosPartido );
@@ -164,14 +171,14 @@ export class AdminHomeComponent {
       this.usuarioPartidoList();
     }
   deleteMatch(partidoId: Partido){
-    this.service.deleteMatch(partidoId).subscribe(data =>{
+    this.apiService.deleteMatch(partidoId).subscribe(data =>{
       console.log('partido borrado',data);
       //this.partido = this.partido.filter(partido => partido.id !== partidoId.id);
       this.getPartidos();
     });
   }
   getNextMacht(){
-    this.service.getNextMatch().subscribe(data =>{
+    this.apiService.getNextMatch().subscribe(data =>{
       console.log('proxims partidos',data);
       this.getPartidos();
     });

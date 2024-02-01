@@ -2,8 +2,7 @@
 
 {
     "card":{
-      "partido": "Match",
-      "mostrarOcultar":"Show/Hide registered",
+      "mostrarOcultar":"Show registered",
       "anadirUsuario": "Add User to match",
       "modificarPartido": "Update Match"
       },

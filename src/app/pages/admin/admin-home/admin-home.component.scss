@@ -12,9 +12,19 @@
     //width: 81px;
 
     &__table-buttons{
-      margin-right: 20px;
-    }
+      margin-right: 10px;
 
+      .editar{
+        background-color: #36bf98;
+        color: #ffffff;
+        margin-right: 10px;
+    }
+      .eliminar{
+        background-color: #e11010;
+        color:#ffffff;
+
+      }
+    }
 
       &__content-wrapper{
         display: flex;
@@ -26,9 +36,11 @@
           flex-wrap: wrap;
           align-items: flex-start;
 
+
+
           &__buttons{
-            height: 185px;
-            width: 100%;
+            height: 100%;
+            width: 105%;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -37,7 +49,33 @@
             font-size: 20px;
             align-items: stretch;
              margin-bottom: 20px;
-          }
+
+             .buttons-card{
+              display: flex;
+              justify-content: space-between;
+              width: 100%;
+
+              &__mostrar, &__modificar{
+                  background-color: #94cef2;
+                  color:black;
+                  font-family: allerta;
+                  font-size: 17px;
+              }
+              &__aniadir{
+                background-color: #36bf98;
+                color: #ffffff;
+                font-family: allerta;
+                font-size: 17px;
+              }
+              &__eliminar{
+                background-color: #8c1f1f;
+                color:#ffffff;
+                font-family: allerta;
+                font-size: 17px;
+            }
+             }
+
+        }
         }
         .buttons{
           height: 50px;
@@ -49,12 +87,19 @@
           justify-content: flex-start;
           font-size: 20px;
           margin-bottom: 20px;
+
+          &__exportar{
+            background-color: #36bf98;
+            color: #ffffff;
+
+          }
+
         }
 
         .card{
           width: 450px;
           height: 280px;
-          background-color: rgb(241 84 186 / 10%);
+          background-color: #e0e0e075;
           border-width: 1px;
           display: grid;
           box-shadow: 5px 5px 1px -1px #e0e0e0, 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
@@ -73,18 +118,25 @@
 
       }
 
-  .mdc-data-table__table {
-    min-width: 10%;
-    border: 0;
-    white-space: nowrap;
-    border-spacing: 0;
-    table-layout: fixed;
-    //width: 60%;
-    width: auto;
-    height: 90%;
-    background-color: #b8b3b81f;
-    margin-bottom: 20px;
-  }
+        .mdc-data-table__table {
+          min-width: 10%;
+          border: 0;
+          white-space: break-spaces;
+          border-spacing: 0;
+          table-layout: fixed;
+          width: auto;
+          height: 100%;
+          margin-bottom: 20px;
+        }
+        .mat-mdc-card-subtitle {
+          font-size: xx-large;
+          display: block;
+          margin: 0;
+          color: black;
+          font-family: evogria;
+          margin-bottom: 20px;
+          font: 700 30px/20px Evogria;
+        }
 
   }
 

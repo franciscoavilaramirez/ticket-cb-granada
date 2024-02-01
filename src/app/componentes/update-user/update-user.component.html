@@ -22,9 +22,10 @@
       </mat-dialog-actions>
 
       </form>
-      <button mat-raised-button class="container__wrapper__buttons" color="primary"(click)="onSubmit()" >{{"botones.guardarCambios" | translate }}</button>
-      <button mat-raised-button class="container__wrapper__buttons" color="primary"(click)="closedModal()">{{"botones.cancelar" | translate }}</button>
-
+      <div class="container__wrapper__content-wrapper">
+      <button mat-raised-button class="buttons__guardar" color="primary"(click)="onSubmit()" >{{"botones.guardarCambios" | translate }}</button>
+      <button mat-raised-button class="buttons__cancelar" color="primary"(click)="closedModal()">{{"botones.cancelar" | translate }}</button>
+    </div>
     </div>
   </div>
 </div>

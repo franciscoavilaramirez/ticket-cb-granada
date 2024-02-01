@@ -1,8 +1,7 @@
 {
 	"card":{
-		"partido": "Partido",
-    "mostrarOcultar":"Mostrar/Ocultar Inscritos",
-    "anadirUsuario": "Añadir Usuario al partido",
+    "mostrarOcultar":"Mostrar Inscritos",
+    "anadirUsuario": "Añadir Usuario",
     "modificarPartido": "Modificar Partido"
 		},
   "listadoUsuarios":{

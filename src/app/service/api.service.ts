@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Usuario } from '../modelo/usuario';
 import { Partido } from '../modelo/partido';
+
 import { Observable } from 'rxjs';
 import { environment } from '../../enviroments/environment';
 import { Pdf } from '../modelo/pdf';
@@ -24,14 +25,14 @@ export class ApiService {
     return this.http.get<number[]>(this.apiUrl + 'getMisPartidosIds/'+userId);
   }
 
-  asignarEntrada(idUsuario:number, idPartido:number) { 
+  asignarEntrada(idUsuario:number, idPartido:number) {
     return this.http.post(this.apiUrl + 'saveUsuarioPartido/'+idUsuario+'/'+idPartido, {});
   }
   desasignarEntrada(idUsuario:number, idPartido:number) {
     return this.http.delete(this.apiUrl + 'deleteUsuarioFromPartido/'+idUsuario+'/'+idPartido, {});
   }
 
-  getEntradaBase64(idUsuario:number, idPartido:number): Observable<string> { 
+  getEntradaBase64(idUsuario:number, idPartido:number): Observable<string> {
     const headers = new HttpHeaders().set('Content-Type', 'text/plain; charset=utf-8');
     return this.http.get(this.apiUrl + 'enviarEntrada/'+idUsuario+'/'+idPartido,{ headers, responseType: 'text'});
   }
@@ -48,11 +49,14 @@ export class ApiService {
     return this.http.post<Usuario>(this.apiUrl+'addUser', usuario);
   }
 
-  modifyUser(usuario: Usuario): Observable<Usuario>{   
-    return this.http.put<Usuario>(`${this.apiUrl+'modificarUsuario'}/${usuario.id}`,usuario);
+  // updateUser(usuario: Usuario): Observable<Usuario>{
+  //   return this.http.put<Usuario>(`${this.apiUrl+'modificarUsuario'}/${usuario.id}`,usuario);
+  // }
+  updateUser(usuarioId: string,usuario:any){
+    return this.http.put<Usuario>(`${this.apiUrl+'modificarUsuario'}/${usuarioId}`,usuario);
   }
-  deleteUser(user: Usuario): Observable<Usuario> { 
-    return this.http.delete<Usuario>(`${this.apiUrl+'borrarUsuario'}/${user.id}`);
+  deleteUser(user: string) {
+    return this.http.delete<Usuario>(`${this.apiUrl+'borrarUsuario'}/${user}`);
   }
 
   Login(usuario: Usuario): Observable<Usuario> {
@@ -62,15 +66,19 @@ export class ApiService {
   getPartidos(){
     return this.http.get<Partido[]>(this.apiUrl + 'getPartidos');
   }
-  getUsuariosSorteo(fecha: string){ 
-    return this.http.get<Usuario[]>(`${this.apiUrl+'getUsuariosSorteo'}/${fecha}`);
+  // getUsuariosSorteo(fecha: string){
+  //   return this.http.get<Usuario[]>(`${this.apiUrl+'getUsuariosSorteo'}/${fecha}`);
+  // }
+  getUsuariosPartido(idPartido: number){
+    return this.http.get<Usuario[]>(`${this.apiUrl + 'getUsuariosPartido'}/${idPartido}`);
+
   }
 
   addPartido(partido: Partido): Observable<Partido> {
     return this.http.post<Partido>(this.apiUrl + 'addPartido', partido);
   }
 
-  modifyPartido(partido: Partido): Observable<Partido> { 
+  modifyPartido(partido: Partido): Observable<Partido> {
     return this.http.put<Partido>(`${this.apiUrl+'modificarPartido'}/${partido.id}`, partido);
   }
 
@@ -78,7 +86,19 @@ export class ApiService {
     return this.http.delete<Partido>(`${this.apiUrl+'borrarPartido'}/${partido.id}`);
   }
 
-  addUserMatch(usuarioId: string,partido: Partido){
-    return this.http.post<Usuario>(`${this.apiUrl+'saveUsuarioSorteo'}/${usuarioId}/${partido.fechaPartido}`,null);
+  addUserMatch(usuarioId: string,partidoId: number){
+    return this.http.post<Usuario>(`${this.apiUrl+'saveUsuarioPartido'}/${usuarioId}/${partidoId}`,null);
+  }
+  updateMatch(partido: Partido): Observable<Partido> {
+    return this.http.put<Partido>(`${this.apiUrl + 'modificarPartido'}/${partido.id}`, partido);
+  }
+  deleteMatch(partido: Partido): Observable<Partido> {
+    return this.http.delete<Partido>(`${this.apiUrl + 'borrarPartido'}/${partido.id}`);
+  }
+  deleteUserMatch(usuarioId: string,partidoId: Partido) {
+    return this.http.delete<Usuario>(`${this.apiUrl + 'deleteUsuarioFromPartido'}/${usuarioId}/${partidoId.id}`);
+  }
+  getNextMatch(){
+    return this.http.get<Partido[]>(this.apiUrl + 'getProximosPartidos');
   }
 }
