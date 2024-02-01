@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -29,9 +29,13 @@ import { ErrorAlertFormComponent } from './componentes/error-alert-form/error-al
 import { AddUserComponent } from './componentes/add-user/add-user.component';
 import { AdminHomeComponent } from './pages/admin/admin-home/admin-home.component'
 import { SubirEntradasComponent } from './pages/admin/subir-entradas/subir-entradas.component'
-
-
 import { HomeComponent } from './pages/home/home.component';
+import { DivisorComponent } from './componentes/divisor/divisor.component';
+
+import localeEs from '@angular/common/locales/es'
+import { registerLocaleData } from '@angular/common';
+import { NavbarComponent } from './componentes/navbar/navbar.component'
+registerLocaleData(localeEs, 'es');
 
 @NgModule({
   declarations: [
@@ -44,7 +48,9 @@ import { HomeComponent } from './pages/home/home.component';
     ErrorAlertFormComponent,
     AddUserComponent,
     AdminHomeComponent,
-    SubirEntradasComponent
+    SubirEntradasComponent,
+    DivisorComponent,
+    NavbarComponent
   ],
   imports: [
     HttpClientModule,
@@ -67,7 +73,7 @@ import { HomeComponent } from './pages/home/home.component';
     MatListModule
 
   ],
-  providers: [],
+  providers: [{provide: LOCALE_ID, useValue: 'es'}],
   bootstrap: [AppComponent]
 })
 

@@ -1,29 +1,79 @@
-<h2>Partidos disponibles</h2>
+<app-navbar [isAdmin]="false"></app-navbar>
 
-<div *ngFor="let partido of partidos" style="display: inline-block;">
-    <div class="entrada" *ngIf="!partido.tengoEntrada">
-        <div class="nombre">{{partido.nombrePartido}}</div>
+<app-divisor [titulo]="'Siguiente Partido'"></app-divisor>
+
+<div *ngIf="primerPartido" class="ticket-wrapper">
+    <div class="ticket">
         <div class="fecha">
-            <div>Fecha:</div>
-            {{partido.fechaPartido | date:'dd-MM-yy'}} <br>
-            {{partido.fechaPartido | date:'HH:mm'}}
+            <div>{{primerPartido.fechaPartido | date:'d MMM'}}.</div>
+            <div class="dia-semana">{{primerPartido.fechaPartido | date:'EEEE'}}</div>
+            <div>{{primerPartido.fechaPartido | date:'hh:mm'}}H</div>
         </div>
-        <button *ngIf="partido.stockEntradas" class="boton" (click)="apuntarse(partido.id)">Apuntarse</button>
-        <button *ngIf="!partido.stockEntradas" class="boton" disabled>Agotadas</button>
+        <div class="equipos-wrapper">
+            <div class="equipos">
+                <div class="nombre">Granada</div>
+                <div class="nombre">{{primerPartido.nombrePartido}}</div>
+            </div>
+        </div>
+        <!-- BOTONES -->
+        <!-- Si tengo la entrada, botones de descarga y devolucion -->
+        <div *ngIf=primerPartido.tengoEntrada>
+            <div (click)="descargar(primerPartido.id, primerPartido.nombrePartido)" class="btn-descargar">
+                <img class="img-descargar" src="assets/imgs/descargar.png">
+            </div>
+            <div (click)="devolver(primerPartido.id)" class="btn-devolver">
+                <img class="img-devolver" src="assets/imgs/devolver.png">
+            </div>
+        </div>
+        <!-- Si no tengo la entrada, boton de apuntarse si quedan -->
+        <div *ngIf=!primerPartido.tengoEntrada>
+
+            <div *ngIf=primerPartido.stockEntradas (click)="apuntarse(primerPartido.id)" class="btn-apuntame">
+                <img class="img-apuntame" src="assets/imgs/apuntame.png">
+            </div>
+            <div *ngIf=!primerPartido.stockEntradas class="agotadas">
+                AGOTADAS
+            </div>
+        </div>
     </div>
 </div>
 
-<h2>Mis entradas</h2>
+<app-divisor [titulo]="'Próximos partidos'"></app-divisor>
 
-<div *ngFor="let partido of partidos">
-    <div class="entrada" *ngIf="partido.tengoEntrada">
-        <div class="nombre">{{partido.nombrePartido}}</div>
-        <div class="fecha">
-            <div>Fecha:</div>
-            {{partido.fechaPartido | date:'dd-MM-yy'}} <br>
-            {{partido.fechaPartido | date:'HH:mm'}}
+<div class="ticket-wrapper">
+    <div *ngFor="let partido of partidos" style="display: inline-block;">
+        <div class="ticket ticket-small">
+            <div class="fecha">
+                <div>{{partido.fechaPartido | date:'d MMM'}}.</div>
+                <div class="dia-semana">{{partido.fechaPartido | date:'EEEE'}}</div>
+                <div>{{partido.fechaPartido | date:'hh:mm'}}H</div>
+            </div>
+            <div class="equipos-wrapper">
+                <div class="equipos">
+                    <div class="nombre">Granada</div>
+                    <div class="nombre">{{partido.nombrePartido}}</div>
+                </div>
+            </div>
+            <!-- BOTONES -->
+            <!-- Si tengo la entrada, botones de descarga y devolucion -->
+            <div *ngIf=partido.tengoEntrada>
+                <div (click)="descargar(partido.id, partido.nombrePartido)" class="btn-descargar">
+                    <img class="img-descargar" src="assets/imgs/descargar.png">
+                </div>
+                <div (click)="devolver(partido.id)" class="btn-devolver">
+                    <img class="img-devolver" src="assets/imgs/devolver.png">
+                </div>
+            </div>
+            <!-- Si no tengo la entrada, boton de apuntarse si quedan -->
+            <div *ngIf=!partido.tengoEntrada>
+
+                <div *ngIf=partido.stockEntradas (click)="apuntarse(partido.id)" class="btn-apuntame">
+                    <img class="img-apuntame" src="assets/imgs/apuntame.png">
+                </div>
+                <div *ngIf=!partido.stockEntradas class="agotadas">
+                    AGOTADAS
+                </div>
+            </div>
         </div>
-        <button class="boton" (click)="descargar(partido.id, partido.nombrePartido)">Descargar</button>
-        <button class="boton" (click)="desapuntarse(partido.id)">Devolver</button>
     </div>
 </div>
