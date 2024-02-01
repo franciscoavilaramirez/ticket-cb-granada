@@ -7,19 +7,6 @@ export class AuthService {
   router: any;
   constructor() { }
 
-  // Inicia sesión con las credenciales del usuario
-  login(email: string, password: string): boolean {
-    // llamada API para autenticar al usuario
-    // suponer que el inicio de sesión siempre es exitoso
-
-    const user = { email, password, isAdmin: false };
-
-    // Guarda el usuario en el localStorage
-    localStorage.setItem('user', JSON.stringify(user));
-
-    return true;
-  }
-
   // Cierra la sesión del usuario
   logout(): void {
     // Elimina el usuario del localStorage

@@ -29,8 +29,6 @@ import { ErrorAlertFormComponent } from './componentes/error-alert-form/error-al
 import { AddUserComponent } from './componentes/add-user/add-user.component';
 import { AdminHomeComponent } from './pages/admin/admin-home/admin-home.component'
 import { SubirEntradasComponent } from './pages/admin/subir-entradas/subir-entradas.component'
-
-
 import { HomeComponent } from './pages/home/home.component';
 
 @NgModule({
