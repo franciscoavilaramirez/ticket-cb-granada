@@ -30,7 +30,7 @@
     <mat-label>Email</mat-label>
     <input matInput formControlName="email">
     <app-error-alert-form
-      [errorMessage]="registerForm.get('email')?.invalid && registerForm.get('email')?.touched ? 'El email es requerido.' : ''"></app-error-alert-form>
+      [errorMessage]="registerForm.get('email')?.invalid && registerForm.get('email')?.touched ? 'El email con @t-systems.com es requerido.' : ''"></app-error-alert-form>
   </mat-form-field>
 
   <mat-form-field appearance="fill" class="form-field">

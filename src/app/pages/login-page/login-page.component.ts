@@ -26,8 +26,11 @@ export class LoginPageComponent implements OnInit {
     }
 
     this.loginForm = this.formBuilder.group({
-      email: ['', Validators.required],
-      password: ['', Validators.required]
+      // email: ['', Validators.required],
+      email: ['', [Validators.required, Validators.pattern("[a-zA-Z0-9._%+-]+@t-systems\\.com$")]],
+      // password: ['', Validators.required]
+      password: ['', [Validators.required, Validators.pattern("^(?=.*\\d)(?=.*[@#$%^&+=*_-])(?=.*[a-z])(?=.*[A-Z]).{8,}$")]],
+
     });
   }
 
@@ -38,7 +41,7 @@ export class LoginPageComponent implements OnInit {
 
         let userJson = JSON.stringify(response);
         localStorage.setItem('user', userJson);
-        console.log("localstorage ID ==>", localStorage.getItem('user'));
+        // console.log("localstorage ID ==>", localStorage.getItem('user'));
         // Redirige a la página de inicio
         this.router.navigate(['/home']);
       },
