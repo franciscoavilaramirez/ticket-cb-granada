@@ -72,8 +72,10 @@ export class HomeComponent {
 
   devolver(idPartido: number) {
     this.apiService.desasignarEntrada(this.idUsuario, idPartido).subscribe(() => {
-      if (this.primerPartido.id == idPartido)
-        this.primerPartido.tengoEntrada = true
+      if (this.primerPartido.id == idPartido) {
+        this.primerPartido.tengoEntrada = false
+        this.primerPartido.stockEntradas = true
+      }
       else {
         this.partidos.forEach(partido => {
           if (partido.id == idPartido) {
