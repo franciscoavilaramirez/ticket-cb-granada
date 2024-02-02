@@ -1,0 +1,20 @@
+<div class="navbar">
+    <img class="icono tsystems" src="assets/imgs/Logo_Tsystems.png">
+    <div class="x">X</div>
+    <img class="icono granada" src="assets/imgs/logo_granada.png"> 
+    <div class="right">
+        <a routerLink="/home">
+            <div class="titulo">Inicio</div>
+            <img class="icono" src="assets/imgs/home.png">
+        </a>
+        <a routerLink="">
+            <div class="titulo">Perfil</div>
+            <img class="icono" src="assets/imgs/user.png">
+        </a>
+        <a *ngIf="isAdmin" routerLink="">
+            <div class="titulo">Usuarios</div>
+            <img class="icono users-icon" src="assets/imgs/users.png">
+        </a>
+    </div>
+</div>
+

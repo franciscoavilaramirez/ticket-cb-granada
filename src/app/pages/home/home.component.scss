@@ -1,0 +1,204 @@
+div {
+    color: white;
+}
+
+.ticket-wrapper {
+    width: fit-content;
+    margin: 40px auto;
+}
+
+.ticket {
+    background-image: url("/assets/imgs/ticket.svg");
+    background-size: contain;
+    position: relative;
+    width: 485px;
+    height: 220px;
+    margin: 10px;
+
+    .fecha {
+        position: absolute;
+        top: 6%;
+        left: 7%;
+        font-family: Evogria;
+        font-size: 22px;
+        font-style: italic;
+
+        .dia-semana {
+            font-size: 14px;
+            margin: -2px 37px;
+        }
+    }
+
+    .equipos-wrapper {
+        width: 69%;
+        position: absolute;
+        top: 37%;
+
+        .equipos {
+            width: fit-content;
+            margin-left: auto;
+            margin-top: 3px;
+
+            .nombre {
+                width: fit-content;
+                font-size: 29px;
+                margin-bottom: 9%;
+                font-family: Evogria;
+            }
+        }
+    }
+
+    .btn-apuntame {
+        position: absolute;
+        bottom: 7px;
+        left: 115px;
+        cursor: pointer;
+
+        .img-apuntame {
+            width: 170px;
+            box-shadow: -5px 4px 17px -6px #000000;
+            border-radius: 6px;
+        }
+
+        .img-apuntame:hover {
+            box-shadow: -5px 4px 17px -6px #e20074;
+        }
+    }
+
+    .btn-descargar {
+        position: absolute;
+        bottom: 7px;
+        left: 35px;
+        cursor: pointer;
+        .img-descargar {
+            width: 150px;
+            box-shadow: -5px 4px 17px -6px #000000;
+            border-radius: 6px;
+        }
+
+        .img-descargar:hover {
+            box-shadow: -5px 4px 17px -6px #e20074;
+        }
+    }
+    .btn-devolver {
+        position: absolute;
+        bottom: 8px;
+        left: 195px;
+        cursor: pointer;
+        .img-devolver {
+            width: 152px;
+            box-shadow: -5px 4px 17px -6px #000000;
+            border-radius: 6px;
+        }
+
+        .img-devolver:hover {
+            box-shadow: -5px 4px 17px -6px #e20074;
+        }
+    }
+
+    .btn-apuntame:hover {
+        cursor: pointer;
+    }
+
+    .agotadas {
+        position: absolute;
+        top: 61%;
+        left: 65%;
+        rotate: -28deg;
+        color: red;
+        font-weight: bold;
+        font-size: 30px;
+        background-color: #0a0a0a;
+        box-shadow: 0 0 8px 8px #292727;
+    }
+}
+
+.ticket-small {
+    background-image: url("/assets/imgs/ticket.svg");
+    background-size: contain;
+    position: relative;
+    width: 328px;
+    height: 149px;
+    margin: 30px 20px 20px 75px;
+
+    .fecha {
+        font-size: 14px;
+
+        .dia-semana {
+            margin: -6px 22px;
+            font-size: 12px;
+        }
+    }
+
+    .equipos-wrapper {
+        position: absolute;
+        top: 34%;
+
+        .equipos {
+            .nombre {
+                font-size: 18px;
+                margin-bottom: 1px;
+            }
+        }
+    }
+
+    .btn-apuntame {
+        position: absolute;
+        left: 64px;
+        width: 40%;
+
+        .img-apuntame {
+            width: 170px;
+            box-shadow: -5px 4px 17px -6px #000000;
+            border-radius: 6px;
+            width: 100%;
+        }
+
+        .img-apuntame:hover {
+            box-shadow: -5px 4px 17px -6px #e20074;
+        }
+    }
+
+    .btn-apuntame:hover {
+        cursor: pointer;
+    }
+
+    .btn-descargar {
+        position: absolute;
+        bottom: 7px;
+        left: 6px;
+        cursor: pointer;
+        .img-descargar {
+            width: 115px;
+            box-shadow: -5px 4px 17px -6px #000000;
+            border-radius: 6px;
+        }
+
+        .img-descargar:hover {
+            box-shadow: -5px 4px 17px -6px #e20074;
+        }
+    }
+    .btn-devolver {
+        position: absolute;
+        bottom: 8px;
+        left: 125px;
+        cursor: pointer;
+        .img-devolver {
+            width: 116px;
+            box-shadow: -5px 4px 17px -6px #000000;
+            border-radius: 6px;
+        }
+
+        .img-devolver:hover {
+            box-shadow: -5px 4px 17px -6px #e20074;
+        }
+    }
+
+
+    .agotadas {
+        position: absolute;
+        top: 58%;
+        left: 61%;
+        font-size: 23px;
+    }
+}

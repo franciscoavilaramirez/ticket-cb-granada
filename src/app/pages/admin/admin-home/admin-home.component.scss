@@ -9,12 +9,22 @@
     display: flex;
     flex-direction: column;
     padding: 50px,50px,0px,50px;
-    width: auto;
+    //width: 81px;
 
     &__table-buttons{
-      margin-right: 20px;
-    }
+      margin-right: 10px;
 
+      .editar{
+        background-color: #36bf98;
+        color: #ffffff;
+        margin-right: 10px;
+    }
+      .eliminar{
+        background-color: #e11010;
+        color:#ffffff;
+
+      }
+    }
 
       &__content-wrapper{
         display: flex;
@@ -23,20 +33,49 @@
 
         .cards-wrapper{
           display: flex;
-          flex-direction: row;
+          flex-wrap: wrap;
           align-items: flex-start;
 
+
+
           &__buttons{
-            height: 100px;
-            width: 100%;
+            height: 100%;
+            width: 105%;
             display: flex;
             flex-direction: column;
             align-items: center;
             //column-gap: 10px;
             justify-content: space-between;
             font-size: 20px;
-            /* margin-bottom: 20px;*/
-          }
+            align-items: stretch;
+             margin-bottom: 20px;
+
+             .buttons-card{
+              display: flex;
+              justify-content: space-between;
+              width: 100%;
+
+              &__mostrar, &__modificar{
+                  background-color: #94cef2;
+                  color:black;
+                  font-family: allerta;
+                  font-size: 17px;
+              }
+              &__aniadir{
+                background-color: #36bf98;
+                color: #ffffff;
+                font-family: allerta;
+                font-size: 17px;
+              }
+              &__eliminar{
+                background-color: #8c1f1f;
+                color:#ffffff;
+                font-family: allerta;
+                font-size: 17px;
+            }
+             }
+
+        }
         }
         .buttons{
           height: 50px;
@@ -48,12 +87,25 @@
           justify-content: flex-start;
           font-size: 20px;
           margin-bottom: 20px;
+
+          &__exportar{
+            background-color: #36bf98;
+            color: #ffffff;
+
+            .alignIcon{
+                background-color: aqua;
+            display: flex;
+            color: black;
+            align-self: center;
+            }
+          }
+
         }
 
         .card{
           width: 450px;
-          height: 250px;
-          background-color: rgb(241 84 186 / 10%);
+          height: 280px;
+          background-color: #e0e0e075;
           border-width: 1px;
           display: grid;
           box-shadow: 5px 5px 1px -1px #e0e0e0, 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
@@ -66,33 +118,31 @@
           border: 1px black solid;
         }
 
-
-
-        .formLogin{
-          display: flex;
-          flex-direction: column;
-          border: solid 2px deeppink;
-          padding: 130px;
-          border-radius: 50px;
-          background-color:#ff00ff08;
-        }
         .demo-inline-calendar-card {
           width: 300px;
         }
 
       }
 
-  .mdc-data-table__table {
-    min-width: 10%;
-    border: 0;
-    white-space: nowrap;
-    border-spacing: 0;
-    table-layout: fixed;
-    //width: 60%;
-    width: auto;
-    background-color: #b8b3b81f;
-    margin-bottom: 20px;
-  }
+        .mdc-data-table__table {
+          min-width: 10%;
+          border: 0;
+          white-space: break-spaces;
+          border-spacing: 0;
+          table-layout: fixed;
+          width: auto;
+          height: 100%;
+          margin-bottom: 20px;
+        }
+        .mat-mdc-card-subtitle {
+          font-size: xx-large;
+          display: block;
+          margin: 0;
+          color: black;
+          font-family: evogria;
+          margin-bottom: 20px;
+          font: 700 30px/20px Evogria;
+        }
 
   }
 

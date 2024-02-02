@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -17,7 +17,7 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 
 
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { UpdateUserComponent } from './componentes/update-user/update-user.component';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatListModule} from '@angular/material/list';
@@ -29,9 +29,22 @@ import { ErrorAlertFormComponent } from './componentes/error-alert-form/error-al
 import { AddUserComponent } from './componentes/add-user/add-user.component';
 import { AdminHomeComponent } from './pages/admin/admin-home/admin-home.component'
 import { SubirEntradasComponent } from './pages/admin/subir-entradas/subir-entradas.component'
-
-
 import { HomeComponent } from './pages/home/home.component';
+import { DivisorComponent } from './componentes/divisor/divisor.component';
+
+import localeEs from '@angular/common/locales/es'
+import { registerLocaleData } from '@angular/common';
+import { NavbarComponent } from './componentes/navbar/navbar.component'
+registerLocaleData(localeEs, 'es');
+import { CommonModule } from '@angular/common';
+import { ModifyMatchComponent } from './componentes/modify-match/modify-match.component';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { TranslationComponent } from './translation/translation.component';
+
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http);
+}
 
 @NgModule({
   declarations: [
@@ -44,7 +57,11 @@ import { HomeComponent } from './pages/home/home.component';
     ErrorAlertFormComponent,
     AddUserComponent,
     AdminHomeComponent,
-    SubirEntradasComponent
+    SubirEntradasComponent,
+    DivisorComponent,
+    NavbarComponent,
+    ModifyMatchComponent,
+    TranslationComponent
   ],
   imports: [
     HttpClientModule,
@@ -64,10 +81,20 @@ import { HomeComponent } from './pages/home/home.component';
     MatCheckboxModule,
     FormsModule,
     MatDatepickerModule,
-    MatListModule
+    MatListModule,
+    CommonModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: (http: HttpClient) => {
+          return new TranslateHttpLoader(http);
+        },
+        deps: [ HttpClient ]
+      }
+    })
 
   ],
-  providers: [],
+  providers: [{provide: LOCALE_ID, useValue: 'es'}],
   bootstrap: [AppComponent]
 })
 

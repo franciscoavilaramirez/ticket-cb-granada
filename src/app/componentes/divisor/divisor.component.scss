@@ -1,0 +1,30 @@
+@import '../../../styles/palette';
+
+.divider {
+    margin-top: 30px;
+    margin-left: 30px;
+    color: white;
+    font-family: 'Allerta';
+    .linea {
+        position: relative;
+        top: 7px;
+        background-color: $magenta;
+        height: 7px;
+        border-radius: 5px;
+        width: 85%;
+    }
+
+    .cartel {
+        background-color: $magenta;
+        font-size: 25px;
+        width: fit-content;
+        border-radius: 8px;
+        padding: 10px;
+        display: flex;
+        align-items: center;
+        .balon{
+            width: 28px;
+            margin-right: 10px;
+        }
+    }
+}
