@@ -5,42 +5,52 @@
   <div class="container__wrapper">
     <div class="container__wrapper__content-wrapper">
       <div class="cards-wrapper">
-          @for (partido of partidosFran; track $index) {
-            <mat-card  class="card" *ngIf="$index < 3" >
+          @for (partido of partido; track $index) {
+            <mat-card  class="card"  >
+              <!-- <mat-card  class="card" *ngIf="$index < 3" > -->
+
             <mat-card-header  >
-              <mat-card-title>Partido:</mat-card-title>
+              <mat-card-title></mat-card-title>
               <mat-card-subtitle>{{partido.nombrePartido}}</mat-card-subtitle>
-              <mat-card-subtitle>{{partido.fechaPartido}}</mat-card-subtitle>
+              <mat-card-subtitle>{{partido.fechaPartido | date:'dd-MM-yyyy' }}</mat-card-subtitle>
             </mat-card-header>
             <mat-card-actions class="cards-wrapper__buttons">
-              <button mat-raised-button color="primary" (click)="getUsuariosSorteo(partido.fechaPartido)" >Mostrar/Ocultar Inscritos</button>
-              <button mat-raised-button color="primary" (click)="openAddUser(partido)" >Añadir Usuario al partido</button>
+              <div class="buttons-card">
+              <button mat-raised-button class="buttons-card__mostrar" (click)="getUsuariosPartido(partido.id)" >{{"card.mostrarOcultar" | translate }}</button>
+              <button mat-raised-button class="buttons-card__modificar" (click)="openModifyMatch(partido)" >{{"card.modificarPartido" | translate }}</button>
+
+            </div>
+            <div class="buttons-card">
+              <button mat-raised-button class="buttons-card__aniadir" (click)="openAddUser(partido)" >{{"card.anadirUsuario" | translate }}</button>
+              <button mat-raised-button class="buttons-card__eliminar" (click)="deleteMatch(partido)" >{{"botones.eliminarPartido" | translate }}</button>
+            </div>
+
               </mat-card-actions>
             </mat-card>
           }
         </div>
 
+
       <!-- LISTA DE USUARIOS INSCRITOS A UN PARTIDO -->
       <div class="container__wrapper" #TABLEUSUARIOSPARTIDO>
         <table mat-table [dataSource]="usuariosPartido" class="mat-elevation-z8" #tableUsuariosPartido *ngIf="hiddenListUsuariosPartidos" >
-          <h1>Listado Usuarios</h1>
-          <ng-container matColumnDef="no">
-            <th mat-header-cell *matHeaderCellDef> No </th>
+          <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef> ID </th>
             <td mat-cell *matCellDef="let inscritos let i = index" > {{i+1}} </td>
           </ng-container>
 
           <ng-container matColumnDef="nombre">
-            <th mat-header-cell *matHeaderCellDef> Nombre </th>
+            <th mat-header-cell *matHeaderCellDef>{{"usuariosInscritos.nombre" | translate }}</th>
             <td mat-cell *matCellDef="let inscritos" > {{inscritos.nombre}} </td>
           </ng-container>
 
-          <ng-container matColumnDef="apellido">
-            <th mat-header-cell *matHeaderCellDef> Apellido </th>
-            <td mat-cell *matCellDef="let inscritos"> {{inscritos.apellido}} </td>
+          <ng-container matColumnDef="apellidos">
+            <th mat-header-cell *matHeaderCellDef>{{"usuariosInscritos.apellidos" | translate }}</th>
+            <td mat-cell *matCellDef="let inscritos">{{inscritos.apellidos}}</td>
           </ng-container>
 
           <ng-container matColumnDef="email">
-            <th mat-header-cell *matHeaderCellDef> Email </th>
+            <th mat-header-cell *matHeaderCellDef>{{"usuariosInscritos.email" | translate }}</th>
             <td mat-cell *matCellDef="let inscritos"> {{inscritos.email}}</td>
           </ng-container>
 
@@ -54,39 +64,40 @@
 
     <div class="container__wrapper" #TABLE>
       <table mat-table [dataSource]="usuarios" class="mat-elevation-z8" #table *ngIf="hiddenList">
-        <h1>Listado Usuarios</h1>
-        <ng-container matColumnDef="no">
-          <th mat-header-cell *matHeaderCellDef> No </th>
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef> ID </th>
           <td mat-cell *matCellDef="let element let i = index" > {{i+1}} </td>
         </ng-container>
         <ng-container matColumnDef="nombre">
-          <th mat-header-cell *matHeaderCellDef> Nombre </th>
+          <th mat-header-cell *matHeaderCellDef>{{"usuarios.nombre" | translate }}</th>
           <td mat-cell *matCellDef="let element" > {{element.nombre}} </td>
         </ng-container>
-        <ng-container matColumnDef="apellido">
-          <th mat-header-cell *matHeaderCellDef> Apellido </th>
-          <td mat-cell *matCellDef="let element"> {{element.apellido}} </td>
+        <ng-container matColumnDef="apellidos">
+          <th mat-header-cell *matHeaderCellDef>{{"usuarios.apellido" | translate }}</th>
+          <td mat-cell *matCellDef="let element"> {{element.apellidos}} </td>
         </ng-container>
         <ng-container matColumnDef="email">
-          <th mat-header-cell *matHeaderCellDef> Email </th>
+          <th mat-header-cell *matHeaderCellDef>{{"usuarios.email" | translate }}</th>
           <td mat-cell *matCellDef="let element"> {{element.email}}</td>
         </ng-container>
 
         <ng-container matColumnDef="botones">
           <th mat-header-cell *matHeaderCellDef></th>
           <td mat-cell *matCellDef="let element" >
-            <button mat-raised-button class="container__wrapper__table-buttons"
-                      color="primary"
+            <div class="container__wrapper__table-buttons">
+            <button mat-raised-button class="editar"
                       type="submit"
                       (click)="openDialog(element)"><mat-icon>edit</mat-icon>
-                      Modificar
+                      <!-- {{"usuarios.modificar" | translate }} -->
             </button>
-             <button mat-raised-button class="container__wrapper__table-buttons"
-                      color="warn"
+
+
+             <button mat-raised-button class="eliminar"
                       type="submit"
-                      (click)="deleteUser(element)"><mat-icon>delete_forever</mat-icon>
-                      Eliminar
+                      (click)="deleteUser(element.user_id)"><mat-icon>delete_forever</mat-icon>
+                      <!-- {{"usuarios.eliminar" | translate }} -->
               </button>
+            </div>
             </td>
         </ng-container>
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
@@ -94,14 +105,19 @@
       </table>
 
       <div class="buttons">
-        <button mat-raised-button class="container__wrapper__buttons" color="primary" (click)="userList()" >Mostrar Listado Usuarios</button>
-        <button mat-raised-button class="container__wrapper__buttons" color="primary" (click)="hiddenUserList()" >Ocultar Listado</button>
+        <button mat-raised-button class="container__wrapper__buttons" color="primary" (click)="userList()" >{{"usuarios.mostrar" | translate }}</button>
+        <button mat-raised-button class="container__wrapper__buttons" color="primary" (click)="hiddenUserList()" >{{"usuarios.ocultar" | translate }}</button>
       </div>
         <div class="buttons">
-        <button mat-raised-button class="container__wrapper__buttons" color="primary" (click)="ExportTOExcel()" *ngIf="exportCsv">Exportar Usuarios a XLSX
-          <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="description" ></mat-icon>
+        <button mat-raised-button class="buttons__exportar"  (click)="ExportTOExcel()" *ngIf="exportCsv">{{"usuarios.exportarXlsX" | translate }}
+          <mat-icon aria-hidden="false" class="alignIcon" aria-label="Example home icon" fontIcon="description" ></mat-icon>
         </button>
         </div>
+        <div class="buttons">
+          <button mat-raised-button class="container__wrapper__buttons" color="primary" (click)="cambiarLenguaje('en')" > Traducir a Inglés</button>
+          <button mat-raised-button class="container__wrapper__buttons" color="primary" (click)="cambiarLenguaje('es')" > Traducir a Español</button>
+
+          </div>
     </div>
 
         <!-- INPUT PARA INTRODUCIR CONTRASEÑA Y PODER MOSTRARLA SI ES NECESARIO -->

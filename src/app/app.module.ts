@@ -17,7 +17,7 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 
 
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { UpdateUserComponent } from './componentes/update-user/update-user.component';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatListModule} from '@angular/material/list';
@@ -36,6 +36,15 @@ import localeEs from '@angular/common/locales/es'
 import { registerLocaleData } from '@angular/common';
 import { NavbarComponent } from './componentes/navbar/navbar.component'
 registerLocaleData(localeEs, 'es');
+import { CommonModule } from '@angular/common';
+import { ModifyMatchComponent } from './componentes/modify-match/modify-match.component';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { TranslationComponent } from './translation/translation.component';
+
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http);
+}
 
 @NgModule({
   declarations: [
@@ -50,7 +59,9 @@ registerLocaleData(localeEs, 'es');
     AdminHomeComponent,
     SubirEntradasComponent,
     DivisorComponent,
-    NavbarComponent
+    NavbarComponent,
+    ModifyMatchComponent,
+    TranslationComponent
   ],
   imports: [
     HttpClientModule,
@@ -70,7 +81,17 @@ registerLocaleData(localeEs, 'es');
     MatCheckboxModule,
     FormsModule,
     MatDatepickerModule,
-    MatListModule
+    MatListModule,
+    CommonModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: (http: HttpClient) => {
+          return new TranslateHttpLoader(http);
+        },
+        deps: [ HttpClient ]
+      }
+    })
 
   ],
   providers: [{provide: LOCALE_ID, useValue: 'es'}],

@@ -8,6 +8,8 @@ import Swal from 'sweetalert2';
 import { Usuario } from '../../../modelo/usuario';
 import { UpdateUserComponent } from '../../../componentes/update-user/update-user.component';
 import { AddUserComponent } from '../../../componentes/add-user/add-user.component';
+import { ModifyMatchComponent } from '../../../componentes/modify-match/modify-match.component';
+import { TranslateService } from '@ngx-translate/core';
 import { ApiService } from '../../../service/api.service';
 
 
@@ -22,10 +24,13 @@ export class AdminHomeComponent {
 [x: string]: any;
 
 
-  constructor(private snackBar: MatSnackBar,public apiService: ApiService, private router: Router,public dialog: MatDialog) {
+  constructor(private snackBar: MatSnackBar,public apiService: ApiService,
+              private router: Router,public dialog: MatDialog,
+              private translate: TranslateService) {
+              this.translate.setDefaultLang(this.activeLang);
   }
 
-
+  activeLang = 'es';
   hiddenList = false;
   hiddenListUsuariosPartidos = false;
   hide = true;
@@ -34,22 +39,27 @@ export class AdminHomeComponent {
   bodyResponse: Usuario;
   currentUser: Usuario;
   //partidos!: Partido[];
-  partidosFran!: Partido[];
+  partido!: Partido[];
   usuariosPartido!: Usuario[];
   fechaPartido:string;
+  idPartido!: string;
 
 
   @ViewChild('TABLE')table!: ElementRef;
   @ViewChild('TABLEUSUARIOSPARTIDO')tableUsuariosPartido!: ElementRef;
 
-  displayedColumns: string[] = ['no','nombre','apellido','email','botones'];
-  ColumnsInscritos: string[] = ['no','nombre','apellido','email'];
+  displayedColumns: string[] = ['id','nombre','apellidos','email','botones'];
+  ColumnsInscritos: string[] = ['id','nombre','apellidos','email'];
 
   ngOnInit(){
     this.getUsers();
     this.getPartidos();
-
   }
+  public cambiarLenguaje(lang: string) {
+    this.activeLang = lang;
+    this.translate.use(lang);
+  }
+
   getUsers(){
     this.apiService.getUsers().subscribe(data =>{
       this.usuarios = data
@@ -57,9 +67,9 @@ export class AdminHomeComponent {
     });
   }
 
-  deleteUser(user: Usuario): void {
+  deleteUser(userId: string): void {
 
-    this.apiService.deleteUser(user).subscribe(async data => {
+    this.apiService.deleteUser(userId).subscribe(async data => {
       const dataUser = await Swal.fire({
         title: '¿Seguro que desea eliminar este usuario?',
         showDenyButton: true,
@@ -76,13 +86,11 @@ export class AdminHomeComponent {
       this.getUsers();
     });
   }
-
-  openSnackBar() {
-    this.snackBar.open('Correo enviado satisfactoriamente', 'Cerrar', {
-      duration: 3000
-    });
-  }
-
+  // openSnackBar() {
+  //   this.snackBar.open('Correo enviado satisfactoriamente', 'Cerrar', {
+  //     duration: 3000
+  //   });
+  // }
 
   userList(){
     this.hiddenList = true;
@@ -95,11 +103,9 @@ export class AdminHomeComponent {
   usuarioPartidoList(){
     this.hiddenListUsuariosPartidos = !this.hiddenListUsuariosPartidos;
   }
-
-  isAdmin(){
-    return this.currentUser.is_admin;
-  }
-
+  // isAdmin(){
+  //   return this.currentUser.is_admin;
+  // }
   ExportTOExcel()
 {
   const ws: XLSX.WorkSheet=XLSX.utils.table_to_sheet(this.table.nativeElement);
@@ -108,37 +114,74 @@ export class AdminHomeComponent {
   /* save to file */
   XLSX.writeFile(wb, 'Listado_Usuarios.xlsx');
 }
-  openDialog(usuario:Usuario) {
-    this.dialog.open(UpdateUserComponent,{
-      data: usuario ,
-      width:'450px',
-      height:'600px'
+  openDialog(usuarioAny:any) {
 
+     let usuario:Usuario = {
+      id:usuarioAny.user_id,
+      nombre:usuarioAny.nombre,
+      apellidos: usuarioAny.apellidos,
+      email:usuarioAny.email
+     }
+    console.log('usuarioAny',usuarioAny, 'usuario',usuario);
+    const dialog = this.dialog.open(UpdateUserComponent,{
+      data: usuario,
+      // width:'450px',
+      // height:'600px'
+      width:'25vw',
+      height:'75vh'
+    });
+
+    dialog.afterClosed().subscribe(result => {
+      this.getUsers();
     });
 
   }
   openAddUser(partido: Partido) {
-    this.dialog.open(AddUserComponent,{
+    const dialog = this.dialog.open(AddUserComponent,{
       data: partido,
-      width:'450px',
-      height:'600px'
-
+      width:'50vw',
+      height:'75vh'
     });
-
+    dialog.afterClosed().subscribe(result => {
+    });
+  }
+  openModifyMatch(partido: Partido) {
+    const dialog = this.dialog.open(ModifyMatchComponent,{
+      data: partido,
+      width:'25vw',
+      height:'75vh'
+    });
+    dialog.afterClosed().subscribe(result => {
+      this.getPartidos();
+    });
   }
   getPartidos(){
     this.apiService.getPartidos().subscribe(data =>{
-      this.partidosFran = data;
-      console.log('Partidos',this.partidosFran);
+      this.partido = data;
+      console.log('Partidos',this.partido);
     })
   }
-  getUsuariosSorteo(fechaSorteo:string){
-    this.apiService.getUsuariosSorteo(fechaSorteo).subscribe(data =>{
+  getUsuariosPartido(idPartido:number){
+    this.apiService.getUsuariosPartido(idPartido).subscribe(data =>{
       this.usuariosPartido = data;
-      console.log('fecha sorteo',this.usuariosPartido );
+      //console.log('id del Partido',this.usuariosPartido );
     });
       this.usuarioPartidoList();
     }
+  deleteMatch(partidoId: Partido){
+    this.apiService.deleteMatch(partidoId).subscribe(data =>{
+      console.log('partido borrado',data);
+      //this.partido = this.partido.filter(partido => partido.id !== partidoId.id);
+      this.getPartidos();
+    });
+  }
+  getNextMacht(){
+    this.apiService.getNextMatch().subscribe(data =>{
+      console.log('proxims partidos',data);
+      this.getPartidos();
+    });
+
+  }
 
 
 

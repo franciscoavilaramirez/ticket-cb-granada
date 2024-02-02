@@ -1,0 +1,60 @@
+
+
+{
+    "card":{
+      "mostrarOcultar":"Show registered",
+      "anadirUsuario": "Add User to match",
+      "modificarPartido": "Update Match"
+      },
+  "listadoUsuarios":{
+    "nombre": "Name",
+    "apellidos":"Last Name",
+    "email":"Email"
+    },
+
+  "usuariosInscritos":{
+    "nombre": "Name",
+    "apellidos":"Last Name",
+    "email":"Email"
+    },
+  "usuarios":{
+    "nombre": "Name",
+    "apellido": "Last Name",
+    "email": "Email",
+    "mostrar": "Show list users",
+    "ocultar":"Hide list",
+    "exportarXlsX": "Export Users to XLSX",
+    "modificar": "Update",
+    "eliminar": "Delete"
+    },
+  "modalAnadirUsuario":{
+    "inscritos": "Registered Users",
+    "pendientes":"Pending Registered Users",
+    "guardar": "Save",
+    "cancelar": "Cancel"
+    },
+  "modificarPartido":{
+    "titulo": "Update Match",
+    "guardar": "Save",
+    "cancelar": "Cancel",
+    "inputTitulo": "Match Title",
+    "inputFecha": "Match Date"
+    },
+
+  "modificarUsuario":{
+    "titulo": "Update User",
+    "inputNombre": "Name",
+    "inputApellido": "Last Name",
+    "inputEmail": "Email",
+    "guardar": "Save",
+    "cancelar": "Cancel"
+    },
+
+    "botones":{
+      "guardar": "Save",
+      "guardarCambios":"Save",
+      "eliminar": "Delete",
+      "eliminarPartido": "Delete",
+      "cancelar":"Cancel"
+    }
+	}

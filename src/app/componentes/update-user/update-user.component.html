@@ -4,7 +4,7 @@
 
     <div mat-dialog-actions>
       <form  [formGroup]="updateUserForm" >
-        <h1>Modificar Usuario</h1>
+        <h1>{{"modificarUsuario.titulo" | translate }}</h1>
         <mat-dialog-actions>
         <mat-form-field >
           <mat-label>Nombre</mat-label>
@@ -12,7 +12,7 @@
         </mat-form-field>
         <mat-form-field >
           <mat-label>Apellido</mat-label>
-          <input type="text" matInput formControlName ="apellido" >
+          <input type="text" matInput formControlName ="apellidos" >
         </mat-form-field>
         <mat-form-field >
           <mat-label>Email</mat-label>
@@ -22,9 +22,10 @@
       </mat-dialog-actions>
 
       </form>
-      <button mat-raised-button class="container__wrapper__buttons" color="primary"(click)="onSubmit()" >Guardar Cambios</button>
-      <button mat-raised-button class="container__wrapper__buttons" color="primary"(click)="closedModal()">Cancelar</button>
-
+      <div class="container__wrapper__content-wrapper">
+      <button mat-raised-button class="buttons__guardar" color="primary"(click)="onSubmit()" >{{"botones.guardarCambios" | translate }}</button>
+      <button mat-raised-button class="buttons__cancelar" color="primary"(click)="closedModal()">{{"botones.cancelar" | translate }}</button>
+    </div>
     </div>
   </div>
 </div>

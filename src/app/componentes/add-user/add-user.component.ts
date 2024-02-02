@@ -5,6 +5,7 @@ import { Usuario } from '../../modelo/usuario';
 import { Partido } from '../../modelo/partido';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AdminHomeComponent } from '../../pages/admin/admin-home/admin-home.component';
+import Swal from 'sweetalert2';
 import { ApiService } from '../../service/api.service';
 
 @Component({
@@ -18,20 +19,20 @@ usuariosYaInscritos: Usuario[];
 usuarios: Usuario[];
 usuariosParaAnadirAlPartido: string[]= [];
 
-  constructor(private service:ApiService, public dialog: MatDialog,
+  constructor(private Apiservice:ApiService, public dialog: MatDialog,
     public dialogRef: MatDialogRef<AdminHomeComponent>,@Inject(MAT_DIALOG_DATA) public partido: Partido,
     public snackBar: MatSnackBar
     ){}
 
     ngOnInit(){
-     this.getUsuariosSorteo(this.partido.fechaPartido);
+     this.getUsuariosPartido(this.partido.id);
 
     }
     getUsers(){
-      this.service.getUsers().subscribe(data=>{
+      this.Apiservice.getUsers().subscribe(data=>{
         this.usuarios = [];
         data.forEach(usu =>{
-          const user = this.usuariosYaInscritos.find(usuInscrito =>{
+          const user = this.usuariosYaInscritos?.find(usuInscrito =>{
            return  usu.id === usuInscrito.id
           })
           console.log('userrrr',user);
@@ -58,10 +59,11 @@ usuariosParaAnadirAlPartido: string[]= [];
       this.usuariosParaAnadirAlPartido.forEach(userId => {
         // Verifica si el usuario ya está en el array
         if (this.isUsuarioAlreadyAdded(userId)) {
-          //console.log('Agregando usuario al partido:', userId);
+          //console.log('Agregando usuario con Id:', userId);
+          debugger
           //llamada al servicio
-          this.service.addUserMatch(userId, this.partido).subscribe(data => {
-            //console.log("Usuario agregado a partido correctamente", data);
+          this.Apiservice.addUserMatch(userId, this.partido.id).subscribe(data => {
+            console.log("Usuario agregado a partido correctamente", data);
             this.closedModal();
             this.snackBar.open('Usuario añadido a partido', 'Cerrar', {
             duration: 5000,
@@ -82,21 +84,29 @@ usuariosParaAnadirAlPartido: string[]= [];
       closedModal(): void {
           this.dialogRef.close();
       }
-      getUsuariosSorteo(fechaSorteo:string){
-        this.service.getUsuariosSorteo(fechaSorteo).subscribe(data =>{
+      getUsuariosPartido(idPartido:number){
+        this.Apiservice.getUsuariosPartido(idPartido).subscribe(data =>{
           this.usuariosYaInscritos = data;
           console.log('fecha sorteo',this.usuariosYaInscritos );
           this.getUsers();
         });
       }
-      deleteUserInscrito(userId: string){
-        const index = this.usuariosYaInscritos.findIndex(user => user.id === userId);
-        console.log('user delete', index)
-        if (index !== -1) {
-          // El usuario está en el array, quitarlo
-          this.usuariosYaInscritos.splice(index, 1);
-          this.getUsers();
-        }
+      // deleteUserInscrito(userId: string){
+      //   const index = this.usuariosYaInscritos.findIndex(user => user.user_id === userId);
+      //   console.log('user delete', index)
+      //   if (index !== -1) {
+      //     // El usuario está en el array, quitarlo
+      //     this.usuariosYaInscritos.splice(index, 1);
+      //     this.getUsers();
+      //   }
+      // }
+      deleteUserInscrito(userId:string,partidoId:Partido){
+
+        this.Apiservice.deleteUserMatch(userId,partidoId).subscribe(data =>{
+          console.log('delete user',data);
+          this.getUsuariosPartido(this.partido.id);
+        })
+
       }
 
 }
