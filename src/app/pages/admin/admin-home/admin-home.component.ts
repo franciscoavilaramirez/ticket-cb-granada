@@ -48,7 +48,7 @@ export class AdminHomeComponent {
   @ViewChild('TABLE')table!: ElementRef;
   @ViewChild('TABLEUSUARIOSPARTIDO')tableUsuariosPartido!: ElementRef;
 
-  displayedColumns: string[] = ['id','nombre','apellidos','email','botones','userId'];
+  displayedColumns: string[] = ['id','nombre','apellidos','email','botones'];
   ColumnsInscritos: string[] = ['id','nombre','apellidos','email'];
 
   ngOnInit(){
@@ -86,13 +86,11 @@ export class AdminHomeComponent {
       this.getUsers();
     });
   }
-
-  openSnackBar() {
-    this.snackBar.open('Correo enviado satisfactoriamente', 'Cerrar', {
-      duration: 3000
-    });
-  }
-
+  // openSnackBar() {
+  //   this.snackBar.open('Correo enviado satisfactoriamente', 'Cerrar', {
+  //     duration: 3000
+  //   });
+  // }
 
   userList(){
     this.hiddenList = true;
@@ -105,11 +103,9 @@ export class AdminHomeComponent {
   usuarioPartidoList(){
     this.hiddenListUsuariosPartidos = !this.hiddenListUsuariosPartidos;
   }
-
-  isAdmin(){
-    return this.currentUser.is_admin;
-  }
-
+  // isAdmin(){
+  //   return this.currentUser.is_admin;
+  // }
   ExportTOExcel()
 {
   const ws: XLSX.WorkSheet=XLSX.utils.table_to_sheet(this.table.nativeElement);
@@ -129,8 +125,10 @@ export class AdminHomeComponent {
     console.log('usuarioAny',usuarioAny, 'usuario',usuario);
     const dialog = this.dialog.open(UpdateUserComponent,{
       data: usuario,
-      width:'450px',
-      height:'600px'
+      // width:'450px',
+      // height:'600px'
+      width:'25vw',
+      height:'75vh'
     });
 
     dialog.afterClosed().subscribe(result => {
@@ -150,7 +148,7 @@ export class AdminHomeComponent {
   openModifyMatch(partido: Partido) {
     const dialog = this.dialog.open(ModifyMatchComponent,{
       data: partido,
-      width:'40vw',
+      width:'25vw',
       height:'75vh'
     });
     dialog.afterClosed().subscribe(result => {

@@ -80,12 +80,6 @@
           <th mat-header-cell *matHeaderCellDef>{{"usuarios.email" | translate }}</th>
           <td mat-cell *matCellDef="let element"> {{element.email}}</td>
         </ng-container>
-        <ng-container matColumnDef="userId">
-          <p>holaaaaaaaa</p>
-          <th mat-header-cell *matHeaderCellDef>{{"usuarios.email" | translate }}</th>
-          <td mat-cell *matCellDef="let element"> {{element.user_id}}</td>
-        </ng-container>
-
 
         <ng-container matColumnDef="botones">
           <th mat-header-cell *matHeaderCellDef></th>
@@ -114,9 +108,9 @@
         <button mat-raised-button class="container__wrapper__buttons" color="primary" (click)="userList()" >{{"usuarios.mostrar" | translate }}</button>
         <button mat-raised-button class="container__wrapper__buttons" color="primary" (click)="hiddenUserList()" >{{"usuarios.ocultar" | translate }}</button>
       </div>
-        <div class="container__wrapper__content-wrapper">
+        <div class="buttons">
         <button mat-raised-button class="buttons__exportar"  (click)="ExportTOExcel()" *ngIf="exportCsv">{{"usuarios.exportarXlsX" | translate }}
-          <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="description" ></mat-icon>
+          <mat-icon aria-hidden="false" class="alignIcon" aria-label="Example home icon" fontIcon="description" ></mat-icon>
         </button>
         </div>
         <div class="buttons">
