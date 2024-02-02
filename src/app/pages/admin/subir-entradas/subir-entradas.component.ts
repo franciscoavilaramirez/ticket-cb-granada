@@ -93,10 +93,14 @@ export class SubirEntradasComponent {
   }
 
   color = "#8f8989" //grey
+  inputValue = ''
   onFocus() {
-    this.color = "#3f51b5"//blue
+    this.color = "black"//"#3f51b5"//blue
   }
   onBlur() {
-    this.color = "#8f8989"
+    if(this.inputValue == '')
+      this.color = "#8f8989" //grey
+    else
+      this.color = "black"
   }
 }
