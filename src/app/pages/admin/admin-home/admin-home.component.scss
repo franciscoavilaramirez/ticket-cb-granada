@@ -1,3 +1,30 @@
+.subir-entradas-container {
+  text-align: right;
+  margin-right: 30px;
+  .subir-entradas-btn {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+    margin-right: 30px;
+    margin-top: 30px;
+    background-color: #36bf98;
+    color: white;
+    font-family: allerta;
+    font-size: 17px;
+    padding: 2px 9px;
+    &-content{
+      display: flex;
+      align-items: center;
+      padding: 0 5px;
+      .entrada-icon {
+        width: 30px;
+        position: relative;
+        bottom: 2px;
+        margin-left: 10px;
+      }
+    }    
+  }
+}
 
 .container{
   height:150%;
