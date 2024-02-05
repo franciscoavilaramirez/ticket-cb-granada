@@ -92,14 +92,14 @@ export class SubirEntradasComponent {
     return fecha.getFullYear()+"-"+mes+"-"+dia+"T"+hora+":"+minutos
   }
 
-  color = "#8f8989" //grey
+  color = "lightgray" //grey
   inputValue = ''
   onFocus() {
     this.color = "black"//"#3f51b5"//blue
   }
   onBlur() {
     if(this.inputValue == '')
-      this.color = "#8f8989" //grey
+      this.color = "lightgray" //grey
     else
       this.color = "black"
   }
