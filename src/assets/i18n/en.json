@@ -51,6 +51,7 @@
     },
 
     "botones":{
+      "acciones": "Actions",
       "guardar": "Save",
       "guardarCambios":"Save",
       "eliminar": "Delete",
