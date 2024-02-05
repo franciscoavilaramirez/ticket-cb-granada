@@ -18,6 +18,7 @@
     "nombre": "Nombre",
     "apellido": "Apellidos",
     "email": "Email",
+    "acciones": "Acciones",
     "mostrar": "Mostrar listado usuarios",
     "ocultar":"Ocultar listado",
     "exportarXlsX": "Exportar Usarios a XLSX",

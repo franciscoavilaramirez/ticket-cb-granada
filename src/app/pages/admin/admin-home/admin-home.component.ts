@@ -48,7 +48,7 @@ export class AdminHomeComponent {
   @ViewChild('TABLE')table!: ElementRef;
   @ViewChild('TABLEUSUARIOSPARTIDO')tableUsuariosPartido!: ElementRef;
 
-  displayedColumns: string[] = ['id','nombre','apellidos','email','botones'];
+  displayedColumns: string[] = ['id','nombre','apellidos','email','acciones'];
   ColumnsInscritos: string[] = ['id','nombre','apellidos','email'];
 
   ngOnInit(){

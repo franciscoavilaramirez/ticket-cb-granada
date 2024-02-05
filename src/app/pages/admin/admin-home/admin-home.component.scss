@@ -59,19 +59,19 @@
                   background-color: #94cef2;
                   color:black;
                   font-family: allerta;
-                  font-size: 17px;
+                  font-size: 15px;
               }
               &__aniadir{
                 background-color: #36bf98;
                 color: #ffffff;
                 font-family: allerta;
-                font-size: 17px;
+                font-size: 15px;
               }
               &__eliminar{
                 background-color: #8c1f1f;
                 color:#ffffff;
                 font-family: allerta;
-                font-size: 17px;
+                font-size: 15px;
             }
              }
 
@@ -92,12 +92,12 @@
             background-color: #36bf98;
             color: #ffffff;
 
-            .alignIcon{
-                background-color: aqua;
-            display: flex;
-            color: black;
-            align-self: center;
-            }
+            // .alignIcon{
+            //     background-color: aqua;
+            // display: flex;
+            // color: black;
+            // align-self: center;
+            // }
           }
 
         }
@@ -133,6 +133,7 @@
           width: auto;
           height: 100%;
           margin-bottom: 20px;
+          text-align-last: center;
         }
         .mat-mdc-card-subtitle {
           font-size: xx-large;
@@ -143,6 +144,11 @@
           margin-bottom: 20px;
           font: 700 30px/20px Evogria;
         }
+        .mat-mdc-table .mat-mdc-header-cell {
+          background: inherit;
+          text-align: center;
+      }
+
 
   }
 

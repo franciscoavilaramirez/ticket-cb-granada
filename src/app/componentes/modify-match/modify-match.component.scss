@@ -11,6 +11,8 @@
     //padding: 50px,50px,0px,50px;
     width: auto;
     justify-content: center;
+    background-color: rgb(0 0 0 / 7%);
+
 
     &__buttons{
       height: 50px;
@@ -27,13 +29,13 @@
         background-color: #36bf98;
         color: #ffffff;
         font-family: allerta;
-        font-size: 17px;
+        font-size: 15px;
       }
       .cancelar{
         background-color: #8c1f1f;
         color:#ffffff;
         font-family: allerta;
-        font-size: 17px;
+        font-size: 15px;
     }
     }
 
