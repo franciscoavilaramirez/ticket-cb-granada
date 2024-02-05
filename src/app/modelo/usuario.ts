@@ -3,5 +3,6 @@ export interface Usuario{
   nombre?: string,
   email?: string,
   apellidos?: string,
-  is_admin?: boolean
+  is_admin?: boolean,
+  password?: string
 }

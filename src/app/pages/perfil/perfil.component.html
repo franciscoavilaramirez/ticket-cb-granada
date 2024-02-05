@@ -1,0 +1,31 @@
+<div>
+    <img src="../../assets/foto_perfil.png" alt="logo" class="avatar" alt="avatar">
+</div>
+
+<form [formGroup]="editarPerfil" class="container"  >
+  <h2>Datos del perfil</h2>
+  <div class="form-container">
+    <label class="txt-label">Nombre</label>
+    <input class="input-form" type="text" formControlName="nombre" value="{{usuario.nombre}}">
+    <img class="icon-edit" src="../../assets/edit_grey.png" >
+  </div>
+  <div class="form-container">
+    <label class="txt-label">Apellidos</label>
+    <input class="input-form" type="text" formControlName="apellidos" value="{{usuario.apellidos}}" >
+    <img class="icon-edit" src="../../assets/edit_grey.png">
+  </div>
+  <div class="form-container">
+    <label class="txt-label">Email</label>
+    <input class="input-form" type="email" formControlName="email" value={{usuario.email}}>
+    <img class="icon-edit" src="../../assets/edit_grey.png">
+  </div>
+  <div class="button-container">
+    <button type="submit" class="submit-button" (click)="editar()">Guardar cambios</button>
+    <button type="submit" class="submit-button-cerrar-sesion">Cerrar sesión</button> 
+  </div>
+  <div class="form-container">
+    <h2 class="cambiar-contraseña" (click)="cambiarPassword(usuario)">Cambiar contraseña</h2>
+  </div>
+</form>
+
+

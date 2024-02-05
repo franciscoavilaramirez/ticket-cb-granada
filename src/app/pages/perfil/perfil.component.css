@@ -1,0 +1,108 @@
+				                
+
+.avatar{
+    padding: 40px;
+    width:300px;
+    border-radius: 160px;
+    margin: 60px;
+}		
+
+.container {
+    border: 1px solid #c7c5c5b2;
+	background: #fcfbfbf0; 
+	border-radius: 10px; 
+	box-shadow: rgba(0, 0, 0, 0.3) 0px 5px 15px;
+    display: flex;
+    flex-direction: column;
+    align-items:start;
+    width: 100%;
+    max-width: 550px;
+    margin-left: 32rem;
+    margin-top: -24rem;
+    padding: 50px;
+    height: 100%;
+    max-height: 580px;
+}
+.form-container{
+    margin: 0 auto;
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    width: 100%;
+    padding: 15px;
+    margin-right: 6rem;
+}
+
+h2{
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.submit-button {
+    margin: 0 auto;
+    padding: 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 220px;
+    font-size: 18px;
+    margin: 60px 25px;
+    color: white;
+    text-align: center;
+    background-color: #f50d8b;
+  }
+  .submit-button-cerrar-sesion{
+    background-color: #acabac;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 220px;
+    font-size: 18px;
+    padding: 15px;
+    text-align: center;
+  }
+
+
+.txt-label{
+    font-size: 20px;
+    color: black;
+}
+
+.input-form{
+    height: 25px;
+    position: relative;
+    display: inline-block;
+    border-radius: 10px;
+    border: 1px solid rgb(200, 201, 201);
+    margin-top: 10px;
+    margin-right: 20px;
+    padding: 10px;
+  
+}
+
+.icon-edit{
+    width: 20px;
+    position: absolute;
+    right: 50px;
+    top: 57px;
+}
+
+
+.icon-edit:hover {
+    cursor: pointer;
+}
+
+.button-container{
+    display: inline-block;
+    margin: 0 auto;
+    width: 100%;
+    margin-inline: 10px;
+}
+
+.cambiar-contraseña{
+    color: rgb(33, 114, 236);
+    text-decoration: underline;
+    font-size: 16px;
+    margin: 0 auto;
+    cursor: pointer;
+}
