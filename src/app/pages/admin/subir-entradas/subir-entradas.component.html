@@ -1,30 +1,30 @@
-<div class="container col-md-5">
+<div class="container">
     <form [formGroup]="form" (submit)="send()">
-        <h2>Subir entradas</h2>
-        <div>
-            <mat-form-field appearance="fill" class="form-field">
-                <mat-label>Equipo local</mat-label>
-                <input matInput formControlName="granada" required>
-            </mat-form-field>
-            VS
-            <mat-form-field appearance="fill" class="form-field">
-                <mat-label>Equipo visitante</mat-label>
-                <input matInput formControlName="titulo" required>
-            </mat-form-field>
-        </div>
-        <div class="calendar-container">
-            <label for="fecha" [ngStyle]="{color:color}" class="fecha-label">Fecha partido*</label>
-            <input (focus)="onFocus()" (blur)="onBlur()" type="datetime-local" class="datetime-picker" formControlName="fecha" required>
-        </div>
-        <div class="calendar-container">
-            <label [ngStyle]="{color:color}" class="fecha-label">Fecha publicación</label>
-            <input type="datetime-local" class="datetime-picker" formControlName="fechaPublicacion">
-        </div>
+        <h2>Subir Entradas</h2>
+        <div class="content">
+            <div>
+                <div class="label">Equipo Local<span style="color: rgb(221, 37, 37);">*</span></div>
+                <input formControlName="granada" class="input-disabled" required>
+            </div>
+            <div>
+                <div class="label">Equipo Visitante<span style="color: rgb(221, 37, 37);">*</span></div>
+                <input formControlName="titulo" class="equipo" placeholder="Equipo visitante" required>
+            </div>
+            <div>
+                <div class="label">Fecha Partido<span style="color: rgb(221, 37, 37);">*</span></div>
+                <input [(ngModel)]="inputValue" [ngStyle]="{color:color}" (focus)="onFocus()" (blur)="onBlur()" type="datetime-local" class="datetime-picker" formControlName="fecha" required>
+            </div>
+            <div>
+                <div class="label">Fecha Publicación<span style="color: rgb(221, 37, 37);">*</span></div>
+                <input (focus)="onFocus()" (blur)="onBlur()" type="datetime-local" class="datetime-picker" formControlName="fechaPublicacion" required>
+            </div>
+
         <div> 
             <input type="file" (change)="subirArchivo($event)" class="input-file" formControlName="entradasPdf" required>
         </div>
         <div> 
-            <button mat-raised-button color="primary" type="submit" [disabled]="!form.valid">Subir</button>
+            <button mat-raised-button class="button" type="submit" [disabled]="!form.valid">Subir</button>
+        </div>
         </div>
     </form>
 </div>

@@ -11,8 +11,7 @@ import { AddUserComponent } from '../../../componentes/add-user/add-user.compone
 import { ModifyMatchComponent } from '../../../componentes/modify-match/modify-match.component';
 import { TranslateService } from '@ngx-translate/core';
 import { ApiService } from '../../../service/api.service';
-
-
+import { SubirEntradasComponent } from '../subir-entradas/subir-entradas.component';
 
 
 @Component({
@@ -136,6 +135,14 @@ export class AdminHomeComponent {
     });
 
   }
+
+  openSubirEntradas() {
+    this.dialog.open(SubirEntradasComponent, {
+      width: '50vw',
+      height: '70vh',
+      autoFocus: false
+    });
+  }
   openAddUser(partido: Partido) {
     const dialog = this.dialog.open(AddUserComponent,{
       data: partido,
@@ -182,9 +189,6 @@ export class AdminHomeComponent {
     });
 
   }
-
-
-
 }
 
 
