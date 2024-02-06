@@ -17,7 +17,7 @@ export class ApiService {
 
   //Partidos cuya fecha sea posterior a la actual
   //Cada partido tiene un campo extra que indica si quedan entradas disponibles (stockEntradas)
-  getProximosPartidos(): Observable<Partido[]> {
+  getProximosPartidos() {
     return this.http.get<Partido[]>(this.apiUrl + 'getProximosPartidos');
   }
   //Ids de los partidos donde tengo entrada
@@ -66,12 +66,9 @@ export class ApiService {
   getPartidos(){
     return this.http.get<Partido[]>(this.apiUrl + 'getPartidos');
   }
-  // getUsuariosSorteo(fecha: string){
-  //   return this.http.get<Usuario[]>(`${this.apiUrl+'getUsuariosSorteo'}/${fecha}`);
-  // }
+
   getUsuariosPartido(idPartido: number){
     return this.http.get<Usuario[]>(`${this.apiUrl + 'getUsuariosPartido'}/${idPartido}`);
-
   }
 
   addPartido(partido: Partido): Observable<Partido> {
@@ -98,9 +95,9 @@ export class ApiService {
   deleteUserMatch(usuarioId: string,partidoId: Partido) {
     return this.http.delete<Usuario>(`${this.apiUrl + 'deleteUsuarioFromPartido'}/${usuarioId}/${partidoId.id}`);
   }
-  getNextMatch(){
-    return this.http.get<Partido[]>(this.apiUrl + 'getProximosPartidos');
-  }
+  // getNextMatch(){
+  //   return this.http.get<Partido[]>(this.apiUrl + 'getProximosPartidos');
+  // }
   
   getUsuarioById(usuarioId: number){
     return this.http.get<Usuario>(this.apiUrl + 'userById/'+usuarioId);

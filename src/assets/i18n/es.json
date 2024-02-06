@@ -29,6 +29,7 @@
     "nombre": "Nombre",
     "apellido": "Apellidos",
     "email": "Email",
+    "acciones": "Acciones",
     "mostrar": "Mostrar listado usuarios",
     "ocultar":"Ocultar listado",
     "exportarXlsX": "Exportar Usarios a XLSX",
@@ -43,11 +44,14 @@
     "cancelar": "Cancelar"
     },
   "modificarPartido":{
+    "equipoLocal": "Equipo Local",
     "titulo": "Modificar Partido",
     "guardar": "Guardar Cambios",
     "cancelar": "Cancelar",
-    "inputTitulo": "Título Partido",
-    "inputFecha": "Fecha Partido"
+    "equipoVisitante": "Equipo Visitante ",
+    "fecha": "Fecha Partido",
+    "fechaPublicacion": "Fecha Publicación"
+
     },
   "modificarUsuario":{
     "titulo": "Modificar Usuario",
@@ -63,6 +67,7 @@
       "guardarCambios":"Guardar Cambios",
       "eliminar": "Eliminar",
       "eliminarPartido": "Eliminar Partido",
-      "cancelar":"Cancelar"
+      "cancelar":"Cancelar",
+      "cerrar": "Cerrar"
     }
 	}

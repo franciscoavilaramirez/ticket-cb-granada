@@ -15,11 +15,6 @@
     justify-content: center;
     margin: 20px;
 
-    &__table-buttons{
-      margin-right: 20px;
-    }
-
-
       &__content-wrapper{
         display: flex;
         flex-direction: column;
@@ -36,17 +31,12 @@
           justify-content: center;
           margin: 10px 0px 0px 10px;
 
-          &__guardar{
-            background-color: #36bf98;
-            color: #ffffff;
-            font-family: allerta;
-            font-size: 15px;
-          }
           &__cancelar{
             background-color: #8c1f1f;
             color:#ffffff;
             font-family: allerta;
             font-size: 15px;
+            margin-bottom: 20px;
           }
         }
       }
@@ -60,6 +50,7 @@
   }
   h1{
     font: 700 30px/30px allerta;
+    text-align: center;
   }
 
 }

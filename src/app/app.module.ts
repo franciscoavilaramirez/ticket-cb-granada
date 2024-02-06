@@ -45,6 +45,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { TranslationComponent } from './translation/translation.component';
 import { UsuariosComponent } from './pages/admin/usuarios/usuarios.component';
 import { RegisterAdminDialogComponent } from './componentes/register-admin-dialog/register-admin-dialog.component';
+import { ListUserComponent } from './componentes/list-user/list-user.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -69,7 +70,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     ModifyMatchComponent,
     TranslationComponent,
     UsuariosComponent,
-    RegisterAdminDialogComponent
+    RegisterAdminDialogComponent,
+    ListUserComponent
   ],
   imports: [
     HttpClientModule,

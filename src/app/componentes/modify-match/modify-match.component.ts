@@ -27,8 +27,10 @@ export class ModifyMatchComponent {
 
   createFormUpdateMatch(){
     this.updateMatchForm = new FormGroup({
-      nombrePartido: new FormControl(this.matchModify.nombrePartido),
+
+      equipoVisitante: new FormControl(this.matchModify.equipoVisitante),
       fechaPartido: new FormControl(this.matchModify.fechaPartido),
+      fechaPublicacion: new FormControl(this.matchModify.fechaPublicacion),
       id:new FormControl(this.matchModify.id),
       //stockEntradas:new FormControl(this.matchModify.stockEntradas)
     });
