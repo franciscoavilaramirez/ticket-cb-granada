@@ -12,6 +12,7 @@ import { ModifyMatchComponent } from '../../../componentes/modify-match/modify-m
 import { TranslateService } from '@ngx-translate/core';
 import { ApiService } from '../../../service/api.service';
 import { SubirEntradasComponent } from '../subir-entradas/subir-entradas.component';
+import { ListUserComponent } from '../../../componentes/list-user/list-user.component';
 
 
 @Component({
@@ -31,7 +32,7 @@ export class AdminHomeComponent {
 
   activeLang = 'es';
   hiddenList = false;
-  hiddenListUsuariosPartidos = false;
+ // hiddenListUsuariosPartidos = false;
   hide = true;
   exportCsv = false;
   usuarios!: Usuario[];
@@ -39,6 +40,7 @@ export class AdminHomeComponent {
   currentUser: Usuario;
   //partidos!: Partido[];
   partido!: Partido[];
+  proximosPartidos!: Partido[];
   usuariosPartido!: Usuario[];
   fechaPartido:string;
   idPartido!: string;
@@ -52,7 +54,7 @@ export class AdminHomeComponent {
 
   ngOnInit(){
     this.getUsers();
-    this.getPartidos();
+    this.getProximosPartidos();
   }
   public cambiarLenguaje(lang: string) {
     this.activeLang = lang;
@@ -99,9 +101,9 @@ export class AdminHomeComponent {
     this.hiddenList = false;
     this.exportCsv = false;
   }
-  usuarioPartidoList(){
-    this.hiddenListUsuariosPartidos = !this.hiddenListUsuariosPartidos;
-  }
+  // usuarioPartidoList(){
+  //   this.hiddenListUsuariosPartidos = !this.hiddenListUsuariosPartidos;
+  // }
   // isAdmin(){
   //   return this.currentUser.is_admin;
   // }
@@ -127,7 +129,7 @@ export class AdminHomeComponent {
       // width:'450px',
       // height:'600px'
       width:'25vw',
-      height:'75vh'
+      height:'85vh'
     });
 
     dialog.afterClosed().subscribe(result => {
@@ -147,7 +149,7 @@ export class AdminHomeComponent {
     const dialog = this.dialog.open(AddUserComponent,{
       data: partido,
       width:'50vw',
-      height:'75vh'
+      height:'85vh'
     });
     dialog.afterClosed().subscribe(result => {
     });
@@ -156,39 +158,52 @@ export class AdminHomeComponent {
     const dialog = this.dialog.open(ModifyMatchComponent,{
       data: partido,
       width:'25vw',
-      height:'75vh'
+      height:'90vh'
     });
     dialog.afterClosed().subscribe(result => {
-      this.getPartidos();
+      this.getProximosPartidos();
     });
   }
-  getPartidos(){
-    this.apiService.getPartidos().subscribe(data =>{
-      this.partido = data;
-      console.log('Partidos',this.partido);
+
+  openListUser(){
+    //console.log('List usuario');
+
+
+  }
+  getProximosPartidos(){
+    this.apiService.getProximosPartidos().subscribe(data =>{
+      this.proximosPartidos = data;
+      console.log('Proximos Partidos',this.proximosPartidos);
     })
   }
-  getUsuariosPartido(idPartido:number){
+  getUsuariosPartido(idPartido:any){
     this.apiService.getUsuariosPartido(idPartido).subscribe(data =>{
       this.usuariosPartido = data;
-      //console.log('id del Partido',this.usuariosPartido );
+      const dialog = this.dialog.open(ListUserComponent,{
+        data: this.usuariosPartido,
+        width:'25vw',
+        height:'75vh',
+      });
+
+      dialog.afterClosed().subscribe(result => {
+        this.getUsers();
+      });
     });
-      this.usuarioPartidoList();
+
     }
   deleteMatch(partidoId: Partido){
     this.apiService.deleteMatch(partidoId).subscribe(data =>{
       console.log('partido borrado',data);
       //this.partido = this.partido.filter(partido => partido.id !== partidoId.id);
-      this.getPartidos();
+      this.getProximosPartidos();
     });
   }
-  getNextMacht(){
-    this.apiService.getNextMatch().subscribe(data =>{
-      console.log('proxims partidos',data);
-      this.getPartidos();
-    });
-
-  }
+  // getNextMacht(){
+  //   this.apiService.getNextMatch().subscribe(data =>{
+  //     console.log('proxims partidos',data);
+  //     this.getProximosPartidos();
+  //   });
+  // }
 }
 
 

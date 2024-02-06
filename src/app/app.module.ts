@@ -41,6 +41,7 @@ import { ModifyMatchComponent } from './componentes/modify-match/modify-match.co
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { TranslationComponent } from './translation/translation.component';
+import { ListUserComponent } from './componentes/list-user/list-user.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -61,7 +62,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     DivisorComponent,
     NavbarComponent,
     ModifyMatchComponent,
-    TranslationComponent
+    TranslationComponent,
+    ListUserComponent
   ],
   imports: [
     HttpClientModule,

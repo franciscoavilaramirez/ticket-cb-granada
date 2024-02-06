@@ -1,0 +1,20 @@
+
+<div class="container">
+  <div class="container__wrapper">
+    <h1>{{"modalAnadirUsuario.inscritos" | translate }}</h1>
+    <div class="container__wrapper__content-wrapper" *ngFor="let usuarioInscrito of usuariosPartido" >
+
+      <mat-list role="list">
+        <mat-list-item  role="listitem">
+          {{usuarioInscrito.nombre }}
+          {{usuarioInscrito.apellidos }}
+        </mat-list-item>
+      </mat-list>
+    </div>
+
+  </div>
+  <div class="container__wrapper__content-wrapper">
+    <div class="buttons">
+    <button mat-raised-button class="buttons__cancelar" (click)="closedModal()">{{"botones.cerrar" | translate }}</button>
+  </div>
+</div>
