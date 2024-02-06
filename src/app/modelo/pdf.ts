@@ -3,4 +3,6 @@ export class Pdf {
     tituloPartido!:string;
     fechaPartido!:string;
     fechaPublicacion!:string;
+    file1:string;
+    file2:string;
 }

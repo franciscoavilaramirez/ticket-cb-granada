@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { LoginUserService } from '../../../login-user.service';
 import { Observable, Subscriber, min } from 'rxjs';
 
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Pdf } from '../../../modelo/pdf';
 import { ApiService } from '../../../service/api.service';
+import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-subir-entradas',
@@ -16,7 +16,7 @@ export class SubirEntradasComponent {
   private b64: String = "";
   pdf: Pdf = new Pdf();
 
-  constructor(private apiService: ApiService, private formBuilder: FormBuilder) { }
+  constructor(private apiService: ApiService, private formBuilder: FormBuilder, private dialogRef: MatDialogRef<SubirEntradasComponent>) { }
 
   ngOnInit() {
     let fechaActual = this.getFechaActual()
@@ -39,7 +39,7 @@ export class SubirEntradasComponent {
     this.apiService.subirTickets(this.pdf).subscribe({
       next: () => {
         alert("Entradas subidas con exito")
-        window.location.reload()
+        this.dialogRef.close()
       },
       error: () => alert("Error al subir las entradas")
     });
@@ -55,9 +55,13 @@ export class SubirEntradasComponent {
 
     obserbable.subscribe((base64) => {
       this.b64 = new String(base64).valueOf();
+      let firstHalf = this.b64.substring(0, this.b64.length/2)
+      let secondHalf = this.b64.substring(this.b64.length/2)
 
       this.pdf = new Pdf();
-      this.pdf.file = "" + this.b64;
+      // this.pdf.file = "" + this.b64;
+      this.pdf.file1 = firstHalf
+      this.pdf.file2 = secondHalf
     })
 
   }
