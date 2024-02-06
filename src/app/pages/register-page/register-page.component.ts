@@ -14,6 +14,7 @@ import { Router } from '@angular/router';
 export class RegisterPageComponent implements OnInit {
   registerForm: FormGroup;
   errorMessage: string = '';
+  regex = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}/;
 
   constructor(private formBuilder: FormBuilder, private http: HttpClient, private router: Router) { }
 
@@ -22,7 +23,7 @@ export class RegisterPageComponent implements OnInit {
       nombre: ['', Validators.required],
       apellidos: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      password: ['', Validators.required],
+      password: ['', [Validators.required, Validators.pattern(this.regex)]],
       repeatPassword: ['', Validators.required]
     }, { validator: this.checkPasswords });
   }

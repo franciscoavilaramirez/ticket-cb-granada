@@ -13,42 +13,46 @@
   </div>
 
   <mat-form-field appearance="fill" class="form-field">
-    <mat-label>Nombre</mat-label>
+    <mat-label>{{"nombre" | translate}}</mat-label>
     <input matInput formControlName="nombre">
     <app-error-alert-form
       [errorMessage]="registerForm.get('nombre')?.invalid && registerForm.get('nombre')?.touched ? 'El nombre es requerido.' : ''"></app-error-alert-form>
   </mat-form-field>
 
   <mat-form-field appearance="fill" class="form-field">
-    <mat-label>Apellidos</mat-label>
+    <mat-label>{{"apellidos" | translate}}</mat-label>
     <input matInput formControlName="apellidos">
     <app-error-alert-form
       [errorMessage]="registerForm.get('apellidos')?.invalid && registerForm.get('apellidos')?.touched ? 'El apellido es requerido.' : ''"></app-error-alert-form>
   </mat-form-field>
 
   <mat-form-field appearance="fill" class="form-field">
-    <mat-label>Email</mat-label>
+    <mat-label>{{"email" | translate}}</mat-label>
     <input matInput formControlName="email">
     <app-error-alert-form
       [errorMessage]="registerForm.get('email')?.invalid && registerForm.get('email')?.touched ? 'El email es requerido.' : ''"></app-error-alert-form>
   </mat-form-field>
 
   <mat-form-field appearance="fill" class="form-field">
-    <mat-label>Contraseña</mat-label>
+    <mat-label>{{"contrasena" | translate}}</mat-label>
     <input matInput formControlName="password" type="password">
     <app-error-alert-form
       [errorMessage]="registerForm.get('password')?.invalid && registerForm.get('password')?.touched ? 'Debes poner una contraseña.' : ''"></app-error-alert-form>
   </mat-form-field>
+  <div *ngIf="registerForm.get('password')?.invalid && registerForm.get('password')?.touched"
+    class="error-message password-pattern">
+    {{"requisitosContrasena" | translate}}
+  </div>
 
   <mat-form-field appearance="fill" class="form-field">
-    <mat-label>Repite la contraseña</mat-label>
+    <mat-label>{{"repiteContrasena" | translate}}</mat-label>
     <input matInput formControlName="repeatPassword" type="password">
   </mat-form-field>
 
-  <button mat-raised-button color="primary" type="submit">Registrarse</button>
+  <button mat-raised-button [disabled]="!registerForm.valid" color="primary" type="submit">Registrarse</button>
 
   <div *ngIf="registerForm.errors?.['notSame'] ? 'Las contraseñas no coinciden.' : ''" class="error-message">
-    Las contraseñas no coinciden
+    {{"contrasenaNoCoincide" | translate}}
   </div>
 
   <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
