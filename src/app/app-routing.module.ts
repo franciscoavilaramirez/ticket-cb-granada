@@ -7,6 +7,7 @@ import { AdminHomeComponent } from './pages/admin/admin-home/admin-home.componen
 import { HomeComponent} from './pages/home/home.component';
 import { SubirEntradasComponent } from './pages/admin/subir-entradas/subir-entradas.component';
 import { UsuariosComponent } from './pages/admin/usuarios/usuarios.component';
+import { PerfilComponent } from './pages/perfil/perfil.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full'},
@@ -16,7 +17,8 @@ const routes: Routes = [
   { path: 'signup', component: RegisterPageComponent},
   { path:'Admin-home', component: AdminHomeComponent },
   { path: 'subir-entradas', component: SubirEntradasComponent},
-  { path: 'usuarios', component: UsuariosComponent}
+  { path: 'usuarios', component: UsuariosComponent},
+  { path: 'perfil', component: PerfilComponent}
 ];
 
 @NgModule({

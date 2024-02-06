@@ -31,6 +31,8 @@ import { AdminHomeComponent } from './pages/admin/admin-home/admin-home.componen
 import { SubirEntradasComponent } from './pages/admin/subir-entradas/subir-entradas.component'
 import { HomeComponent } from './pages/home/home.component';
 import { DivisorComponent } from './componentes/divisor/divisor.component';
+import { EditPasswordComponent } from './componentes/edit-password/edit-password.component';
+import { PerfilComponent } from './pages/perfil/perfil.component';
 
 import localeEs from '@angular/common/locales/es'
 import { registerLocaleData } from '@angular/common';
@@ -61,6 +63,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     AdminHomeComponent,
     SubirEntradasComponent,
     DivisorComponent,
+    EditPasswordComponent,
+    PerfilComponent,
     NavbarComponent,
     ModifyMatchComponent,
     TranslationComponent,
