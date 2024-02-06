@@ -47,6 +47,9 @@
 
   <button mat-raised-button color="primary" type="submit">Registrarse</button>
 
+  <div *ngIf="registerForm.get('password')?.hasError('pattern')" class="error-message-password-pattern">
+    Asegurate de que la contraseña tenga al menos 8 caracteres, un número y un caracter especial
+  </div>
   <div *ngIf="registerForm.errors?.['notSame'] ? 'Las contraseñas no coinciden.' : ''" class="error-message">
     Las contraseñas no coinciden
   </div>
