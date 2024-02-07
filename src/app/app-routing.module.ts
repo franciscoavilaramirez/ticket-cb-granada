@@ -15,7 +15,7 @@ const routes: Routes = [
   { path: 'tickets', component: ArchivosPDFComponent},
   { path: 'login', component: LoginPageComponent},
   { path: 'signup', component: RegisterPageComponent},
-  { path:'Admin-home', component: AdminHomeComponent },
+  { path:'admin-home', component: AdminHomeComponent },
   { path: 'subir-entradas', component: SubirEntradasComponent},
   { path: 'usuarios', component: UsuariosComponent},
   { path: 'perfil', component: PerfilComponent}
