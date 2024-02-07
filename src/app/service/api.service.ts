@@ -83,16 +83,19 @@ export class ApiService {
     return this.http.delete<Partido>(`${this.apiUrl+'borrarPartido'}/${partido.id}`);
   }
 
-  addUserMatch(usuarioId: string,partidoId: number){
+  addUserMatch(usuarioId: number | undefined,partidoId: number){
     return this.http.post<Usuario>(`${this.apiUrl+'saveUsuarioPartido'}/${usuarioId}/${partidoId}`,null);
   }
-  updateMatch(partido: Partido): Observable<Partido> {
+  // updateMatch(partido: Partido): Observable<Partido> {
+  //   return this.http.put<Partido>(`${this.apiUrl + 'modificarPartido'}/${partido.id}`, partido);
+  // }
+  updateMatch(partido: any){
     return this.http.put<Partido>(`${this.apiUrl + 'modificarPartido'}/${partido.id}`, partido);
   }
   deleteMatch(partido: Partido): Observable<Partido> {
     return this.http.delete<Partido>(`${this.apiUrl + 'borrarPartido'}/${partido.id}`);
   }
-  deleteUserMatch(usuarioId: string,partidoId: Partido) {
+  deleteUserMatch(usuarioId: number | undefined,partidoId: Partido) {
     return this.http.delete<Usuario>(`${this.apiUrl + 'deleteUsuarioFromPartido'}/${usuarioId}/${partidoId.id}`);
   }
   // getNextMatch(){

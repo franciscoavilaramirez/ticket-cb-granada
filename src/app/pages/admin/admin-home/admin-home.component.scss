@@ -22,7 +22,7 @@
         bottom: 2px;
         margin-left: 10px;
       }
-    }    
+    }
   }
 }
 
@@ -67,7 +67,7 @@
 
           &__buttons{
             height: 100%;
-            width: 105%;
+            width: 107%;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -81,6 +81,9 @@
               display: flex;
               justify-content: space-between;
               width: 100%;
+              max-width: 400px;
+              min-width: 300px;
+              column-gap: 20px;
 
               &__mostrar, &__modificar{
                   background-color: #94cef2;
@@ -176,6 +179,7 @@
           font-family: evogria;
           margin-bottom: 20px;
           font: 700 30px/20px Evogria;
+          text-align: center;
         }
         .mat-mdc-table .mat-mdc-header-cell {
           background: inherit;

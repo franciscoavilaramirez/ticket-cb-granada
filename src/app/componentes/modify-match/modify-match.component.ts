@@ -32,25 +32,22 @@ export class ModifyMatchComponent {
       fechaPartido: new FormControl(this.matchModify.fechaPartido),
       fechaPublicacion: new FormControl(this.matchModify.fechaPublicacion),
       id:new FormControl(this.matchModify.id),
-      //stockEntradas:new FormControl(this.matchModify.stockEntradas)
     });
   }
   getPartidos(){
     this.apiService.getPartidos().subscribe(data =>{
-      //this.partido = data
-      //console.log('Partidos desde modify-match', this.partido);
     });
   }
   onSubmit(){
-    //let dataPartido: Partido
     if(this.updateMatchForm.valid){
       const bodyResponse: Partido = this.updateMatchForm.value;
-      //console.log("bodyResponse",bodyResponse);
+      console.log("bodyResponse",bodyResponse);
       this.apiService.updateMatch(bodyResponse).subscribe(data =>{
+        console.log('update partido',data);
         this.closedModal();
       });
 
-    }
+    }else(console.log('NO se actualiza partido'));
   }
   closedModal(): void {
     this.dialogRef.close();
