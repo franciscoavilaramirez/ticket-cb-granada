@@ -115,10 +115,10 @@ export class HomeComponent {
   }
 
   getUsuarioId(): number {
-    let user = localStorage.getItem('user');
-    if (user == null)
+    let userStr = localStorage.getItem('user');
+    if (userStr == null)
       return -1
     else
-      return parseInt(JSON.parse(user).userId)
+      return JSON.parse(userStr).user_id
   }
 }

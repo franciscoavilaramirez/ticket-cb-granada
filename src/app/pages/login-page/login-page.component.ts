@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
-import { LoginResponse } from '../../modelo/LoginResponse';
 import { environment } from '../../../enviroments/environment';
 import { Router } from '@angular/router';
 
@@ -22,7 +21,7 @@ export class LoginPageComponent implements OnInit {
     let userString = localStorage.getItem('user');
     if (userString != null) {
       let user = JSON.parse(userString);
-      user.isAdmin == "true" ? this.router.navigate(['/admin-home']) : this.router.navigate(['/home']);
+      user.isAdmin ? this.router.navigate(['/admin-home']) : this.router.navigate(['/home']);
     }
 
     this.loginForm = this.formBuilder.group({
@@ -33,11 +32,12 @@ export class LoginPageComponent implements OnInit {
 
   onSubmit(): void {
     const observer = {
-      next: (user: LoginResponse) => {
+      next: (user: any) => {
         let userString = JSON.stringify(user);
         localStorage.setItem('user', userString);
-        if(user.isAdmin)
+        if(user.isAdmin) {
           this.router.navigate(['/admin-home'])
+        }
         else
           this.router.navigate(['/home']);
       },
@@ -45,6 +45,6 @@ export class LoginPageComponent implements OnInit {
         this.errorMessage = 'Error al iniciar sesión. Por favor, inténtalo de nuevo.';
       }
     };
-    this.http.post<LoginResponse>(environment.apiUrl + 'login', this.loginForm.value).subscribe(observer);
+    this.http.post<any>(environment.apiUrl + 'login', this.loginForm.value).subscribe(observer);
   }
 }
