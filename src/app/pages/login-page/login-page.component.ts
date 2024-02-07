@@ -19,10 +19,10 @@ export class LoginPageComponent implements OnInit {
 
   ngOnInit(): void {
     // Si el usuario ya ha iniciado sesión, redirige a la página de inicio
-    let user = localStorage.getItem('user');
-    if (user != null) {
-      let userJson = JSON.parse(user);
-      userJson.isAdmin == "true" ? this.router.navigate(['/Admin-home']) : this.router.navigate(['/home']);
+    let userString = localStorage.getItem('user');
+    if (userString != null) {
+      let user = JSON.parse(userString);
+      user.isAdmin == "true" ? this.router.navigate(['/admin-home']) : this.router.navigate(['/home']);
     }
 
     this.loginForm = this.formBuilder.group({
@@ -33,21 +33,18 @@ export class LoginPageComponent implements OnInit {
 
   onSubmit(): void {
     const observer = {
-      next: (response: LoginResponse) => {
-        // console.log('Success!', response);
-
-        let userJson = JSON.stringify(response);
-        localStorage.setItem('user', userJson);
-        console.log("localstorage ID ==>", localStorage.getItem('user'));
-        // Redirige a la página de inicio
-        this.router.navigate(['/home']);
+      next: (user: LoginResponse) => {
+        let userString = JSON.stringify(user);
+        localStorage.setItem('user', userString);
+        if(user.isAdmin)
+          this.router.navigate(['/admin-home'])
+        else
+          this.router.navigate(['/home']);
       },
       error: (error: any) => {
-        // console.error('Error!', error);
         this.errorMessage = 'Error al iniciar sesión. Por favor, inténtalo de nuevo.';
       }
     };
-
     this.http.post<LoginResponse>(environment.apiUrl + 'login', this.loginForm.value).subscribe(observer);
   }
 }
