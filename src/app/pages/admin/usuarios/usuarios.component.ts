@@ -27,6 +27,8 @@ export class UsuariosComponent {
   openRegistrarUsuario() {
     this.dialog.open(RegisterAdminDialogComponent, {
       width: '50vw'
+    }).afterClosed().subscribe(()=>{
+      this.getUsers()
     });
   }
   openDialog(usuarioAny: any) {
@@ -61,10 +63,8 @@ export class UsuariosComponent {
     }).then((response) => {
       if (response.isConfirmed) {
         this.apiService.deleteUser(userId).subscribe((success)=>{
-          if(success)
             Swal.fire("Usuario Eliminado", "", "success");
-          else
-            alert("Error al eliminar un usuario")
+            this.getUsers()
         });        
       }  
     });

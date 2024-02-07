@@ -3,7 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../enviroments/environment';
 import { Router } from '@angular/router';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-register-admin-dialog',
@@ -14,7 +15,7 @@ export class RegisterAdminDialogComponent {
   registerForm: FormGroup;
   errorMessage: string = '';
   regex = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}/;
-  constructor(private formBuilder: FormBuilder, private http: HttpClient, private router: Router) { }
+  constructor(private formBuilder: FormBuilder, private http: HttpClient, private router: Router, private matDialogRef: MatDialogRef<RegisterAdminDialogComponent>) { }
 
   ngOnInit() {
     
@@ -48,12 +49,12 @@ export class RegisterAdminDialogComponent {
       this.http.post(environment.apiUrl + 'addUser', this.registerForm.value).subscribe({
         next: (response) => {
           console.log(response)
+          Swal.fire("Usuario registrado", "", "success");
+          this.matDialogRef.close()
         },
         error: error => {
-          // Maneja el error aquí
-          alert("Error al registrar el usuario")
-          console.log("Error al registrar el usuario", error);
-          //this.errorMessage = 'Error al registrar el usuario. Email ya está en uso. Por favor, inténtalo de nuevo.';
+          alert("Error de registro. Compruebe que el email no esté en uso")
+          console.log("Error al registrar el usuario.", error);
         }
       });
     }
