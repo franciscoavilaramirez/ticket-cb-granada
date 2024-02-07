@@ -1,4 +1,15 @@
 {
+  "nombre": "Nombre",
+  "apellidos":"Apellidos",
+  "email": "Email",
+  "registrarUsuario": "Registrar usuario",
+  "contrasena": "Contraseña",
+  "repiteContrasena": "Repite la contraseña",
+  "administrador": "Administrador",
+  "contrasenaNoCoincide": "Las contraseñas no coinciden",
+  "registrarse" : "Registrarse",
+  "requisitosContrasena" : "La contraseña debe tener al menos 8 caracteres, una minúscula, una mayúscula y un caracter especial",
+  
 	"card":{
     "mostrarOcultar":"Mostrar Inscritos",
     "anadirUsuario": "Añadir Usuario",
@@ -23,7 +34,8 @@
     "ocultar":"Ocultar listado",
     "exportarXlsX": "Exportar Usarios a XLSX",
     "modificar": "Modificar",
-    "eliminar": "Eliminar"
+    "eliminar": "Eliminar",
+    "registrados": "Usuarios registrados"
     },
   "modalAnadirUsuario":{
     "inscritos": "Usuarios Inscritos",
@@ -50,6 +62,7 @@
     "cancelar": "Cancelar"
     },
     "botones":{
+      "acciones": "Acciones",
       "guardar": "Guardar",
       "guardarCambios":"Guardar Cambios",
       "eliminar": "Eliminar",

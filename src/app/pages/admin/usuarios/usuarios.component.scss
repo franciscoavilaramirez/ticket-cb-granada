@@ -1,0 +1,74 @@
+.title {
+    font-weight: bold;
+    font-size: 20px;
+    width: 80vw;
+    margin: 0 auto;
+    margin-top: 50px;
+    display: flex;
+    align-items: center;
+    .registrar-usuario-container {
+        text-align: right;
+        margin-left: 30px;
+        button {
+          display: flex;
+          align-items: center;
+          margin-left: auto;
+          background-color: #36bf98;
+          color: white;
+          font-size: 25px;
+          padding: 2px 9px;
+          .content{
+            display: flex;
+            align-items: center;
+            padding: 0 5px;
+            .user-icon {
+              width: 25px;
+            }
+          }    
+        }
+      }
+}
+.container__wrapper {
+    width: 80vw;
+    height: 400px;
+    overflow: auto;
+    margin: 20px auto;
+
+    &__table-buttons {
+        margin-right: 10px;
+
+        .editar {
+            background-color: #36bf98;
+            color: #ffffff;
+            margin-right: 10px;
+
+            mat-icon {
+                margin: 0 auto;
+            }
+        }
+
+        .eliminar {
+            background-color: #e11010;
+            color: #ffffff;
+
+            mat-icon {
+                margin: 0 auto;
+            }
+        }
+    }
+}
+
+.buttons {
+    width: 80vw;
+    margin: 0 auto;
+    margin-top: 35px;
+    margin-bottom: 20px;
+    font-size: 20px;
+    &__exportar {
+        background-color: #36bf98 !important;
+        color: #ffffff !important;
+        .alignIcon {
+            background-color: #36bf98;
+        }
+    }
+}

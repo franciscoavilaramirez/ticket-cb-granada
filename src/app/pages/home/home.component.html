@@ -12,13 +12,13 @@
         <div class="equipos-wrapper">
             <div class="equipos">
                 <div class="nombre">Granada</div>
-                <div class="nombre">{{primerPartido.nombrePartido}}</div>
+                <div class="nombre">{{primerPartido.equipoVisitante}}</div>
             </div>
         </div>
         <!-- BOTONES -->
         <!-- Si tengo la entrada, botones de descarga y devolucion -->
         <div *ngIf=primerPartido.tengoEntrada>
-            <div (click)="descargar(primerPartido.id, primerPartido.nombrePartido)" class="btn-descargar">
+            <div (click)="descargar(primerPartido.id, primerPartido.equipoVisitante)" class="btn-descargar">
                 <img class="img-descargar" src="assets/imgs/descargar.png">
             </div>
             <div (click)="devolver(primerPartido.id)" class="btn-devolver">
@@ -51,13 +51,13 @@
             <div class="equipos-wrapper">
                 <div class="equipos">
                     <div class="nombre">Granada</div>
-                    <div class="nombre">{{partido.nombrePartido}}</div>
+                    <div class="nombre">{{partido.equipoVisitante}}</div>
                 </div>
             </div>
             <!-- BOTONES -->
             <!-- Si tengo la entrada, botones de descarga y devolucion -->
             <div *ngIf=partido.tengoEntrada>
-                <div (click)="descargar(partido.id, partido.nombrePartido)" class="btn-descargar">
+                <div (click)="descargar(partido.id, partido.equipoVisitante)" class="btn-descargar">
                     <img class="img-descargar" src="assets/imgs/descargar.png">
                 </div>
                 <div (click)="devolver(partido.id)" class="btn-devolver">

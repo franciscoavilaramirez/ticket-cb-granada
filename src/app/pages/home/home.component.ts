@@ -27,9 +27,9 @@ export class HomeComponent {
       this.misPartidosIds = misPartidosIds
       this.apiService.getProximosPartidos().subscribe(proximosPartidos => {
 
-        if (misPartidosIds != null && proximosPartidos != null) {
+        if (proximosPartidos != null) {
           this.primerPartido = proximosPartidos[0]
-          if (this.misPartidosIds.includes(this.primerPartido.id))
+          if (this.misPartidosIds?.includes(this.primerPartido.id))
             this.primerPartido.tengoEntrada = true
           else
             this.primerPartido.tengoEntrada = false
@@ -40,7 +40,7 @@ export class HomeComponent {
           this.partidos = proximosPartidos //el resto de partidos que se mostraran abajo mas pequeños
           console.log("Próximos partidos:", this.partidos)
           this.partidos.forEach(partido => {
-            if (this.misPartidosIds.includes(partido.id))
+            if (this.misPartidosIds?.includes(partido.id))
               partido.tengoEntrada = true;
             else
               partido.tengoEntrada = false;
@@ -115,10 +115,10 @@ export class HomeComponent {
   }
 
   getUsuarioId(): number {
-    let user = localStorage.getItem('user');
-    if (user == null)
+    let userStr = localStorage.getItem('user');
+    if (userStr == null)
       return -1
     else
-      return parseInt(JSON.parse(user).userId)
+      return JSON.parse(userStr).user_id
   }
 }

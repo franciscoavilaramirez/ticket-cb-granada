@@ -22,7 +22,7 @@ export class RegisterPageComponent implements OnInit {
       nombre: ['', Validators.required],
       apellidos: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      password: ['', Validators.required],
+      password: ['', [Validators.required, Validators.pattern("^(?=.*\\d)(?=.*[@#$%^&+=*_-])(?=.*[a-z])(?=.*[A-Z]).{8,}$")]],
       repeatPassword: ['', Validators.required]
     }, { validator: this.checkPasswords });
   }

@@ -101,4 +101,17 @@ export class ApiService {
   // getNextMatch(){
   //   return this.http.get<Partido[]>(this.apiUrl + 'getProximosPartidos');
   // }
+  
+  getUsuarioById(usuarioId: number){
+    return this.http.get<Usuario>(this.apiUrl + 'userById/'+usuarioId);
+  }
+
+  checkPasswords(usuarioId: number, password: string){
+    return this.http.get<Boolean>(this.apiUrl + 'checkPasswords/'+usuarioId+'/'+password);
+  }
+
+  modifyUser(usuario: Usuario): Observable<Partido> {
+    return this.http.put<Partido>(`${this.apiUrl+'modificarUsuario'}/${usuario.id}`, usuario);
+  }
+
 }

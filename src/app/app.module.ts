@@ -31,6 +31,8 @@ import { AdminHomeComponent } from './pages/admin/admin-home/admin-home.componen
 import { SubirEntradasComponent } from './pages/admin/subir-entradas/subir-entradas.component'
 import { HomeComponent } from './pages/home/home.component';
 import { DivisorComponent } from './componentes/divisor/divisor.component';
+import { EditPasswordComponent } from './componentes/edit-password/edit-password.component';
+import { PerfilComponent } from './pages/perfil/perfil.component';
 
 import localeEs from '@angular/common/locales/es'
 import { registerLocaleData } from '@angular/common';
@@ -41,6 +43,8 @@ import { ModifyMatchComponent } from './componentes/modify-match/modify-match.co
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { TranslationComponent } from './translation/translation.component';
+import { UsuariosComponent } from './pages/admin/usuarios/usuarios.component';
+import { RegisterAdminDialogComponent } from './componentes/register-admin-dialog/register-admin-dialog.component';
 import { ListUserComponent } from './componentes/list-user/list-user.component';
 import {MatSelectModule} from '@angular/material/select';
 import {MatMenuModule} from '@angular/material/menu';
@@ -62,9 +66,13 @@ export function HttpLoaderFactory(http: HttpClient) {
     AdminHomeComponent,
     SubirEntradasComponent,
     DivisorComponent,
+    EditPasswordComponent,
+    PerfilComponent,
     NavbarComponent,
     ModifyMatchComponent,
     TranslationComponent,
+    UsuariosComponent,
+    RegisterAdminDialogComponent,
     ListUserComponent
   ],
   imports: [

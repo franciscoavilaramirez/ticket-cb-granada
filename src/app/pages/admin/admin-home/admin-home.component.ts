@@ -99,8 +99,6 @@ export class AdminHomeComponent {
     console.log('usuarioAny',usuarioAny, 'usuario',usuario);
     const dialog = this.dialog.open(UpdateUserComponent,{
       data: usuario,
-      // width:'450px',
-      // height:'600px'
       width:'25vw',
       height:'85vh'
     });
@@ -114,6 +112,8 @@ export class AdminHomeComponent {
       width: '50vw',
       height: '70vh',
       autoFocus: false
+    }).afterClosed().subscribe( () => {
+      this.getProximosPartidos()
     });
   }
   openAddUser(partido: Partido) {
@@ -162,6 +162,24 @@ export class AdminHomeComponent {
 
     }
   deleteMatch(partidoId: Partido){
+
+    Swal.fire({
+      title: '¿Seguro que desea eliminar este partido?',
+      showDenyButton: true,
+      confirmButtonText: 'Eliminar',
+      denyButtonText: 'Cancelar',
+      confirmButtonColor: 'red',
+      denyButtonColor: 'grey',
+    }).then((response) => {
+      if (response.isConfirmed) {
+        this.apiService.deleteMatch(partidoId).subscribe( () =>{
+            this.getProximosPartidos();
+        });        
+      }  
+    });
+  }
+
+
     this.apiService.deleteMatch(partidoId).subscribe(data =>{
       console.log('partido borrado',data);
       this.getProximosPartidos();
