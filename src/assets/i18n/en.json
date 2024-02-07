@@ -3,8 +3,8 @@
 {
     "card":{
       "mostrarOcultar":"Show registered",
-      "anadirUsuario": "Add User to match",
-      "modificarPartido": "Update Match"
+      "anadirUsuario": "Add user match",
+      "modificarPartido": "Update match"
       },
   "listadoUsuarios":{
     "nombre": "Name",

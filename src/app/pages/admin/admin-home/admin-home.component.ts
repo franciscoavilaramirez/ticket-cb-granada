@@ -23,7 +23,6 @@ import { ListUserComponent } from '../../../componentes/list-user/list-user.comp
 export class AdminHomeComponent {
 [x: string]: any;
 
-
   constructor(private snackBar: MatSnackBar,public apiService: ApiService,
               private router: Router,public dialog: MatDialog,
               private translate: TranslateService) {
