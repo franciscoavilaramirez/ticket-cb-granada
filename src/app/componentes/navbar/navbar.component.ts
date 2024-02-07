@@ -1,4 +1,8 @@
+
 import { Component, Input, OnInit } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
+
+
 
 @Component({
   selector: 'app-navbar',
@@ -7,6 +11,7 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class NavbarComponent implements OnInit{
   @Input() isAdmin = false
+
   user: any;
   ngOnInit(): void {
     let userStr = localStorage.getItem('user');
@@ -17,4 +22,21 @@ export class NavbarComponent implements OnInit{
       console.log("isAdmin: " + user.isAdmin)
     }
   }
+
+  activeLang = 'es';
+
+
+constructor(private translate: TranslateService){}
+
+
+  cambiarIdioma(event: any) {
+    //console.log('Valor seleccionado:', event.target.value);
+
+    const lang = event.target.value;
+    this.activeLang = lang;
+    this.translate.use(lang);
+  }
+
+
+
 }

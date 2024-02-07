@@ -17,9 +17,9 @@ export class AddUserComponent {
 
 usuariosYaInscritos: Usuario[];
 usuarios: Usuario[];
-usuariosParaAnadirAlPartido: string[]= [];
+usuariosParaAnadirAlPartido: Array<number | undefined>= [];
 
-  constructor(private Apiservice:ApiService, public dialog: MatDialog,
+  constructor(private apiService:ApiService, public dialog: MatDialog,
     public dialogRef: MatDialogRef<AdminHomeComponent>,@Inject(MAT_DIALOG_DATA) public partido: Partido,
     public snackBar: MatSnackBar
     ){}
@@ -29,20 +29,20 @@ usuariosParaAnadirAlPartido: string[]= [];
 
     }
     getUsers(){
-      this.Apiservice.getUsers().subscribe(data=>{
+      this.apiService.getUsers().subscribe(data=>{
         this.usuarios = [];
         data.forEach(usu =>{
           const user = this.usuariosYaInscritos?.find(usuInscrito =>{
-           return  usu.id === usuInscrito.id
+           return  usu.user_id === usuInscrito.user_id
           })
-          console.log('userrrr',user);
+          //console.log('userrrr',user);
           if(!Boolean(user)){
             this.usuarios.push(usu)
           }
         })
        });
     }
-    addUserToSorteo(userId: string) {
+    addUserToSorteo(userId: number | undefined) {
       const index = this.usuariosParaAnadirAlPartido.indexOf(userId);
 
       if (index === -1) {
@@ -59,12 +59,10 @@ usuariosParaAnadirAlPartido: string[]= [];
       this.usuariosParaAnadirAlPartido.forEach(userId => {
         // Verifica si el usuario ya está en el array
         if (this.isUsuarioAlreadyAdded(userId)) {
-          //console.log('Agregando usuario con Id:', userId);
-          debugger
           //llamada al servicio
-          this.Apiservice.addUserMatch(userId, this.partido.id).subscribe(data => {
-            console.log("Usuario agregado a partido correctamente", data);
-            this.closedModal();
+          this.apiService.addUserMatch(userId, this.partido.id).subscribe(data => {
+            //this.closedModal();
+            this.getUsuariosPartido(this.partido.id);
             this.snackBar.open('Usuario añadido a partido', 'Cerrar', {
             duration: 5000,
           });
@@ -76,7 +74,7 @@ usuariosParaAnadirAlPartido: string[]= [];
     }
 
     // Función para verificar si el usuario ya está en el array
-    isUsuarioAlreadyAdded(userId: string): boolean {
+    isUsuarioAlreadyAdded(userId: number | undefined): boolean {
       return this.usuariosParaAnadirAlPartido.includes(userId);
     }
 
@@ -85,25 +83,16 @@ usuariosParaAnadirAlPartido: string[]= [];
           this.dialogRef.close();
       }
       getUsuariosPartido(idPartido:number){
-        this.Apiservice.getUsuariosPartido(idPartido).subscribe(data =>{
+        this.apiService.getUsuariosPartido(idPartido).subscribe(data =>{
           this.usuariosYaInscritos = data;
-          console.log('fecha sorteo',this.usuariosYaInscritos );
+          //console.log('usuarios inscritos',this.usuariosYaInscritos );
           this.getUsers();
         });
       }
-      // deleteUserInscrito(userId: string){
-      //   const index = this.usuariosYaInscritos.findIndex(user => user.user_id === userId);
-      //   console.log('user delete', index)
-      //   if (index !== -1) {
-      //     // El usuario está en el array, quitarlo
-      //     this.usuariosYaInscritos.splice(index, 1);
-      //     this.getUsers();
-      //   }
-      // }
-      deleteUserInscrito(userId:string,partidoId:Partido){
 
-        this.Apiservice.deleteUserMatch(userId,partidoId).subscribe(data =>{
-          console.log('delete user',data);
+      deleteUserInscrito(userId:number | undefined ,partidoId:Partido){
+
+        this.apiService.deleteUserMatch(userId,partidoId).subscribe(data =>{
           this.getUsuariosPartido(this.partido.id);
         })
 

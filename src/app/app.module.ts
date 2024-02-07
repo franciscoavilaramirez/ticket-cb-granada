@@ -46,6 +46,8 @@ import { TranslationComponent } from './translation/translation.component';
 import { UsuariosComponent } from './pages/admin/usuarios/usuarios.component';
 import { RegisterAdminDialogComponent } from './componentes/register-admin-dialog/register-admin-dialog.component';
 import { ListUserComponent } from './componentes/list-user/list-user.component';
+import {MatSelectModule} from '@angular/material/select';
+import {MatMenuModule} from '@angular/material/menu';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -86,12 +88,14 @@ export function HttpLoaderFactory(http: HttpClient) {
     MatSnackBarModule,
     MatTableModule,
     MatIconModule,
+    MatSelectModule,
     ReactiveFormsModule,
     MatDialogModule,
     MatCheckboxModule,
     FormsModule,
     MatDatepickerModule,
     MatListModule,
+    MatMenuModule,
     CommonModule,
     TranslateModule.forRoot({
       loader: {

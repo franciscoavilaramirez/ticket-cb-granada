@@ -23,7 +23,6 @@ import { ListUserComponent } from '../../../componentes/list-user/list-user.comp
 export class AdminHomeComponent {
 [x: string]: any;
 
-
   constructor(private snackBar: MatSnackBar,public apiService: ApiService,
               private router: Router,public dialog: MatDialog,
               private translate: TranslateService) {
@@ -32,13 +31,11 @@ export class AdminHomeComponent {
 
   activeLang = 'es';
   hiddenList = false;
- // hiddenListUsuariosPartidos = false;
   hide = true;
   exportCsv = false;
   usuarios!: Usuario[];
   bodyResponse: Usuario;
   currentUser: Usuario;
-  //partidos!: Partido[];
   partido!: Partido[];
   proximosPartidos!: Partido[];
   usuariosPartido!: Usuario[];
@@ -46,10 +43,7 @@ export class AdminHomeComponent {
   idPartido!: string;
 
 
-  @ViewChild('TABLE')table!: ElementRef;
-  @ViewChild('TABLEUSUARIOSPARTIDO')tableUsuariosPartido!: ElementRef;
 
-  displayedColumns: string[] = ['id','nombre','apellidos','email','acciones'];
   ColumnsInscritos: string[] = ['id','nombre','apellidos','email'];
 
   ngOnInit(){
@@ -69,7 +63,6 @@ export class AdminHomeComponent {
   }
 
   deleteUser(userId: string): void {
-
     this.apiService.deleteUser(userId).subscribe(async data => {
       const dataUser = await Swal.fire({
         title: '¿Seguro que desea eliminar este usuario?',
@@ -81,40 +74,20 @@ export class AdminHomeComponent {
       });
       if (dataUser.isConfirmed) {
         Swal.fire("Usuario Eliminado", "", "success");      }
-      // else if (dataUser.isDenied) {
-      //   Swal.fire("Changes are not saved", "", "info");
-      // }
       this.getUsers();
     });
   }
-  // openSnackBar() {
-  //   this.snackBar.open('Correo enviado satisfactoriamente', 'Cerrar', {
-  //     duration: 3000
-  //   });
-  // }
 
   userList(){
     this.hiddenList = true;
     this.exportCsv = true;
   }
+
   hiddenUserList(){
     this.hiddenList = false;
     this.exportCsv = false;
   }
-  // usuarioPartidoList(){
-  //   this.hiddenListUsuariosPartidos = !this.hiddenListUsuariosPartidos;
-  // }
-  // isAdmin(){
-  //   return this.currentUser.is_admin;
-  // }
-  ExportTOExcel()
-{
-  const ws: XLSX.WorkSheet=XLSX.utils.table_to_sheet(this.table.nativeElement);
-  const wb: XLSX.WorkBook = XLSX.utils.book_new();
-  XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
-  /* save to file */
-  XLSX.writeFile(wb, 'Listado_Usuarios.xlsx');
-}
+
   openDialog(usuarioAny:any) {
 
      let usuario:Usuario = {
@@ -129,11 +102,9 @@ export class AdminHomeComponent {
       width:'25vw',
       height:'85vh'
     });
-
     dialog.afterClosed().subscribe(result => {
       this.getUsers();
     });
-
   }
 
   openSubirEntradas() {
@@ -184,7 +155,6 @@ export class AdminHomeComponent {
         width:'25vw',
         height:'75vh',
       });
-
       dialog.afterClosed().subscribe(result => {
         this.getUsers();
       });
@@ -192,6 +162,7 @@ export class AdminHomeComponent {
 
     }
   deleteMatch(partidoId: Partido){
+
     Swal.fire({
       title: '¿Seguro que desea eliminar este partido?',
       showDenyButton: true,
@@ -208,13 +179,13 @@ export class AdminHomeComponent {
     });
   }
 
-  // getNextMacht(){
-  //   this.apiService.getNextMatch().subscribe(data =>{
-  //     console.log('proxims partidos',data);
-  //     this.getPartidos();
-  //   });
 
-  // }
+    this.apiService.deleteMatch(partidoId).subscribe(data =>{
+      console.log('partido borrado',data);
+      this.getProximosPartidos();
+    });
+  }
+
 }
 
 
