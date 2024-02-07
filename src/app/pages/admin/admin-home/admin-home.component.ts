@@ -141,6 +141,8 @@ export class AdminHomeComponent {
       width: '50vw',
       height: '70vh',
       autoFocus: false
+    }).afterClosed().subscribe( () => {
+      this.getProximosPartidos()
     });
   }
   openAddUser(partido: Partido) {

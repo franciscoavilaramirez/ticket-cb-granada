@@ -72,7 +72,7 @@
 
     <!-- USUARIOS -->
 
-    <div class="container__wrapper" #TABLE>
+    <!-- <div class="container__wrapper" #TABLE>
       <table mat-table [dataSource]="usuarios" class="mat-elevation-z8" #table *ngIf="hiddenList">
         <ng-container matColumnDef="id">
           <th mat-header-cell *matHeaderCellDef> ID </th>
@@ -98,14 +98,14 @@
             <button mat-raised-button class="editar"
                       type="submit"
                       (click)="openDialog(element)"><mat-icon>edit</mat-icon>
-                      <!-- {{"usuarios.modificar" | translate }} -->
+                      <!-- {{"usuarios.modificar" | translate }} 
             </button>
 
 
              <button mat-raised-button class="eliminar"
                       type="submit"
                       (click)="deleteUser(element.user_id)"><mat-icon>delete_forever</mat-icon>
-                      <!-- {{"usuarios.eliminar" | translate }} -->
+                      <!-- {{"usuarios.eliminar" | translate }} 
               </button>
             </div>
             </td>
@@ -122,7 +122,7 @@
         <button mat-raised-button class="buttons__exportar"  (click)="ExportTOExcel()" *ngIf="exportCsv">{{"usuarios.exportarXlsX" | translate }}
           <mat-icon aria-hidden="false" class="alignIcon" aria-label="Example home icon" fontIcon="description" ></mat-icon>
         </button>
-        </div>
+        </div> -->
         <div class="buttons">
           <button mat-raised-button class="container__wrapper__buttons" color="primary" (click)="cambiarLenguaje('en')" > Traducir a Inglés</button>
           <button mat-raised-button class="container__wrapper__buttons" color="primary" (click)="cambiarLenguaje('es')" > Traducir a Español</button>
