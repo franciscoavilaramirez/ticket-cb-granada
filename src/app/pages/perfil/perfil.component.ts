@@ -6,6 +6,7 @@ import { ApiService } from '../../service/api.service';
 import { HttpClient } from '@angular/common/http';
 import { EditPasswordComponent } from '../../componentes/edit-password/edit-password.component';
 import Swal from 'sweetalert2';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-perfil',
@@ -18,7 +19,7 @@ export class PerfilComponent {
   idUsuario: number
   errorMessage: string = '';
 
-  constructor(private formBuilder: FormBuilder, private apiService : ApiService,  private http: HttpClient, public dialog: MatDialog){}
+  constructor(private formBuilder: FormBuilder, private apiService : ApiService, private router:Router,  private http: HttpClient, public dialog: MatDialog){}
 
   
   ngOnInit() {
@@ -61,16 +62,17 @@ export class PerfilComponent {
     this.apiService.modifyUser(usuario).subscribe(()=>{})
   }
 
-
   cambiarPassword(usuario:Usuario) {
     usuario.id = this.idUsuario + "";
     this.dialog.open(EditPasswordComponent,{
       data: usuario ,
       width:'450px',
       height:'600px'
-
     });
-
   }
   
+  cerrarSesion() {
+    localStorage.removeItem('user')
+    this.router.navigate(['/login']);
+  }
 }
