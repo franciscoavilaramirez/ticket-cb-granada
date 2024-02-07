@@ -56,5 +56,19 @@
       "eliminarPartido": "Eliminar Partido",
       "cancelar":"Cancelar",
       "cerrar": "Cerrar"
+    },
+    "idioma":{
+      "titulo":"Idioma",
+      "espanol":"Español",
+      "ingles":"Inglés",
+      "ruso":"Ruso"
+    },
+    "navbar":{
+      "inicio":"Inicio",
+      "perfil":"Perfil",
+      "usuarios":"Usuarios"
+    },
+    "entradas":{
+      "subir":"Subir Entradas"
     }
 	}

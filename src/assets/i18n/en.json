@@ -35,10 +35,12 @@
     },
   "modificarPartido":{
     "titulo": "Update Match",
+    "equipoLocal": "Local Team",
+    "equipoVisitante": "Visiting Team",
     "guardar": "Save",
     "cancelar": "Cancel",
-    "inputTitulo": "Match Title",
-    "inputFecha": "Match Date"
+    "fecha": "Match Date",
+    "fechaPublicacion": "Publication Date"
     },
 
   "modificarUsuario":{
@@ -56,5 +58,20 @@
       "eliminar": "Delete",
       "eliminarPartido": "Delete",
       "cancelar":"Cancel"
+
+    },
+    "idioma":{
+      "titulo":"Languaje",
+      "espanol":"Spanish",
+      "ingles":"English",
+      "ruso":"Russian"
+    },
+    "navbar":{
+      "inicio":"Home",
+      "perfil":"Profile",
+      "usuarios":"Users"
+    },
+    "entradas":{
+      "subir":"Upload Tickets"
     }
 	}

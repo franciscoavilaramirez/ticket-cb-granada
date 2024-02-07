@@ -1,20 +1,37 @@
 <div class="navbar">
     <img class="icono tsystems" src="assets/imgs/Logo_Tsystems.png">
     <div class="x">X</div>
-    <img class="icono granada" src="assets/imgs/logo_granada.png"> 
+    <img class="icono granada" src="assets/imgs/logo_granada.png">
     <div class="right">
         <a routerLink="/home">
-            <div class="titulo">Inicio</div>
+            <div class="titulo">{{"navbar.inicio" | translate }}</div>
             <img class="icono" src="assets/imgs/home.png">
         </a>
         <a routerLink="">
-            <div class="titulo">Perfil</div>
+            <div class="titulo">{{"navbar.perfil" | translate }}</div>
             <img class="icono" src="assets/imgs/user.png">
         </a>
         <a *ngIf="isAdmin" routerLink="">
-            <div class="titulo">Usuarios</div>
+            <div class="titulo">{{"navbar.usuarios" | translate }}</div>
             <img class="icono users-icon" src="assets/imgs/users.png">
         </a>
+        <a>
+        <div class="titulo">{{"idioma.titulo" | translate }}</div>
+          <select class="select" (change)="cambiarIdioma($event)">
+              <option value="es">{{"idioma.espanol" | translate }}</option>
+              <option value="en">{{"idioma.ingles" | translate }}</option>
+              <option value="ru">{{"idioma.ruso" | translate }}</option>
+          </select>
+        </a>
+        <!-- <div class="titulo">
+          <label>{{"idioma.titulo" | translate }}</label>
+          <select (change)="cambiarIdioma($event)">
+              <option value="es">{{"idioma.espanol" | translate }}</option>
+              <option value="en">{{"idioma.ingles" | translate }}</option>
+              <option value="ru">{{"idioma.ruso" | translate }}</option>
+          </select>
+      </div> -->
+
     </div>
 </div>
 

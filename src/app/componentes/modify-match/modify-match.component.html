@@ -3,9 +3,7 @@
   <div class="container__wrapper">
     <div mat-dialog-actions>
       <form  [formGroup]="updateMatchForm" >
-        <!-- <h1>Modificar Partido</h1> -->
         <h1>{{"modificarPartido.titulo" | translate }}</h1>
-
         <mat-dialog-actions>
           <mat-form-field >
             <mat-label>{{"modificarPartido.equipoLocal" | translate }}</mat-label>
@@ -19,12 +17,7 @@
           <mat-label>{{"modificarPartido.fecha" | translate }}</mat-label>
           <input type="text" matInput formControlName ="fechaPartido">
         </mat-form-field>
-        <!-- <mat-form-field>
-          <mat-label>{{"modificarPartido.inputFecha" | translate }}</mat-label>
-          <input matInput [matDatepicker]="picker">
-          <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-          <mat-datepicker #picker></mat-datepicker>
-        </mat-form-field> -->
+
           <mat-label>{{"modificarPartido.fechaPublicacion" | translate }}</mat-label>
         <input class="datetime-picker" type="datetime-local" formControlName ="fechaPublicacion">
 

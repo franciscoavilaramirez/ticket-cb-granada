@@ -2,7 +2,7 @@
 <div class="subir-entradas-container">
   <button mat-raised-button (click)="openSubirEntradas()" class="subir-entradas-btn">
     <div class="subir-entradas-btn-content">
-      Subir Entradas
+      {{"entradas.subir" | translate }}
       <img class="entrada-icon" src="assets/imgs/ticket.png">
     </div>
   </button>
@@ -14,8 +14,6 @@
       <div class="cards-wrapper">
           @for (proximoPartido of proximosPartidos; track $index) {
             <mat-card  class="card"  >
-              <!-- <mat-card  class="card" *ngIf="$index < 3" > -->
-
             <mat-card-header  >
               <mat-card-title></mat-card-title>
               <mat-card-subtitle>Granada - {{proximoPartido.equipoVisitante}}</mat-card-subtitle>
@@ -23,121 +21,24 @@
             </mat-card-header>
             <mat-card-actions class="cards-wrapper__buttons">
               <div class="buttons-card">
-
               <button mat-raised-button class="buttons-card__mostrar" (click)="getUsuariosPartido(proximoPartido.id)" >{{"card.mostrarOcultar" | translate }}</button>
               <button mat-raised-button class="buttons-card__modificar" (click)="openModifyMatch(proximoPartido)" >{{"card.modificarPartido" | translate }}</button>
-
             </div>
             <div class="buttons-card">
               <button mat-raised-button class="buttons-card__aniadir" (click)="openAddUser(proximoPartido)" >{{"card.anadirUsuario" | translate }}</button>
               <button mat-raised-button class="buttons-card__eliminar" (click)="deleteMatch(proximoPartido)" >{{"botones.eliminarPartido" | translate }}</button>
             </div>
-
               </mat-card-actions>
             </mat-card>
           }
-          <!-- <button mat-raised-button class="buttons-card__mostrar" (click)="getUsuariosPartido(1)" >usuarios partido</button> -->
-
         </div>
 
-
-      <!-- LISTA DE USUARIOS INSCRITOS A UN PARTIDO -->
-      <!-- <div class="container__wrapper" #TABLEUSUARIOSPARTIDO>
-        <table mat-table [dataSource]="usuariosPartido" class="mat-elevation-z8" #tableUsuariosPartido *ngIf="hiddenListUsuariosPartidos" >
-          <ng-container matColumnDef="id">
-            <th mat-header-cell *matHeaderCellDef> ID </th>
-            <td mat-cell *matCellDef="let inscritos let i = index" > {{i+1}} </td>
-          </ng-container>
-
-          <ng-container matColumnDef="nombre">
-            <th mat-header-cell *matHeaderCellDef>{{"usuariosInscritos.nombre" | translate }}</th>
-            <td mat-cell *matCellDef="let inscritos" > {{inscritos.nombre}} </td>
-          </ng-container>
-
-          <ng-container matColumnDef="apellidos">
-            <th mat-header-cell *matHeaderCellDef>{{"usuariosInscritos.apellidos" | translate }}</th>
-            <td mat-cell *matCellDef="let inscritos">{{inscritos.apellidos}}</td>
-          </ng-container>
-
-          <ng-container matColumnDef="email">
-            <th mat-header-cell *matHeaderCellDef>{{"usuariosInscritos.email" | translate }}</th>
-            <td mat-cell *matCellDef="let inscritos"> {{inscritos.email}}</td>
-          </ng-container>
-
-          <tr mat-header-row *matHeaderRowDef="ColumnsInscritos"></tr>
-          <tr mat-row *matRowDef="let row; columns: ColumnsInscritos;"></tr>
-        </table>
-      </div> -->
-
-
-    <!-- USUARIOS -->
-
-    <div class="container__wrapper" #TABLE>
-      <table mat-table [dataSource]="usuarios" class="mat-elevation-z8" #table *ngIf="hiddenList">
-        <ng-container matColumnDef="id">
-          <th mat-header-cell *matHeaderCellDef> ID </th>
-          <td mat-cell *matCellDef="let element let i = index" > {{i+1}} </td>
-        </ng-container>
-        <ng-container matColumnDef="nombre">
-          <th mat-header-cell *matHeaderCellDef>{{"usuarios.nombre" | translate }}</th>
-          <td mat-cell *matCellDef="let element" > {{element.nombre}} </td>
-        </ng-container>
-        <ng-container matColumnDef="apellidos">
-          <th mat-header-cell *matHeaderCellDef>{{"usuarios.apellido" | translate }}</th>
-          <td mat-cell *matCellDef="let element"> {{element.apellidos}} </td>
-        </ng-container>
-        <ng-container matColumnDef="email">
-          <th mat-header-cell *matHeaderCellDef>{{"usuarios.email" | translate }}</th>
-          <td mat-cell *matCellDef="let element"> {{element.email}}</td>
-        </ng-container>
-
-        <ng-container matColumnDef="acciones">
-          <th mat-header-cell *matHeaderCellDef>{{"usuarios.acciones" | translate }}</th>
-          <td mat-cell *matCellDef="let element" >
-            <div class="container__wrapper__table-buttons">
-            <button mat-raised-button class="editar"
-                      type="submit"
-                      (click)="openDialog(element)"><mat-icon>edit</mat-icon>
-                      <!-- {{"usuarios.modificar" | translate }} -->
-            </button>
-
-
-             <button mat-raised-button class="eliminar"
-                      type="submit"
-                      (click)="deleteUser(element.user_id)"><mat-icon>delete_forever</mat-icon>
-                      <!-- {{"usuarios.eliminar" | translate }} -->
-              </button>
-            </div>
-            </td>
-        </ng-container>
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-      </table>
-
-      <div class="buttons">
-        <button mat-raised-button class="container__wrapper__buttons" color="primary" (click)="userList()" >{{"usuarios.mostrar" | translate }}</button>
-        <button mat-raised-button class="container__wrapper__buttons" color="primary" (click)="hiddenUserList()" >{{"usuarios.ocultar" | translate }}</button>
-      </div>
-        <div class="buttons">
-        <button mat-raised-button class="buttons__exportar"  (click)="ExportTOExcel()" *ngIf="exportCsv">{{"usuarios.exportarXlsX" | translate }}
-          <mat-icon aria-hidden="false" class="alignIcon" aria-label="Example home icon" fontIcon="description" ></mat-icon>
-        </button>
-        </div>
+    <!-- <div class="container__wrapper">
         <div class="buttons">
           <button mat-raised-button class="container__wrapper__buttons" color="primary" (click)="cambiarLenguaje('en')" > Traducir a Inglés</button>
           <button mat-raised-button class="container__wrapper__buttons" color="primary" (click)="cambiarLenguaje('es')" > Traducir a Español</button>
-
-          </div>
-    </div>
-
-        <!-- INPUT PARA INTRODUCIR CONTRASEÑA Y PODER MOSTRARLA SI ES NECESARIO -->
-        <!-- <mat-form-field>
-          <mat-label>Contraseña</mat-label>
-          <input matInput [type]="hide ? 'password' : 'text'" formControlName="contraseña">
-          <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-          </button>
-        </mat-form-field> -->
+        </div>
+    </div> -->
   </div>
 </div>
 
