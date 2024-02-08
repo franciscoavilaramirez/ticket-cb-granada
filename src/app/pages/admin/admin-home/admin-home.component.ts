@@ -142,9 +142,8 @@ export class AdminHomeComponent {
 
   }
   getProximosPartidos(){
-    this.apiService.getProximosPartidos().subscribe(data =>{
+    this.apiService.getPartidos().subscribe(data =>{
       this.proximosPartidos = data;
-      console.log('Proximos Partidos',this.proximosPartidos);
     })
   }
   getUsuariosPartido(idPartido:any){
