@@ -60,12 +60,17 @@ usuariosParaAnadirAlPartido: Array<number | undefined>= [];
         // Verifica si el usuario ya está en el array
         if (this.isUsuarioAlreadyAdded(userId)) {
           //llamada al servicio
-          this.apiService.addUserMatch(userId, this.partido.id).subscribe(data => {
+          this.apiService.addUserMatch(userId, this.partido.id).subscribe(success => {
             //this.closedModal();
             this.getUsuariosPartido(this.partido.id);
-            this.snackBar.open('Usuario añadido a partido', 'Cerrar', {
-            duration: 5000,
-          });
+            if(success)
+              this.snackBar.open('Usuario añadido a partido', 'Cerrar', {
+                duration: 5000,
+              });
+            else
+              this.snackBar.open('No quedan entradas para el partido', 'Cerrar', {
+                duration: 5000,
+              });
           });
           // Agrega el usuario al array solo si aún no está presente
           this.usuariosParaAnadirAlPartido.push(userId);
