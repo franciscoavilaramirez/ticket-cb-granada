@@ -143,7 +143,7 @@ export class AdminHomeComponent {
 
   }
   getProximosPartidos(){
-    this.apiService.getProximosPartidos().subscribe(data =>{
+    this.apiService.getPartidos().subscribe(data =>{
       this.proximosPartidos = data;
       console.log('Proximos Partidos',this.proximosPartidos);
       this.proximosPartidos.forEach(partido =>{
@@ -185,7 +185,6 @@ export class AdminHomeComponent {
 
     }
   deleteMatch(partidoId: Partido){
-
     Swal.fire({
       title: '¿Seguro que desea eliminar este partido?',
       showDenyButton: true,

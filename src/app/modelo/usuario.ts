@@ -4,7 +4,6 @@ export interface Usuario{
   email?: string,
   apellidos?: string,
   is_admin?: boolean,
-  password?: string
+  password?: string,
   user_id?: number
-
 }

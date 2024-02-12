@@ -1,7 +1,5 @@
-
 import { Component, Input, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-
 
 
 @Component({
@@ -9,13 +7,14 @@ import { TranslateService } from '@ngx-translate/core';
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss'
 })
-export class NavbarComponent implements OnInit{
+export class NavbarComponent implements OnInit {
   @Input() isAdmin = false
+  constructor(private translate: TranslateService) { }
 
   user: any;
   ngOnInit(): void {
     let userStr = localStorage.getItem('user');
-    if(userStr != null) {
+    if (userStr != null) {
       let user = JSON.parse(userStr);
       this.isAdmin = user.isAdmin
       console.log(user)
@@ -24,11 +23,6 @@ export class NavbarComponent implements OnInit{
   }
 
   activeLang = 'es';
-
-
-constructor(private translate: TranslateService){}
-
-
   cambiarIdioma(event: any) {
     //console.log('Valor seleccionado:', event.target.value);
 
@@ -36,7 +30,6 @@ constructor(private translate: TranslateService){}
     this.activeLang = lang;
     this.translate.use(lang);
   }
-
 
 
 }
