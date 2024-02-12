@@ -41,7 +41,8 @@ export class AdminHomeComponent {
   usuariosPartido!: Usuario[];
   fechaPartido:string;
   idPartido!: string;
-
+  entradasSobrantes!: any;
+  entradas: number;
 
 
   ColumnsInscritos: string[] = ['id','nombre','apellidos','email'];
@@ -49,6 +50,7 @@ export class AdminHomeComponent {
   ngOnInit(){
     this.getUsers();
     this.getProximosPartidos();
+    //this.getEntradasSobrantes(1);
   }
   public cambiarLenguaje(lang: string) {
     this.activeLang = lang;
@@ -139,17 +141,38 @@ export class AdminHomeComponent {
   openListUser(){
     //console.log('List usuario');
 
-
   }
   getProximosPartidos(){
     this.apiService.getProximosPartidos().subscribe(data =>{
       this.proximosPartidos = data;
       console.log('Proximos Partidos',this.proximosPartidos);
-    })
+      this.proximosPartidos.forEach(partido =>{
+        console.log('partidooooooo',partido)
+        //  this.entradas = partido.stockEntradas;
+        // console.log('entradas',this.entradas)
+        //this.getEntradasSobrantes(partido.id);
+      });
+    });
   }
+  // getUsuariosPartido(idPartido:any){
+  //   this.apiService.getUsuariosPartido(idPartido).subscribe(data =>{
+  //     this.usuariosPartido = data;
+  //     this.contador = this.usuariosPartido.length || 0;
+  //     const dialog = this.dialog.open(ListUserComponent,{
+  //       data: this.usuariosPartido,
+  //       width:'25vw',
+  //       height:'75vh',
+  //     });
+  //     dialog.afterClosed().subscribe(result => {
+  //       this.getUsers();
+  //     });
+  //   });
+
+  //   }
   getUsuariosPartido(idPartido:any){
     this.apiService.getUsuariosPartido(idPartido).subscribe(data =>{
       this.usuariosPartido = data;
+
       const dialog = this.dialog.open(ListUserComponent,{
         data: this.usuariosPartido,
         width:'25vw',
@@ -174,18 +197,31 @@ export class AdminHomeComponent {
       if (response.isConfirmed) {
         this.apiService.deleteMatch(partidoId).subscribe( () =>{
             this.getProximosPartidos();
-        });        
-      }  
+        });
+      }
     });
-  }
-
-
     this.apiService.deleteMatch(partidoId).subscribe(data =>{
-      console.log('partido borrado',data);
-      this.getProximosPartidos();
-    });
+          console.log('partido borrado',data);
+          this.getProximosPartidos();
+        });
   }
+  // entradasSobrantesPorPartido: { [key: number]: any } = {};
+
+  // getEntradasSobrantes(partidoId:number){
+  //   this.apiService.getEntradasSobrantes(partidoId).subscribe(data =>{
+  //     this.entradasSobrantes = data
+  //     this.entradasSobrantesPorPartido[partidoId] = data;
+  //     console.log('entradas sobrantes para partido', partidoId, ':', data);
+  //   });
+  // }
+
+
 
 }
+
+
+
+
+
 
 

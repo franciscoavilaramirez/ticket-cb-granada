@@ -74,13 +74,13 @@ export class HomeComponent {
     this.apiService.desasignarEntrada(this.idUsuario, idPartido).subscribe(() => {
       if (this.primerPartido.id == idPartido) {
         this.primerPartido.tengoEntrada = false
-        this.primerPartido.stockEntradas = true
+        //this.primerPartido.stockEntradas = true
       }
       else {
         this.partidos.forEach(partido => {
           if (partido.id == idPartido) {
             partido.tengoEntrada = false;
-            partido.stockEntradas = true;
+            //partido.stockEntradas = true;
           }
         });
       }

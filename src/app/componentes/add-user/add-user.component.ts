@@ -81,6 +81,7 @@ usuariosParaAnadirAlPartido: Array<number | undefined>= [];
 
       closedModal(): void {
           this.dialogRef.close();
+          //this.apiService.getProximosPartidos();
       }
       getUsuariosPartido(idPartido:number){
         this.apiService.getUsuariosPartido(idPartido).subscribe(data =>{

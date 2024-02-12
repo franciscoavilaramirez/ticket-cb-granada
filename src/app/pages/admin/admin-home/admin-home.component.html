@@ -13,15 +13,25 @@
   <div class="container__wrapper">
     <div class="container__wrapper__content-wrapper">
       <div class="cards-wrapper">
+        <!-- <span> {{getEntradasSobrantes(id)}}metodo entradas sobrantes</span> -->
+        <!-- <span>{{ getEntradasSobrantes(this.contador) }}</span> -->
+
           @for (proximoPartido of proximosPartidos; track $index) {
             <mat-card  class="card"  >
-            <mat-card-header  >
-              <mat-card-title></mat-card-title>
-              <mat-card-subtitle>Granada - {{proximoPartido.equipoVisitante}}</mat-card-subtitle>
-              <mat-card-subtitle>{{proximoPartido.fechaPartido | date:'dd-MM-yyyy' }}</mat-card-subtitle>
+            <mat-card-header>
+
+              <!-- <span>{{ entradasSobrantesPorPartido[proximoPartido.id] }}</span> -->
+              <mat-card-title >Granada - {{proximoPartido.equipoVisitante}}</mat-card-title>
+              <mat-card-subtitle></mat-card-subtitle>
+              <mat-card-subtitle>Fecha Partido:  {{proximoPartido.fechaPartido | date:'dd-MM-yyyy' }}</mat-card-subtitle>
+              <mat-card-subtitle>Fecha Publicación:  {{proximoPartido.fechaPublicacion| date:'dd-MM-yyyy' }}</mat-card-subtitle>
+              <mat-card-subtitle>Entradas Disponibles:  {{proximoPartido.stockEntradas}}</mat-card-subtitle>
+
+
             </mat-card-header>
             <mat-card-actions class="cards-wrapper__buttons">
               <div class="buttons-card">
+
               <button mat-raised-button class="buttons-card__mostrar" (click)="getUsuariosPartido(proximoPartido.id)" >{{"card.mostrarOcultar" | translate }}</button>
               <button mat-raised-button class="buttons-card__modificar" (click)="openModifyMatch(proximoPartido)" >{{"card.modificarPartido" | translate }}</button>
             </div>

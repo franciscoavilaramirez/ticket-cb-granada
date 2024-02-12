@@ -1,7 +1,10 @@
 
 <div class="container">
   <div class="container__wrapper">
+    <div class="container__wrapper__contador">
     <h1>{{"modalAnadirUsuario.inscritos" | translate }}</h1>
+    <span>{{this.contador}}</span>
+    </div>
     <div class="container__wrapper__content-wrapper" *ngFor="let usuarioInscrito of usuariosPartido" >
 
       <mat-list role="list">
@@ -11,7 +14,9 @@
         </mat-list-item>
       </mat-list>
     </div>
-
+    <ng-container *ngIf="!usuariosPartido || usuariosPartido.length === 0">
+      <p>No hay usuarios registrados en este momento</p>
+    </ng-container>
   </div>
   <div class="container__wrapper__content-wrapper">
     <div class="buttons">

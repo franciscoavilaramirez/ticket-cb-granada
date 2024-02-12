@@ -28,13 +28,13 @@ export class EditPasswordComponent {
 
       console.log("id usuario edit: "+ this.userModify.id)
       console.log("usuario edit: "+ JSON.stringify(this.userModify))
-      
-    } 
+
+    }
 
     checkPasswordsMatch(group: FormGroup) {
       let passControl = group.get('contrasenaNueva');
       let confirmPassControl = group.get('contrasenaRepetida');
-  
+
       if (passControl && confirmPassControl) {
         let pass = passControl.value;
         let confirmPass = confirmPassControl.value;
@@ -42,11 +42,11 @@ export class EditPasswordComponent {
       }
       return { notSame: true };
     }
-   
+
     checkPasswords(){
       console.log("contraseña actual: " + this.editPassword.get("contrasenaActual")?.value);
       console.log("passwird: "+this.userModify.id);
-      this.service.checkPasswords(parseInt(this.userModify.id), this.editPassword.get("contrasenaActual")?.value).subscribe(response => {
+      this.service.checkPasswords((this.userModify.id), this.editPassword.get("contrasenaActual")?.value).subscribe(response => {
         if(response == true) {
           console.log("contraseña correcta");
           let usuario : Usuario = this.userModify;
@@ -60,12 +60,12 @@ export class EditPasswordComponent {
       })
     }
 
- 
+
 
   closedModal(){
     this.dialogRef.close();
   }
-  
+
 
 }
 
