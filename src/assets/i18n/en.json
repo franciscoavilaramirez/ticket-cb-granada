@@ -1,6 +1,10 @@
 
 
 {
+  "nombre": "Name",
+  "apellidos":"Last Name",
+  "email": "Email",
+
     "card":{
       "mostrarOcultar":"Show registered",
       "anadirUsuario": "Add user match",
@@ -21,6 +25,7 @@
     "nombre": "Name",
     "apellido": "Last Name",
     "email": "Email",
+    "partidos": "Attend Match",
     "mostrar": "Show list users",
     "ocultar":"Hide list",
     "exportarXlsX": "Export Users to XLSX",
@@ -39,8 +44,9 @@
     "equipoVisitante": "Visiting Team",
     "guardar": "Save",
     "cancelar": "Cancel",
-    "fecha": "Match Date",
-    "fechaPublicacion": "Publication Date"
+    "fecha": "Match Date: ",
+    "fechaPublicacion": "Publication Date: ",
+    "entradas": "Available Tickets: "
     },
 
   "modificarUsuario":{
@@ -58,7 +64,9 @@
       "guardarCambios":"Save",
       "eliminar": "Delete",
       "eliminarPartido": "Delete",
-      "cancelar":"Cancel"
+      "cancelar":"Cancel",
+      "cerrarSesion":"Log Out",
+      "cambiarContrasena":"Change Password"
 
     },
     "idioma":{
@@ -74,5 +82,8 @@
     },
     "entradas":{
       "subir":"Upload Tickets"
+    },
+    "perfil":{
+      "datosPerfil":"Data Profile"
     }
 	}

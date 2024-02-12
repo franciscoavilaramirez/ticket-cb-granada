@@ -9,7 +9,7 @@
   "contrasenaNoCoincide": "Las contraseñas no coinciden",
   "registrarse" : "Registrarse",
   "requisitosContrasena" : "La contraseña debe tener al menos 8 caracteres, una minúscula, una mayúscula y un caracter especial",
-  
+
 	"card":{
     "mostrarOcultar":"Mostrar Inscritos",
     "anadirUsuario": "Añadir Usuario",
@@ -29,6 +29,7 @@
     "nombre": "Nombre",
     "apellido": "Apellidos",
     "email": "Email",
+    "partidos": "Partidos Asistidos",
     "acciones": "Acciones",
     "mostrar": "Mostrar listado usuarios",
     "ocultar":"Ocultar listado",
@@ -49,8 +50,10 @@
     "guardar": "Guardar Cambios",
     "cancelar": "Cancelar",
     "equipoVisitante": "Equipo Visitante ",
-    "fecha": "Fecha Partido",
-    "fechaPublicacion": "Fecha Publicación"
+    "fecha": "Fecha Partido: ",
+    "fechaPublicacion": "Fecha Publicación: ",
+    "entradas": "Entradas Disponibles: "
+
 
     },
   "modificarUsuario":{
@@ -68,7 +71,9 @@
       "eliminar": "Eliminar",
       "eliminarPartido": "Eliminar Partido",
       "cancelar":"Cancelar",
-      "cerrar": "Cerrar"
+      "cerrar": "Cerrar",
+      "cerrarSesion":"Cerrar Sesión",
+      "cambiarContrasena":"Cambiar Contraseña"
     },
     "idioma":{
       "titulo":"Idioma",
@@ -83,5 +88,8 @@
     },
     "entradas":{
       "subir":"Subir Entradas"
+    },
+    "perfil":{
+      "datosPerfil":"Datos del Perfil"
     }
 	}

@@ -30,6 +30,10 @@
       <th mat-header-cell *matHeaderCellDef>{{"usuarios.email" | translate }}</th>
       <td mat-cell *matCellDef="let element"> {{element.email}}</td>
     </ng-container>
+    <ng-container matColumnDef="partidos">
+      <th mat-header-cell *matHeaderCellDef>{{"usuarios.partidos" | translate }}</th>
+      <td mat-cell *matCellDef="let element"> {{element.partidosAsistidos}}</td>
+    </ng-container>
 
     <ng-container matColumnDef="botones">
       <th mat-header-cell *matHeaderCellDef>{{"botones.acciones" | translate }}</th>

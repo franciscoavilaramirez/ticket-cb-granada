@@ -23,9 +23,9 @@
               <!-- <span>{{ entradasSobrantesPorPartido[proximoPartido.id] }}</span> -->
               <mat-card-title >Granada - {{proximoPartido.equipoVisitante}}</mat-card-title>
               <mat-card-subtitle></mat-card-subtitle>
-              <mat-card-subtitle>Fecha Partido:  {{proximoPartido.fechaPartido | date:'dd-MM-yyyy' }}</mat-card-subtitle>
-              <mat-card-subtitle>Fecha Publicación:  {{proximoPartido.fechaPublicacion| date:'dd-MM-yyyy' }}</mat-card-subtitle>
-              <mat-card-subtitle>Entradas Disponibles:  {{proximoPartido.stockEntradas}}</mat-card-subtitle>
+              <mat-card-subtitle>{{"modificarPartido.fecha" | translate }}  {{proximoPartido.fechaPartido | date:'dd-MM-yyyy' }}</mat-card-subtitle>
+              <mat-card-subtitle>{{"modificarPartido.fechaPublicacion" | translate }}  {{proximoPartido.fechaPublicacion| date:'dd-MM-yyyy' }}</mat-card-subtitle>
+              <mat-card-subtitle>{{"modificarPartido.entradas" | translate }}  {{proximoPartido.stockEntradas}}</mat-card-subtitle>
 
 
             </mat-card-header>

@@ -5,5 +5,6 @@ export interface Usuario{
   apellidos?: string,
   is_admin?: boolean,
   password?: string,
-  user_id?: number
+  user_id?: number,
+  partidosAsistidos?: number;
 }

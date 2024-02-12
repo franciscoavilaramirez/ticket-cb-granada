@@ -18,7 +18,7 @@ export class UsuariosComponent {
 
   @ViewChild('TABLE') table!: ElementRef;
   usuarios: Usuario[]
-  displayedColumns: string[] = ['id', 'nombre', 'apellidos', 'email', 'botones'];
+  displayedColumns: string[] = ['id', 'nombre', 'apellidos', 'email','partidos', 'botones'];
 
   ngOnInit() {
     this.getUsers();
@@ -65,11 +65,11 @@ export class UsuariosComponent {
         this.apiService.deleteUser(userId).subscribe((success)=>{
             Swal.fire("Usuario Eliminado", "", "success");
             this.getUsers()
-        });        
-      }  
+        });
+      }
     });
   }
-  
+
   getUsers() {
     this.apiService.getUsers().subscribe(data => {
       this.usuarios = data
