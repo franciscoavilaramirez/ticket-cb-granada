@@ -9,7 +9,7 @@
   "contrasenaNoCoincide": "Las contraseñas no coinciden",
   "registrarse" : "Registrarse",
   "requisitosContrasena" : "La contraseña debe tener al menos 8 caracteres, una minúscula, una mayúscula y un caracter especial",
-
+  "buscador": "Buscar",
 	"card":{
     "mostrarOcultar":"Mostrar Inscritos",
     "anadirUsuario": "Añadir Usuario",
@@ -40,6 +40,7 @@
     },
   "modalAnadirUsuario":{
     "inscritos": "Usuarios Inscritos",
+    "noHayInscritos":"No hay usuarios registrados en este momento",
     "pendientes":"Usuarios pendientes Inscribir",
     "guardar": "Guardar",
     "cancelar": "Cancelar"

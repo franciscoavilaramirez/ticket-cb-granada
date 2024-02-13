@@ -4,6 +4,7 @@ import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dial
 import { TranslateService } from '@ngx-translate/core';
 import { Usuario } from '../../modelo/usuario';
 import { AdminHomeComponent } from '../../pages/admin/admin-home/admin-home.component';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-list-user',
@@ -12,6 +13,8 @@ import { AdminHomeComponent } from '../../pages/admin/admin-home/admin-home.comp
 })
 export class ListUserComponent implements OnInit {
 contador: any;
+filterPost = '' ;
+
 
 constructor(public apiService: ApiService,public dialog: MatDialog,
             private translate: TranslateService,
@@ -19,11 +22,10 @@ constructor(public apiService: ApiService,public dialog: MatDialog,
             @Inject(MAT_DIALOG_DATA) public usuariosPartido: Usuario[]){}
 
 ngOnInit(){
-  //console.log('usuarios partido desde list-user',this.usuariosPartido)
   this.contador = this.usuariosPartido.length || 0;
-  console.log('contador usuuuuu desde list-user',this.contador)
-
 }
+
+
 closedModal(): void {
   this.dialogRef.close();
 }

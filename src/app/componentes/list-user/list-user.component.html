@@ -1,21 +1,26 @@
 
 <div class="container">
   <div class="container__wrapper">
+    <mat-form-field>
+      <mat-label>{{"buscador" | translate }}</mat-label>
+      <input matInput placeholder= "Introduce el término de búsqueda" name="filterPost" [(ngModel)]="filterPost" >
+    </mat-form-field>
     <div class="container__wrapper__contador">
+
     <h1>{{"modalAnadirUsuario.inscritos" | translate }}</h1>
     <span>{{this.contador}}</span>
     </div>
-    <div class="container__wrapper__content-wrapper" *ngFor="let usuarioInscrito of usuariosPartido" >
+    <div class="container__wrapper__content-wrapper" *ngFor="let usuarioInscrito of usuariosPartido | filter:filterPost" >
 
       <mat-list role="list">
-        <mat-list-item  role="listitem">
+        <mat-list-item  role="listitem" >
           {{usuarioInscrito.nombre }}
           {{usuarioInscrito.apellidos }}
         </mat-list-item>
       </mat-list>
     </div>
     <ng-container *ngIf="!usuariosPartido || usuariosPartido.length === 0">
-      <p>No hay usuarios registrados en este momento</p>
+      <p>{{"modalAnadirUsuario.noHayInscritos" | translate }}</p>
     </ng-container>
   </div>
   <div class="container__wrapper__content-wrapper">

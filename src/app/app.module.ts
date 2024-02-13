@@ -48,6 +48,7 @@ import { RegisterAdminDialogComponent } from './componentes/register-admin-dialo
 import { ListUserComponent } from './componentes/list-user/list-user.component';
 import {MatSelectModule} from '@angular/material/select';
 import {MatMenuModule} from '@angular/material/menu';
+import { FilterPipe } from './pipes/filter.pipe';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -73,7 +74,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     TranslationComponent,
     UsuariosComponent,
     RegisterAdminDialogComponent,
-    ListUserComponent
+    ListUserComponent,
+    FilterPipe
   ],
   imports: [
     HttpClientModule,

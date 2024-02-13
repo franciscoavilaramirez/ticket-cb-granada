@@ -4,6 +4,8 @@
   "nombre": "Name",
   "apellidos":"Last Name",
   "email": "Email",
+  "buscador": "Search",
+
 
     "card":{
       "mostrarOcultar":"Show registered",
@@ -34,6 +36,7 @@
     },
   "modalAnadirUsuario":{
     "inscritos": "Registered Users",
+    "noHayInscritos":"There are not registered users at this moment",
     "pendientes":"Pending Registered Users",
     "guardar": "Save",
     "cancelar": "Cancel"

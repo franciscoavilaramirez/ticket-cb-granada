@@ -18,6 +18,7 @@ export class AddUserComponent {
 usuariosYaInscritos: Usuario[];
 usuarios: Usuario[];
 usuariosParaAnadirAlPartido: Array<number | undefined>= [];
+filterPost = '';
 
   constructor(private apiService:ApiService, public dialog: MatDialog,
     public dialogRef: MatDialogRef<AdminHomeComponent>,@Inject(MAT_DIALOG_DATA) public partido: Partido,
@@ -35,7 +36,6 @@ usuariosParaAnadirAlPartido: Array<number | undefined>= [];
           const user = this.usuariosYaInscritos?.find(usuInscrito =>{
            return  usu.user_id === usuInscrito.user_id
           })
-          //console.log('userrrr',user);
           if(!Boolean(user)){
             this.usuarios.push(usu)
           }
@@ -52,7 +52,6 @@ usuariosParaAnadirAlPartido: Array<number | undefined>= [];
         // El usuario está en el array, quitarlo
         this.usuariosParaAnadirAlPartido.splice(index, 1);
       }
-      //console.log('usuariosPartido', this.usuariosParaAnadirAlPartido);
     }
 
     onSubmit() {
@@ -84,24 +83,22 @@ usuariosParaAnadirAlPartido: Array<number | undefined>= [];
     }
 
 
-      closedModal(): void {
-          this.dialogRef.close();
-          //this.apiService.getProximosPartidos();
-      }
-      getUsuariosPartido(idPartido:number){
-        this.apiService.getUsuariosPartido(idPartido).subscribe(data =>{
-          this.usuariosYaInscritos = data;
-          //console.log('usuarios inscritos',this.usuariosYaInscritos );
-          this.getUsers();
-        });
-      }
+    closedModal(): void {
+        this.dialogRef.close();
+        //this.apiService.getProximosPartidos();
+    }
+    getUsuariosPartido(idPartido:number){
+      this.apiService.getUsuariosPartido(idPartido).subscribe(data =>{
+        this.usuariosYaInscritos = data;
+        //console.log('usuarios inscritos',this.usuariosYaInscritos );
+        this.getUsers();
+      });
+    }
 
-      deleteUserInscrito(userId:number | undefined ,partidoId:Partido){
+    deleteUserInscrito(userId:number | undefined ,partidoId:Partido){
+      this.apiService.deleteUserMatch(userId,partidoId).subscribe(data =>{
+        this.getUsuariosPartido(this.partido.id);
+      })
 
-        this.apiService.deleteUserMatch(userId,partidoId).subscribe(data =>{
-          this.getUsuariosPartido(this.partido.id);
-        })
-
-      }
-
+    }
 }

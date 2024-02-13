@@ -1,17 +1,19 @@
 
 <div class="container">
   <div class="container__wrapper">
+    <mat-form-field>
+      <mat-label>{{"buscador" | translate }}</mat-label>
+      <input matInput placeholder= "Introduce el término de búsqueda" name="filterPost" [(ngModel)]="filterPost" >
+    </mat-form-field>
     <h1>{{"modalAnadirUsuario.inscritos" | translate }}</h1>
-    <div class="container__wrapper__content-wrapper" *ngFor="let usuarioYaInscrito of usuariosYaInscritos" >
+    <div class="container__wrapper__content-wrapper" *ngFor="let usuarioYaInscrito of usuariosYaInscritos | filter:filterPost" >
 
       <mat-list role="list">
         <mat-list-item  role="listitem">
           {{usuarioYaInscrito.nombre }}
           {{usuarioYaInscrito.apellidos }}
           ({{usuarioYaInscrito.email}})
-
           <button mat-icon-button color="warn" (click)="deleteUserInscrito(usuarioYaInscrito.user_id,partido)" title="Eliminar Usuario" ><mat-icon>delete_forever</mat-icon></button>
-
         </mat-list-item>
       </mat-list>
 
@@ -20,15 +22,13 @@
     <div class="container__wrapper__content-wrapper" *ngFor="let usuario of usuarios" >
         <section>
         <mat-checkbox
-          (change)="addUserToSorteo(usuario.user_id)"
-          >
+          (change)="addUserToSorteo(usuario.user_id)">
             {{usuario.nombre}}
             {{usuario.apellidos}}
             ({{usuario.email}})
         </mat-checkbox>
       </section>
     </div>
-
   </div>
   <div class="container__wrapper__content-wrapper">
     <div class="buttons">
