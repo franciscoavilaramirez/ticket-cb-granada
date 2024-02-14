@@ -61,6 +61,9 @@ filterPost = '';
           //llamada al servicio
           this.apiService.addUserMatch(userId, this.partido.id).subscribe(success => {
             //this.closedModal();
+            console.log('success',success)
+            this.partido.stockEntradas--;
+
             this.getUsuariosPartido(this.partido.id);
             if(success)
               this.snackBar.open('Usuario añadido a partido', 'Cerrar', {
@@ -85,7 +88,8 @@ filterPost = '';
 
     closedModal(): void {
         this.dialogRef.close();
-        //this.apiService.getProximosPartidos();
+        this.apiService.getProximosPartidos();
+
     }
     getUsuariosPartido(idPartido:number){
       this.apiService.getUsuariosPartido(idPartido).subscribe(data =>{
@@ -97,6 +101,7 @@ filterPost = '';
 
     deleteUserInscrito(userId:number | undefined ,partidoId:Partido){
       this.apiService.deleteUserMatch(userId,partidoId).subscribe(data =>{
+        this.partido.stockEntradas++;
         this.getUsuariosPartido(this.partido.id);
       })
 

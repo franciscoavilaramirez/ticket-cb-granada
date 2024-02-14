@@ -5,7 +5,11 @@
   "apellidos":"Last Name",
   "email": "Email",
   "buscador": "Search",
-
+  "contrasena": "Password",
+  "repiteContrasena": "Repeat Password",
+  "requisitosContrasena" : "The password must have at least 8 characters, one lowercase letter, one uppercase letter and one special character",
+  "administrador": "Admin",
+  "registrarse" : "Register",
 
     "card":{
       "mostrarOcultar":"Show registered",
@@ -35,7 +39,8 @@
     "eliminar": "Delete"
     },
   "modalAnadirUsuario":{
-    "inscritos": "Registered Users",
+    "inscritos": "Registered Users:",
+    "yaInscritos": "Registered Users",
     "noHayInscritos":"There are not registered users at this moment",
     "pendientes":"Pending Registered Users",
     "guardar": "Save",

@@ -39,7 +39,8 @@
     "registrados": "Usuarios registrados"
     },
   "modalAnadirUsuario":{
-    "inscritos": "Usuarios Inscritos",
+    "inscritos": "Usuarios Inscritos:",
+    "yaInscritos": "Usuarios Inscritos",
     "noHayInscritos":"No hay usuarios registrados en este momento",
     "pendientes":"Usuarios pendientes Inscribir",
     "guardar": "Guardar",

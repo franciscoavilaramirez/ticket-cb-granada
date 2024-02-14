@@ -59,7 +59,7 @@ export class AdminHomeComponent {
   getUsers(){
     this.apiService.getUsers().subscribe(data =>{
       this.usuarios = data
-      console.log('Usuarios', this.usuarios);
+      //console.log('Usuarios', this.usuarios);
     });
   }
 
@@ -113,6 +113,12 @@ export class AdminHomeComponent {
       height:'85vh'
     });
     dialog.afterClosed().subscribe(result => {
+      //console.log('stock entradas',partido.stockEntradas);
+
+      // if (result && result.usuarioAgregado) {
+      //   partido.stockEntradas--; // Restar 1 al stock de entradas
+      //   console.log('stock entradas',partido.stockEntradas);
+      // }
     });
   }
   openModifyMatch(partido: Partido) {
@@ -135,6 +141,7 @@ export class AdminHomeComponent {
       this.proximosPartidos = data;
       console.log('Proximos Partidos',this.proximosPartidos);
       this.proximosPartidos.forEach(partido =>{
+        console.log('partido',partido)
       });
     });
   }

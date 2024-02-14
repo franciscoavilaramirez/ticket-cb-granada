@@ -5,7 +5,7 @@
       <mat-label>{{"buscador" | translate }}</mat-label>
       <input matInput placeholder= "Introduce el término de búsqueda" name="filterPost" [(ngModel)]="filterPost" >
     </mat-form-field>
-    <h1>{{"modalAnadirUsuario.inscritos" | translate }}</h1>
+    <h1>{{"modalAnadirUsuario.yaInscritos" | translate }}</h1>
     <div class="container__wrapper__content-wrapper" *ngFor="let usuarioYaInscrito of usuariosYaInscritos | filter:filterPost" >
 
       <mat-list role="list">
