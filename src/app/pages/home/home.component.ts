@@ -89,30 +89,35 @@ export class HomeComponent {
   }
 
   descargar(idPartido: number, nombrePartido: string) {
-    this.apiService.getEntradaBase64(this.idUsuario, idPartido).subscribe(data => {
-      let blob = this.base64ToBlob(data, "application/pdf")
-      this.saveBlobAsTextFile(blob, 'Granada - ' + nombrePartido + '.pdf')
+    this.apiService.getEntrada(this.idUsuario, idPartido).subscribe(entradaPdf => {
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(entradaPdf);
+      link.download = 'Granada - ' + nombrePartido + '.pdf';
+      link.click();
     });
   }
 
-  base64ToBlob(base64String: string, contentType = ''): Blob {
-    const byteCharacters = atob(base64String);
-    const byteArrays = [];
+  // descargar1() {
+  //   this.apiService.getEntrada(1, 1).subscribe(entradaPdf => {
+  //     const link = document.createElement('a');
+  //     link.href = URL.createObjectURL(entradaPdf);
+  //     link.download = 'Granada - ' + 'Madrid' + '.pdf';
+  //     link.click();
+  //   });
+  // }
 
-    for (let i = 0; i < byteCharacters.length; i++) {
-      byteArrays.push(byteCharacters.charCodeAt(i));
-    }
+  // base64ToBlob(base64String: string, contentType = ''): Blob {
+  //   const byteCharacters = atob(base64String);
+  //   const byteArrays = [];
 
-    const byteArray = new Uint8Array(byteArrays);
-    return new Blob([byteArray], { type: contentType });
-  }
+  //   for (let i = 0; i < byteCharacters.length; i++) {
+  //     byteArrays.push(byteCharacters.charCodeAt(i));
+  //   }
 
-  saveBlobAsTextFile(blob: Blob, fileName: string): void {
-    const link = document.createElement('a');
-    link.href = URL.createObjectURL(blob);
-    link.download = fileName;
-    link.click();
-  }
+  //   const byteArray = new Uint8Array(byteArrays);
+  //   return new Blob([byteArray], { type: contentType });
+  // }
+
 
   getUsuarioId(): number {
     let userStr = localStorage.getItem('user');

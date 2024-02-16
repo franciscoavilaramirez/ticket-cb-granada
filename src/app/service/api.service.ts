@@ -32,14 +32,17 @@ export class ApiService {
     return this.http.delete(this.apiUrl + 'deleteUsuarioFromPartido/'+idUsuario+'/'+idPartido, {});
   }
 
-  getEntradaBase64(idUsuario:number, idPartido:number): Observable<string> {
-    const headers = new HttpHeaders().set('Content-Type', 'text/plain; charset=utf-8');
-    return this.http.get(this.apiUrl + 'enviarEntrada/'+idUsuario+'/'+idPartido,{ headers, responseType: 'text'});
-  }
+  // getEntradaBase64(idUsuario:number, idPartido:number): Observable<string> {
+  //   const headers = new HttpHeaders().set('Content-Type', 'text/plain; charset=utf-8');
+  //   return this.http.get(this.apiUrl + 'enviarEntrada/'+idUsuario+'/'+idPartido,{ headers, responseType: 'text'});
+  // }
+  getEntrada(idUsuario:number, idPartido:number): Observable<Blob> {
+    return this.http.get(this.apiUrl + 'descargarEntrada/'+idUsuario+'/'+idPartido, {responseType:'blob'})
+  } 
 
-  subirTickets(pdf: Pdf): Observable<object>{
-    return this.http.post(this.apiUrl + 'crearPartidoConEntradas', pdf);
-  }
+  // subirTickets(pdf: Pdf): Observable<object>{
+  //   return this.http.post(this.apiUrl + 'crearPartidoConEntradas', pdf);
+  // }
   getUsers(){
     return this.http.get<Usuario[]>(this.apiUrl + 'getAllUsers');
   }
@@ -49,6 +52,9 @@ export class ApiService {
     return this.http.post<Usuario>(this.apiUrl+'addUser', usuario);
   }
 
+  subirPartido(partidoForm: any) {
+    return this.http.post<any>(this.apiUrl+'subirPartido', partidoForm)
+  }
   // updateUser(usuario: Usuario): Observable<Usuario>{
   //   return this.http.put<Usuario>(`${this.apiUrl+'modificarUsuario'}/${usuario.id}`,usuario);
   // }
@@ -86,9 +92,7 @@ export class ApiService {
   addUserMatch(usuarioId: number | undefined,partidoId: number){
     return this.http.post<Usuario>(`${this.apiUrl+'saveUsuarioPartido'}/${usuarioId}/${partidoId}`,null);
   }
-  // updateMatch(partido: Partido): Observable<Partido> {
-  //   return this.http.put<Partido>(`${this.apiUrl + 'modificarPartido'}/${partido.id}`, partido);
-  // }
+
   updateMatch(partido: any){
     return this.http.put<Partido>(`${this.apiUrl + 'modificarPartido'}/${partido.id}`, partido);
   }
@@ -98,9 +102,6 @@ export class ApiService {
   deleteUserMatch(usuarioId: number | undefined,partidoId: Partido) {
     return this.http.delete<Usuario>(`${this.apiUrl + 'deleteUsuarioFromPartido'}/${usuarioId}/${partidoId.id}`);
   }
-  // getNextMatch(){
-  //   return this.http.get<Partido[]>(this.apiUrl + 'getProximosPartidos');
-  // }
   
   getUsuarioById(usuarioId: number){
     return this.http.get<Usuario>(this.apiUrl + 'userById/'+usuarioId);

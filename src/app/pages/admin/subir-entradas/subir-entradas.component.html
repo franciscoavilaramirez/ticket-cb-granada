@@ -1,5 +1,5 @@
 <div class="container">
-    <form [formGroup]="form" (submit)="send()">
+    <form [formGroup]="form" (submit)="subirPartido()">
         <h2>Subir Entradas</h2>
         <div class="content">
             <div>
@@ -8,11 +8,11 @@
             </div>
             <div>
                 <div class="label">Equipo Visitante<span style="color: rgb(221, 37, 37);">*</span></div>
-                <input formControlName="titulo" class="equipo" placeholder="Equipo visitante" required>
+                <input formControlName="equipoVisitante" class="equipo" placeholder="Equipo visitante" required>
             </div>
             <div>
                 <div class="label">Fecha Partido<span style="color: rgb(221, 37, 37);">*</span></div>
-                <input [(ngModel)]="inputValue" [ngStyle]="{color:color}" (focus)="onFocus()" (blur)="onBlur()" type="datetime-local" class="datetime-picker" formControlName="fecha" required>
+                <input [(ngModel)]="inputValue" [ngStyle]="{color:color}" (focus)="onFocus()" (blur)="onBlur()" type="datetime-local" class="datetime-picker" formControlName="fechaPartido" required>
             </div>
             <div>
                 <div class="label">Fecha Publicación<span style="color: rgb(221, 37, 37);">*</span></div>
@@ -20,10 +20,10 @@
             </div>
 
         <div> 
-            <input type="file" (change)="subirArchivo($event)" class="input-file" formControlName="entradasPdf" required>
+            <input type="file" (change)="uploadPdfFile($event)" class="input-file" required>
         </div>
         <div> 
-            <button mat-raised-button class="button" type="submit" [disabled]="!form.valid">Subir</button>
+            <button mat-raised-button class="button" type="submit" [disabled]="!form.valid || noFiles">Subir</button>
         </div>
         </div>
     </form>
