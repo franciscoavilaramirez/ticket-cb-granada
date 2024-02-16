@@ -42,7 +42,7 @@
     "inscritos": "Registered Users:",
     "yaInscritos": "Registered Users",
     "noHayInscritos":"There are not registered users at this moment",
-    "pendientes":"Pending Registered Users",
+    "pendientes":"Pending Users",
     "guardar": "Save",
     "cancelar": "Cancel"
     },
@@ -70,6 +70,7 @@
       "acciones": "Actions",
       "guardar": "Save",
       "guardarCambios":"Save",
+      "subir":"Upload",
       "eliminar": "Delete",
       "eliminarPartido": "Delete",
       "cancelar":"Cancel",
@@ -89,7 +90,13 @@
       "usuarios":"Users"
     },
     "entradas":{
-      "subir":"Upload Tickets"
+      "subir":"Upload Tickets",
+      "habilitar":"Enable Tickets"
+    },
+    "habilitarEntradas":{
+      "titulo":"Enable Tickets",
+      "numero":"Number of tickets",
+      "fechaPublicacion":"Publication date"
     },
     "perfil":{
       "datosPerfil":"Data Profile"

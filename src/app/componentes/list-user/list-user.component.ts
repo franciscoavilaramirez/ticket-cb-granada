@@ -4,7 +4,6 @@ import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dial
 import { TranslateService } from '@ngx-translate/core';
 import { Usuario } from '../../modelo/usuario';
 import { AdminHomeComponent } from '../../pages/admin/admin-home/admin-home.component';
-import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-list-user',

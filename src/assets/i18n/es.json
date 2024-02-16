@@ -42,7 +42,7 @@
     "inscritos": "Usuarios Inscritos:",
     "yaInscritos": "Usuarios Inscritos",
     "noHayInscritos":"No hay usuarios registrados en este momento",
-    "pendientes":"Usuarios pendientes Inscribir",
+    "pendientes":"Usuarios Pendientes",
     "guardar": "Guardar",
     "cancelar": "Cancelar"
     },
@@ -70,6 +70,7 @@
       "acciones": "Acciones",
       "guardar": "Guardar",
       "guardarCambios":"Guardar Cambios",
+      "subir":"Subir",
       "eliminar": "Eliminar",
       "eliminarPartido": "Eliminar Partido",
       "cancelar":"Cancelar",
@@ -89,7 +90,13 @@
       "usuarios":"Usuarios"
     },
     "entradas":{
-      "subir":"Subir Entradas"
+      "subir":"Subir Entradas",
+      "habilitar":"Habilitar Entradas"
+    },
+    "habilitarEntradas":{
+      "titulo":"Habilitar Entradas",
+      "numero":"Número de entradas",
+      "fechaPublicacion":"Fecha de publicación"
     },
     "perfil":{
       "datosPerfil":"Datos del Perfil"

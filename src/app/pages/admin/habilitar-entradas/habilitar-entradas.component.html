@@ -1,0 +1,36 @@
+<div class="container">
+  <form [formGroup]="enableTicketsForm" (click)="onSubmit()">
+      <h2>{{"habilitarEntradas.titulo" | translate }}</h2>
+      <div class="content">
+          <div>
+              <div class="label">{{"habilitarEntradas.numero" | translate }}<span style="color: rgb(221, 37, 37);">*</span></div>
+              <input type="number" formControlName="numero" class="equipo" required>
+          </div>
+          <div>
+            <div class="label">{{"habilitarEntradas.fechaPublicacion" | translate }}<span style="color: rgb(221, 37, 37);">*</span></div>
+            <input (focus)="onFocus()" (blur)="onBlur()" type="datetime-local" class="datetime-picker" formControlName="fechaPublicacion" required>
+          </div>
+          <div >
+            <div class="buttons">
+            <button mat-raised-button class="buttons__guardar"[disabled]="!enableTicketsForm.valid" (click)="onSubmit()">{{"botones.guardar" | translate }}</button>
+            <button mat-raised-button class="buttons__cancelar" (click)="closedModal()">{{"botones.cancelar" | translate }}</button>
+          </div>
+        </div>
+          <!-- <div>
+              <div class="label">Fecha Partido<span style="color: rgb(221, 37, 37);">*</span></div>
+              <input [(ngModel)]="inputValue" [ngStyle]="{color:color}" (focus)="onFocus()" (blur)="onBlur()" type="datetime-local" class="datetime-picker" formControlName="fecha" required>
+          </div>
+          <div>
+              <div class="label">Fecha Publicación<span style="color: rgb(221, 37, 37);">*</span></div>
+              <input (focus)="onFocus()" (blur)="onBlur()" type="datetime-local" class="datetime-picker" formControlName="fechaPublicacion" required>
+          </div>
+
+      <div>
+          <input type="file" (change)="subirArchivo($event)" class="input-file" formControlName="entradasPdf" required>
+      </div>
+      <div>
+          <button mat-raised-button class="button" type="submit" [disabled]="!form.valid">Subir</button>
+      </div> -->
+      </div>
+  </form>
+</div>

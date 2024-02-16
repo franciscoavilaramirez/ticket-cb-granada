@@ -49,6 +49,7 @@ import { ListUserComponent } from './componentes/list-user/list-user.component';
 import {MatSelectModule} from '@angular/material/select';
 import {MatMenuModule} from '@angular/material/menu';
 import { FilterPipe } from './pipes/filter.pipe';
+import { HabilitarEntradasComponent } from './pages/admin/habilitar-entradas/habilitar-entradas.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -75,7 +76,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     UsuariosComponent,
     RegisterAdminDialogComponent,
     ListUserComponent,
-    FilterPipe
+    FilterPipe,
+    HabilitarEntradasComponent
   ],
   imports: [
     HttpClientModule,

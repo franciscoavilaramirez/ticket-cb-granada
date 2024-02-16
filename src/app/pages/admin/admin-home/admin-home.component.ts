@@ -13,6 +13,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { ApiService } from '../../../service/api.service';
 import { SubirEntradasComponent } from '../subir-entradas/subir-entradas.component';
 import { ListUserComponent } from '../../../componentes/list-user/list-user.component';
+import { HabilitarEntradasComponent } from '../habilitar-entradas/habilitar-entradas.component';
 
 
 @Component({
@@ -113,12 +114,7 @@ export class AdminHomeComponent {
       height:'85vh'
     });
     dialog.afterClosed().subscribe(result => {
-      //console.log('stock entradas',partido.stockEntradas);
 
-      // if (result && result.usuarioAgregado) {
-      //   partido.stockEntradas--; // Restar 1 al stock de entradas
-      //   console.log('stock entradas',partido.stockEntradas);
-      // }
     });
   }
   openModifyMatch(partido: Partido) {
@@ -131,6 +127,15 @@ export class AdminHomeComponent {
       this.getProximosPartidos();
     });
   }
+  openHabilitarEntradas() {
+    this.dialog.open(HabilitarEntradasComponent, {
+      width: '30vw',
+      height: '60vh',
+      autoFocus: false
+    }).afterClosed().subscribe( () => {
+      //this.getProximosPartidos()
+    });
+  }
 
   openListUser(){
     //console.log('List usuario');
@@ -141,7 +146,6 @@ export class AdminHomeComponent {
       this.proximosPartidos = data;
       console.log('Proximos Partidos',this.proximosPartidos);
       this.proximosPartidos.forEach(partido =>{
-        console.log('partido',partido)
       });
     });
   }
@@ -151,7 +155,7 @@ export class AdminHomeComponent {
 
       const dialog = this.dialog.open(ListUserComponent,{
         data: this.usuariosPartido,
-        width:'25vw',
+        width:'35vw',
         height:'75vh',
       });
       dialog.afterClosed().subscribe(result => {

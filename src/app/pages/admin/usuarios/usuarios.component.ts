@@ -19,6 +19,7 @@ export class UsuariosComponent {
   @ViewChild('TABLE') table!: ElementRef;
   usuarios: Usuario[]
   displayedColumns: string[] = ['id', 'nombre', 'apellidos', 'email','partidos', 'botones'];
+  filterPost = '';
 
   ngOnInit() {
     this.getUsers();

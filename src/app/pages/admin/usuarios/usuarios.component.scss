@@ -27,6 +27,15 @@
           }
         }
       }
+      .buscador{
+        display: flex;
+        /* background-color: aqua; */
+        /* width: -webkit-fill-available; */
+        align-content: space-between;
+        /* align-items: flex-end; */
+        margin-left: 30%;
+        width: 100%;
+      }
 }
 .container__wrapper {
     width: 80vw;
@@ -57,10 +66,8 @@
             }
         }
     }
+
 }
-
-
-
 
 .buttons {
     width: 80vw;

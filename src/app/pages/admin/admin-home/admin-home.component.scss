@@ -1,8 +1,30 @@
 .subir-entradas-container {
   text-align: right;
   margin-right: 30px;
+
+  .habilitar-entradas-btn {
+    align-items: center;
+    margin-left: auto;
+    margin-right: 30px;
+    margin-top: 30px;
+    background-color: #94cef2;
+    color: white;
+    font-family: allerta;
+    font-size: 17px;
+    padding: 2px 9px;
+    &-content{
+      display: flex;
+      align-items: center;
+      padding: 0 5px;
+      .entrada-icon {
+        width: 30px;
+        position: relative;
+        bottom: 2px;
+        margin-left: 10px;
+      }
+    }
+  }
   .subir-entradas-btn {
-    display: flex;
     align-items: center;
     margin-left: auto;
     margin-right: 30px;
@@ -31,7 +53,7 @@
   width: 100%;
   display: grid;
  // padding: 100px;
- padding: 80px 0px 80px 0px;
+ padding: 80px 0px 80px 30px;
 
   &__wrapper{
     display: flex;
@@ -64,7 +86,7 @@
           display: flex;
           flex-wrap: wrap;
           align-items: center;
-          justify-content: space-evenly;
+          justify-content: start;
 
 
 
@@ -131,12 +153,6 @@
             background-color: #36bf98;
             color: #ffffff;
 
-            // .alignIcon{
-            //     background-color: aqua;
-            // display: flex;
-            // color: black;
-            // align-self: center;
-            // }
           }
 
         }
@@ -178,17 +194,17 @@
 
       }
 
-        .mdc-data-table__table {
-          min-width: 10%;
-          border: 0;
-          white-space: break-spaces;
-          border-spacing: 0;
-          table-layout: fixed;
-          width: auto;
-          height: 100%;
-          margin-bottom: 20px;
-          text-align-last: center;
-        }
+        // .mdc-data-table__table {
+        //   min-width: 10%;
+        //   border: 0;
+        //   white-space: break-spaces;
+        //   border-spacing: 0;
+        //   table-layout: fixed;
+        //   width: auto;
+        //   height: 100%;
+        //   margin-bottom: 20px;
+        //   text-align-last: center;
+        // }
         .mat-mdc-card-title{
           font-size: xx-large;
           display: block;
@@ -210,9 +226,9 @@
           text-align: center;
         }
 
-        .mat-mdc-table .mat-mdc-header-cell {
-          background: inherit;
-          text-align: center;
-      }
+      //   .mat-mdc-table .mat-mdc-header-cell {
+      //     background: inherit;
+      //     text-align: center;
+      // }
   }
 }
