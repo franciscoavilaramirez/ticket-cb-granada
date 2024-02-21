@@ -116,5 +116,9 @@ export class ApiService {
   getEntradasSobrantes(partidoId: number){
     return this.http.get<Partido>(this.apiUrl + 'entradasSobrantes/'+partidoId);
   }
+  getDescargarEntradasAdi(usuarioId: string,partidoId: number,numEntradas: number){
+    return this.http.get<number[]>(this.apiUrl + 'descargarEntradasAdicionales/'+ usuarioId + '/' + partidoId + '/' + numEntradas);
+  }
+
 
 }

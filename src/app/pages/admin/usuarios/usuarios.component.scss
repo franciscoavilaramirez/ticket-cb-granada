@@ -65,6 +65,16 @@
                 margin: 0 auto;
             }
         }
+        .habilitar {
+          background-color: #94cef2;
+          color: #ffffff;
+          margin-right: 10px;
+          align-items: flex-end;
+
+          mat-icon {
+              margin: 0 auto;
+          }
+      }
     }
 
 }

@@ -95,6 +95,22 @@ div {
             box-shadow: -5px 4px 17px -6px #e20074;
         }
     }
+    .btn-acompanante{
+      position: absolute;
+      bottom: 7px;
+      left: 270px;
+      cursor: pointer;
+
+      .img-acompanante {
+          width: 60px;
+          box-shadow: -5px 4px 17px -6px #000000;
+          border-radius: 6px;
+      }
+
+      .img-acompanante:hover {
+          box-shadow: -5px 4px 17px -6px #e20074;
+      }
+  }
 
     .btn-apuntame:hover {
         cursor: pointer;
@@ -193,7 +209,6 @@ div {
             box-shadow: -5px 4px 17px -6px #e20074;
         }
     }
-
 
     .agotadas {
         position: absolute;

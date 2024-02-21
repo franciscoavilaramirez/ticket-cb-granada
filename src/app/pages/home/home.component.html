@@ -21,9 +21,12 @@
             <div (click)="descargar(primerPartido.id, primerPartido.equipoVisitante)" class="btn-descargar">
                 <img class="img-descargar" src="assets/imgs/descargar.png">
             </div>
-            <div (click)="devolver(primerPartido.id)" class="btn-devolver">
+            <!-- <div (click)="devolver(primerPartido.id)" class="btn-devolver">
                 <img class="img-devolver" src="assets/imgs/devolver.png">
-            </div>
+            </div> -->
+            <div (click)="openAddTicketsUser()"  class="btn-acompanante">
+              <img class="img-acompanante" src="assets/imgs/ticket.png">
+          </div>
         </div>
         <!-- Si no tengo la entrada, boton de apuntarse si quedan -->
         <div *ngIf=!primerPartido.tengoEntrada>

@@ -10,6 +10,10 @@
   "registrarse" : "Registrarse",
   "requisitosContrasena" : "La contraseña debe tener al menos 8 caracteres, una minúscula, una mayúscula y un caracter especial",
   "buscador": "Buscar",
+  "registro":"Registrate para crear una cuenta",
+  "usuarioRegistrado":"Ya tienes una cuenta?",
+  "iniciaSesion":"Inicia sesión",
+  "anadirEntradas":"Añadir Entradas",
 	"card":{
     "mostrarOcultar":"Mostrar Inscritos",
     "anadirUsuario": "Añadir Usuario",
@@ -96,7 +100,7 @@
     "habilitarEntradas":{
       "titulo":"Habilitar Entradas",
       "numero":"Número de entradas",
-      "fechaPublicacion":"Fecha de publicación"
+      "dias":"Días de antelación"
     },
     "perfil":{
       "datosPerfil":"Datos del Perfil"

@@ -21,10 +21,10 @@ export class HabilitarEntradasComponent {
   }
 
   createFormEnableTickets(){
-    let fechaActual = this.getFechaActual()
+    //let fechaActual = this.getFechaActual()
     this.enableTicketsForm = new FormGroup({
       numero: new FormControl(''),
-      fechaPublicacion: new FormControl(fechaActual),
+      dias: new FormControl(''),
     });
   }
   onSubmit(){
@@ -38,20 +38,20 @@ export class HabilitarEntradasComponent {
     }
   }
 
-  getFechaActual() {
-    let fecha = new Date()
-    let mes:any = fecha.getMonth() + 1
-    let dia:any = fecha.getDate()
-    let hora:any = fecha.getHours()
-    let minutos:any = fecha.getMinutes()
+  // getFechaActual() {
+  //   let fecha = new Date()
+  //   let mes:any = fecha.getMonth() + 1
+  //   let dia:any = fecha.getDate()
+  //   let hora:any = fecha.getHours()
+  //   let minutos:any = fecha.getMinutes()
 
-    if(mes < 10) mes = '0'+mes
-    if(dia < 10) dia = '0'+dia
-    if(hora < 10) hora = '0'+hora
-    if(minutos < 10) minutos = '0'+minutos
+  //   if(mes < 10) mes = '0'+mes
+  //   if(dia < 10) dia = '0'+dia
+  //   if(hora < 10) hora = '0'+hora
+  //   if(minutos < 10) minutos = '0'+minutos
 
-    return fecha.getFullYear()+"-"+mes+"-"+dia+"T"+hora+":"+minutos
-  }
+  //   return fecha.getFullYear()+"-"+mes+"-"+dia+"T"+hora+":"+minutos
+  // }
   onFocus() {
     this.color = "black"//"#3f51b5"//blue
   }

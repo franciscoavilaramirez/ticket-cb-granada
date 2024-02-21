@@ -1,6 +1,8 @@
 import { Component, Renderer2 } from '@angular/core';
 import { ApiService } from '../../service/api.service';
 import { Partido } from '../../modelo/partido';
+import { MatDialog } from '@angular/material/dialog';
+import { AddEntradasUsuarioComponent } from '../../componentes/add-entradas-usuario/add-entradas-usuario.component';
 
 @Component({
   selector: 'app-home',
@@ -9,7 +11,7 @@ import { Partido } from '../../modelo/partido';
 })
 export class HomeComponent {
 
-  constructor(private apiService: ApiService, private renderer: Renderer2) {
+  constructor(private apiService: ApiService, private renderer: Renderer2,public dialog: MatDialog) {
     // this.renderer.setStyle(document.body, 'background', 'url("../../../assets/imgs/pista-baloncesto.png")');
     // this.renderer.setStyle(document.body, 'background-size', 'cover');
     // this.renderer.setStyle(document.body, 'background-repeat', 'no-repeat');
@@ -120,5 +122,13 @@ export class HomeComponent {
       return -1
     else
       return JSON.parse(userStr).user_id
+  }
+  openAddTicketsUser() {
+    const dialog = this.dialog.open(AddEntradasUsuarioComponent,{
+      width:'35vw',
+      height:'50vh'
+    });
+    dialog.afterClosed().subscribe(result => {
+    });
   }
 }
