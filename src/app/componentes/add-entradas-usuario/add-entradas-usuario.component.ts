@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { ApiService } from '../../service/api.service';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { HomeComponent } from '../../pages/home/home.component';
 import { FormControl, FormGroup } from '@angular/forms';
+import { Usuario } from '../../modelo/usuario';
+import { Partido } from '../../modelo/partido';
 
 @Component({
   selector: 'app-add-entradas-usuario',
@@ -11,13 +13,27 @@ import { FormControl, FormGroup } from '@angular/forms';
 })
 export class AddEntradasUsuarioComponent implements OnInit {
 
+  idUsuario:number;
 addTicketsForm: FormGroup;
+numEntradas: number;
 
-constructor(private apiService:ApiService,public dialogRef: MatDialogRef<HomeComponent>){}
+constructor(private apiService:ApiService,public dialogRef: MatDialogRef<HomeComponent>,
+            @Inject(MAT_DIALOG_DATA) public partidoId: Partido,
+            @Inject(MAT_DIALOG_DATA) public usuario: Usuario){}
 
 
   ngOnInit(): void {
     this.createAddTicketsForm();
+
+    this.idUsuario = this.getUsuarioId();
+    console.log('userid desde local storage',this.idUsuario) // user_id almacenado en local storage
+    this.apiService.getProximosPartidos().subscribe(proximosPartidos =>{
+      console.log('proximos partidos',proximosPartidos);
+      if (proximosPartidos != null) {
+        this.partidoId = proximosPartidos[0]
+        console.log('partidoooooooID',this.partidoId.id);
+      }
+    });
   }
 
 createAddTicketsForm(){
@@ -25,12 +41,23 @@ createAddTicketsForm(){
     numeroTickets: new FormControl(''),
   })
 }
-onSubmit(){
-this.apiService.getDescargarEntradasAdi('31',2,5).subscribe(data =>{
-console.log('dataaaaa',data);
-});
+getUsuarioId(): number {
+  let userStr = localStorage.getItem('user');
+  if (userStr == null)
+    return -1
+  else
+    return JSON.parse(userStr).user_id
 }
+onSubmit(){
+  const bodyResponse = this.addTicketsForm.value;
+  this.numEntradas = bodyResponse.numeroTickets;
+  //console.log('bodyResponse',bodyResponse)
+  console.log('numEntradas',this.numEntradas)
 
+  this.apiService.getDescargarEntradasAdi(this.idUsuario,this.partidoId.id,this.numEntradas).subscribe(data =>{
+  console.log('dataaaaa',data);
+  });
+}
   closedModal(): void {
     this.dialogRef.close();
     //this.apiService.getProximosPartidos();

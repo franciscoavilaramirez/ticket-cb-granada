@@ -38,7 +38,7 @@ export class ApiService {
   }
 
   subirTickets(pdf: Pdf): Observable<object>{
-    return this.http.post(this.apiUrl + 'crearPartidoConEntradas', pdf);
+    return this.http.post(this.apiUrl + 'subirPartido', pdf);
   }
   getUsers(){
     return this.http.get<Usuario[]>(this.apiUrl + 'getAllUsers');
@@ -116,8 +116,8 @@ export class ApiService {
   getEntradasSobrantes(partidoId: number){
     return this.http.get<Partido>(this.apiUrl + 'entradasSobrantes/'+partidoId);
   }
-  getDescargarEntradasAdi(usuarioId: string,partidoId: number,numEntradas: number){
-    return this.http.get<number[]>(this.apiUrl + 'descargarEntradasAdicionales/'+ usuarioId + '/' + partidoId + '/' + numEntradas);
+  getDescargarEntradasAdi(usuarioId: number,partidoId: number,numEntradas: number){
+    return this.http.get(this.apiUrl + 'descargarEntradasAdicionales/'+ usuarioId + '/' + partidoId + '/' + numEntradas);
   }
 
 
