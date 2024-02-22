@@ -15,6 +15,11 @@
     justify-content: center;
     margin: 20px;
 
+    .buscador{
+      display: flex;
+      flex-direction: column;
+    }
+
     &__contador{
       display: flex;
       font: 700 30px/30px allerta;

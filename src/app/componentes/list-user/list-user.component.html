@@ -1,11 +1,13 @@
 
 <div class="container">
   <div class="container__wrapper">
-    <mat-form-field color="accent">
-      <mat-label>{{"buscador" | translate }}</mat-label>
-      <input matInput placeholder= "Introduce el término de búsqueda" name="filterPost" [(ngModel)]="filterPost" >
-      <mat-icon>find_in_page</mat-icon>
+    <div class="buscador">
+    <mat-form-field color="accent" >
+      <!-- <mat-label>{{"buscador" | translate }}</mat-label> -->
+      <input matInput name="filterPost" [(ngModel)]="filterPost">
+       <img style="width: 25px;" src="../../../assets/imgs/search_grey.png">
     </mat-form-field>
+  </div>
     <div class="container__wrapper__contador">
 
     <h1>{{"modalAnadirUsuario.inscritos" | translate }}</h1>

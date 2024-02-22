@@ -15,7 +15,9 @@
   "usuarioRegistrado":"Do you have an account?",
   "iniciaSesion":"Log In",
   "anadirEntradas":"Add Tickets",
-
+  "partido":"Match",
+  "fecha":"Data",
+  "usuarios":"Users",
 
 
     "card":{

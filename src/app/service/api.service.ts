@@ -21,7 +21,7 @@ export class ApiService {
     return this.http.get<Partido[]>(this.apiUrl + 'getProximosPartidos');
   }
   //Ids de los partidos donde tengo entrada
-  getMisPartidosIds(userId: number): Observable<number[]> {
+  getMisPartidosIds(userId: number) {
     return this.http.get<number[]>(this.apiUrl + 'getMisPartidosIds/'+userId);
   }
 
@@ -120,6 +120,8 @@ export class ApiService {
   getDescargarEntradasAdi(usuarioId: number,partidoId: number,numEntradas: number){
     return this.http.get(this.apiUrl + 'descargarEntradasAdicionales/'+ usuarioId + '/' + partidoId + '/' + numEntradas);
   }
-
+  getPartidosAnteriores(){
+    return this.http.get<Partido[]>(this.apiUrl + 'getPartidosAnteriores');
+  }
 
 }

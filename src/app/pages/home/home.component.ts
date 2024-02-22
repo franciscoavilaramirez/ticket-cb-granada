@@ -23,7 +23,7 @@ export class HomeComponent {
   misPartidosIds: number[]
   primerPartido: Partido
   ngOnInit() {
-    this.idUsuario = this.getUsuarioId()
+        this.idUsuario = this.getUsuarioId()
 
     this.apiService.getMisPartidosIds(this.idUsuario).subscribe(misPartidosIds => {
       this.misPartidosIds = misPartidosIds
@@ -126,7 +126,7 @@ export class HomeComponent {
     if (userStr == null)
       return -1
     else
-      return JSON.parse(userStr).user_id
+      return JSON.parse(userStr).id
   }
   openAddTicketsUser() {
     const dialog = this.dialog.open(AddEntradasUsuarioComponent,{

@@ -39,18 +39,22 @@ export class AdminHomeComponent {
   currentUser: Usuario;
   partido!: Partido[];
   proximosPartidos!: Partido[];
+  partidosPasados: Partido[] =[];
   usuariosPartido!: Usuario[];
   fechaPartido:string;
   idPartido!: string;
   entradasSobrantes!: any;
   entradas: number;
-
+  filterPost = '';
+  @ViewChild('TABLE') table!: ElementRef;
 
   ColumnsInscritos: string[] = ['id','nombre','apellidos','email'];
+  displayedColumns: string[] = ['partido','fecha','usuarios'];
 
   ngOnInit(){
     this.getUsers();
     this.getProximosPartidos();
+    this.getPartidosAnteriores();
   }
   public cambiarLenguaje(lang: string) {
     this.activeLang = lang;
@@ -183,6 +187,12 @@ export class AdminHomeComponent {
           console.log('partido borrado',data);
           this.getProximosPartidos();
         });
+  }
+  getPartidosAnteriores(){
+    this.apiService.getPartidosAnteriores().subscribe(partidosAnteriores =>{
+      this.partidosPasados = partidosAnteriores;
+      console.log('partidos Anteriores', partidosAnteriores);
+    });
   }
 }
 
