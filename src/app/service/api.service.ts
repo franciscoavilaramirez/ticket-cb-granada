@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Usuario } from '../modelo/usuario';
 import { Partido } from '../modelo/partido';
+import { FileInfo } from '../modelo/FileInfo';
 
 import { Observable } from 'rxjs';
 import { environment } from '../../enviroments/environment';
@@ -114,5 +115,10 @@ export class ApiService {
   modifyUser(usuario: Usuario): Observable<Partido> {
     return this.http.put<Partido>(`${this.apiUrl+'modificarUsuario'}/${usuario.id}`, usuario);
   }
+
+  getEntradasExtra(idUsuario:number, idPartido:number, nEntarda:number) {
+    return this.http.get<FileInfo[]>(this.apiUrl + 'descargarEntradasAdicionales/'+idUsuario+'/'+idPartido+'/'+nEntarda)
+  } 
+
 
 }

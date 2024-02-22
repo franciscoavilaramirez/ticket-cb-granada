@@ -23,7 +23,7 @@ export class HomeComponent {
   ngOnInit() {
     this.idUsuario = this.getUsuarioId()
 
-    this.apiService.getMisPartidosIds(this.idUsuario).subscribe(misPartidosIds => {
+    this.apiService.getMisPartidosIds(2).subscribe(misPartidosIds => {
       this.misPartidosIds = misPartidosIds
       this.apiService.getProximosPartidos().subscribe(proximosPartidos => {
 
@@ -126,4 +126,31 @@ export class HomeComponent {
     else
       return JSON.parse(userStr).user_id
   }
+
+  descargarVarias(idPartido: number, nombrePartido: string, contentType = '') {
+    this.apiService.getEntradasExtra(2, 1, 2).subscribe(entradaPdf => {
+      entradaPdf.forEach(file => {
+        console.log("aaaaaaaaa "+file.data + file.fileName)
+        const byteCharacters = atob(file.data);
+        const byteArrays = [];
+
+        for (let i = 0; i < byteCharacters.length; i++) {
+          byteArrays.push(byteCharacters.charCodeAt(i));
+        }
+        const byteArray = new Uint8Array(byteArrays);
+        //return new Blob([byteArray], { type: 'application/pdf' });
+
+        const blob = new Blob([byteArray], { type: 'application/pdf' });
+        const url = window.URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = 'Granada - ' + nombrePartido + '.pdf';
+        link.click();
+        window.URL.revokeObjectURL(url);
+    
+      })
+     
+    });
+
+}
 }
