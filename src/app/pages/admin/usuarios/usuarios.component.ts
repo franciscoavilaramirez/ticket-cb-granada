@@ -6,6 +6,7 @@ import { UpdateUserComponent } from '../../../componentes/update-user/update-use
 import Swal from 'sweetalert2';
 import * as XLSX from 'xlsx';
 import { RegisterAdminDialogComponent } from '../../../componentes/register-admin-dialog/register-admin-dialog.component';
+import { UserService } from '../../../service/user.service';
 
 @Component({
   selector: 'app-usuarios',
@@ -14,15 +15,17 @@ import { RegisterAdminDialogComponent } from '../../../componentes/register-admi
 })
 export class UsuariosComponent {
 
-  constructor(public apiService: ApiService, public dialog: MatDialog) { }
+  constructor(public apiService: ApiService, public dialog: MatDialog, public userService: UserService) { }
 
   @ViewChild('TABLE') table!: ElementRef;
   usuarios: Usuario[]
   displayedColumns: string[] = ['id', 'nombre', 'apellidos', 'email','partidos', 'botones'];
   filterPost = '';
+  myId: number;
 
   ngOnInit() {
-    this.getUsers();
+    this.getUsers()
+    this.myId = this.userService.getMyUser().user_id
   }
 
   openRegistrarUsuario() {

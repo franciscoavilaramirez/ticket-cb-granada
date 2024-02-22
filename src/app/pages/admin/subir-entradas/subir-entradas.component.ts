@@ -5,6 +5,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Pdf } from '../../../modelo/pdf';
 import { ApiService } from '../../../service/api.service';
 import { MatDialogRef } from '@angular/material/dialog';
+import { Partido } from '../../../modelo/partido';
 
 @Component({
   selector: 'app-subir-entradas',
@@ -15,34 +16,63 @@ export class SubirEntradasComponent {
   public form: FormGroup;
   private b64: String = "";
   pdf: Pdf = new Pdf();
-
+  
+  entradas: any//FormData = new FormData();
+  noFiles = true
   constructor(private apiService: ApiService, private formBuilder: FormBuilder, private dialogRef: MatDialogRef<SubirEntradasComponent>) { }
 
   ngOnInit() {
     let fechaActual = this.getFechaActual()
     this.form = this.formBuilder.group({
       granada: [{ value:'Granada', disabled: true }],
-      titulo: [''],
-      fecha: [''],
+      equipoVisitante: [''],
+      fechaPartido: [''],
       fechaPublicacion: fechaActual,
-      entradasPdf: []
     });
   }
 
-  send() {
-    this.pdf.tituloPartido = this.form.value.titulo;
-    this.pdf.fechaPartido = this.form.value.fecha;
-    this.pdf.fechaPublicacion = this.form.value.fechaPublicacion
-    console.log("Pdf: ", this.pdf)
-    console.log("Form: ", this.form.value)
+  // send() {
+  //   this.pdf.tituloPartido = this.form.value.titulo;
+  //   this.pdf.fechaPartido = this.form.value.fecha;
+  //   this.pdf.fechaPublicacion = this.form.value.fechaPublicacion
+  //   console.log("Pdf: ", this.pdf)
+  //   console.log("Form: ", this.form.value)
 
-    this.apiService.subirTickets(this.pdf).subscribe({
-      next: () => {
-        alert("Entradas subidas con exito")
-        this.dialogRef.close()
-      },
-      error: () => alert("Error al subir las entradas")
-    });
+  //   this.apiService.subirTickets(this.pdf).subscribe({
+  //     next: () => {
+  //       alert("Entradas subidas con exito")
+  //       this.dialogRef.close()
+  //     },
+  //     error: () => alert("Error al subir las entradas")
+  //   });
+  // }
+
+  uploadPdfFile(event: any) {
+    this.entradas = event.target.files[0];
+    this.noFiles = false
+    // this.entradas.append('entradas', entradas);
+    // this.pdfFile = pdfFiles.item(0);
+    //   let target = (event.target as HTMLInputElement)
+    //   if(target != null) {
+    //   let file = target.files[0];
+    //   this.form.patchValue({'entradasPdf': pdfFile})
+    //   console.log('form: ', this.form)
+    //   }
+    // }
+  }
+  subirPartido() {
+    let partido: Partido = this.form.value;
+    // partido.entradas = this.entradas;
+    console.log("partido", partido)
+    console.log(this.entradas)
+    let form = new FormData()
+    form.append('partido', JSON.stringify(partido))
+    form.append('entradasPdf', this.entradas)
+    this.apiService.subirPartido(form).subscribe({
+      next: (r) => {console.log("r")},
+      error: () => {}
+    }
+    );
   }
 
   subirArchivo(event: any): any {

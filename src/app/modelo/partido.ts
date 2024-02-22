@@ -5,5 +5,5 @@ export interface Partido {
   tengoEntrada: boolean,
   equipoVisitante: string,
   fechaPublicacion: string
-  }
+}
 

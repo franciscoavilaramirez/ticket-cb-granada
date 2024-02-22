@@ -75,6 +75,9 @@
               margin: 0 auto;
           }
       }
+        .eliminar:disabled {
+            background-color: #f87474;
+        }
     }
 
 }
