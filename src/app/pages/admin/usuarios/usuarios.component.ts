@@ -43,7 +43,7 @@ export class UsuariosComponent {
       apellidos: usuarioAny.apellidos,
       email: usuarioAny.email
     }
-    console.log('usuarioAny', usuarioAny, 'usuario', usuario);
+    //console.log('usuarioAny', usuarioAny, 'usuario', usuario);
     const dialog = this.dialog.open(UpdateUserComponent, {
       data: usuario,
       width: '25vw',
