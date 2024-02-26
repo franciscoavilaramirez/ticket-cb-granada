@@ -58,6 +58,14 @@
 
   <div class="container__table" #TABLE>
     <div class="container__table__content-table">
+      <div class="buscador">
+        <mat-form-field color="accent" >
+          <input matInput name="filterPost" [(ngModel)]="filterPost" placeholder="Escribe lo que deseas buscar" >
+           <mat-icon matPrefix>
+            <img style="width: 25px; height: 25px;" src="../../../assets/imgs/search_grey.png" alt="Lupa">
+          </mat-icon>
+        </mat-form-field>
+      </div>
 
       <table mat-table [dataSource]="partidosPasados | filter:filterPost" class="mat-elevation-z8" #table>
         <ng-container matColumnDef="partido">
@@ -70,15 +78,16 @@
         </ng-container>
         <ng-container matColumnDef="usuarios">
           <th mat-header-cell *matHeaderCellDef>{{"usuarios.usuarios" | translate }}</th>
-          <td mat-cell *matCellDef="let element"> </td>
+          <td mat-cell *matCellDef="let partido" (click)="getUsuariosPartido(partido.id)" >
+            <button mat-icon-button class="" type="submit"  >
+              <img src="../../../../assets/imgs/users_black.png" width="80px" height="30px">
+            </button>
+          </td>
         </ng-container>
-
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
       </table>
     </div>
   </div>
-
-
 </div>
 

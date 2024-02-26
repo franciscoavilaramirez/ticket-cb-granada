@@ -89,4 +89,9 @@ export class UsuariosComponent {
     /* save to file */
     XLSX.writeFile(wb, 'Listado_Usuarios.xlsx');
   }
+  getPartidosUsuario(){
+    this.apiService.getPartidosUsuario().subscribe(partidosUsuario =>{
+      console.log('partidos usuario',partidosUsuario);
+    });
+  }
 }

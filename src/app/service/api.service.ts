@@ -123,5 +123,8 @@ export class ApiService {
   getPartidosAnteriores(){
     return this.http.get<Partido[]>(this.apiUrl + 'getPartidosAnteriores');
   }
+  getPartidosUsuario() {
+    return this.http.get<Partido[]>(this.apiUrl + 'listarPartidosUsuario');
+  }
 
 }

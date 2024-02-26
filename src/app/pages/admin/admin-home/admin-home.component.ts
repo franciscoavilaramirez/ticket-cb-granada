@@ -31,12 +31,9 @@ export class AdminHomeComponent {
   }
 
   activeLang = 'es';
-  hiddenList = false;
-  hide = true;
   exportCsv = false;
   usuarios!: Usuario[];
   bodyResponse: Usuario;
-  currentUser: Usuario;
   partido!: Partido[];
   proximosPartidos!: Partido[];
   partidosPasados: Partido[] =[];
@@ -140,13 +137,8 @@ export class AdminHomeComponent {
       //this.getProximosPartidos()
     });
   }
-
-  openListUser(){
-    //console.log('List usuario');
-
-  }
   getProximosPartidos(){
-    this.apiService.getPartidos().subscribe(data =>{
+    this.apiService.getProximosPartidos().subscribe(data =>{
       this.proximosPartidos = data;
       console.log('Proximos Partidos',this.proximosPartidos);
       this.proximosPartidos.forEach(partido =>{

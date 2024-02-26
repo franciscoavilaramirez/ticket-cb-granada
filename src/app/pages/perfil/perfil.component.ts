@@ -28,7 +28,7 @@ export class PerfilComponent {
       this.idUsuario = -1
     else {
       let userJson = JSON.parse(user);
-      this.idUsuario = userJson.user_id
+      this.idUsuario = userJson.id
       console.log("id usuario perfil: " + this.idUsuario)
     }
     this.apiService.getUsuarioById(this.idUsuario).subscribe(

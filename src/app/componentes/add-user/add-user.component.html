@@ -2,8 +2,10 @@
 <div class="container">
   <div class="container__wrapper">
     <mat-form-field color="accent" >
-      <mat-label>{{"buscador" | translate }}</mat-label>
-      <input matInput placeholder= "Introduce el término de búsqueda" name="filterPost" [(ngModel)]="filterPost" >
+      <input matInput name="filterPost" [(ngModel)]="filterPost" placeholder="Escribe lo que deseas buscar" >
+       <mat-icon matPrefix>
+        <img style="width: 25px; height: 25px;" src="../../../assets/imgs/search_grey.png" alt="Lupa">
+      </mat-icon>
     </mat-form-field>
     <h1>{{"modalAnadirUsuario.yaInscritos" | translate }}</h1>
     <div class="container__wrapper__content-wrapper" *ngFor="let usuarioYaInscrito of usuariosYaInscritos | filter:filterPost" >

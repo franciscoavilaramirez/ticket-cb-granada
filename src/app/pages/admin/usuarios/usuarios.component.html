@@ -14,6 +14,9 @@
   <mat-form-field color="accent" class="buscador">
     <mat-label>{{"buscador" | translate }}</mat-label>
     <input matInput placeholder= "Introduce el término de búsqueda" name="filterPost" [(ngModel)]="filterPost" >
+    <mat-icon matPrefix>
+      <img style="width: 25px; height: 25px;" src="../../../assets/imgs/search_grey.png" alt="Lupa">
+    </mat-icon>
   </mat-form-field>
 </div>
 
@@ -45,7 +48,7 @@
       <th mat-header-cell *matHeaderCellDef>{{"botones.acciones" | translate }}</th>
       <td mat-cell *matCellDef="let element">
         <div class="container__wrapper__table-buttons">
-          <button mat-raised-button class="habilitar" type="submit" >
+          <button mat-raised-button class="habilitar" type="submit" (click)="getPartidosUsuario()" >
              <img src="../../../../assets/imgs/balon.png" width="20px" height="25px">
              <!-- <img src="assets/imgs/balon.png" > -->
              <!-- <mat-icon matSuffix  ></mat-icon> -->
