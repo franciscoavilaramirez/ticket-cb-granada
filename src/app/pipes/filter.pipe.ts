@@ -14,7 +14,6 @@ export class FilterPipe implements PipeTransform {
     // return value.filter((post: any) =>   post.nombre.toLowerCase().includes(arg) ||
     //                                      post.apellidos.toLowerCase().includes(arg) ||
     //                                      post.email.toLowerCase().includes(arg)
-
     // );
     return value.filter((post: any) => {
       const nombreLowerCase = post.nombre ? post.nombre.toLowerCase() : '';
@@ -29,7 +28,6 @@ export class FilterPipe implements PipeTransform {
              equipoVisitanteLowerCase.includes(arg) ||
              fechaPartidoLowerCase.includes(arg);
     });
-
   }
 }
 

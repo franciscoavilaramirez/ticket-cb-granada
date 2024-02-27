@@ -49,7 +49,7 @@
   "modalAnadirUsuario":{
     "inscritos": "Usuarios Inscritos:",
     "yaInscritos": "Usuarios Inscritos",
-    "noHayInscritos":"No hay usuarios registrados en este momento",
+    "noHayInscritos":"No hay usuarios registrados en este partido",
     "pendientes":"Usuarios Pendientes",
     "guardar": "Guardar",
     "cancelar": "Cancelar"

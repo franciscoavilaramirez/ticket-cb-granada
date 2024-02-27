@@ -1,4 +1,4 @@
-import { Component, Renderer2 } from '@angular/core';
+import { ChangeDetectorRef, Component, Renderer2 } from '@angular/core';
 import { ApiService } from '../../service/api.service';
 import { Partido } from '../../modelo/partido';
 import { MatDialog } from '@angular/material/dialog';
@@ -11,7 +11,7 @@ import { AddEntradasUsuarioComponent } from '../../componentes/add-entradas-usua
 })
 export class HomeComponent {
 
-  constructor(private apiService: ApiService, private renderer: Renderer2,public dialog: MatDialog) {
+  constructor(private apiService: ApiService, private renderer: Renderer2,public dialog: MatDialog,) {
     // this.renderer.setStyle(document.body, 'background', 'url("../../../assets/imgs/pista-baloncesto.png")');
     // this.renderer.setStyle(document.body, 'background-size', 'cover');
     // this.renderer.setStyle(document.body, 'background-repeat', 'no-repeat');
@@ -87,39 +87,39 @@ export class HomeComponent {
         });
       }
     })
-
   }
-
   descargar(idPartido: number, nombrePartido: string) {
+
     this.apiService.getEntrada(this.idUsuario, idPartido).subscribe(entradaPdf => {
-      const link = document.createElement('a');
-      link.href = URL.createObjectURL(entradaPdf);
-      link.download = 'Granada - ' + nombrePartido + '.pdf';
-      link.click();
+      entradaPdf.forEach(file => {
+        const byteCharacters = atob(file.data);
+        const byteArrays = [];
+        for (let i = 0; i < byteCharacters.length; i++) {
+          byteArrays.push(byteCharacters.charCodeAt(i));
+        }
+        const byteArray = new Uint8Array(byteArrays);
+        //return new Blob([byteArray], { type: 'application/pdf' });
+        const blob = new Blob([byteArray], { type: 'application/pdf' });
+        const url = window.URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = 'Granada - ' + nombrePartido + '.pdf';
+        link.click();
+        window.URL.revokeObjectURL(url);
+
+      })
+
     });
   }
 
-  // descargar1() {
-  //   this.apiService.getEntrada(1, 1).subscribe(entradaPdf => {
+  // descargar(idPartido: number, nombrePartido: string) {
+  //   this.apiService.getEntrada(this.idUsuario, idPartido).subscribe(entradaPdf => {
   //     const link = document.createElement('a');
   //     link.href = URL.createObjectURL(entradaPdf);
-  //     link.download = 'Granada - ' + 'Madrid' + '.pdf';
+  //     link.download = 'Granada - ' + nombrePartido + '.pdf';
   //     link.click();
   //   });
   // }
-
-  // base64ToBlob(base64String: string, contentType = ''): Blob {
-  //   const byteCharacters = atob(base64String);
-  //   const byteArrays = [];
-
-  //   for (let i = 0; i < byteCharacters.length; i++) {
-  //     byteArrays.push(byteCharacters.charCodeAt(i));
-  //   }
-
-  //   const byteArray = new Uint8Array(byteArrays);
-  //   return new Blob([byteArray], { type: contentType });
-  // }
-
 
   getUsuarioId(): number {
     let userStr = localStorage.getItem('user');
@@ -130,8 +130,8 @@ export class HomeComponent {
   }
   openAddTicketsUser() {
     const dialog = this.dialog.open(AddEntradasUsuarioComponent,{
-      width:'35vw',
-      height:'50vh'
+      width:'30vw',
+      height:'60vh'
     });
     dialog.afterClosed().subscribe(result => {
     });

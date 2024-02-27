@@ -6,6 +6,7 @@ import { Partido } from '../modelo/partido';
 import { Observable } from 'rxjs';
 import { environment } from '../../enviroments/environment';
 import { Pdf } from '../modelo/pdf';
+import { FileInfo } from '../modelo/fileInfo';
 
 @Injectable({
   providedIn: 'root'
@@ -36,9 +37,9 @@ export class ApiService {
   //   const headers = new HttpHeaders().set('Content-Type', 'text/plain; charset=utf-8');
   //   return this.http.get(this.apiUrl + 'enviarEntrada/'+idUsuario+'/'+idPartido,{ headers, responseType: 'text'});
   // }
-  getEntrada(idUsuario:number, idPartido:number): Observable<Blob> {
-    return this.http.get(this.apiUrl + 'descargarEntrada/'+idUsuario+'/'+idPartido, {responseType:'blob'})
-  }
+  // getEntrada(idUsuario:number, idPartido:number): Observable<Blob> {
+  //   return this.http.get(this.apiUrl + 'descargarEntrada/'+idUsuario+'/'+idPartido, {responseType:'blob'})
+  // }
 
   // subirTickets(pdf: Pdf): Observable<object>{
   //   return this.http.post(this.apiUrl + 'crearPartidoConEntradas', pdf);
@@ -118,7 +119,7 @@ export class ApiService {
     return this.http.get<Partido>(this.apiUrl + 'entradasSobrantes/'+partidoId);
   }
   getDescargarEntradasAdi(usuarioId: number,partidoId: number,numEntradas: number){
-    return this.http.get(this.apiUrl + 'descargarEntradasAdicionales/'+ usuarioId + '/' + partidoId + '/' + numEntradas);
+    return this.http.get<Boolean>(this.apiUrl + 'descargarEntradasAdicionales/'+ usuarioId + '/' + partidoId + '/' + numEntradas);
   }
   getPartidosAnteriores(){
     return this.http.get<Partido[]>(this.apiUrl + 'getPartidosAnteriores');
@@ -126,5 +127,10 @@ export class ApiService {
   getPartidosUsuario() {
     return this.http.get<Partido[]>(this.apiUrl + 'listarPartidosUsuario');
   }
-
+  // getEntradasExtra(idUsuario:number, idPartido:number, nEntarda:number) {
+  //   return this.http.get<any[]>(this.apiUrl + 'descargarEntradasAdicionales/'+idUsuario+'/'+idPartido+'/'+nEntarda)
+  // }
+  getEntrada(idUsuario:number, idPartido:number) {
+    return this.http.get<FileInfo[]>(this.apiUrl + 'descargarEntrada/'+idUsuario+'/'+idPartido)
+  }
 }

@@ -16,7 +16,7 @@ export class SubirEntradasComponent {
   public form: FormGroup;
   private b64: String = "";
   pdf: Pdf = new Pdf();
-  
+
   entradas: any//FormData = new FormData();
   noFiles = true
   constructor(private apiService: ApiService, private formBuilder: FormBuilder, private dialogRef: MatDialogRef<SubirEntradasComponent>) { }
@@ -31,34 +31,9 @@ export class SubirEntradasComponent {
     });
   }
 
-  // send() {
-  //   this.pdf.tituloPartido = this.form.value.titulo;
-  //   this.pdf.fechaPartido = this.form.value.fecha;
-  //   this.pdf.fechaPublicacion = this.form.value.fechaPublicacion
-  //   console.log("Pdf: ", this.pdf)
-  //   console.log("Form: ", this.form.value)
-
-  //   this.apiService.subirTickets(this.pdf).subscribe({
-  //     next: () => {
-  //       alert("Entradas subidas con exito")
-  //       this.dialogRef.close()
-  //     },
-  //     error: () => alert("Error al subir las entradas")
-  //   });
-  // }
-
   uploadPdfFile(event: any) {
     this.entradas = event.target.files[0];
     this.noFiles = false
-    // this.entradas.append('entradas', entradas);
-    // this.pdfFile = pdfFiles.item(0);
-    //   let target = (event.target as HTMLInputElement)
-    //   if(target != null) {
-    //   let file = target.files[0];
-    //   this.form.patchValue({'entradasPdf': pdfFile})
-    //   console.log('form: ', this.form)
-    //   }
-    // }
   }
   subirPartido() {
     let partido: Partido = this.form.value;
@@ -73,6 +48,7 @@ export class SubirEntradasComponent {
       error: () => {}
     }
     );
+    this.dialogRef.close();
   }
 
   subirArchivo(event: any): any {
@@ -118,11 +94,11 @@ export class SubirEntradasComponent {
     let hora:any = fecha.getHours()
     let minutos:any = fecha.getMinutes()
 
-    if(mes < 10) mes = '0'+mes 
+    if(mes < 10) mes = '0'+mes
     if(dia < 10) dia = '0'+dia
     if(hora < 10) hora = '0'+hora
     if(minutos < 10) minutos = '0'+minutos
-    
+
     return fecha.getFullYear()+"-"+mes+"-"+dia+"T"+hora+":"+minutos
   }
 

@@ -5,6 +5,10 @@ import { HomeComponent } from '../../pages/home/home.component';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Usuario } from '../../modelo/usuario';
 import { Partido } from '../../modelo/partido';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Subscription } from 'rxjs';
+import Swal from 'sweetalert2';
+
 
 @Component({
   selector: 'app-add-entradas-usuario',
@@ -13,13 +17,16 @@ import { Partido } from '../../modelo/partido';
 })
 export class AddEntradasUsuarioComponent implements OnInit {
 
-  idUsuario:number;
+idUsuario:number;
 addTicketsForm: FormGroup;
 numEntradas: number;
+//acompananteDisable: boolean =  true;
+valueChangesSubscription: Subscription | undefined;
 
 constructor(private apiService:ApiService,public dialogRef: MatDialogRef<HomeComponent>,
             @Inject(MAT_DIALOG_DATA) public partidoId: Partido,
-            @Inject(MAT_DIALOG_DATA) public usuario: Usuario){}
+            @Inject(MAT_DIALOG_DATA) public usuario: Usuario,
+            public snackBar: MatSnackBar){}
 
 
   ngOnInit(): void {
@@ -34,11 +41,20 @@ constructor(private apiService:ApiService,public dialogRef: MatDialogRef<HomeCom
         //console.log('partidoooooooID',this.partidoId.id);
       }
     });
+    this.valueChangesSubscription = this.addTicketsForm.get('numeroTickets')?.valueChanges.subscribe(value => {
+      console.log('current', value); // Imprimir el valor actualizado en la consola
+    });
+  }
+  ngOnDestroy() {
+    // Darse de baja de la suscripción para evitar posibles fugas de memoria
+    if (this.valueChangesSubscription) {
+      this.valueChangesSubscription.unsubscribe();
+    }
   }
 
 createAddTicketsForm(){
   this.addTicketsForm = new FormGroup({
-    numeroTickets: new FormControl(''),
+    numeroTickets: new FormControl(1),
   })
 }
 getUsuarioId(): number {
@@ -48,32 +64,45 @@ getUsuarioId(): number {
   else
     return JSON.parse(userStr).id
 }
+
 onSubmit(){
   const bodyResponse = this.addTicketsForm.value;
   this.numEntradas = bodyResponse.numeroTickets;
-  //console.log('bodyResponse',bodyResponse)
-  //console.log('numEntradas',this.numEntradas)
-
-  this.apiService.getDescargarEntradasAdi(this.idUsuario,this.partidoId.id,this.numEntradas).subscribe(data =>{
-  console.log('Entrada',data);
+  this.apiService.getDescargarEntradasAdi(this.idUsuario,this.partidoId.id,this.numEntradas).subscribe(entrada =>{
+  console.log('Entrada',entrada);
+    if(entrada == true ){
+      Swal.fire("Entradas adicionales asignadas", "", "success");
+    }
+    else {
+      Swal.fire("No quedan entradas", "", "info");
+    }
   });
   this.closedModal();
 }
+
   closedModal(): void {
     this.dialogRef.close();
     //this.apiService.getProximosPartidos();
 }
+  incrementNumber() {
+    const numeroTicketsControl = this.addTicketsForm.get('numeroTickets');
+    if (numeroTicketsControl) {
+      let currentValue = parseInt(numeroTicketsControl.value);
+      if (!isNaN(currentValue)) {
+        numeroTicketsControl.setValue(currentValue + 1);
+      }
+    }
+  }
+  decrementNumber() {
+    const numeroTicketsControl = this.addTicketsForm.get('numeroTickets');
+    if (numeroTicketsControl) {
+      let currentValue = parseInt(numeroTicketsControl.value);
+      if(currentValue >= 1){
+        if (!isNaN(currentValue)) {
+          numeroTicketsControl.setValue(currentValue - 1);
+        }
+      }
+    }
+  }
+
 }
-// if (this.registerForm.valid) {
-//   this.http.post(environment.apiUrl + 'addUser', this.registerForm.value).subscribe({
-//     next: (response) => {
-//       console.log(response)
-//       Swal.fire("Usuario registrado", "", "success");
-//       this.matDialogRef.close()
-//     },
-//     error: error => {
-//       alert("Error de registro. Compruebe que el email no esté en uso")
-//       console.log("Error al registrar el usuario.", error);
-//     }
-//   });
-// }
