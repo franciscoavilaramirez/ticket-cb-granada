@@ -22,6 +22,10 @@ export class HomeComponent {
   partidos: Partido[]
   misPartidosIds: number[]
   primerPartido: Partido
+  filterPost = '';
+  partidosFuturos: Partido[] =[];
+  displayedColumns: string[] = ['partido','fechaPublicacion'];
+
   ngOnInit() {
         this.idUsuario = this.getUsuarioId()
 
@@ -52,6 +56,7 @@ export class HomeComponent {
         console.log("Mis partidos ids: ", this.misPartidosIds)
       });
     });
+    this.getPartidosFuturos();
   }
 
   apuntarse(idPartido: number) {
@@ -134,6 +139,12 @@ export class HomeComponent {
       height:'60vh'
     });
     dialog.afterClosed().subscribe(result => {
+    });
+  }
+  getPartidosFuturos(){
+    this.apiService.getProximosPartidosDisponibles().subscribe(partidosFuturos =>{
+      this.partidosFuturos = partidosFuturos;
+      console.log('partidos futuros',this.partidosFuturos)
     });
   }
 }

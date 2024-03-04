@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { Observable, Subscriber, min } from 'rxjs';
 
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -16,9 +16,11 @@ export class SubirEntradasComponent {
   public form: FormGroup;
   private b64: String = "";
   pdf: Pdf = new Pdf();
-
   entradas: any//FormData = new FormData();
   noFiles = true
+  @Output() actualizacionProximosPartidos: EventEmitter<any> = new EventEmitter();
+
+
   constructor(private apiService: ApiService, private formBuilder: FormBuilder, private dialogRef: MatDialogRef<SubirEntradasComponent>) { }
 
   ngOnInit() {
@@ -49,6 +51,9 @@ export class SubirEntradasComponent {
     }
     );
     this.dialogRef.close();
+    this.apiService.getProximosPartidos().subscribe(data => {
+      console.log('proximos partidos desde subir entradas',data);
+    })
   }
 
   subirArchivo(event: any): any {

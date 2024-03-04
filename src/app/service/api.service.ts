@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Usuario } from '../modelo/usuario';
 import { Partido } from '../modelo/partido';
 
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { environment } from '../../enviroments/environment';
 import { Pdf } from '../modelo/pdf';
 import { FileInfo } from '../modelo/fileInfo';
@@ -133,4 +133,9 @@ export class ApiService {
   getEntrada(idUsuario:number, idPartido:number) {
     return this.http.get<FileInfo[]>(this.apiUrl + 'descargarEntrada/'+idUsuario+'/'+idPartido)
   }
+  getProximosPartidosDisponibles() {
+    return this.http.get<Partido[]>(this.apiUrl + 'getProximosPartidosDisponibles');
+  }
+
+
 }

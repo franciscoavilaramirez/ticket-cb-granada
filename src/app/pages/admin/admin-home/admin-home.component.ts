@@ -14,12 +14,12 @@ import { ApiService } from '../../../service/api.service';
 import { SubirEntradasComponent } from '../subir-entradas/subir-entradas.component';
 import { ListUserComponent } from '../../../componentes/list-user/list-user.component';
 import { HabilitarEntradasComponent } from '../habilitar-entradas/habilitar-entradas.component';
-
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-home',
   templateUrl: './admin-home.component.html',
-  styleUrls: ['./admin-home.component.scss']
+  styleUrls: ['./admin-home.component.scss'],
 })
 export class AdminHomeComponent {
 [x: string]: any;
@@ -28,6 +28,7 @@ export class AdminHomeComponent {
               private router: Router,public dialog: MatDialog,
               private translate: TranslateService) {
               this.translate.setDefaultLang(this.activeLang);
+
   }
 
   activeLang = 'es';
@@ -44,6 +45,7 @@ export class AdminHomeComponent {
   entradas: number;
   filterPost = '';
   @ViewChild('TABLE') table!: ElementRef;
+  private subscription: Subscription;
 
   ColumnsInscritos: string[] = ['id','nombre','apellidos','email'];
   displayedColumns: string[] = ['partido','fecha','usuarios'];
@@ -100,12 +102,13 @@ export class AdminHomeComponent {
   }
 
   openSubirEntradas() {
-    this.dialog.open(SubirEntradasComponent, {
+    const dialog = this.dialog.open(SubirEntradasComponent, {
       width: '50vw',
-      height: '70vh',
+      height: '85vh',
       autoFocus: false
-    }).afterClosed().subscribe( () => {
-      this.getProximosPartidos()
+    });
+      dialog.afterClosed().subscribe( result => {
+        this.getProximosPartidos()
     });
   }
   openAddUser(partido: Partido) {
@@ -128,15 +131,15 @@ export class AdminHomeComponent {
       this.getProximosPartidos();
     });
   }
-  openHabilitarEntradas() {
-    this.dialog.open(HabilitarEntradasComponent, {
-      width: '30vw',
-      height: '60vh',
-      autoFocus: false
-    }).afterClosed().subscribe( () => {
-      //this.getProximosPartidos()
-    });
-  }
+  // openHabilitarEntradas() {
+  //   this.dialog.open(HabilitarEntradasComponent, {
+  //     width: '30vw',
+  //     height: '60vh',
+  //     autoFocus: false
+  //   }).afterClosed().subscribe( () => {
+  //     //this.getProximosPartidos()
+  //   });
+  // }
   getProximosPartidos(){
     this.apiService.getProximosPartidos().subscribe(data =>{
       this.proximosPartidos = data;
