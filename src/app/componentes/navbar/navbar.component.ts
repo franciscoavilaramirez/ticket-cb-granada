@@ -16,7 +16,7 @@ export class NavbarComponent implements OnInit {
   ngOnInit(): void {
     this.isAdmin = this.userService.getMyUser().isAdmin
   }
-  
+
   activeLang = 'es';
   cambiarIdioma(event: any) {
     //console.log('Valor seleccionado:', event.target.value);

@@ -26,10 +26,10 @@ export class EditPasswordComponent {
       contrasenaRepetida: ['', [Validators.required, Validators.pattern("^(?=.*\\d)(?=.*[@#$%^&+=*_-])(?=.*[a-z])(?=.*[A-Z]).{8,}$")]]
     }, { validator: this.checkPasswordsMatch });
 
-    console.log("id usuario edit: " + this.userModify.id)
-    console.log("usuario edit: " + JSON.stringify(this.userModify))
+      console.log("id usuario edit: "+ this.userModify.id)
+      console.log("usuario edit: "+ JSON.stringify(this.userModify))
 
-  }
+    }
 
   checkPasswordsMatch(group: FormGroup) {
     let passControl = group.get('contrasenaNueva');
@@ -47,7 +47,7 @@ export class EditPasswordComponent {
     console.log("contraseña actual: " + this.editPassword.get("contrasenaActual")?.value);
     console.log("passwird: " + this.userModify.id);
     if (this.userModify.id != null) {
-      this.service.checkPasswords(parseInt(this.userModify.id), this.editPassword.get("contrasenaActual")?.value).subscribe(response => {
+      this.service.checkPasswords(this.userModify.id, this.editPassword.get("contrasenaActual")?.value).subscribe(response => {
         if (response == true) {
           console.log("contraseña correcta");
           let usuario: Usuario = this.userModify;

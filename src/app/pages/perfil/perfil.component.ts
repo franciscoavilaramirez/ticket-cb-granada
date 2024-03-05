@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-perfil',
   templateUrl: './perfil.component.html',
-  styleUrl: './perfil.component.css'
+  styleUrl: './perfil.component.scss'
 })
 export class PerfilComponent {
   editarPerfil: FormGroup;
@@ -28,7 +28,7 @@ export class PerfilComponent {
       this.idUsuario = -1
     else {
       let userJson = JSON.parse(user);
-      this.idUsuario = userJson.user_id
+      this.idUsuario = userJson.id
       console.log("id usuario perfil: " + this.idUsuario)
     }
     this.apiService.getUsuarioById(this.idUsuario).subscribe(
@@ -58,7 +58,7 @@ export class PerfilComponent {
       confirmButtonColor: '#36BF98',
       denyButtonColor: 'grey',
     }).then((response) => {
-      if (response.isConfirmed) 
+      if (response.isConfirmed)
         this.apiService.modifyUser(usuario).subscribe()
     });
   }

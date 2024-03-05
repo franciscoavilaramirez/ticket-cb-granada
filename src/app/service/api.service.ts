@@ -4,9 +4,10 @@ import { Usuario } from '../modelo/usuario';
 import { Partido } from '../modelo/partido';
 import { FileInfo } from '../modelo/FileInfo';
 
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { environment } from '../../enviroments/environment';
 import { Pdf } from '../modelo/pdf';
+import { FileInfo } from '../modelo/fileInfo';
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +23,7 @@ export class ApiService {
     return this.http.get<Partido[]>(this.apiUrl + 'getProximosPartidos');
   }
   //Ids de los partidos donde tengo entrada
-  getMisPartidosIds(userId: number): Observable<number[]> {
+  getMisPartidosIds(userId: number) {
     return this.http.get<number[]>(this.apiUrl + 'getMisPartidosIds/'+userId);
   }
 
@@ -37,9 +38,9 @@ export class ApiService {
   //   const headers = new HttpHeaders().set('Content-Type', 'text/plain; charset=utf-8');
   //   return this.http.get(this.apiUrl + 'enviarEntrada/'+idUsuario+'/'+idPartido,{ headers, responseType: 'text'});
   // }
-  getEntrada(idUsuario:number, idPartido:number): Observable<Blob> {
-    return this.http.get(this.apiUrl + 'descargarEntrada/'+idUsuario+'/'+idPartido, {responseType:'blob'})
-  } 
+  // getEntrada(idUsuario:number, idPartido:number): Observable<Blob> {
+  //   return this.http.get(this.apiUrl + 'descargarEntrada/'+idUsuario+'/'+idPartido, {responseType:'blob'})
+  // }
 
   // subirTickets(pdf: Pdf): Observable<object>{
   //   return this.http.post(this.apiUrl + 'crearPartidoConEntradas', pdf);
@@ -103,18 +104,40 @@ export class ApiService {
   deleteUserMatch(usuarioId: number | undefined,partidoId: Partido) {
     return this.http.delete<Usuario>(`${this.apiUrl + 'deleteUsuarioFromPartido'}/${usuarioId}/${partidoId.id}`);
   }
-  
+
   getUsuarioById(usuarioId: number){
     return this.http.get<Usuario>(this.apiUrl + 'userById/'+usuarioId);
   }
 
-  checkPasswords(usuarioId: number, password: string){
+  checkPasswords(usuarioId: string | undefined, password: string){
     return this.http.get<Boolean>(this.apiUrl + 'checkPasswords/'+usuarioId+'/'+password);
   }
 
   modifyUser(usuario: Usuario): Observable<Partido> {
     return this.http.put<Partido>(`${this.apiUrl+'modificarUsuario'}/${usuario.id}`, usuario);
   }
+  getEntradasSobrantes(partidoId: number){
+    return this.http.get<Partido>(this.apiUrl + 'entradasSobrantes/'+partidoId);
+  }
+  getDescargarEntradasAdi(usuarioId: number,partidoId: number,numEntradas: number){
+    return this.http.get<Boolean>(this.apiUrl + 'descargarEntradasAdicionales/'+ usuarioId + '/' + partidoId + '/' + numEntradas);
+  }
+  getPartidosAnteriores(){
+    return this.http.get<Partido[]>(this.apiUrl + 'getPartidosAnteriores');
+  }
+  getPartidosUsuario() {
+    return this.http.get<Partido[]>(this.apiUrl + 'listarPartidosUsuario');
+  }
+  // getEntradasExtra(idUsuario:number, idPartido:number, nEntarda:number) {
+  //   return this.http.get<any[]>(this.apiUrl + 'descargarEntradasAdicionales/'+idUsuario+'/'+idPartido+'/'+nEntarda)
+  // }
+  getEntrada(idUsuario:number, idPartido:number) {
+    return this.http.get<FileInfo[]>(this.apiUrl + 'descargarEntrada/'+idUsuario+'/'+idPartido)
+  }
+  getProximosPartidosDisponibles() {
+    return this.http.get<Partido[]>(this.apiUrl + 'getProximosPartidosDisponibles');
+  }
+
 
   getEntradasExtra(idUsuario:number, idPartido:number, nEntarda:number) {
     return this.http.get<FileInfo[]>(this.apiUrl + 'descargarEntradasAdicionales/'+idUsuario+'/'+idPartido+'/'+nEntarda)

@@ -19,7 +19,8 @@ export class UsuariosComponent {
 
   @ViewChild('TABLE') table!: ElementRef;
   usuarios: Usuario[]
-  displayedColumns: string[] = ['id', 'nombre', 'apellidos', 'email', 'botones'];
+  displayedColumns: string[] = ['id', 'nombre', 'apellidos', 'email','partidos', 'botones'];
+  filterPost = '';
   myId: number;
 
   ngOnInit() {
@@ -42,7 +43,7 @@ export class UsuariosComponent {
       apellidos: usuarioAny.apellidos,
       email: usuarioAny.email
     }
-    console.log('usuarioAny', usuarioAny, 'usuario', usuario);
+    //console.log('usuarioAny', usuarioAny, 'usuario', usuario);
     const dialog = this.dialog.open(UpdateUserComponent, {
       data: usuario,
       width: '25vw',
@@ -68,11 +69,11 @@ export class UsuariosComponent {
         this.apiService.deleteUser(userId).subscribe((success)=>{
             Swal.fire("Usuario Eliminado", "", "success");
             this.getUsers()
-        });        
-      }  
+        });
+      }
     });
   }
-  
+
   getUsers() {
     this.apiService.getUsers().subscribe(data => {
       this.usuarios = data
@@ -87,5 +88,10 @@ export class UsuariosComponent {
     XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
     /* save to file */
     XLSX.writeFile(wb, 'Listado_Usuarios.xlsx');
+  }
+  getPartidosUsuario(){
+    this.apiService.getPartidosUsuario().subscribe(partidosUsuario =>{
+      console.log('partidos usuario',partidosUsuario);
+    });
   }
 }

@@ -41,7 +41,6 @@ export class ModifyMatchComponent {
   onSubmit(){
     if(this.updateMatchForm.valid){
       const bodyResponse: Partido = this.updateMatchForm.value;
-      console.log("bodyResponse",bodyResponse);
       this.apiService.updateMatch(bodyResponse).subscribe(data =>{
         console.log('update partido',data);
         this.closedModal();

@@ -11,6 +11,8 @@ import { AdminHomeComponent } from '../../pages/admin/admin-home/admin-home.comp
   styleUrl: './list-user.component.scss'
 })
 export class ListUserComponent implements OnInit {
+contador: any;
+filterPost = '' ;
 
 
 constructor(public apiService: ApiService,public dialog: MatDialog,
@@ -19,9 +21,10 @@ constructor(public apiService: ApiService,public dialog: MatDialog,
             @Inject(MAT_DIALOG_DATA) public usuariosPartido: Usuario[]){}
 
 ngOnInit(){
-  //this.getUsuariosPartido(this.usuarioPartido)
-  console.log('usuarios partido',this.usuariosPartido)
+  this.contador = this.usuariosPartido.length || 0;
 }
+
+
 closedModal(): void {
   this.dialogRef.close();
 }

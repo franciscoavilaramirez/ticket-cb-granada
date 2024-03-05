@@ -1,0 +1,23 @@
+<div class="container">
+  <form [formGroup]="enableTicketsForm" (click)="onSubmit()">
+      <h2>{{"habilitarEntradas.titulo" | translate }}</h2>
+      <div class="content">
+          <div>
+              <div class="label">{{"habilitarEntradas.numero" | translate }}<span style="color: rgb(221, 37, 37);">*</span></div>
+              <input type="number" formControlName="numero" min="1" class="equipo" required>
+          </div>
+          <div>
+            <div class="label">{{"habilitarEntradas.dias" | translate }}<span style="color: rgb(221, 37, 37);">*</span></div>
+            <!-- <input (focus)="onFocus()" (blur)="onBlur()" type="number" class="datetime-picker" formControlName="fechaPublicacion" required> -->
+            <input type="number" formControlName="dias" min="1" required>
+
+          </div>
+          <div >
+            <div class="buttons">
+            <button mat-raised-button class="buttons__guardar" [disabled]="!enableTicketsForm.valid" (click)="onSubmit()">{{"botones.guardar" | translate }}</button>
+            <button mat-raised-button class="buttons__cancelar" (click)="closedModal()">{{"botones.cancelar" | translate }}</button>
+          </div>
+        </div>
+      </div>
+  </form>
+</div>

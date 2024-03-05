@@ -1,5 +1,5 @@
 import { LOCALE_ID, NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, DomSanitizer } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -10,7 +10,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatTableModule} from '@angular/material/table';
-import {MatIconModule} from '@angular/material/icon'
+import {MatIconModule, MatIconRegistry} from '@angular/material/icon'
 import { ReactiveFormsModule } from '@angular/forms';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatCheckboxModule} from '@angular/material/checkbox';
@@ -48,6 +48,9 @@ import { RegisterAdminDialogComponent } from './componentes/register-admin-dialo
 import { ListUserComponent } from './componentes/list-user/list-user.component';
 import {MatSelectModule} from '@angular/material/select';
 import {MatMenuModule} from '@angular/material/menu';
+import { FilterPipe } from './pipes/filter.pipe';
+import { HabilitarEntradasComponent } from './pages/admin/habilitar-entradas/habilitar-entradas.component';
+import { AddEntradasUsuarioComponent } from './componentes/add-entradas-usuario/add-entradas-usuario.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -73,7 +76,10 @@ export function HttpLoaderFactory(http: HttpClient) {
     TranslationComponent,
     UsuariosComponent,
     RegisterAdminDialogComponent,
-    ListUserComponent
+    ListUserComponent,
+    FilterPipe,
+    HabilitarEntradasComponent,
+    AddEntradasUsuarioComponent
   ],
   imports: [
     HttpClientModule,
@@ -112,4 +118,7 @@ export function HttpLoaderFactory(http: HttpClient) {
   bootstrap: [AppComponent]
 })
 
-export class AppModule { }
+export class AppModule {
+
+
+}

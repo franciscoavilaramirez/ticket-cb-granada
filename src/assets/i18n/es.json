@@ -9,7 +9,18 @@
   "contrasenaNoCoincide": "Las contraseñas no coinciden",
   "registrarse" : "Registrarse",
   "requisitosContrasena" : "La contraseña debe tener al menos 8 caracteres, una minúscula, una mayúscula y un caracter especial",
-  
+  "buscador": "Buscar",
+  "registro":"Registrate para crear una cuenta",
+  "usuarioRegistrado":"Ya tienes una cuenta?",
+  "iniciaSesion":"Inicia sesión",
+  "anadirEntradas":"Añadir Entradas",
+  "partido":"Partido",
+  "fecha":"Fecha",
+  "fechaPublicacion": "Fecha Publicación",
+  "tickets": "entradas",
+  "quedan": "Quedan",
+
+
 	"card":{
     "mostrarOcultar":"Mostrar Inscritos",
     "anadirUsuario": "Añadir Usuario",
@@ -29,17 +40,21 @@
     "nombre": "Nombre",
     "apellido": "Apellidos",
     "email": "Email",
+    "partidos": "Partidos Asistidos",
     "acciones": "Acciones",
     "mostrar": "Mostrar listado usuarios",
     "ocultar":"Ocultar listado",
     "exportarXlsX": "Exportar Usarios a XLSX",
     "modificar": "Modificar",
     "eliminar": "Eliminar",
-    "registrados": "Usuarios registrados"
+    "registrados": "Usuarios registrados",
+    "usuarios": "Usuarios"
     },
   "modalAnadirUsuario":{
-    "inscritos": "Usuarios Inscritos",
-    "pendientes":"Usuarios pendientes Inscribir",
+    "inscritos": "Usuarios Inscritos:",
+    "yaInscritos": "Usuarios Inscritos",
+    "noHayInscritos":"No hay usuarios registrados en este partido",
+    "pendientes":"Usuarios Pendientes",
     "guardar": "Guardar",
     "cancelar": "Cancelar"
     },
@@ -49,8 +64,10 @@
     "guardar": "Guardar Cambios",
     "cancelar": "Cancelar",
     "equipoVisitante": "Equipo Visitante ",
-    "fecha": "Fecha Partido",
-    "fechaPublicacion": "Fecha Publicación"
+    "fecha": "Fecha Partido: ",
+    "fechaPublicacion": "Fecha Publicación: ",
+    "entradas": "Entradas Disponibles: "
+
 
     },
   "modificarUsuario":{
@@ -65,10 +82,13 @@
       "acciones": "Acciones",
       "guardar": "Guardar",
       "guardarCambios":"Guardar Cambios",
+      "subir":"Subir",
       "eliminar": "Eliminar",
       "eliminarPartido": "Eliminar Partido",
       "cancelar":"Cancelar",
-      "cerrar": "Cerrar"
+      "cerrar": "Cerrar",
+      "cerrarSesion":"Cerrar Sesión",
+      "cambiarContrasena":"Cambiar Contraseña"
     },
     "idioma":{
       "titulo":"Idioma",
@@ -82,6 +102,15 @@
       "usuarios":"Usuarios"
     },
     "entradas":{
-      "subir":"Subir Entradas"
+      "subir":"Subir Entradas",
+      "habilitar":"Habilitar Entradas"
+    },
+    "habilitarEntradas":{
+      "titulo":"Habilitar Entradas",
+      "numero":"Número de entradas",
+      "dias":"Días de antelación"
+    },
+    "perfil":{
+      "datosPerfil":"Datos del Perfil"
     }
 	}

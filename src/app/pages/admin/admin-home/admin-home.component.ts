@@ -13,12 +13,13 @@ import { TranslateService } from '@ngx-translate/core';
 import { ApiService } from '../../../service/api.service';
 import { SubirEntradasComponent } from '../subir-entradas/subir-entradas.component';
 import { ListUserComponent } from '../../../componentes/list-user/list-user.component';
-
+import { HabilitarEntradasComponent } from '../habilitar-entradas/habilitar-entradas.component';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-home',
   templateUrl: './admin-home.component.html',
-  styleUrls: ['./admin-home.component.scss']
+  styleUrls: ['./admin-home.component.scss'],
 })
 export class AdminHomeComponent {
 [x: string]: any;
@@ -27,28 +28,32 @@ export class AdminHomeComponent {
               private router: Router,public dialog: MatDialog,
               private translate: TranslateService) {
               this.translate.setDefaultLang(this.activeLang);
+
   }
 
   activeLang = 'es';
-  hiddenList = false;
-  hide = true;
   exportCsv = false;
   usuarios!: Usuario[];
   bodyResponse: Usuario;
-  currentUser: Usuario;
   partido!: Partido[];
   proximosPartidos!: Partido[];
+  partidosPasados: Partido[] =[];
   usuariosPartido!: Usuario[];
   fechaPartido:string;
   idPartido!: string;
-
-
+  entradasSobrantes!: any;
+  entradas: number;
+  filterPost = '';
+  @ViewChild('TABLE') table!: ElementRef;
+  private subscription: Subscription;
 
   ColumnsInscritos: string[] = ['id','nombre','apellidos','email'];
+  displayedColumns: string[] = ['partido','fecha','usuarios'];
 
   ngOnInit(){
     this.getUsers();
     this.getProximosPartidos();
+    this.getPartidosAnteriores();
   }
   public cambiarLenguaje(lang: string) {
     this.activeLang = lang;
@@ -77,17 +82,6 @@ export class AdminHomeComponent {
       this.getUsers();
     });
   }
-
-  userList(){
-    this.hiddenList = true;
-    this.exportCsv = true;
-  }
-
-  hiddenUserList(){
-    this.hiddenList = false;
-    this.exportCsv = false;
-  }
-
   openDialog(usuarioAny:any) {
 
      let usuario:Usuario = {
@@ -108,12 +102,13 @@ export class AdminHomeComponent {
   }
 
   openSubirEntradas() {
-    this.dialog.open(SubirEntradasComponent, {
+    const dialog = this.dialog.open(SubirEntradasComponent, {
       width: '50vw',
-      height: '70vh',
+      height: '85vh',
       autoFocus: false
-    }).afterClosed().subscribe( () => {
-      this.getProximosPartidos()
+    });
+      dialog.afterClosed().subscribe( result => {
+        this.getProximosPartidos()
     });
   }
   openAddUser(partido: Partido) {
@@ -123,6 +118,7 @@ export class AdminHomeComponent {
       height:'85vh'
     });
     dialog.afterClosed().subscribe(result => {
+
     });
   }
   openModifyMatch(partido: Partido) {
@@ -135,23 +131,30 @@ export class AdminHomeComponent {
       this.getProximosPartidos();
     });
   }
-
-  openListUser(){
-    //console.log('List usuario');
-
-
-  }
+  // openHabilitarEntradas() {
+  //   this.dialog.open(HabilitarEntradasComponent, {
+  //     width: '30vw',
+  //     height: '60vh',
+  //     autoFocus: false
+  //   }).afterClosed().subscribe( () => {
+  //     //this.getProximosPartidos()
+  //   });
+  // }
   getProximosPartidos(){
-    this.apiService.getPartidos().subscribe(data =>{
+    this.apiService.getProximosPartidos().subscribe(data =>{
       this.proximosPartidos = data;
-    })
+      console.log('Proximos Partidos',this.proximosPartidos);
+      this.proximosPartidos.forEach(partido =>{
+      });
+    });
   }
   getUsuariosPartido(idPartido:any){
     this.apiService.getUsuariosPartido(idPartido).subscribe(data =>{
       this.usuariosPartido = data;
+
       const dialog = this.dialog.open(ListUserComponent,{
         data: this.usuariosPartido,
-        width:'25vw',
+        width:'35vw',
         height:'75vh',
       });
       dialog.afterClosed().subscribe(result => {
@@ -172,18 +175,25 @@ export class AdminHomeComponent {
       if (response.isConfirmed) {
         this.apiService.deleteMatch(partidoId).subscribe( () =>{
             this.getProximosPartidos();
-        });        
-      }  
+        });
+      }
+    });
+    this.apiService.deleteMatch(partidoId).subscribe(data =>{
+          console.log('partido borrado',data);
+          this.getProximosPartidos();
+        });
+  }
+  getPartidosAnteriores(){
+    this.apiService.getPartidosAnteriores().subscribe(partidosAnteriores =>{
+      this.partidosPasados = partidosAnteriores;
+      console.log('partidos Anteriores', partidosAnteriores);
     });
   }
-
-  // getNextMacht(){
-  //   this.apiService.getNextMatch().subscribe(data =>{
-  //     console.log('proxims partidos',data);
-  //     this.getPartidos();
-  //   });
-
-  // }
 }
+
+
+
+
+
 
 

@@ -7,25 +7,35 @@
         <h1>{{"modificarUsuario.titulo" | translate }}</h1>
         <mat-dialog-actions>
         <mat-form-field >
-          <mat-label>Nombre</mat-label>
+          <mat-label>{{"nombre" | translate }}</mat-label>
           <input type="text" matInput formControlName ="nombre" >
         </mat-form-field>
         <mat-form-field >
-          <mat-label>Apellido</mat-label>
+          <mat-label>{{"apellidos" | translate }}</mat-label>
           <input type="text" matInput formControlName ="apellidos" >
         </mat-form-field>
         <mat-form-field >
-          <mat-label>Email</mat-label>
+          <mat-label>{{"email" | translate }}</mat-label>
           <input type="email" matInput formControlName ="email" >
         </mat-form-field>
-
+        <mat-form-field >
+          <mat-label>{{"contrasena" | translate }}</mat-label>
+          <input type="password" matInput formControlName ="contrasena" >
+        </mat-form-field>
+        <mat-form-field >
+          <mat-label>{{"repiteContrasena" | translate }}</mat-label>
+          <input type="password" matInput formControlName ="repiteContrasena">
+        </mat-form-field>
       </mat-dialog-actions>
-
+      <div *ngIf="updateUserForm.get('contrasena')?.hasError('pattern')"  class="error-message">
+        Asegurate de que la contraseña tenga al menos 8 caracteres, un número y un caracter especial.</div>
+     <div *ngIf="updateUserForm.errors?.['notSame'] " class="error-message">
+     Las contraseñas no coinciden.</div>
       </form>
-      <div class="container__wrapper__content-wrapper">
-      <button mat-raised-button class="buttons__guardar" color="primary"(click)="onSubmit()" >{{"botones.guardarCambios" | translate }}</button>
-      <button mat-raised-button class="buttons__cancelar" color="primary"(click)="closedModal()">{{"botones.cancelar" | translate }}</button>
-    </div>
+        <div class="container__wrapper__content-wrapper">
+        <button mat-raised-button class="buttons__guardar" color="primary"(click)="onSubmit()" >{{"botones.guardarCambios" | translate }}</button>
+        <button mat-raised-button class="buttons__cancelar" color="primary"(click)="closedModal()">{{"botones.cancelar" | translate }}</button>
+      </div>
     </div>
   </div>
 </div>
