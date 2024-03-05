@@ -3,7 +3,7 @@
 <app-divisor [titulo]="'Siguiente Partido'"></app-divisor>
 
 <div *ngIf="primerPartido" class="ticket-wrapper">
-    <button (click)="descargarVarias(primerPartido.id, primerPartido.equipoVisitante)">DESCARGAR</button>
+    <!-- <button (click)="descargarVarias(primerPartido.id, primerPartido.equipoVisitante)">DESCARGAR</button> -->
     <div class="ticket">
         <div class="fecha">
             <div>{{primerPartido.fechaPartido | date:'d MMM'}}.</div>

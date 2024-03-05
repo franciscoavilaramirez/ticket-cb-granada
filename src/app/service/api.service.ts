@@ -7,7 +7,7 @@ import { FileInfo } from '../modelo/FileInfo';
 import { Observable, Subject } from 'rxjs';
 import { environment } from '../../enviroments/environment';
 import { Pdf } from '../modelo/pdf';
-import { FileInfo } from '../modelo/fileInfo';
+//import { FileInfo } from '../modelo/fileInfo';
 
 @Injectable({
   providedIn: 'root'
@@ -141,7 +141,7 @@ export class ApiService {
 
   getEntradasExtra(idUsuario:number, idPartido:number, nEntarda:number) {
     return this.http.get<FileInfo[]>(this.apiUrl + 'descargarEntradasAdicionales/'+idUsuario+'/'+idPartido+'/'+nEntarda)
-  } 
+  }
 
 
 }
