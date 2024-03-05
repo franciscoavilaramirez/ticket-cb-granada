@@ -1,4 +1,4 @@
 export interface FileInfo {
-  fileName: string,
-  data: string
+    fileName: string,
+    data: string
 }
