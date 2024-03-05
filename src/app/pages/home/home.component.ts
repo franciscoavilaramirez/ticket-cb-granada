@@ -139,6 +139,7 @@ export class HomeComponent {
       height:'60vh'
     });
     dialog.afterClosed().subscribe(result => {
+      this.ngOnInit();
     });
   }
   getPartidosFuturos(){

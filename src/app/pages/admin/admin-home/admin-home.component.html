@@ -24,16 +24,18 @@
 
           @for (proximoPartido of proximosPartidos; track $index) {
             <mat-card  class="card"  >
-            <mat-card-header>
-
+            <mat-card-header style="display: grid;width: -webkit-fill-available;" >
+              <div class="card__entradas">
+                {{"quedan" | translate }} {{proximoPartido.stockEntradas}} {{"tickets" | translate }}
+              </div>
             <div class="div">
               <mat-card-title >Granada - {{proximoPartido.equipoVisitante}}</mat-card-title>
               <mat-card-subtitle>{{"modificarPartido.fecha" | translate }}  {{proximoPartido.fechaPartido | date:'dd-MM-yyyy' }}</mat-card-subtitle>
               <mat-card-subtitle>{{"modificarPartido.fechaPublicacion" | translate }}  {{proximoPartido.fechaPublicacion| date:'dd-MM-yyyy' }}</mat-card-subtitle>
-              <div class="card__entradas">
+              <!-- <div class="card__entradas">
               <mat-card-subtitle>{{"modificarPartido.entradas" | translate }}</mat-card-subtitle>
               <mat-card-subtitle class="stock-entradas"> {{proximoPartido.stockEntradas}}</mat-card-subtitle>
-            </div>
+            </div> -->
             </div>
 
             </mat-card-header>

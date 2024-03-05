@@ -16,6 +16,10 @@
   "anadirEntradas":"Añadir Entradas",
   "partido":"Partido",
   "fecha":"Fecha",
+  "fechaPublicacion": "Fecha Publicación",
+  "tickets": "entradas",
+  "quedan": "Quedan",
+
 
 	"card":{
     "mostrarOcultar":"Mostrar Inscritos",

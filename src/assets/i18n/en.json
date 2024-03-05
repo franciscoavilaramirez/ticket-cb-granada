@@ -18,6 +18,9 @@
   "partido":"Match",
   "fecha":"Data",
   "usuarios":"Users",
+  "tickets": "tickets",
+  "quedan": "There are",
+
 
 
     "card":{

@@ -63,7 +63,7 @@ export class AdminHomeComponent {
   getUsers(){
     this.apiService.getUsers().subscribe(data =>{
       this.usuarios = data
-      //console.log('Usuarios', this.usuarios);
+      console.log('Usuarios', this.usuarios);
     });
   }
 

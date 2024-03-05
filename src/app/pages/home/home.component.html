@@ -84,7 +84,6 @@
     </div>
 </div>
 <app-divisor [titulo]="'Partidos Futuros'"></app-divisor>
-<!-- <button mat-raised-button (click)="getPartidosFuturos()">PRUEBA</button> -->
 <div class="container">
   <div class="container__table" #TABLE>
     <div class="container__table__content-table">
@@ -103,7 +102,7 @@
           <td mat-cell *matCellDef="let partido" style="padding-left: 25px;">Granada - {{partido.equipoVisitante}}</td>
         </ng-container>
         <ng-container matColumnDef="fechaPublicacion">
-          <th mat-header-cell *matHeaderCellDef>{{"fecha" | translate }}</th>
+          <th mat-header-cell *matHeaderCellDef>{{"fechaPublicacion" | translate }}</th>
           <td mat-cell *matCellDef="let partido"> {{partido.fechaPublicacion | date:'dd-MM-yyyy'}} </td>
         </ng-container>
 

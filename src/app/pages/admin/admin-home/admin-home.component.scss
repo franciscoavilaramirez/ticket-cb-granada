@@ -120,53 +120,54 @@
 
 
 
-          &__buttons{
-            height: 100%;
-            width: 107%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            //column-gap: 10px;
-            justify-content: space-between;
-            font-size: 20px;
-            align-items: stretch;
-             margin-bottom: 20px;
-
-             .buttons-card{
-              display: flex;
-              justify-content: space-between;
+            &__buttons{
+              height: 100%;
               width: 100%;
-              max-width: 400px;
-              min-width: 300px;
-              column-gap: 20px;
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              //column-gap: 10px;
+              justify-content: space-between;
+              font-size: 20px;
+              align-items: stretch;
+              margin-bottom: 20px;
+              padding-bottom: 20px;
 
-              &__mostrar, &__modificar{
-                  background-color: #94cef2;
-                  color:black;
+              .buttons-card{
+                display: flex;
+                justify-content: space-between;
+                width: 100%;
+                max-width: 400px;
+                min-width: 300px;
+                column-gap: 20px;
+
+                &__mostrar, &__modificar{
+                    background-color: #94cef2;
+                    color:black;
+                    font-family: allerta;
+                    font-size: 15px;
+                    width: 100%;
+                    margin: 0 12px;
+                }
+                &__aniadir{
+                  background-color: #36bf98;
+                  color: #ffffff;
                   font-family: allerta;
                   font-size: 15px;
                   width: 100%;
                   margin: 0 12px;
+                }
+                &__eliminar{
+                  background-color: #8c1f1f;
+                  color:#ffffff;
+                  font-family: allerta;
+                  font-size: 15px;
+                  width: 100%;
+                  margin: 0 12px;
+                }
               }
-              &__aniadir{
-                background-color: #36bf98;
-                color: #ffffff;
-                font-family: allerta;
-                font-size: 15px;
-                width: 100%;
-                margin: 0 12px;
-              }
-              &__eliminar{
-                background-color: #8c1f1f;
-                color:#ffffff;
-                font-family: allerta;
-                font-size: 15px;
-                width: 100%;
-                margin: 0 12px;
-              }
-             }
 
-        }
+            }
         }
         .buttons{
           height: 50px;
@@ -189,7 +190,8 @@
 
         .card{
           width: 450px;
-          height: 315px;
+          //height: 345px;
+          height: auto;
           background-color: #e0e0e075;
           border-width: 1px;
           display: grid;
@@ -202,20 +204,34 @@
           margin-right: 20px;
           border: 1px black solid;
 
+          // &__entradas{
+          //   display: flex;
+          //   justify-content: center;
+          //   align-content: center;
+          //   align-items: center;
+          //   .stock-entradas{
+          //     display: flex;
+          //     border: 5px solid #f25ea3;
+          //     padding: 10px;
+          //     position: relative;
+          //     border-radius: 15px;
+          //     box-shadow: 0 0 20px #f25ea3;
+          //   }
+          // }
           &__entradas{
-            display: flex;
-            justify-content: center;
-            align-content: center;
-            align-items: center;
-            .stock-entradas{
-              display: flex;
-              border: 5px solid #f25ea3;
-              padding: 10px;
-              position: relative;
-              border-radius: 15px;
-              box-shadow: 0 0 20px #f25ea3;
+               /* padding-bottom: 20px; */
+                border: 0px solid;
+                border-radius: 16%;
+                width: 140px;
+                display: flex;
+                justify-content: center;
+                background-color: white;
+                height: 45px;
+                align-content: center;
+                flex-wrap: wrap;
+                margin-bottom: 30px;
+                box-shadow: 5px 5px 1px -1px #e0e0e0, 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
             }
-          }
         }
 
         .demo-inline-calendar-card {
