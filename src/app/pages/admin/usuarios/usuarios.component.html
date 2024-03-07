@@ -48,7 +48,7 @@
       <th mat-header-cell *matHeaderCellDef>{{"botones.acciones" | translate }}</th>
       <td mat-cell *matCellDef="let element">
         <div class="container__wrapper__table-buttons">
-          <button mat-raised-button class="habilitar" type="submit" (click)="getPartidosUsuario()" >
+          <button mat-raised-button class="habilitar" type="submit" (click)="getPartidosInscritosUser(element.user_id)" >
              <img src="../../../../assets/imgs/balon.png" width="20px" height="25px">
              <!-- <img src="assets/imgs/balon.png" > -->
              <!-- <mat-icon matSuffix  ></mat-icon> -->

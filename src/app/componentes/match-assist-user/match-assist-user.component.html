@@ -1,0 +1,38 @@
+
+<div class="container">
+  <div class="container__wrapper">
+    <div class="buscador">
+    <mat-form-field color="accent" >
+      <input matInput name="filterPost" [(ngModel)]="filterPost" placeholder="Escribe lo que deseas buscar" >
+       <mat-icon matPrefix>
+        <img style="width: 25px; height: 25px;" src="../../../assets/imgs/search_grey.png" alt="Lupa">
+      </mat-icon>
+    </mat-form-field>
+  </div>
+    <div class="container__wrapper__contador">
+      <h1>{{"partidosInscritos" | translate }}</h1>
+      <span>{{this.contador}}</span>
+    </div>
+    <!-- <div style="display: flex;">
+      <p>{{"partidosAsistidos" | translate }}</p>
+      <span>{{this.contador}}</span> -->
+  </div>
+    <div class="container__wrapper__content-wrapper" *ngFor="let partidoInscrito of partidosInscritos | filter:filterPost" >
+      <mat-list role="list">
+        <mat-list-item  role="listitem" >
+          Granada - {{partidoInscrito.equipoVisitante }}
+          {{partidoInscrito.fechaPartido | date:'dd-MM-yyyy' }}
+        </mat-list-item>
+      </mat-list>
+    </div>
+    <mat-error>
+    <ng-container *ngIf="!partidosInscritos || partidosInscritos.length <= 0">
+      <p style="text-align: center;">{{"noInscrito" | translate }}</p>
+    </ng-container>
+  </mat-error>
+  </div>
+  <div class="container__wrapper__content-wrapper">
+    <div class="buttons">
+    <button mat-raised-button class="buttons__cancelar" (click)="closedModal()">{{"botones.cancelar" | translate }}</button>
+  </div>
+</div>

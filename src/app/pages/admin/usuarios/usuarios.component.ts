@@ -7,6 +7,8 @@ import Swal from 'sweetalert2';
 import * as XLSX from 'xlsx';
 import { RegisterAdminDialogComponent } from '../../../componentes/register-admin-dialog/register-admin-dialog.component';
 import { UserService } from '../../../service/user.service';
+import { Partido } from '../../../modelo/partido';
+import { MatchAssistUserComponent } from '../../../componentes/match-assist-user/match-assist-user.component';
 
 @Component({
   selector: 'app-usuarios',
@@ -22,6 +24,8 @@ export class UsuariosComponent {
   displayedColumns: string[] = ['id', 'nombre', 'apellidos', 'email','partidos', 'botones'];
   filterPost = '';
   myId: number;
+  partidosInscritos: Partido[] = [];
+
 
   ngOnInit() {
     this.getUsers()
@@ -53,8 +57,20 @@ export class UsuariosComponent {
     dialog.afterClosed().subscribe(result => {
       this.getUsers();
     });
-
   }
+  getPartidosInscritosUser(idUsuario: number){
+    this.apiService.getPartidosInscritos(idUsuario).subscribe(data =>{
+      this.partidosInscritos = data;
+      console.log('partidos inscritos',this.partidosInscritos)
+      const dialog = this.dialog.open(MatchAssistUserComponent,{
+        data: this.partidosInscritos,
+        width:'30vw',
+        height:'75vh',
+      });
+      dialog.afterClosed().subscribe(result => {
+      });
+    });
+    }
 
   deleteUser(userId: string): void {
     Swal.fire({
@@ -88,10 +104,5 @@ export class UsuariosComponent {
     XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
     /* save to file */
     XLSX.writeFile(wb, 'Listado_Usuarios.xlsx');
-  }
-  getPartidosUsuario(){
-    this.apiService.getPartidosUsuario().subscribe(partidosUsuario =>{
-      console.log('partidos usuario',partidosUsuario);
-    });
   }
 }

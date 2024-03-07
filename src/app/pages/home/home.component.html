@@ -3,7 +3,6 @@
 <app-divisor [titulo]="'Siguiente Partido'"></app-divisor>
 
 <div *ngIf="primerPartido" class="ticket-wrapper">
-    <!-- <button (click)="descargarVarias(primerPartido.id, primerPartido.equipoVisitante)">DESCARGAR</button> -->
     <div class="ticket">
         <div class="fecha">
             <div>{{primerPartido.fechaPartido | date:'d MMM'}}.</div>
@@ -22,9 +21,7 @@
             <div (click)="descargar(primerPartido.id, primerPartido.equipoVisitante)" class="btn-descargar">
                 <img class="img-descargar" src="assets/imgs/descargar.png">
             </div>
-            <!-- <div (click)="devolver(primerPartido.id)" class="btn-devolver">
-                <img class="img-devolver" src="assets/imgs/devolver.png">
-            </div> -->
+
             <div  class="btn-acompanante" >
               <button mat-button (click)="openAddTicketsUser()" [disabled]="primerPartido.stockEntradas < 1" >
                 <img class="img-acompanante" [src]="primerPartido.stockEntradas >= 1 ? 'assets/imgs/btn_acompañante.png' : 'assets/imgs/btn_acompañante_deshab.png'">
@@ -84,6 +81,7 @@
         </div>
     </div>
 </div>
+      <!-- Buscador y tabla de partidos futuros -->
 <app-divisor [titulo]="'Partidos Futuros'"></app-divisor>
 <div class="container">
   <div class="container__table" #TABLE>

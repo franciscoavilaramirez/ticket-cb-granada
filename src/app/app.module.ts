@@ -51,6 +51,7 @@ import {MatMenuModule} from '@angular/material/menu';
 import { FilterPipe } from './pipes/filter.pipe';
 import { HabilitarEntradasComponent } from './pages/admin/habilitar-entradas/habilitar-entradas.component';
 import { AddEntradasUsuarioComponent } from './componentes/add-entradas-usuario/add-entradas-usuario.component';
+import { MatchAssistUserComponent } from './componentes/match-assist-user/match-assist-user.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -79,7 +80,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     ListUserComponent,
     FilterPipe,
     HabilitarEntradasComponent,
-    AddEntradasUsuarioComponent
+    AddEntradasUsuarioComponent,
+    MatchAssistUserComponent
   ],
   imports: [
     HttpClientModule,

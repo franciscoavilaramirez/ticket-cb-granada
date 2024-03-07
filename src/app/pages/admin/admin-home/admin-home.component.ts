@@ -13,7 +13,6 @@ import { TranslateService } from '@ngx-translate/core';
 import { ApiService } from '../../../service/api.service';
 import { SubirEntradasComponent } from '../subir-entradas/subir-entradas.component';
 import { ListUserComponent } from '../../../componentes/list-user/list-user.component';
-import { HabilitarEntradasComponent } from '../habilitar-entradas/habilitar-entradas.component';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -163,6 +162,7 @@ export class AdminHomeComponent {
     });
 
     }
+
   deleteMatch(partidoId: Partido){
     Swal.fire({
       title: '¿Seguro que desea eliminar este partido?',

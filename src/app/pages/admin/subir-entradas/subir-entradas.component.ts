@@ -51,9 +51,8 @@ export class SubirEntradasComponent {
     }
     );
     this.dialogRef.close();
-    // this.apiService.getProximosPartidos().subscribe(data => {
-    //   console.log('proximos partidos desde subir entradas',data);
-    // })
+    this.apiService.getProximosPartidos().subscribe(data => {
+    })
   }
 
   subirArchivo(event: any): any {

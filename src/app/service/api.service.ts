@@ -125,8 +125,8 @@ export class ApiService {
   getPartidosAnteriores(){
     return this.http.get<Partido[]>(this.apiUrl + 'getPartidosAnteriores');
   }
-  getPartidosUsuario() {
-    return this.http.get<Partido[]>(this.apiUrl + 'listarPartidosUsuario');
+  getPartidosInscritos(idUsuario:number) {
+    return this.http.get<Partido[]>(this.apiUrl + 'listarPartidosUsuario/' + idUsuario);
   }
   // getEntradasExtra(idUsuario:number, idPartido:number, nEntarda:number) {
   //   return this.http.get<any[]>(this.apiUrl + 'descargarEntradasAdicionales/'+idUsuario+'/'+idPartido+'/'+nEntarda)

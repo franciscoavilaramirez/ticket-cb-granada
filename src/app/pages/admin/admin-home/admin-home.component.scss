@@ -53,7 +53,8 @@
   width: 100%;
   display: grid;
  // padding: 100px;
- padding: 50px 0px 70px 30px;
+  padding: 50px 0px 70px 30px;
+  //display: table-cell;
 
   &__table{
     display: flex;
@@ -204,20 +205,6 @@
           margin-right: 20px;
           border: 1px black solid;
 
-          // &__entradas{
-          //   display: flex;
-          //   justify-content: center;
-          //   align-content: center;
-          //   align-items: center;
-          //   .stock-entradas{
-          //     display: flex;
-          //     border: 5px solid #f25ea3;
-          //     padding: 10px;
-          //     position: relative;
-          //     border-radius: 15px;
-          //     box-shadow: 0 0 20px #f25ea3;
-          //   }
-          // }
           &__entradas{
                /* padding-bottom: 20px; */
                 border: 0px solid;
@@ -240,17 +227,6 @@
 
       }
 
-        // .mdc-data-table__table {
-        //   min-width: 10%;
-        //   border: 0;
-        //   white-space: break-spaces;
-        //   border-spacing: 0;
-        //   table-layout: fixed;
-        //   width: auto;
-        //   height: 100%;
-        //   margin-bottom: 20px;
-        //   text-align-last: center;
-        // }
         .mat-mdc-card-title{
           font-size: xx-large;
           display: block;
@@ -267,14 +243,8 @@
           margin: 0px 15px 20px 15px;
           color: black;
           font-family: evogria;
-          //margin-bottom: 20px;
           font: 200 20px/20px Allerta;
           text-align: center;
         }
-
-      //   .mat-mdc-table .mat-mdc-header-cell {
-      //     background: inherit;
-      //     text-align: center;
-      // }
   }
 }
