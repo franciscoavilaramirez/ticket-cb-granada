@@ -66,6 +66,14 @@
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
+  <!-- <mat-paginator [pageSizeOptions]="pageSizeOptions" [length]="usuarios.length" (page)="onPageChange($event)"></mat-paginator> -->
+
+  <mat-paginator
+  [length]="usuariosDataSource?.paginator?.length"
+  [pageSize]="cantidadPorPagina"
+  (page)= "paginar($event)"
+  [pageSizeOptions]="opcionesDeCantidades">
+</mat-paginator>
 </div>
 
 <div class="buttons">

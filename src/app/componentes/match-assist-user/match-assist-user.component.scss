@@ -23,12 +23,11 @@
 
     &__contador{
       display: flex;
-    font: 700 30px / 30px allerta;
-    text-align: center;
-    width: max-content;
-    width: 100%;
-    /* flex-direction: column; */
-    justify-content: flex-start;
+      font: 700 30px / 30px allerta;
+      /* text-align: center; */
+      /* width: max-content; */
+      width: 100%;
+      justify-content: flex-start;
     }
 
       &__content-wrapper{
@@ -50,6 +49,7 @@
     font-size: 15px;
     /* margin: 10px 0px 0px 10px; */
     justify-content: center;
+    background-color: rgba(0, 0, 0, 0.07);
 
           &__cancelar{
             background-color: #8c1f1f;

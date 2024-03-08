@@ -52,6 +52,7 @@ import { FilterPipe } from './pipes/filter.pipe';
 import { HabilitarEntradasComponent } from './pages/admin/habilitar-entradas/habilitar-entradas.component';
 import { AddEntradasUsuarioComponent } from './componentes/add-entradas-usuario/add-entradas-usuario.component';
 import { MatchAssistUserComponent } from './componentes/match-assist-user/match-assist-user.component';
+import {MatPaginatorModule} from '@angular/material/paginator';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -81,7 +82,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     FilterPipe,
     HabilitarEntradasComponent,
     AddEntradasUsuarioComponent,
-    MatchAssistUserComponent
+    MatchAssistUserComponent,
   ],
   imports: [
     HttpClientModule,
@@ -104,6 +105,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     MatDatepickerModule,
     MatListModule,
     MatMenuModule,
+    MatPaginatorModule,
     CommonModule,
     TranslateModule.forRoot({
       loader: {
