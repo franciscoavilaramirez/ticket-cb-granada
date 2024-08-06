@@ -54,8 +54,8 @@ export class ApiService {
     return this.http.post<Usuario>(this.apiUrl+'addUser', usuario);
   }
 
-  subirPartido(partidoForm: any) {
-    return this.http.post<any>(this.apiUrl+'subirPartido', partidoForm)
+  subirPartido(partidoForm: any):Observable<Partido> {
+    return this.http.post<any>(this.apiUrl+'subirPartido', partidoForm);
   }
   // updateUser(usuario: Usuario): Observable<Usuario>{
   //   return this.http.put<Usuario>(`${this.apiUrl+'modificarUsuario'}/${usuario.id}`,usuario);

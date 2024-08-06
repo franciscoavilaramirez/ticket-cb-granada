@@ -13,6 +13,10 @@
     justify-content: center;
     background-color: rgb(0 0 0 / 7%);
 
+    &__error-message{
+      color: #ff0000;
+      padding: 0px 20px 20px 20px;
+    }
 
     &__table-buttons{
       margin-right: 20px;

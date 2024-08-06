@@ -18,7 +18,7 @@ export class SubirEntradasComponent {
   pdf: Pdf = new Pdf();
   entradas: any//FormData = new FormData();
   noFiles = true
-  @Output() actualizacionProximosPartidos: EventEmitter<any> = new EventEmitter();
+  @Output() actualizacionProximosPartidos: EventEmitter<any> = new EventEmitter<void>();
 
 
   constructor(private apiService: ApiService, private formBuilder: FormBuilder, private dialogRef: MatDialogRef<SubirEntradasComponent>) { }
@@ -39,20 +39,33 @@ export class SubirEntradasComponent {
   }
   subirPartido() {
     let partido: Partido = this.form.value;
-    // partido.entradas = this.entradas;
-    console.log("partido", partido)
-    console.log(this.entradas)
+    //console.log("partido", partido)
+    //console.log(this.entradas)
     let form = new FormData()
     form.append('partido', JSON.stringify(partido))
     form.append('entradasPdf', this.entradas)
     this.apiService.subirPartido(form).subscribe({
-      next: (r) => {console.log("r")},
-      error: () => {}
+      next: (r) => {console.log("partido creado",r),
+           this.actualizacionProximosPartidos.emit();
+           //console.log('Evento emitido desde SubirEntradasComponent');
+
+           this.dialogRef.close();
+      },
+      error: (error) => {
+        console.error("Error al crear el partido:", error);
+      },
+      complete: () => {
+        console.log('Solicitud de creación de partido completada.');
+      }
     }
     );
+
+    // this.apiService.getProximosPartidos().subscribe(data => {
+    //   console.log('dataaaa subir partido',data)
+    // })
+    //console.log('Emitiendo un nuevo partido');
     this.dialogRef.close();
-    this.apiService.getProximosPartidos().subscribe(data => {
-    })
+
   }
 
   subirArchivo(event: any): any {

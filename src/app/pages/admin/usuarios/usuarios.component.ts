@@ -75,7 +75,7 @@ export class UsuariosComponent {
     const dialog = this.dialog.open(UpdateUserComponent, {
       data: usuario,
       width: '25vw',
-      height: '75vh'
+      height: '90vh'
     });
 
     dialog.afterClosed().subscribe(result => {

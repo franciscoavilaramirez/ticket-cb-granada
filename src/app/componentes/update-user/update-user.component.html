@@ -27,10 +27,12 @@
           <input type="password" matInput formControlName ="repiteContrasena">
         </mat-form-field>
       </mat-dialog-actions>
-      <div *ngIf="updateUserForm.get('contrasena')?.hasError('pattern')"  class="error-message">
-        Asegurate de que la contraseña tenga al menos 8 caracteres, un número y un caracter especial.</div>
-     <div *ngIf="updateUserForm.errors?.['notSame'] " class="error-message">
-     Las contraseñas no coinciden.</div>
+      <div *ngIf="updateUserForm.get('contrasena')?.hasError('pattern')" class="container__wrapper__error-message">
+        {{"requisitosContrasena" | translate }}
+      </div>
+     <div *ngIf="updateUserForm.errors?.['notSame'] " class="container__wrapper__error-message">
+        {{"contrasenaNoCoincide" | translate }}
+      </div>
       </form>
         <div class="container__wrapper__content-wrapper">
         <button mat-raised-button class="buttons__guardar" color="primary"(click)="onSubmit()" >{{"botones.guardarCambios" | translate }}</button>

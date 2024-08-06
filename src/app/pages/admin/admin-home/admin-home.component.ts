@@ -106,9 +106,15 @@ export class AdminHomeComponent {
       height: '85vh',
       autoFocus: false
     });
-      dialog.afterClosed().subscribe( result => {
-        this.getProximosPartidos()
+    const instance = dialog.componentInstance;
+    instance.actualizacionProximosPartidos.subscribe(() => {
+      this.getProximosPartidos();
     });
+
+    dialog.afterClosed().subscribe(result => {
+      this.getProximosPartidos();
+    });
+
   }
   openAddUser(partido: Partido) {
     const dialog = this.dialog.open(AddUserComponent,{
@@ -142,9 +148,7 @@ export class AdminHomeComponent {
   getProximosPartidos(){
     this.apiService.getProximosPartidos().subscribe(data =>{
       this.proximosPartidos = data;
-      console.log('Proximos Partidos',this.proximosPartidos);
-      this.proximosPartidos.forEach(partido =>{
-      });
+      console.log('get Proximos Partidos',this.proximosPartidos);
     });
   }
   getUsuariosPartido(idPartido:any){
@@ -173,16 +177,15 @@ export class AdminHomeComponent {
       denyButtonColor: 'grey',
     }).then((response) => {
       if (response.isConfirmed) {
-        this.apiService.deleteMatch(partidoId).subscribe( () =>{
+        this.apiService.deleteMatch(partidoId).subscribe( (success) =>{
+          Swal.fire("Partido Eliminado", "", "success");
             this.getProximosPartidos();
         });
       }
     });
-    this.apiService.deleteMatch(partidoId).subscribe(data =>{
-          console.log('partido borrado',data);
-          this.getProximosPartidos();
-        });
   }
+
+
   getPartidosAnteriores(){
     this.apiService.getPartidosAnteriores().subscribe(partidosAnteriores =>{
       this.partidosPasados = partidosAnteriores;

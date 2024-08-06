@@ -3,7 +3,7 @@
 <div class="title">
   {{"navbar.usuarios" | translate}}
   <div class="registrar-usuario-container">
-    <button mat-raised-button (click)="openRegistrarUsuario()">
+    <button mat-raised-button title="Registrar Usuario" (click)="openRegistrarUsuario()">
       <div class="content">
         +
         <img class="user-icon" src="assets/imgs/user.png">
@@ -48,16 +48,17 @@
       <th mat-header-cell *matHeaderCellDef>{{"botones.acciones" | translate }}</th>
       <td mat-cell *matCellDef="let element">
         <div class="container__wrapper__table-buttons">
-          <button mat-raised-button class="habilitar" type="submit" (click)="getPartidosInscritosUser(element.user_id)" >
+          <button mat-raised-button class="habilitar" type="submit" title="Partidos Inscritos" (click)="getPartidosInscritosUser(element.user_id)" >
              <img src="../../../../assets/imgs/balon.png" width="20px" height="25px">
              <!-- <img src="assets/imgs/balon.png" > -->
              <!-- <mat-icon matSuffix  ></mat-icon> -->
 
           </button>
-          <button mat-raised-button class="editar" type="submit" (click)="openDialog(element)">
+          <button mat-raised-button class="editar" type="submit" title="Editar Usuario" (click)="openDialog(element)">
             <mat-icon>edit</mat-icon>
           </button>
-          <button [disabled]="element.user_id == myId" mat-raised-button class="eliminar" type="submit" (click)="deleteUser(element.user_id)">
+          <button [disabled]="element.user_id == myId" mat-raised-button class="eliminar" type="submit"
+                  title="Eliminar Usuario" (click)="deleteUser(element.user_id)">
             <mat-icon>delete_forever</mat-icon>
           </button>
         </div>
