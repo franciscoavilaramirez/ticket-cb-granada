@@ -30,7 +30,7 @@
     <app-error-alert-form
       [errorMessage]="registerForm.get('password')?.invalid && registerForm.get('password')?.touched ? 'Debes poner una contraseña.' : ''"></app-error-alert-form>
   </mat-form-field>
-  <div *ngIf="registerForm.get('password')?.invalid && registerForm.get('password')?.touched" class="error-message password-pattern"> 
+  <div *ngIf="registerForm.get('password')?.invalid && registerForm.get('password')?.touched" class="error-message password-pattern">
     {{"requisitosContrasena" | translate}}
   </div>
 
@@ -38,6 +38,10 @@
     <mat-label>{{"repiteContrasena" | translate}}</mat-label>
     <input matInput formControlName="repeatPassword" type="password">
   </mat-form-field>
+
+  <div *ngIf="registerForm.errors?.['notSame'] ? 'Las contraseñas no coinciden.' : ''" class="error-message">
+    {{"contrasenaNoCoincide" | translate}}
+  </div>
 
   <div class="admin">
     <input formControlName="_admin" type="checkbox">
@@ -47,9 +51,9 @@
   <button mat-raised-button color="primary" type="submit" [disabled]="!registerForm.valid">{{"registrarse" |
     translate}}</button>
 
-  <div *ngIf="registerForm.errors?.['notSame'] ? 'Las contraseñas no coinciden.' : ''" class="error-message">
+  <!-- <div appearance="fill" *ngIf="registerForm.errors?.['notSame'] ? 'Las contraseñas no coinciden.' : ''" class="error-message">
     {{"contrasenaNoCoincide" | translate}}
-  </div>
+  </div> -->
 
   <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
 </form>

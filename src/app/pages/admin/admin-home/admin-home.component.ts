@@ -14,11 +14,16 @@ import { ApiService } from '../../../service/api.service';
 import { SubirEntradasComponent } from '../subir-entradas/subir-entradas.component';
 import { ListUserComponent } from '../../../componentes/list-user/list-user.component';
 import { Subscription } from 'rxjs';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { NgIf } from '@angular/common';
+import { ThemePalette } from '@angular/material/core';
 
 @Component({
   selector: 'app-home',
   templateUrl: './admin-home.component.html',
   styleUrls: ['./admin-home.component.scss'],
+  standalone:false,
+
 })
 export class AdminHomeComponent {
 [x: string]: any;
@@ -43,6 +48,8 @@ export class AdminHomeComponent {
   entradasSobrantes!: any;
   entradas: number;
   filterPost = '';
+  spinnerShow = true;
+  color: ThemePalette = "accent";
   @ViewChild('TABLE') table!: ElementRef;
   private subscription: Subscription;
 
@@ -108,6 +115,8 @@ export class AdminHomeComponent {
     });
     const instance = dialog.componentInstance;
     instance.actualizacionProximosPartidos.subscribe(() => {
+      console.log('respuesta recibida del evento', )
+      this.spinnerShow = true;
       this.getProximosPartidos();
     });
 
@@ -149,6 +158,8 @@ export class AdminHomeComponent {
     this.apiService.getProximosPartidos().subscribe(data =>{
       this.proximosPartidos = data;
       console.log('get Proximos Partidos',this.proximosPartidos);
+      this.spinnerShow = false;
+
     });
   }
   getUsuariosPartido(idPartido:any){

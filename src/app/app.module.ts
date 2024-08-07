@@ -53,6 +53,8 @@ import { HabilitarEntradasComponent } from './pages/admin/habilitar-entradas/hab
 import { AddEntradasUsuarioComponent } from './componentes/add-entradas-usuario/add-entradas-usuario.component';
 import { MatchAssistUserComponent } from './componentes/match-assist-user/match-assist-user.component';
 import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -83,6 +85,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     HabilitarEntradasComponent,
     AddEntradasUsuarioComponent,
     MatchAssistUserComponent,
+
   ],
   imports: [
     HttpClientModule,
@@ -107,6 +110,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     MatMenuModule,
     MatPaginatorModule,
     CommonModule,
+    MatProgressSpinnerModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

@@ -58,7 +58,8 @@ export class UsuariosComponent {
 
   openRegistrarUsuario() {
     this.dialog.open(RegisterAdminDialogComponent, {
-      width: '50vw'
+      width: '40vw',
+      height:'95vh',
     }).afterClosed().subscribe(()=>{
       this.getUsers()
     });
