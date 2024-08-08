@@ -18,7 +18,7 @@ export class RegisterAdminDialogComponent {
   constructor(private formBuilder: FormBuilder, private http: HttpClient, private router: Router, private matDialogRef: MatDialogRef<RegisterAdminDialogComponent>) { }
 
   ngOnInit() {
-    
+
     this.registerForm = this.formBuilder.group({
       nombre: ['', Validators.required],
       apellidos: ['', Validators.required],
@@ -26,7 +26,7 @@ export class RegisterAdminDialogComponent {
       password: ['', [Validators.required, Validators.pattern(this.regex)]],
       repeatPassword: ['', Validators.required],
       _admin: false
-    }, { validator: this.checkPasswords }); 
+    }, { validator: this.checkPasswords });
   }
 
   checkPasswords(group: FormGroup) {
@@ -44,11 +44,11 @@ export class RegisterAdminDialogComponent {
   }
 
   register() {
-    console.log(this.registerForm.value)
+    //console.log(this.registerForm.value)
     if (this.registerForm.valid) {
       this.http.post(environment.apiUrl + 'addUser', this.registerForm.value).subscribe({
         next: (response) => {
-          console.log(response)
+          //console.log('usuario',response)
           Swal.fire("Usuario registrado", "", "success");
           this.matDialogRef.close()
         },
