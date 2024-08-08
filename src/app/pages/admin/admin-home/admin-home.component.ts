@@ -115,7 +115,7 @@ export class AdminHomeComponent {
     });
     const instance = dialog.componentInstance;
     instance.actualizacionProximosPartidos.subscribe(() => {
-      console.log('respuesta recibida del evento', )
+      //console.log('respuesta recibida del evento', )
       this.spinnerShow = true;
       this.getProximosPartidos();
     });

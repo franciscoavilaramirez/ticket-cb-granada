@@ -55,7 +55,7 @@ export class SubirEntradasComponent {
         console.error("Error al crear el partido:", error);
       },
       complete: () => {
-        console.log('Solicitud de creación de partido completada.');
+        //console.log('Solicitud de creación de partido completada.');
       }
     }
     );

@@ -52,7 +52,7 @@ export class HomeComponent {
               partido.tengoEntrada = false;
           })
         }
-        console.log("Partidos: ", this.partidos)
+        //console.log("Partidos: ", this.partidos)
         console.log("Mis partidos ids: ", this.misPartidosIds)
       });
     });
@@ -169,9 +169,9 @@ export class HomeComponent {
         link.download = 'Granada - ' + nombrePartido + '.pdf';
         link.click();
         window.URL.revokeObjectURL(url);
-    
+
       })
-     
+
     });
 
 }
