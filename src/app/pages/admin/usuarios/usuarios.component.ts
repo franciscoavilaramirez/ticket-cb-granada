@@ -33,27 +33,40 @@ export class UsuariosComponent {
   cantidadPorPagina = 10;
   opcionesDeCantidades = [10,20,30];
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  usuariosDataSource: MatTableDataSource<Usuario>;
+  usuariosDataSource: MatTableDataSource<Usuario> = new MatTableDataSource<Usuario>();
 
 
   ngOnInit() {
     this.getUsers()
     this.myId = this.userService.getMyUser().user_id
   }
+  // getUsers() {
+  //   this.apiService.getUsers().subscribe(data => {
+  //     this.usuarios = data;
+  //     this.usuariosMostrar = this.usuarios.slice(0, this.cantidadPorPagina); // Inicializa usuariosMostrar con los primeros diez usuarios
+
+  //     this.usuariosDataSource = new MatTableDataSource<Usuario>(data);
+  //     this.usuariosDataSource.paginator = this.paginator;
+  //   });
+  // }
   getUsers() {
     this.apiService.getUsers().subscribe(data => {
       this.usuarios = data;
-      this.usuariosMostrar = this.usuarios.slice(0, this.cantidadPorPagina); // Inicializa usuariosMostrar con los primeros diez usuarios
-
-      this.usuariosDataSource = new MatTableDataSource<Usuario>(data);
+      this.usuariosDataSource = new MatTableDataSource<Usuario>(this.usuarios);
       this.usuariosDataSource.paginator = this.paginator;
     });
   }
-  paginar(paginacion: any) {
-    let inicio = paginacion.pageIndex * paginacion.pageSize;
-    let fin = inicio + paginacion.pageSize;
-    this.usuariosMostrar = this.usuarios.slice(inicio, fin);
+  paginar(event: any) {
+    const inicio = event.pageIndex * event.pageSize;
+    const fin = inicio + event.pageSize;
+    this.usuariosDataSource.data = this.usuarios.slice(inicio, fin);
   }
+
+  // paginar(paginacion: any) {
+  //   let inicio = paginacion.pageIndex * paginacion.pageSize;
+  //   let fin = inicio + paginacion.pageSize;
+  //   this.usuariosMostrar = this.usuarios.slice(inicio, fin);
+  // }
 
 
   openRegistrarUsuario() {

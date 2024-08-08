@@ -22,7 +22,7 @@
 
 <div class="container__wrapper" #TABLE>
 
-  <table mat-table [dataSource]="usuarios"  #table>
+  <table mat-table [dataSource]="usuariosDataSource"  #table>
     <ng-container matColumnDef="id">
       <th mat-header-cell *matHeaderCellDef style="padding-left: 25px;"> No. </th>
       <td mat-cell *matCellDef="let element let i = index" style="padding-left: 25px;"> {{i+1}} </td>
@@ -69,15 +69,21 @@
   </table>
   <!-- <mat-paginator [pageSizeOptions]="pageSizeOptions" [length]="usuarios.length" (page)="onPageChange($event)"></mat-paginator> -->
 
-  <mat-paginator
+  <!-- <mat-paginator
   [length]="usuariosDataSource?.paginator?.length"
   [pageSize]="cantidadPorPagina"
   (page)= "paginar($event)"
   [pageSizeOptions]="opcionesDeCantidades">
+</mat-paginator> -->
+<mat-paginator [length]="usuarios.length"
+                [pageSize]="cantidadPorPagina"
+                (page)="paginar($event)"
+                [pageSizeOptions]="opcionesDeCantidades">
 </mat-paginator>
 </div>
 
 <div class="buttons">
+
   <button mat-raised-button class="buttons__exportar" (click)="ExportTOExcel()">
     {{"usuarios.exportarXlsX" | translate }}
     <mat-icon aria-hidden="false" class="alignIcon" aria-label="Example home icon" fontIcon="description"></mat-icon>

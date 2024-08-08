@@ -1,17 +1,17 @@
-				                
+
 
 .avatar{
     padding: 40px;
     width:300px;
     border-radius: 160px;
     margin: 60px;
-}		
+}
 
 .container {
     border: 1px solid #c7c5c5b2;
-	background: #fcfbfbf0; 
-	border-radius: 10px; 
-	box-shadow: rgba(0, 0, 0, 0.3) 0px 5px 15px;
+	  background: #fcfbfbf0;
+	  border-radius: 10px;
+	  box-shadow: rgba(0, 0, 0, 0.3) 0px 5px 15px;
     display: flex;
     flex-direction: column;
     align-items:start;
@@ -21,7 +21,7 @@
     margin-top: -24rem;
     padding: 50px;
     height: 100%;
-    max-height: 580px;
+    //max-height: 580px;
 }
 .form-container{
     margin: 0 auto;
@@ -37,7 +37,7 @@ h2{
     font-size: 28px;
     font-weight: bold;
     font-family: Evogria;
-   
+
 }
 
 .submit-button {
@@ -52,6 +52,22 @@ h2{
     color: white;
     text-align: center;
     background-color: #f50d8b;
+  }
+  .submit-button-cancelar {
+    margin: 0 auto;
+    padding: 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 220px;
+    font-size: 18px;
+    /* margin: 33px 25px; */
+    color: white;
+    text-align: center;
+    background-color: #f50d8b;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
   }
   .submit-button-cerrar-sesion{
     background-color: #acabac;
@@ -80,7 +96,7 @@ h2{
     margin-top: 10px;
     margin-right: 20px;
     padding: 10px;
-  
+
 }
 
 .icon-edit{
@@ -100,6 +116,16 @@ h2{
     margin: 0 auto;
     width: 100%;
     margin-inline: 10px;
+}
+.button-cancelar{
+
+  display: inline-block;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+
+
 }
 
 .cambiar-contraseña{
