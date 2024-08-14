@@ -29,7 +29,7 @@ export class HomeComponent {
   ngOnInit() {
         this.idUsuario = this.getUsuarioId()
 
-    this.apiService.getMisPartidosIds(2).subscribe(misPartidosIds => {
+    this.apiService.getMisPartidosIds(this.idUsuario).subscribe(misPartidosIds => {
       this.misPartidosIds = misPartidosIds
       this.apiService.getProximosPartidos().subscribe(proximosPartidos => {
 

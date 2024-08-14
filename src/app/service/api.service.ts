@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Usuario } from '../modelo/usuario';
 import { Partido } from '../modelo/partido';
-import { FileInfo } from '../modelo/FileInfo';
+import { FileInfo } from '../modelo/fileInfo';
 
 import { Observable, Subject } from 'rxjs';
 import { environment } from '../../enviroments/environment';
