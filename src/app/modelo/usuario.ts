@@ -3,7 +3,7 @@ export interface Usuario{
   nombre?: string,
   email?: string,
   apellidos?: string,
-  is_admin?: boolean,
+  _admin?: boolean,
   password?: string,
   user_id?: number,
   partidosAsistidos?: number;

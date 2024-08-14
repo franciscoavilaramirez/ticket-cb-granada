@@ -34,6 +34,7 @@ export class PerfilComponent {
     this.apiService.getUsuarioById(this.idUsuario).subscribe(
       usuario => {
         this.usuario = usuario
+        console.log('this usuario',this.usuario)
         this.usuario.id = this.idUsuario + "";
         console.log("usuario perfil: " + JSON.stringify(this.usuario))
         this.editarPerfil = this.formBuilder.group({
@@ -72,6 +73,19 @@ export class PerfilComponent {
     });
   }
 
+  // Con el metodo cancelar se pretende volver a la página home correspondiente al tipo de usuario
+  // que hay registrado en ese preciso momento
+cancelar() {
+  if(this.usuario._admin === true){
+    //console.log('this usuario es admin')
+        this.router.navigate(['/admin-home']);
+
+  }else {
+    //console.log('this usuario no es admin')
+        this.router.navigate(['/home']);
+
+  }
+  }
   cerrarSesion() {
     localStorage.removeItem('user')
     this.router.navigate(['/login']);
