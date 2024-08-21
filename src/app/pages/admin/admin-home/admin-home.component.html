@@ -45,14 +45,30 @@
             </mat-card-header>
             <mat-card-actions class="cards-wrapper__buttons">
               <div class="buttons-card">
-
               <button mat-raised-button class="buttons-card__mostrar" (click)="getUsuariosPartido(proximoPartido.id)" >{{"card.mostrarOcultar" | translate }}</button>
               <button mat-raised-button class="buttons-card__modificar" (click)="openModifyMatch(proximoPartido)" >{{"card.modificarPartido" | translate }}</button>
             </div>
             <div class="buttons-card">
-              <button mat-raised-button class="buttons-card__aniadir" (click)="openAddUser(proximoPartido)" >{{"card.anadirUsuario" | translate }}</button>
+              <!--<button mat-raised-button class="buttons-card__aniadir" (click)="openAddUser(proximoPartido)" >{{"card.anadirUsuario" | translate }}</button>-->
               <button mat-raised-button class="buttons-card__eliminar" (click)="deleteMatch(proximoPartido)" >{{"botones.eliminarPartido" | translate }}</button>
             </div>
+            <div *ngIf=proximoPartido.tengoEntrada>
+            <div class="buttons-card">
+              <div (click)="descargar(proximoPartido.id, proximoPartido.equipoVisitante)" class="btn-descargar">
+                  <img class="img-descargar" src="assets/imgs/descargar.png">
+              </div>
+              <div (click)="devolver(proximoPartido.id)" class="btn-devolver">
+                  <img class="img-devolver" src="assets/imgs/devolver.png">
+              </div>
+            </div>
+          </div>
+          <div *ngIf="!proximoPartido.tengoEntrada && proximoPartido.stockEntradas > 0">
+            <div class="buttons-card">
+              <div *ngIf=proximoPartido.stockEntradas (click)="apuntarse(proximoPartido.id)" class="btn-apuntame">
+                  <img class="img-apuntame" src="assets/imgs/apuntame.png">
+              </div>
+            </div>
+          </div>
               </mat-card-actions>
             </mat-card>
           }

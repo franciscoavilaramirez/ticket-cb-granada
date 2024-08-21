@@ -34,7 +34,8 @@ export class AdminHomeComponent {
               this.translate.setDefaultLang(this.activeLang);
 
   }
-
+  misPartidosIds: number[]
+  idUsuario: number
   activeLang = 'es';
   exportCsv = false;
   usuarios!: Usuario[];
@@ -132,7 +133,7 @@ export class AdminHomeComponent {
       height:'85vh'
     });
     dialog.afterClosed().subscribe(result => {
-
+      this.getProximosPartidos()
     });
   }
   openModifyMatch(partido: Partido) {
@@ -159,7 +160,18 @@ export class AdminHomeComponent {
       this.proximosPartidos = data;
       console.log('get Proximos Partidos',this.proximosPartidos);
       this.spinnerShow = false;
+      this.idUsuario = this.getUsuarioId()
 
+      this.apiService.getMisPartidosIds(this.idUsuario).subscribe(misPartidosIds => {
+        this.misPartidosIds = misPartidosIds
+    
+        this.proximosPartidos.forEach(partido => {
+          if (this.misPartidosIds?.includes(partido.id))
+            partido.tengoEntrada = true;
+          else
+          partido.tengoEntrada = false;
+        })
+      })
     });
   }
   getUsuariosPartido(idPartido:any){
@@ -201,6 +213,64 @@ export class AdminHomeComponent {
     this.apiService.getPartidosAnteriores().subscribe(partidosAnteriores =>{
       this.partidosPasados = partidosAnteriores;
       console.log('partidos Anteriores', partidosAnteriores);
+    });
+  }
+
+  getUsuarioId(): number {
+    let userStr = localStorage.getItem('user');
+    if (userStr == null)
+      return -1
+    else
+      return JSON.parse(userStr).id
+  }
+  devolver(idPartido: number) {
+    this.apiService.desasignarEntrada(this.idUsuario, idPartido).subscribe(() => {
+      this.proximosPartidos.forEach(partido => {
+          if (partido.id == idPartido) {
+            partido.tengoEntrada = false;
+            //partido.stockEntradas = true;
+            partido.stockEntradas ++;
+          }
+        });
+      })
+      this.getProximosPartidos()
+  }
+  apuntarse(idPartido: number) {
+    this.apiService.asignarEntrada(this.idUsuario, idPartido).subscribe(response => {
+       if(response == true){ 
+        this.proximosPartidos.forEach(partido => {
+              if (partido.id == idPartido){
+                partido.tengoEntrada = true;
+                partido.stockEntradas --;
+              }
+            });
+        } else {
+          alert("No quedan entradas")
+        }
+    })
+    this.getProximosPartidos()
+  }
+  descargar(idPartido: number, nombrePartido: string) {
+
+    this.apiService.getEntrada(this.idUsuario, idPartido).subscribe(entradaPdf => {
+      entradaPdf.forEach(file => {
+        const byteCharacters = atob(file.data);
+        const byteArrays = [];
+        for (let i = 0; i < byteCharacters.length; i++) {
+          byteArrays.push(byteCharacters.charCodeAt(i));
+        }
+        const byteArray = new Uint8Array(byteArrays);
+        //return new Blob([byteArray], { type: 'application/pdf' });
+        const blob = new Blob([byteArray], { type: 'application/pdf' });
+        const url = window.URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = 'Granada - ' + nombrePartido + '.pdf';
+        link.click();
+        window.URL.revokeObjectURL(url);
+
+      })
+
     });
   }
 }

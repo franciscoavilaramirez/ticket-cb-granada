@@ -254,3 +254,51 @@
         }
   }
 }
+.btn-descargar {
+  position: absolute;
+  bottom: 0px;
+  left: 35px;
+  cursor: pointer;
+  .img-descargar {
+      width: 165px;
+      box-shadow: -5px 4px 17px -6px #000000;
+      border-radius: 6px;
+  }
+
+  .img-descargar:hover {
+      box-shadow: -5px 4px 17px -6px #e20074;
+  }
+}
+.btn-devolver {
+ position: absolute;
+  bottom: 0px;
+  left: 245px;
+  cursor: pointer;
+  .img-devolver {
+      width: 167px;
+      box-shadow: -5px 4px 17px -6px #000000;
+      border-radius: 6px;
+  }
+
+  .img-devolver:hover {
+      box-shadow: -5px 4px 17px -6px #e20074;
+  }
+}
+.btn-apuntame {
+  position: absolute;
+  bottom: 0px;
+  left: 150px;
+  cursor: pointer;
+  .img-apuntame {
+      width: 150px;
+      box-shadow: -5px 4px 17px -6px #000000;
+      border-radius: 6px;
+  }
+
+  .img-apuntame:hover {
+      box-shadow: -5px 4px 17px -6px #e20074;
+  }
+}
+.btn-apuntame:hover {
+  cursor: pointer;
+}

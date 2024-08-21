@@ -41,6 +41,7 @@ export class ModifyMatchComponent {
   onSubmit(){
     if(this.updateMatchForm.valid){
       const bodyResponse: Partido = this.updateMatchForm.value;
+      bodyResponse.fechaPublicacion = bodyResponse.fechaPublicacion + this.getHoraActual()
       this.apiService.updateMatch(bodyResponse).subscribe(data =>{
         console.log('update partido',data);
         this.closedModal();
@@ -51,5 +52,14 @@ export class ModifyMatchComponent {
   closedModal(): void {
     this.dialogRef.close();
   }
+  getHoraActual(){
+    let fecha = new Date()
+    let hora:any = fecha.getHours()
+    let minutos:any = fecha.getMinutes()
 
+    if(hora < 10) hora = '0'+hora
+    if(minutos < 10) minutos = '0'+minutos
+
+    return "T"+ hora +":"+minutos
+  }
 }

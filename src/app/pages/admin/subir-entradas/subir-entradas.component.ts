@@ -39,6 +39,7 @@ export class SubirEntradasComponent {
   }
   subirPartido() {
     let partido: Partido = this.form.value;
+    partido.fechaPublicacion = partido.fechaPublicacion + this.getHoraActual()
     //console.log("partido", partido)
     //console.log(this.entradas)
     let form = new FormData()
@@ -108,15 +109,19 @@ export class SubirEntradasComponent {
     let fecha = new Date()
     let mes:any = fecha.getMonth() + 1
     let dia:any = fecha.getDate()
-    let hora:any = fecha.getHours()
-    let minutos:any = fecha.getMinutes()
-
     if(mes < 10) mes = '0'+mes
     if(dia < 10) dia = '0'+dia
+
+    return fecha.getFullYear()+"-"+mes+"-"+dia
+  }
+  getHoraActual(){
+    let fecha = new Date()
+    let hora:any = fecha.getHours()
+    let minutos:any = fecha.getMinutes()
     if(hora < 10) hora = '0'+hora
     if(minutos < 10) minutos = '0'+minutos
 
-    return fecha.getFullYear()+"-"+mes+"-"+dia+"T"+hora+":"+minutos
+    return "T"+ hora +":"+minutos
   }
 
   color = "lightgray" //grey

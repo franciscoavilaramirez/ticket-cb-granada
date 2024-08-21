@@ -24,7 +24,7 @@ export class HomeComponent {
   primerPartido: Partido
   filterPost = '';
   partidosFuturos: Partido[] =[];
-  displayedColumns: string[] = ['partido','fechaPublicacion'];
+  displayedColumns: string[] = ['partido','Fecha Del Partido'];
 
   ngOnInit() {
         this.idUsuario = this.getUsuarioId()
