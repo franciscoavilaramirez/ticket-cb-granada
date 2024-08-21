@@ -34,6 +34,7 @@ export class AdminHomeComponent {
               this.translate.setDefaultLang(this.activeLang);
 
   }
+  partidosFuturos: Partido[] =[];
   misPartidosIds: number[]
   idUsuario: number
   activeLang = 'es';
@@ -56,11 +57,13 @@ export class AdminHomeComponent {
 
   ColumnsInscritos: string[] = ['id','nombre','apellidos','email'];
   displayedColumns: string[] = ['partido','fecha','usuarios'];
+  displayColumns: string[] = ['partido','Fecha Del Partido'];
 
   ngOnInit(){
     this.getUsers();
     this.getProximosPartidos();
     this.getPartidosAnteriores();
+    this.getPartidosFuturos();
   }
   public cambiarLenguaje(lang: string) {
     this.activeLang = lang;
@@ -251,7 +254,6 @@ export class AdminHomeComponent {
     this.getProximosPartidos()
   }
   descargar(idPartido: number, nombrePartido: string) {
-
     this.apiService.getEntrada(this.idUsuario, idPartido).subscribe(entradaPdf => {
       entradaPdf.forEach(file => {
         const byteCharacters = atob(file.data);
@@ -271,6 +273,12 @@ export class AdminHomeComponent {
 
       })
 
+    });
+  }
+  getPartidosFuturos(){
+    this.apiService.getProximosPartidosDisponibles().subscribe(partidosFuturos =>{
+      this.partidosFuturos = partidosFuturos;
+      console.log('partidos futuros',this.partidosFuturos)
     });
   }
 }
