@@ -49,7 +49,7 @@
               <button mat-raised-button class="buttons-card__modificar" (click)="openModifyMatch(proximoPartido)" >{{"card.modificarPartido" | translate }}</button>
             </div>
             <div class="buttons-card">
-              <!--<button mat-raised-button class="buttons-card__aniadir" (click)="openAddUser(proximoPartido)" >{{"card.anadirUsuario" | translate }}</button>-->
+              <button mat-raised-button class="buttons-card__aniadir" (click)="openAddUser(proximoPartido)" >{{"card.anadirUsuario" | translate }}</button>
               <button mat-raised-button class="buttons-card__eliminar" (click)="deleteMatch(proximoPartido)" >{{"botones.eliminarPartido" | translate }}</button>
             </div>
             <div *ngIf=proximoPartido.tengoEntrada>
@@ -131,8 +131,8 @@
           <th mat-header-cell *matHeaderCellDef style="padding-left: 25px;">{{"partido" | translate }}  </th>
           <td mat-cell *matCellDef="let partido" style="padding-left: 25px;">Granada - {{partido.equipoVisitante}}</td>
         </ng-container>
-        <ng-container matColumnDef="Fecha Del Partido">
-          <th mat-header-cell *matHeaderCellDef>{{"Fecha Del Partido" | translate }}</th>
+        <ng-container matColumnDef="fechaDelPartido">
+          <th mat-header-cell *matHeaderCellDef>{{"fechaDelPartido" | translate }}</th>
           <td mat-cell *matCellDef="let partido"> {{partido.fechaPartido | date:'dd-MM-yyyy'}} </td>
         </ng-container>
 

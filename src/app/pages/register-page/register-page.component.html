@@ -32,6 +32,10 @@
     <app-error-alert-form
       [errorMessage]="registerForm.get('email')?.invalid && registerForm.get('email')?.touched ? 'El email es requerido.' : ''"></app-error-alert-form>
   </mat-form-field>
+  <div *ngIf="registerForm.get('email')?.invalid && registerForm.get('email')?.touched"
+   class="error-message password-pattern">
+    {{"requisitosEmail" | translate}}
+  </div>
 
   <mat-form-field appearance="fill" class="form-field">
     <mat-label>{{"contrasena" | translate}}</mat-label>
@@ -48,12 +52,11 @@
     <mat-label>{{"repiteContrasena" | translate}}</mat-label>
     <input matInput formControlName="repeatPassword" type="password">
   </mat-form-field>
-
-  <button mat-raised-button [disabled]="!registerForm.valid" color="primary" type="submit">Registrarse</button>
-
+  
   <div *ngIf="registerForm.errors?.['notSame'] ? 'Las contraseñas no coinciden.' : ''" class="error-message">
     {{"contrasenaNoCoincide" | translate}}
   </div>
 
   <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+  <button mat-raised-button [disabled]="!registerForm.valid" color="primary" type="submit">Registrarse</button>
 </form>

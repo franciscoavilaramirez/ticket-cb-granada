@@ -9,6 +9,7 @@
   "registrarUsuario": "Register User",
   "repiteContrasena": "Repeat Password",
   "requisitosContrasena" : "The password must have at least 8 characters, one lowercase letter, one uppercase letter and one special character",
+  "requisitosEmail":"The email must have @t-systems.com",
   "administrador": "Admin",
   "registrarse" : "Register",
   "registro":"Register to create an account",
@@ -16,8 +17,8 @@
   "iniciaSesion":"Log In",
   "anadirEntradas":"Add Tickets",
   "partido":"Match",
-  "fecha":"Data",
-  "usuarios":"Users",
+  "fecha":"Date",
+  "fechaDelPartido":"Date of Match",
   "tickets": "tickets",
   "quedan": "There are",
   "partidosInscritos": "Attended Matches",
@@ -50,7 +51,8 @@
     "ocultar":"Hide list",
     "exportarXlsX": "Export Users to XLSX",
     "modificar": "Update",
-    "eliminar": "Delete"
+    "eliminar": "Delete",
+    "usuarios": "Users"
     },
   "modalAnadirUsuario":{
     "inscritos": "Registered Users:",

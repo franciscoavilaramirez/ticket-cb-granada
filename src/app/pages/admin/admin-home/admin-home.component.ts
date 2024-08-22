@@ -57,7 +57,7 @@ export class AdminHomeComponent {
 
   ColumnsInscritos: string[] = ['id','nombre','apellidos','email'];
   displayedColumns: string[] = ['partido','fecha','usuarios'];
-  displayColumns: string[] = ['partido','Fecha Del Partido'];
+  displayColumns: string[] = ['partido','fechaDelPartido'];
 
   ngOnInit(){
     this.getUsers();
