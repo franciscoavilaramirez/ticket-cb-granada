@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../enviroments/environment';
 import { Router } from '@angular/router';
-
+import { TranslateService } from '@ngx-translate/core';
 
 
 @Component({
@@ -15,7 +15,7 @@ export class RegisterPageComponent implements OnInit {
   registerForm: FormGroup;
   errorMessage: string = '';
 
-  constructor(private formBuilder: FormBuilder, private http: HttpClient, private router: Router) { }
+  constructor(private formBuilder: FormBuilder, private http: HttpClient, private router: Router, private translate: TranslateService) { }
 
   ngOnInit() {
     this.registerForm = this.formBuilder.group({
@@ -25,6 +25,7 @@ export class RegisterPageComponent implements OnInit {
       password: ['', [Validators.required, Validators.pattern("^(?=.*\\d)(?=.*[@#$%^&+=*_-])(?=.*[a-z])(?=.*[A-Z]).{8,}$")]],
       repeatPassword: ['', Validators.required]
     }, { validator: this.checkPasswords });
+    this.translate.use('en');
   }
 
   checkPasswords(group: FormGroup) {
