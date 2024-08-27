@@ -57,7 +57,7 @@ export class AdminHomeComponent {
 
   ColumnsInscritos: string[] = ['id','nombre','apellidos','email'];
   displayedColumns: string[] = ['partido','fecha','usuarios'];
-  displayColumns: string[] = ['partido','fechaDelPartido'];
+  displayColumns: string[] = ['partido','fechaDelPartido','editar'];
 
   ngOnInit(){
     this.getUsers();
@@ -126,6 +126,7 @@ export class AdminHomeComponent {
 
     dialog.afterClosed().subscribe(result => {
       this.getProximosPartidos();
+      this.getPartidosFuturos();
     });
 
   }
@@ -147,6 +148,7 @@ export class AdminHomeComponent {
     });
     dialog.afterClosed().subscribe(result => {
       this.getProximosPartidos();
+      this.getPartidosFuturos();
     });
   }
   // openHabilitarEntradas() {
