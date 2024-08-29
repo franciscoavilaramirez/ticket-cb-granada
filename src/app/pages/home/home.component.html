@@ -22,12 +22,14 @@
                 <img class="img-descargar" src="assets/imgs/descargar.png">
             </div>
 
-            <div  class="btn-acompanante" >
+           <!-- <div  class="btn-acompanante" >
               <button mat-button (click)="openAddTicketsUser()" [disabled]="primerPartido.stockEntradas < 1" >
                 <img class="img-acompanante" [src]="primerPartido.stockEntradas >= 1 ? 'assets/imgs/btn_acompañante.png' : 'assets/imgs/btn_acompañante_deshab.png'">
               </button>
-          </div>
-
+          </div> -->
+          <div (click)="devolver(primerPartido.id)" class="btn-devolver">
+                <img class="img-devolver" src="assets/imgs/devolver.png">
+            </div>
         </div>
         <!-- Si no tengo la entrada, boton de apuntarse si quedan -->
         <div *ngIf=!primerPartido.tengoEntrada>
