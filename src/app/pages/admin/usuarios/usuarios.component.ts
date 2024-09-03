@@ -32,13 +32,18 @@ export class UsuariosComponent {
   usuariosMostrar: Usuario[] = [];
   cantidadPorPagina = 10;
   opcionesDeCantidades = [10,20,30];
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  usuariosDataSource: MatTableDataSource<Usuario> = new MatTableDataSource<Usuario>();
+  //@ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  //usuariosDataSource: MatTableDataSource<Usuario> = new MatTableDataSource<Usuario>();
+  usuariosDataSource = new MatTableDataSource<Usuario>([]); // Inicializar el dataSource
 
 
   ngOnInit() {
     this.getUsers()
     this.myId = this.userService.getMyUser().user_id
+  }
+  ngAfterViewInit() {
+    this.usuariosDataSource.paginator = this.paginator;
   }
   // getUsers() {
   //   this.apiService.getUsers().subscribe(data => {
@@ -52,8 +57,9 @@ export class UsuariosComponent {
   getUsers() {
     this.apiService.getUsers().subscribe(data => {
       this.usuarios = data;
-      this.usuariosDataSource = new MatTableDataSource<Usuario>(this.usuarios);
-      this.usuariosDataSource.paginator = this.paginator;
+      this.usuariosDataSource.data = data;
+      //this.usuariosDataSource = new MatTableDataSource<Usuario>(this.usuarios);
+      //this.usuariosDataSource.paginator = this.paginator;
     });
   }
   paginar(event: any) {

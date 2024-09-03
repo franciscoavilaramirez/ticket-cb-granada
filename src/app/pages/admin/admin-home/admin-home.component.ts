@@ -2,7 +2,6 @@ import { Component, ViewChild, AfterViewInit, ElementRef } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Partido } from '../../../modelo/partido';
 import { Router } from '@angular/router';
-import * as XLSX from 'xlsx';
 import { MatDialog } from '@angular/material/dialog';
 import Swal from 'sweetalert2';
 import { Usuario } from '../../../modelo/usuario';
@@ -14,9 +13,9 @@ import { ApiService } from '../../../service/api.service';
 import { SubirEntradasComponent } from '../subir-entradas/subir-entradas.component';
 import { ListUserComponent } from '../../../componentes/list-user/list-user.component';
 import { Subscription } from 'rxjs';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { NgIf } from '@angular/common';
 import { ThemePalette } from '@angular/material/core';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-home',
@@ -58,6 +57,8 @@ export class AdminHomeComponent {
   ColumnsInscritos: string[] = ['id','nombre','apellidos','email'];
   displayedColumns: string[] = ['partido','fecha','usuarios'];
   displayColumns: string[] = ['partido','fechaDelPartido','editar'];
+  dataSource = new MatTableDataSource<Partido>(this.partidosPasados);
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   ngOnInit(){
     this.getUsers();
@@ -65,6 +66,11 @@ export class AdminHomeComponent {
     this.getPartidosAnteriores();
     this.getPartidosFuturos();
   }
+
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+  }
+
   public cambiarLenguaje(lang: string) {
     this.activeLang = lang;
     this.translate.use(lang);
@@ -113,7 +119,7 @@ export class AdminHomeComponent {
 
   openSubirEntradas() {
     const dialog = this.dialog.open(SubirEntradasComponent, {
-      width: '50vw',
+      width: '40vw',
       height: '85vh',
       autoFocus: false
     });
@@ -169,7 +175,7 @@ export class AdminHomeComponent {
 
       this.apiService.getMisPartidosIds(this.idUsuario).subscribe(misPartidosIds => {
         this.misPartidosIds = misPartidosIds
-    
+
         this.proximosPartidos.forEach(partido => {
           if (this.misPartidosIds?.includes(partido.id))
             partido.tengoEntrada = true;
@@ -217,6 +223,8 @@ export class AdminHomeComponent {
   getPartidosAnteriores(){
     this.apiService.getPartidosAnteriores().subscribe(partidosAnteriores =>{
       this.partidosPasados = partidosAnteriores;
+      this.dataSource.data = partidosAnteriores;
+
       console.log('partidos Anteriores', partidosAnteriores);
     });
   }
@@ -242,7 +250,7 @@ export class AdminHomeComponent {
   }
   apuntarse(idPartido: number) {
     this.apiService.asignarEntrada(this.idUsuario, idPartido).subscribe(response => {
-       if(response == true){ 
+       if(response == true){
         this.proximosPartidos.forEach(partido => {
               if (partido.id == idPartido){
                 partido.tengoEntrada = true;

@@ -67,19 +67,14 @@
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
-  <!-- <mat-paginator [pageSizeOptions]="pageSizeOptions" [length]="usuarios.length" (page)="onPageChange($event)"></mat-paginator> -->
+  <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
 
-  <!-- <mat-paginator
-  [length]="usuariosDataSource?.paginator?.length"
-  [pageSize]="cantidadPorPagina"
-  (page)= "paginar($event)"
-  [pageSizeOptions]="opcionesDeCantidades">
-</mat-paginator> -->
-<mat-paginator [length]="usuarios.length"
+
+<!-- <mat-paginator [length]="usuarios.length"
                 [pageSize]="cantidadPorPagina"
                 (page)="paginar($event)"
                 [pageSizeOptions]="opcionesDeCantidades">
-</mat-paginator>
+</mat-paginator> -->
 </div>
 
 <div class="buttons">

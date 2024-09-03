@@ -318,3 +318,21 @@
 .btn-apuntame:hover {
   cursor: pointer;
 }
+.mat-mdc-table {
+  table-layout: auto;
+  margin-bottom: 16px;
+  white-space: normal;
+  background-color: var(--mat-table-background-color);
+}
+::ng-deep .mat-mdc-paginator-container  {
+  /* background-color: blanchedalmond; */
+  background: linear-gradient(to bottom right, #ff4081, rgba(0, 0, 0, 0.2));
+  border-radius: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 0 8px;
+  flex-wrap: wrap-reverse;
+  width: 100%;
+  min-height: var(--mat-paginator-container-size);
+}
