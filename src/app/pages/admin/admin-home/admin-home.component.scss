@@ -145,7 +145,7 @@
                 width: 100%;
                 max-width: 400px;
                 min-width: 300px;
-                column-gap: 20px;
+                //column-gap: 20px;
 
                 &__mostrar, &__modificar{
                     background-color: #94cef2;
@@ -169,6 +169,22 @@
                   font-family: allerta;
                   font-size: 15px;
                   width: 100%;
+                  margin: 0 12px;
+                }
+                &__aniadir-Admin{
+                  background-color: #e20074;
+                  color: #ffffff;
+                  font-family: allerta;
+                  font-size: 15px;
+                  width: 94%;
+                  margin: 0 12px;
+                }
+                &__descargar-devolver{
+                  background-color: #e20074;
+                  color: #ffffff;
+                  font-family: allerta;
+                  font-size: 15px;
+                  width: 50%;
                   margin: 0 12px;
                 }
               }

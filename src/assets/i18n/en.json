@@ -29,7 +29,10 @@
     "card":{
       "mostrarOcultar":"Show registered",
       "anadirUsuario": "Add user match",
-      "modificarPartido": "Update match"
+      "modificarPartido": "Update match",
+      "anadirAdmin": "Add Admin",
+      "descargar": "Download Admin",
+      "devolver": "Restore"
       },
   "listadoUsuarios":{
     "nombre": "Name",

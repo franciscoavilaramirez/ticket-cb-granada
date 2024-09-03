@@ -18,10 +18,10 @@ filterPost = '' ;
 constructor(public apiService: ApiService,public dialog: MatDialog,
             private translate: TranslateService,
             public dialogRef: MatDialogRef<AdminHomeComponent>,
-            @Inject(MAT_DIALOG_DATA) public usuariosPartido: Usuario[]){}
+            @Inject(MAT_DIALOG_DATA) public usuariosPartido: Usuario[] = []){}
 
 ngOnInit(){
-  this.contador = this.usuariosPartido.length || 0;
+  //this.contador = this.usuariosPartido.length || 0;
 }
 
 

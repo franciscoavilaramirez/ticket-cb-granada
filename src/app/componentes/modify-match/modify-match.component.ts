@@ -30,7 +30,7 @@ export class ModifyMatchComponent {
 
       equipoVisitante: new FormControl(this.matchModify.equipoVisitante),
       fechaPartido: new FormControl(this.matchModify.fechaPartido),
-      fechaPublicacion: new FormControl(this.matchModify.fechaPublicacion),
+      fechaPublicacion: new FormControl(this.matchModify.fechaPublicacion.split('T')[0]),
       id:new FormControl(this.matchModify.id),
     });
   }
@@ -41,7 +41,14 @@ export class ModifyMatchComponent {
   onSubmit(){
     if(this.updateMatchForm.valid){
       const bodyResponse: Partido = this.updateMatchForm.value;
+
+      // Aquí separamos la fecha, eliminando la hora si existe
+      //const fechaPartidoSoloFecha = bodyResponse.fechaPublicacion.split('T')[0];
       bodyResponse.fechaPublicacion = bodyResponse.fechaPublicacion + this.getHoraActual()
+
+      // Volvemos a asignar la fecha sin hora y añadimos la hora actual
+     //bodyResponse.fechaPublicacion = fechaPartidoSoloFecha + this.getHoraActual();
+
       this.apiService.updateMatch(bodyResponse).subscribe(data =>{
         console.log('update partido',data);
         this.closedModal();

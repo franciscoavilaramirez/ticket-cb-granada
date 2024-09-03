@@ -28,7 +28,12 @@
 	"card":{
     "mostrarOcultar":"Mostrar Inscritos",
     "anadirUsuario": "Añadir Usuario",
-    "modificarPartido": "Modificar Partido"
+    "modificarPartido": "Modificar Partido",
+    "anadirAdmin": "Añadir Administrador",
+    "descargar": "Descargar Admin",
+    "devolver": "Devolver"
+
+
 		},
   "listadoUsuarios":{
     "nombre": "Nombre",
