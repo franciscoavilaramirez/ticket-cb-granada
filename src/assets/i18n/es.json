@@ -11,6 +11,7 @@
   "requisitosContrasena" : "La contraseña debe tener al menos 8 caracteres, una minúscula, una mayúscula y un caracter especial",
   "requisitosEmail":"El email debe contener @t-systems.com",
   "buscador": "Buscar",
+  "terminoBuscar": "Introduce el término de búsqueda",
   "registro":"Registrate para crear una cuenta",
   "usuarioRegistrado":"Ya tienes una cuenta?",
   "iniciaSesion":"Inicia sesión",
@@ -24,6 +25,10 @@
   "partidosInscritos": "Partidos Inscritos: ",
   "noInscrito": "Este usuario no ha asistido a ningún partido",
   "editar":"Editar",
+  "siguientePartido":"Siguiente Partido",
+  "proximosPartidos":"Próximos Partidos",
+  "partidosAnteriores":"Partidos Anteriores",
+  "partidosFuturos":"Partidos Futuros",
 
 	"card":{
     "mostrarOcultar":"Mostrar Inscritos",

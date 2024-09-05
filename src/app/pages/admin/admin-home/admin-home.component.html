@@ -13,7 +13,7 @@
     </div>
   </button>
 </div>
-<app-divisor [titulo]="'Próximos Partidos'"></app-divisor>
+<app-divisor [titulo]="'proximosPartidos'"></app-divisor>
 
 <div class="container">
   <div class="container__wrapper">
@@ -74,13 +74,13 @@
     </div>
   </div>
 </div>
-  <app-divisor [titulo]="'Partidos Anteriores'"></app-divisor>
+  <app-divisor [titulo]="'partidosAnteriores'"></app-divisor>
 <div class="container">
   <div class="container__table" #TABLE>
     <div class="container__table__content-table">
       <div class="buscador">
         <mat-form-field color="accent" >
-          <input matInput name="filterPost" [(ngModel)]="filterPost" placeholder="Escribe lo que deseas buscar" >
+          <input matInput name="filterPost" [(ngModel)]="filterPost" placeholder="{{'terminoBuscar' | translate}}" >
            <mat-icon matPrefix>
             <img style="width: 25px; height: 25px;" src="../../../assets/imgs/search_grey.png" alt="Lupa">
           </mat-icon>
@@ -113,13 +113,13 @@
   </div>
 </div>
 
-<app-divisor [titulo]="'Partidos Futuros'"></app-divisor>
+<app-divisor [titulo]="'partidosFuturos'"></app-divisor>
 <div class="container">
   <div class="container__table" #TABLE>
     <div class="container__table__content-table">
       <div class="buscador">
         <mat-form-field color="accent" >
-          <input matInput name="filterPost" [(ngModel)]="filterPost" placeholder="Escribe lo que deseas buscar" >
+          <input matInput name="filterPost" [(ngModel)]="filterPost" placeholder="{{'terminoBuscar' | translate}}">
           <mat-icon matPrefix>
             <img style="width: 25px; height: 25px;" src="../../../assets/imgs/search_grey.png" alt="Lupa">
           </mat-icon>
