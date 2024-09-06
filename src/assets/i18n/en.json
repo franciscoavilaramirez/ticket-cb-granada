@@ -5,6 +5,7 @@
   "apellidos":"Last Name",
   "email": "Email",
   "buscador": "Search",
+  "terminoBuscar":"Enter the search term",
   "contrasena": "Password",
   "registrarUsuario": "Register User",
   "repiteContrasena": "Repeat Password",
@@ -24,7 +25,10 @@
   "partidosInscritos": "Attended Matches",
   "noInscrito": "This user has not attended any games",
   "editar":"Edit",
-
+  "siguientePartido":"Next Match",
+  "proximosPartidos":"Upcoming Matches",
+  "partidosAnteriores":"Last Matches",
+  "partidosFuturos":"Future matches",
 
     "card":{
       "mostrarOcultar":"Show registered",
