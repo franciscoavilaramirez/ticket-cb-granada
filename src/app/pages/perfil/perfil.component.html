@@ -6,6 +6,7 @@
 
 <form [formGroup]="editarPerfil" class="container"  >
   <h2>{{"perfil.datosPerfil" | translate }}</h2>
+  <div *ngIf="usuario">
   <div class="form-container">
     <label class="txt-label">{{"nombre" | translate }}</label>
     <input class="input-form" type="text" formControlName="nombre" value="{{usuario.nombre}}">
@@ -21,6 +22,7 @@
     <input class="input-form" type="email" formControlName="email" value="{{usuario.email}}">
     <img class="icon-edit" src="../../assets/edit_grey.png">
   </div>
+</div>
   <div class="button-container">
     <button type="submit" class="submit-button" (click)="editar()">{{"botones.guardarCambios" | translate }}</button>
     <button type="submit" class="submit-button-cerrar-sesion" (click)="cerrarSesion()">{{"botones.cerrarSesion" | translate }}</button>

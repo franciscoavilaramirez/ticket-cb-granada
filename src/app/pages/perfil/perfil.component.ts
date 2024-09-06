@@ -15,11 +15,12 @@ import { Router } from '@angular/router';
 })
 export class PerfilComponent {
   editarPerfil: FormGroup;
-  usuario: Usuario
+  usuario: Usuario;
   idUsuario: number
   errorMessage: string = '';
 
-  constructor(private formBuilder: FormBuilder, private apiService: ApiService, private router: Router, private http: HttpClient, public dialog: MatDialog) { }
+  constructor(private formBuilder: FormBuilder, private apiService: ApiService,
+              private router: Router, private http: HttpClient, public dialog: MatDialog) { }
 
 
   ngOnInit() {
@@ -31,18 +32,39 @@ export class PerfilComponent {
       this.idUsuario = userJson.id
       console.log("id usuario perfil: " + this.idUsuario)
     }
+    // Inicializa el FormGroup antes de cargar los datos del usuario para evitar errores de referencia
+    this.editarPerfil = this.formBuilder.group({
+      nombre: ['', Validators.required],
+      apellidos: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+    });
+
     this.apiService.getUsuarioById(this.idUsuario).subscribe(
       usuario => {
         this.usuario = usuario
         console.log('this usuario',this.usuario)
-        this.usuario.id = this.idUsuario + "";
-        console.log("usuario perfil: " + JSON.stringify(this.usuario))
-        this.editarPerfil = this.formBuilder.group({
-          nombre: [this.usuario.nombre, Validators.required],
-          apellidos: [this.usuario.apellidos, Validators.required],
-          email: [this.usuario.email, [Validators.required, Validators.email]],
 
+        // Actualiza el FormGroup con los datos del usuario una vez cargados
+        this.editarPerfil.patchValue({
+          nombre: this.usuario.nombre,
+          apellidos: this.usuario.apellidos,
+          email: this.usuario.email
         });
+
+
+
+        // this.usuario.id = this.idUsuario + "";
+        // console.log("usuario perfil: " + JSON.stringify(this.usuario))
+        // this.editarPerfil = this.formBuilder.group({
+        //   nombre: [this.usuario.nombre, Validators.required],
+        //   apellidos: [this.usuario.apellidos, Validators.required],
+        //   email: [this.usuario.email, [Validators.required, Validators.email]],
+
+        // });
+      },
+      error => {
+        this.errorMessage = "Error al cargar el usuario";
+        console.error(error);
       }
     )
 

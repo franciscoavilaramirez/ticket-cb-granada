@@ -45,21 +45,11 @@ export class UsuariosComponent {
   ngAfterViewInit() {
     this.usuariosDataSource.paginator = this.paginator;
   }
-  // getUsers() {
-  //   this.apiService.getUsers().subscribe(data => {
-  //     this.usuarios = data;
-  //     this.usuariosMostrar = this.usuarios.slice(0, this.cantidadPorPagina); // Inicializa usuariosMostrar con los primeros diez usuarios
 
-  //     this.usuariosDataSource = new MatTableDataSource<Usuario>(data);
-  //     this.usuariosDataSource.paginator = this.paginator;
-  //   });
-  // }
   getUsers() {
     this.apiService.getUsers().subscribe(data => {
       this.usuarios = data;
       this.usuariosDataSource.data = data;
-      //this.usuariosDataSource = new MatTableDataSource<Usuario>(this.usuarios);
-      //this.usuariosDataSource.paginator = this.paginator;
     });
   }
   paginar(event: any) {
@@ -67,13 +57,6 @@ export class UsuariosComponent {
     const fin = inicio + event.pageSize;
     this.usuariosDataSource.data = this.usuarios.slice(inicio, fin);
   }
-
-  // paginar(paginacion: any) {
-  //   let inicio = paginacion.pageIndex * paginacion.pageSize;
-  //   let fin = inicio + paginacion.pageSize;
-  //   this.usuariosMostrar = this.usuarios.slice(inicio, fin);
-  // }
-
 
   openRegistrarUsuario() {
     this.dialog.open(RegisterAdminDialogComponent, {
@@ -91,7 +74,6 @@ export class UsuariosComponent {
       apellidos: usuarioAny.apellidos,
       email: usuarioAny.email
     }
-    //console.log('usuarioAny', usuarioAny, 'usuario', usuario);
     const dialog = this.dialog.open(UpdateUserComponent, {
       data: usuario,
       width: '25vw',
