@@ -32,15 +32,19 @@ export class UsuariosComponent {
   usuariosMostrar: Usuario[] = [];
   cantidadPorPagina = 10;
   opcionesDeCantidades = [10,20,30];
-  //@ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
-  //usuariosDataSource: MatTableDataSource<Usuario> = new MatTableDataSource<Usuario>();
   usuariosDataSource = new MatTableDataSource<Usuario>([]); // Inicializar el dataSource
+  filterTerm: string = '';
 
 
   ngOnInit() {
     this.getUsers()
     this.myId = this.userService.getMyUser().user_id
+  }
+  // Método para aplicar el filtro
+  applyFilter(event: Event): void {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.usuariosDataSource.filter = filterValue.trim().toLowerCase();  // Filtrar los datos
   }
   ngAfterViewInit() {
     this.usuariosDataSource.paginator = this.paginator;
@@ -50,6 +54,8 @@ export class UsuariosComponent {
     this.apiService.getUsers().subscribe(data => {
       this.usuarios = data;
       this.usuariosDataSource.data = data;
+      this.usuariosDataSource.data = this.usuarios;  // Asignar los datos al dataSource
+
     });
   }
   paginar(event: any) {

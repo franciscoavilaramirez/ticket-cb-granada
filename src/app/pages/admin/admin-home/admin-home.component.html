@@ -80,14 +80,14 @@
     <div class="container__table__content-table">
       <div class="buscador">
         <mat-form-field color="accent" >
-          <input matInput name="filterPost" [(ngModel)]="filterPost" placeholder="{{'terminoBuscar' | translate}}" >
+          <input matInput name="filterTerm" (input)="applyFilter($event)" placeholder="{{'terminoBuscar' | translate}}" >
            <mat-icon matPrefix>
             <img style="width: 25px; height: 25px;" src="../../../assets/imgs/search_grey.png" alt="Lupa">
           </mat-icon>
         </mat-form-field>
       </div>
 
-      <table mat-table [dataSource]="dataSource  | filter:filterPost" class="mat-elevation-z8" #table>
+      <table mat-table [dataSource]="dataSource  | filter:filterTerm" class="mat-elevation-z8" #table>
         <ng-container matColumnDef="partido">
           <th mat-header-cell *matHeaderCellDef style="padding-left: 25px;">{{"partido" | translate }}  </th>
           <td mat-cell *matCellDef="let partido" style="padding-left: 25px;">Granada - {{partido.equipoVisitante}}</td>
@@ -119,14 +119,14 @@
     <div class="container__table__content-table">
       <div class="buscador">
         <mat-form-field color="accent" >
-          <input matInput name="filterPost" [(ngModel)]="filterPost" placeholder="{{'terminoBuscar' | translate}}">
+          <input matInput name="filterTerm" [(ngModel)]="filterTerm" placeholder="{{'terminoBuscar' | translate}}">
           <mat-icon matPrefix>
             <img style="width: 25px; height: 25px;" src="../../../assets/imgs/search_grey.png" alt="Lupa">
           </mat-icon>
         </mat-form-field>
       </div>
 
-      <table mat-table [dataSource]="partidosFuturos | filter:filterPost" class="mat-elevation-z8" #table>
+      <table mat-table [dataSource]="partidosFuturos | filter:filterTerm" class="mat-elevation-z8" #table>
         <ng-container matColumnDef="partido">
           <th mat-header-cell *matHeaderCellDef style="padding-left: 25px;">{{"partido" | translate }}  </th>
           <td mat-cell *matCellDef="let partido" style="padding-left: 25px;">Granada - {{partido.equipoVisitante}}</td>

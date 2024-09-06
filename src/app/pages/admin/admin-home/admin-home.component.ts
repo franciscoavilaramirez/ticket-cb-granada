@@ -42,13 +42,12 @@ export class AdminHomeComponent {
   bodyResponse: Usuario;
   partido!: Partido[];
   proximosPartidos!: Partido[];
-  partidosPasados: Partido[] =[];
   usuariosPartido!: Usuario[];
   fechaPartido:string;
   idPartido!: string;
   entradasSobrantes!: any;
   entradas: number;
-  filterPost = '';
+  partidosPasados: Partido[] =[];
   spinnerShow = true;
   color: ThemePalette = "accent";
   @ViewChild('TABLE') table!: ElementRef;
@@ -57,14 +56,20 @@ export class AdminHomeComponent {
   ColumnsInscritos: string[] = ['id','nombre','apellidos','email'];
   displayedColumns: string[] = ['partido','fecha','usuarios'];
   displayColumns: string[] = ['partido','fechaDelPartido','editar'];
-  dataSource = new MatTableDataSource<Partido>(this.partidosPasados);
   @ViewChild(MatPaginator) paginator!: MatPaginator;
+  dataSource = new MatTableDataSource<Partido>([]);
+  filterTerm: string = '';  // Valor del input para la búsqueda
+
 
   ngOnInit(){
     this.getUsers();
     this.getProximosPartidos();
     this.getPartidosAnteriores();
     this.getPartidosFuturos();
+  }
+  applyFilter(event: Event): void {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();  // Filtrar los datos
   }
 
   ngAfterViewInit() {
@@ -224,6 +229,7 @@ export class AdminHomeComponent {
     this.apiService.getPartidosAnteriores().subscribe(partidosAnteriores =>{
       this.partidosPasados = partidosAnteriores;
       this.dataSource.data = partidosAnteriores;
+      this.dataSource.data = this.partidosPasados;  // Asignar los datos al dataSource
 
       console.log('partidos Anteriores', partidosAnteriores);
     });
