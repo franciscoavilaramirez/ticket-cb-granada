@@ -14,6 +14,7 @@
 	  box-shadow: rgba(0, 0, 0, 0.3) 0px 5px 15px;
     display: flex;
     flex-direction: column;
+    //flex-wrap: wrap;
     align-items:start;
     width: 100%;
     max-width: 550px;
@@ -23,7 +24,13 @@
     height: 100%;
     //max-height: 580px;
 }
-.form-container{
+.form-center{
+
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+  .form-container{
     margin: 0 auto;
     display: flex;
     position: relative;
@@ -32,11 +39,16 @@
     padding: 15px;
     margin-right: 6rem;
 }
+}
+
 
 h2{
     font-size: 28px;
     font-weight: bold;
     font-family: Evogria;
+    width: 100%;
+    display: flex;
+    justify-content: center;
 
 }
 

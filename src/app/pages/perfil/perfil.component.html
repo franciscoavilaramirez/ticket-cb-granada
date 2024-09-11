@@ -6,7 +6,7 @@
 
 <form [formGroup]="editarPerfil" class="container"  >
   <h2>{{"perfil.datosPerfil" | translate }}</h2>
-  <div *ngIf="usuario">
+  <div class="form-center" *ngIf="usuario">
   <div class="form-container">
     <label class="txt-label">{{"nombre" | translate }}</label>
     <input class="input-form" type="text" formControlName="nombre" value="{{usuario.nombre}}">

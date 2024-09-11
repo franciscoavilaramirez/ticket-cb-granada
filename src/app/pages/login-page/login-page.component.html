@@ -29,7 +29,7 @@
         class="input-field">
     </mat-form-field>
 
-    <button mat-raised-button color="primary" type="submit" [disabled]="!loginForm.valid" class="submit-button">Log In</button>
+    <button mat-raised-button color="primary" type="submit" [disabled]="!loginForm.valid" class="submit-button">{{"login" | translate }}</button>
 
     <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
 
