@@ -17,6 +17,7 @@ export class HomeComponent {
     // this.renderer.setStyle(document.body, 'background-repeat', 'no-repeat');
     // this.renderer.setStyle(document.body, 'background-attachment', 'fixed');
   }
+  idioma: string = 'es'; // valor inicial por defecto
 
   idUsuario: number
   partidos: Partido[]
@@ -24,10 +25,15 @@ export class HomeComponent {
   primerPartido: Partido
   filterPost = '';
   partidosFuturos: Partido[] =[];
- 
+
 
   ngOnInit() {
-        this.idUsuario = this.getUsuarioId()
+
+    this.apiService.idioma$.subscribe((nuevoIdioma: string) => {
+      this.idioma = nuevoIdioma;
+    });
+
+    this.idUsuario = this.getUsuarioId()
 
     this.apiService.getMisPartidosIds(this.idUsuario).subscribe(misPartidosIds => {
       this.misPartidosIds = misPartidosIds

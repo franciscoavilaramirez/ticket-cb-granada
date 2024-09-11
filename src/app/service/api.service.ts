@@ -4,9 +4,10 @@ import { Usuario } from '../modelo/usuario';
 import { Partido } from '../modelo/partido';
 import { FileInfo } from '../modelo/fileInfo';
 
-import { Observable, Subject } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { environment } from '../../enviroments/environment';
 import { Pdf } from '../modelo/pdf';
+import { TranslateService } from '@ngx-translate/core';
 //import { FileInfo } from '../modelo/fileInfo';
 
 @Injectable({
@@ -14,11 +15,22 @@ import { Pdf } from '../modelo/pdf';
 })
 export class ApiService {
 
-  constructor(private http:HttpClient) { }
-  apiUrl = environment.apiUrl
+  private idiomaActual = new BehaviorSubject<string>('es');
+  idioma$ = this.idiomaActual.asObservable();
 
+  constructor(private http:HttpClient, private translate: TranslateService) {
+    this.translate.setDefaultLang('es'); // idioma por defecto
+
+   }
+
+  apiUrl = environment.apiUrl
   //Partidos cuya fecha sea posterior a la actual
   //Cada partido tiene un campo extra que indica si quedan entradas disponibles (stockEntradas)
+
+  cambiarIdioma(idioma: string) {
+    this.idiomaActual.next(idioma);
+    this.translate.use(idioma);
+  }
   getProximosPartidos() {
     return this.http.get<Partido[]>(this.apiUrl + 'getProximosPartidos');
   }

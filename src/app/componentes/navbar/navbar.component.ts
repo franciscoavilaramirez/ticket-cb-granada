@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { UserService } from '../../service/user.service';
+import { ApiService } from '../../service/api.service';
 
 
 @Component({
@@ -10,21 +11,26 @@ import { UserService } from '../../service/user.service';
 })
 export class NavbarComponent implements OnInit {
 
-  constructor(private translate: TranslateService, public userService: UserService) { }
+  constructor(private translate: TranslateService, public userService: UserService, public apiService: ApiService) { }
 
   isAdmin = false
   ngOnInit(): void {
     this.isAdmin = this.userService.getMyUser().isAdmin
   }
 
-  activeLang = 'es';
   cambiarIdioma(event: any) {
-    //console.log('Valor seleccionado:', event.target.value);
-
-    const lang = event.target.value;
-    this.activeLang = lang;
-    this.translate.use(lang);
+    const idiomaSeleccionado = event.target.value;
+    this.apiService.cambiarIdioma(idiomaSeleccionado);
   }
+
+  activeLang = 'es';
+  // cambiarIdioma(event: any) {
+  //   //console.log('Valor seleccionado:', event.target.value);
+
+  //   const lang = event.target.value;
+  //   this.activeLang = lang;
+  //   this.translate.use(lang);
+  // }
 
 
 }
