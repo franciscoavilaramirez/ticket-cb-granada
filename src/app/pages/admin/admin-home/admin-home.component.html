@@ -19,12 +19,9 @@
   <div class="container__wrapper">
     <div class="container__wrapper__content-wrapper">
       <div class="cards-wrapper">
-        <!-- <span> {{getEntradasSobrantes(id)}}metodo entradas sobrantes</span> -->
-        <!-- <span>{{ getEntradasSobrantes(this.contador) }}</span> -->
         <div *ngIf="spinnerShow"  class="cards-wrapper__spinner">
           <mat-spinner [color]="color" ></mat-spinner>
         </div>
-
 
           @for (proximoPartido of proximosPartidos; track $index) {
             <mat-card  class="card"  >
@@ -86,7 +83,6 @@
           </mat-icon>
         </mat-form-field>
       </div>
-
       <table mat-table [dataSource]="dataSource  | filter:filterTerm" class="mat-elevation-z8" #table>
         <ng-container matColumnDef="partido">
           <th mat-header-cell *matHeaderCellDef style="padding-left: 25px;">{{"partido" | translate }}  </th>
@@ -108,7 +104,6 @@
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
       </table>
       <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
-
     </div>
   </div>
 </div>
@@ -125,7 +120,6 @@
           </mat-icon>
         </mat-form-field>
       </div>
-
       <table mat-table [dataSource]="partidosFuturos | filter:filterTerm" class="mat-elevation-z8" #table>
         <ng-container matColumnDef="partido">
           <th mat-header-cell *matHeaderCellDef style="padding-left: 25px;">{{"partido" | translate }}  </th>

@@ -1,11 +1,12 @@
 <app-navbar></app-navbar>
 
 <app-divisor [titulo]="'siguientePartido'"></app-divisor>
-
+<div *ngIf="spinnerShow"  class="container__spinner">
+  <mat-spinner [color]="color" ></mat-spinner>
+</div>
 <div *ngIf="primerPartido" class="ticket-wrapper">
     <div class="ticket">
         <div class="fecha">
-            <!-- <div>{{primerPartido.fechaPartido | date:'d MMM' }}.</div> -->
             <div>{{primerPartido.fechaPartido | date:'d MMM' : '' : idioma}}.</div>
             <div class="dia-semana">{{primerPartido.fechaPartido | date:'EEEE' : '' : idioma}}</div>
             <div>{{primerPartido.fechaPartido | date:'HH:mm'}}H</div>
@@ -51,7 +52,6 @@
     <div *ngFor="let partido of partidos" style="display: inline-block;">
         <div class="ticket ticket-small">
             <div class="fecha">
-                <!-- <div>{{partido.fechaPartido | date:'d MMM'}}.</div> -->
                 <div>{{partido.fechaPartido | date:'d MMM' : '' : idioma}}.</div>
                 <div class="dia-semana">{{partido.fechaPartido | date:'EEEE' : '' : idioma}}</div>
                 <div>{{partido.fechaPartido | date:'HH:mm'}}H</div>

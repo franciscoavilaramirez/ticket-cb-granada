@@ -27,12 +27,14 @@
           <input type="password" matInput formControlName ="repiteContrasena">
         </mat-form-field>
       </mat-dialog-actions>
+      <div class="div">
       <div *ngIf="updateUserForm.get('contrasena')?.hasError('pattern')" class="container__wrapper__error-message">
         {{"requisitosContrasena" | translate }}
       </div>
      <div *ngIf="updateUserForm.errors?.['notSame'] " class="container__wrapper__error-message">
         {{"contrasenaNoCoincide" | translate }}
       </div>
+    </div>
       </form>
         <div class="container__wrapper__content-wrapper">
         <button mat-raised-button class="buttons__guardar" color="primary"(click)="onSubmit()" >{{"botones.guardarCambios" | translate }}</button>

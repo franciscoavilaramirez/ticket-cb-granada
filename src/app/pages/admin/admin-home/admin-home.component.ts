@@ -130,7 +130,6 @@ export class AdminHomeComponent {
     });
     const instance = dialog.componentInstance;
     instance.actualizacionProximosPartidos.subscribe(() => {
-      //console.log('respuesta recibida del evento', )
       this.spinnerShow = true;
       this.getProximosPartidos();
     });
@@ -144,7 +143,7 @@ export class AdminHomeComponent {
   openAddUser(partido: Partido) {
     const dialog = this.dialog.open(AddUserComponent,{
       data: partido,
-      width:'50vw',
+      width:'35vw',
       height:'85vh'
     });
     dialog.afterClosed().subscribe(result => {
@@ -154,7 +153,7 @@ export class AdminHomeComponent {
   openModifyMatch(partido: Partido) {
     const dialog = this.dialog.open(ModifyMatchComponent,{
       data: partido,
-      width:'25vw',
+      width:'35vw',
       height:'90vh'
     });
     dialog.afterClosed().subscribe(result => {
@@ -162,15 +161,7 @@ export class AdminHomeComponent {
       this.getPartidosFuturos();
     });
   }
-  // openHabilitarEntradas() {
-  //   this.dialog.open(HabilitarEntradasComponent, {
-  //     width: '30vw',
-  //     height: '60vh',
-  //     autoFocus: false
-  //   }).afterClosed().subscribe( () => {
-  //     //this.getProximosPartidos()
-  //   });
-  // }
+
   getProximosPartidos(){
     this.apiService.getProximosPartidos().subscribe(data =>{
       this.proximosPartidos = data;

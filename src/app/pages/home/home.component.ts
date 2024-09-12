@@ -3,6 +3,9 @@ import { ApiService } from '../../service/api.service';
 import { Partido } from '../../modelo/partido';
 import { MatDialog } from '@angular/material/dialog';
 import { AddEntradasUsuarioComponent } from '../../componentes/add-entradas-usuario/add-entradas-usuario.component';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { ThemePalette } from '@angular/material/core';
+
 
 @Component({
   selector: 'app-home',
@@ -18,34 +21,33 @@ export class HomeComponent {
     // this.renderer.setStyle(document.body, 'background-attachment', 'fixed');
   }
   idioma: string = 'es'; // valor inicial por defecto
-
   idUsuario: number
   partidos: Partido[]
   misPartidosIds: number[]
   primerPartido: Partido
   filterPost = '';
   partidosFuturos: Partido[] =[];
+  spinnerShow = false;
+  color: ThemePalette = "accent";
 
 
   ngOnInit() {
 
+    this.spinnerShow = true
     this.apiService.idioma$.subscribe((nuevoIdioma: string) => {
       this.idioma = nuevoIdioma;
     });
-
     this.idUsuario = this.getUsuarioId()
-
     this.apiService.getMisPartidosIds(this.idUsuario).subscribe(misPartidosIds => {
       this.misPartidosIds = misPartidosIds
       this.apiService.getProximosPartidos().subscribe(proximosPartidos => {
-
         if (proximosPartidos != null) {
           this.primerPartido = proximosPartidos[0]
+          this.spinnerShow = false;
           if (this.misPartidosIds?.includes(this.primerPartido.id))
             this.primerPartido.tengoEntrada = true
           else
             this.primerPartido.tengoEntrada = false
-
           console.log("Primer partido", this.primerPartido)
 
           proximosPartidos.splice(0, 1) //quitamos el primer partido para mostrarlo mas grande como siguiente partido
@@ -58,7 +60,6 @@ export class HomeComponent {
               partido.tengoEntrada = false;
           })
         }
-        //console.log("Partidos: ", this.partidos)
         console.log("Mis partidos ids: ", this.misPartidosIds)
       });
     });
@@ -77,12 +78,11 @@ export class HomeComponent {
           });
         }
       } else {
-        alert("No quedan entradas")
+          alert("No quedan entradas")
       }
     })
 
   }
-
   devolver(idPartido: number) {
     this.apiService.desasignarEntrada(this.idUsuario, idPartido).subscribe(() => {
       if (this.primerPartido.id == idPartido) {
@@ -100,7 +100,6 @@ export class HomeComponent {
     })
   }
   descargar(idPartido: number, nombrePartido: string) {
-
     this.apiService.getEntrada(this.idUsuario, idPartido).subscribe(entradaPdf => {
       entradaPdf.forEach(file => {
         const byteCharacters = atob(file.data);
@@ -109,7 +108,6 @@ export class HomeComponent {
           byteArrays.push(byteCharacters.charCodeAt(i));
         }
         const byteArray = new Uint8Array(byteArrays);
-        //return new Blob([byteArray], { type: 'application/pdf' });
         const blob = new Blob([byteArray], { type: 'application/pdf' });
         const url = window.URL.createObjectURL(blob);
         const link = document.createElement('a');
@@ -122,15 +120,6 @@ export class HomeComponent {
 
     });
   }
-
-  // descargar(idPartido: number, nombrePartido: string) {
-  //   this.apiService.getEntrada(this.idUsuario, idPartido).subscribe(entradaPdf => {
-  //     const link = document.createElement('a');
-  //     link.href = URL.createObjectURL(entradaPdf);
-  //     link.download = 'Granada - ' + nombrePartido + '.pdf';
-  //     link.click();
-  //   });
-  // }
 
   getUsuarioId(): number {
     let userStr = localStorage.getItem('user');
@@ -166,8 +155,6 @@ export class HomeComponent {
           byteArrays.push(byteCharacters.charCodeAt(i));
         }
         const byteArray = new Uint8Array(byteArrays);
-        //return new Blob([byteArray], { type: 'application/pdf' });
-
         const blob = new Blob([byteArray], { type: 'application/pdf' });
         const url = window.URL.createObjectURL(blob);
         const link = document.createElement('a');
@@ -177,8 +164,6 @@ export class HomeComponent {
         window.URL.revokeObjectURL(url);
 
       })
-
     });
-
-}
+  }
 }

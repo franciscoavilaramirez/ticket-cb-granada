@@ -225,6 +225,11 @@ div {
  // padding: 100px;
  padding: 50px 0px 70px 30px;
 
+  &__spinner{
+    display: flex;
+    justify-content: center;
+  }
+
   &__table{
     display: flex;
     //flex-direction: column;
