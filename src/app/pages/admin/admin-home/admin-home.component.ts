@@ -16,6 +16,7 @@ import { Subscription } from 'rxjs';
 import { ThemePalette } from '@angular/material/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { UserService } from '../../../service/user.service';
 
 @Component({
   selector: 'app-home',
@@ -29,8 +30,10 @@ export class AdminHomeComponent {
 
   constructor(private snackBar: MatSnackBar,public apiService: ApiService,
               private router: Router,public dialog: MatDialog,
+              private userService:UserService,
               private translate: TranslateService) {
-              this.translate.setDefaultLang(this.activeLang);
+              this.translate.setDefaultLang(this.activeLang,
+              );
 
   }
   partidosFuturos: Partido[] =[];
@@ -66,7 +69,15 @@ export class AdminHomeComponent {
     this.getProximosPartidos();
     this.getPartidosAnteriores();
     this.getPartidosFuturos();
+    this.viewDataDecoded();
   }
+
+  // Creado para comprobar que viene bien los datos desde UserService
+viewDataDecoded(){
+   const dataUserDecoded = this.userService.getUserData();
+   console.log('data user decoded', dataUserDecoded);
+}
+
   applyFilter(event: Event): void {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();  // Filtrar los datos
@@ -114,7 +125,7 @@ export class AdminHomeComponent {
     console.log('usuarioAny',usuarioAny, 'usuario',usuario);
     const dialog = this.dialog.open(UpdateUserComponent,{
       data: usuario,
-      width:'25vw',
+      width:'35vw',
       height:'85vh'
     });
     dialog.afterClosed().subscribe(result => {

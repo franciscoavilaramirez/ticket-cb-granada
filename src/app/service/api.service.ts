@@ -8,6 +8,7 @@ import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { environment } from '../../enviroments/environment';
 import { Pdf } from '../modelo/pdf';
 import { TranslateService } from '@ngx-translate/core';
+import { Router } from '@angular/router';
 //import { FileInfo } from '../modelo/fileInfo';
 
 @Injectable({
@@ -18,9 +19,8 @@ export class ApiService {
   private idiomaActual = new BehaviorSubject<string>('es');
   idioma$ = this.idiomaActual.asObservable();
 
-  constructor(private http:HttpClient, private translate: TranslateService) {
+  constructor(private http:HttpClient, private translate: TranslateService, private router: Router) {
     this.translate.setDefaultLang('es'); // idioma por defecto
-
    }
 
   apiUrl = environment.apiUrl
@@ -46,21 +46,9 @@ export class ApiService {
     return this.http.delete(this.apiUrl + 'deleteUsuarioFromPartido/'+idUsuario+'/'+idPartido, {});
   }
 
-  // getEntradaBase64(idUsuario:number, idPartido:number): Observable<string> {
-  //   const headers = new HttpHeaders().set('Content-Type', 'text/plain; charset=utf-8');
-  //   return this.http.get(this.apiUrl + 'enviarEntrada/'+idUsuario+'/'+idPartido,{ headers, responseType: 'text'});
-  // }
-  // getEntrada(idUsuario:number, idPartido:number): Observable<Blob> {
-  //   return this.http.get(this.apiUrl + 'descargarEntrada/'+idUsuario+'/'+idPartido, {responseType:'blob'})
-  // }
-
-  // subirTickets(pdf: Pdf): Observable<object>{
-  //   return this.http.post(this.apiUrl + 'crearPartidoConEntradas', pdf);
-  // }
   getUsers(){
     return this.http.get<Usuario[]>(this.apiUrl + 'getAllUsers');
   }
-
 
   insertLogin(usuario: Usuario): Observable<Usuario> {
     return this.http.post<Usuario>(this.apiUrl+'addUser', usuario);
@@ -149,8 +137,6 @@ export class ApiService {
   getProximosPartidosDisponibles() {
     return this.http.get<Partido[]>(this.apiUrl + 'getProximosPartidosDisponibles');
   }
-
-
   getEntradasExtra(idUsuario:number, idPartido:number, nEntarda:number) {
     return this.http.get<FileInfo[]>(this.apiUrl + 'descargarEntradasAdicionales/'+idUsuario+'/'+idPartido+'/'+nEntarda)
   }

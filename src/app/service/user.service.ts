@@ -1,9 +1,12 @@
 import { Injectable } from '@angular/core';
+import { Usuario } from '../modelo/usuario';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
+private userData: Usuario;
+private perfilesUsuario: any[];
 
   constructor() { }
 
@@ -14,4 +17,24 @@ export class UserService {
     else
       return JSON.parse(userStr)
   }
+
+  getUserData(){
+
+    return this.userData;
+  }
+
+  getPerfilesUsuario(){
+    return this. perfilesUsuario;
+
+  }
+  setUserData(usuario:Usuario){
+    this.userData = usuario
+  }
+
+  setPerfilesUsuario(perfilesUsuario:any[]){
+    this.perfilesUsuario = perfilesUsuario
+  }
+
+
+
 }

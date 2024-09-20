@@ -51,9 +51,5 @@
   <button mat-raised-button color="primary" type="submit" [disabled]="!registerForm.valid">{{"registrarse" |
     translate}}</button>
 
-  <!-- <div appearance="fill" *ngIf="registerForm.errors?.['notSame'] ? 'Las contraseñas no coinciden.' : ''" class="error-message">
-    {{"contrasenaNoCoincide" | translate}}
-  </div> -->
-
   <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
 </form>

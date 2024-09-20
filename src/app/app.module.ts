@@ -54,6 +54,8 @@ import { AddEntradasUsuarioComponent } from './componentes/add-entradas-usuario/
 import { MatchAssistUserComponent } from './componentes/match-assist-user/match-assist-user.component';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { JwtModule } from "@auth0/angular-jwt";
+
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -119,8 +121,12 @@ export function HttpLoaderFactory(http: HttpClient) {
         },
         deps: [ HttpClient ]
       }
+    }),
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: () => localStorage.getItem('token')
+      }
     })
-
   ],
   providers: [{provide: LOCALE_ID, useValue: 'es'}],
   bootstrap: [AppComponent]
