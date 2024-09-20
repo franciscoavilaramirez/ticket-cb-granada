@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../enviroments/environment';
 import { Router } from '@angular/router';
+import { TokenService } from '../../service/token.service';
 
 @Component({
   selector: 'app-login-page',
@@ -32,22 +33,29 @@ export class LoginPageComponent implements OnInit {
   }
 
   onSubmit(): void {
+    //debugger;
     const observer = {
-      next: (user: any) => {
-        let userString = JSON.stringify(user);
+
+
+      next: (response: any) => {
+        //debugger;
+        //let userString = JSON.stringify(response);
+        //const token = response;
+
+        localStorage.setItem('token', response.token);
 
 
       // Hardcodear un token temporal
-      const fakeToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcGVsbGlkb3MiOiJhdmlsYSIsImVtYWlsIjoiRnJhbmNpc2NvQEF2aWxhLmNvbSIsImlkIjo0NCwiaXNBZG1pbiI6InRydWUiLCJub21icmUiOiJGcmFuY2lzY28iLCJwYXJ0aWRvc0FzaXN0aWRvcyI6MH0.9cMIIEGZMIONON9DQpjMAiIWu6gPQuaq-YSDwWhXsKI';  // Esto será reemplazado por el token real luego
+      //const fakeToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcGVsbGlkb3MiOiJhdmlsYSIsImVtYWlsIjoiRnJhbmNpc2NvQEF2aWxhLmNvbSIsImlkIjo0NCwiaXNBZG1pbiI6InRydWUiLCJub21icmUiOiJGcmFuY2lzY28iLCJwYXJ0aWRvc0FzaXN0aWRvcyI6MH0.9cMIIEGZMIONON9DQpjMAiIWu6gPQuaq-YSDwWhXsKI';  // Esto será reemplazado por el token real luego
 
       // Almacenar usuario y token en localStorage
-      localStorage.setItem('user', userString);
-      localStorage.setItem('token', fakeToken);
+      //localStorage.setItem('user', userString);
+      //localStorage.setItem('token', token);
 
 
 
        // localStorage.setItem('user', userString);
-        if(user.isAdmin) {
+        if(response.isAdmin) {
           this.router.navigate(['/admin-home'])
         }
         else

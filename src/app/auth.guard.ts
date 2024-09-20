@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
 import { TokenService } from './service/token.service';
+import { UserService } from './service/user.service';
+import { JwtHelperService } from '@auth0/angular-jwt';
+import { Usuario } from './modelo/usuario';
 
 
 @Injectable({
@@ -12,20 +15,32 @@ import { TokenService } from './service/token.service';
 export class AuthGuard implements CanActivate {
 
 
-  constructor( private router: Router, private tokenService: TokenService) {}
+  constructor( private router: Router, private tokenService: TokenService,private userService: UserService) {}
 
-  canActivate(): boolean {
+   canActivate():boolean {
     //debugger;
-    const token = localStorage.getItem('token');  // Leer el token fake de localStorage
-    const userLocalStorage = localStorage.getItem('user');
+    const token = localStorage.getItem('token');
+    if (token) {
+      //console.log('Token decodificado:' );
+      const jwt = new JwtHelperService();
+      //debugger;
+      const tokenDecoded = jwt.decodeToken(token); // Pasamos la variable 'token' aquí
+      console.log('Token decodificado:', tokenDecoded);
+      this.userService.setUserData(tokenDecoded.usuario);
+    } else {
+      console.log('No hay token en el localStorage');
+    }
+
+    const userLocalStorage = this.userService.getUserData();
     const isLoggedIn = Boolean(userLocalStorage);
 
     if (!isLoggedIn) {
       console.log('dentro del auth-guard')
-      this.router.navigate(['/login']);
       return false;
+      this.router.navigate(['/login']);
+
+
     }
-    this.tokenService.tokenConfig();
     return true;
   }
 
