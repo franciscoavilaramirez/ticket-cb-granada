@@ -4,6 +4,9 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../enviroments/environment';
 import { Router } from '@angular/router';
 import { TokenService } from '../../service/token.service';
+import { UserService } from '../../service/user.service';
+import { JwtHelperService } from '@auth0/angular-jwt';
+
 
 @Component({
   selector: 'app-login-page',
@@ -15,7 +18,7 @@ export class LoginPageComponent implements OnInit {
   errorMessage: string = '';
   successMessage: string;
 
-  constructor(private formBuilder: FormBuilder, private http: HttpClient, private router: Router) { }
+  constructor(private formBuilder: FormBuilder, private http: HttpClient, private router: Router, private userService:UserService) { }
 
   ngOnInit(): void {
 
@@ -33,29 +36,17 @@ export class LoginPageComponent implements OnInit {
   }
 
   onSubmit(): void {
-    //debugger;
     const observer = {
-
-
       next: (response: any) => {
         //debugger;
-        //let userString = JSON.stringify(response);
-        //const token = response;
-
+        console.log('response desde login-page',response)
         localStorage.setItem('token', response.token);
 
+        const jwt = new JwtHelperService();
+        const tokenDecoded = jwt.decodeToken(response.token); // Pasamos la variable 'token' aquí
+        //console.log('Token decodificado desde login-page:', tokenDecoded);
 
-      // Hardcodear un token temporal
-      //const fakeToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcGVsbGlkb3MiOiJhdmlsYSIsImVtYWlsIjoiRnJhbmNpc2NvQEF2aWxhLmNvbSIsImlkIjo0NCwiaXNBZG1pbiI6InRydWUiLCJub21icmUiOiJGcmFuY2lzY28iLCJwYXJ0aWRvc0FzaXN0aWRvcyI6MH0.9cMIIEGZMIONON9DQpjMAiIWu6gPQuaq-YSDwWhXsKI';  // Esto será reemplazado por el token real luego
-
-      // Almacenar usuario y token en localStorage
-      //localStorage.setItem('user', userString);
-      //localStorage.setItem('token', token);
-
-
-
-       // localStorage.setItem('user', userString);
-        if(response.isAdmin) {
+        if(tokenDecoded.usuario.isAdmin) {
           this.router.navigate(['/admin-home'])
         }
         else

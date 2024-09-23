@@ -27,6 +27,8 @@ export class AuthGuard implements CanActivate {
       const tokenDecoded = jwt.decodeToken(token); // Pasamos la variable 'token' aquí
       console.log('Token decodificado:', tokenDecoded);
       this.userService.setUserData(tokenDecoded.usuario);
+      //console.log('setUserData:', tokenDecoded.usuario);
+
     } else {
       console.log('No hay token en el localStorage');
     }

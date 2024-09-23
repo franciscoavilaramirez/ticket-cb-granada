@@ -39,7 +39,7 @@ export class UsuariosComponent {
 
   ngOnInit() {
     this.getUsers()
-    this.myId = this.userService.getMyUser().user_id
+    //this.myId = this.userService.getMyUser().user_id
   }
   // Método para aplicar el filtro
   applyFilter(event: Event): void {

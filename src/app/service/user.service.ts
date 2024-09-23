@@ -10,13 +10,13 @@ private perfilesUsuario: any[];
 
   constructor() { }
 
-  getMyUser(): any {
-    let userStr = localStorage.getItem('user');
-    if (userStr == null)
-      return null
-    else
-      return JSON.parse(userStr)
-  }
+  // getMyUser(): any {
+  //   let userStr = localStorage.getItem('user');
+  //   if (userStr == null)
+  //     return null
+  //   else
+  //     return JSON.parse(userStr)
+  // }
 
   getUserData(){
 

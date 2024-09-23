@@ -69,14 +69,14 @@ export class AdminHomeComponent {
     this.getProximosPartidos();
     this.getPartidosAnteriores();
     this.getPartidosFuturos();
-    this.viewDataDecoded();
+    //this.viewDataDecoded();
   }
 
   // Creado para comprobar que viene bien los datos desde UserService
-viewDataDecoded(){
-   const dataUserDecoded = this.userService.getUserData();
-   console.log('data user decoded', dataUserDecoded);
-}
+// viewDataDecoded(){
+//    const dataUserDecoded = this.userService.getUserData();
+//    console.log('data user decoded', dataUserDecoded);
+// }
 
   applyFilter(event: Event): void {
     const filterValue = (event.target as HTMLInputElement).value;

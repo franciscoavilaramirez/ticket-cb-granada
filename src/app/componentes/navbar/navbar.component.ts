@@ -15,7 +15,7 @@ export class NavbarComponent implements OnInit {
 
   isAdmin = false
   ngOnInit(): void {
-    this.isAdmin = this.userService.getMyUser().isAdmin
+    //this.isAdmin = this.userService.getMyUser().isAdmin
   }
 
   cambiarIdioma(event: any) {
