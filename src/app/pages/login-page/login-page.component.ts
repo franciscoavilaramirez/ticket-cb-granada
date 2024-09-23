@@ -3,7 +3,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../enviroments/environment';
 import { Router } from '@angular/router';
-import { TokenService } from '../../service/token.service';
 import { UserService } from '../../service/user.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
 
@@ -21,13 +20,6 @@ export class LoginPageComponent implements OnInit {
   constructor(private formBuilder: FormBuilder, private http: HttpClient, private router: Router, private userService:UserService) { }
 
   ngOnInit(): void {
-
-    // Si el usuario ya ha iniciado sesión, redirige a la página de inicio
-    // let userString = localStorage.getItem('user');
-    // if (userString != null) {
-    //   let user = JSON.parse(userString);
-    //   user.isAdmin ? this.router.navigate(['/admin-home']) : this.router.navigate(['/home']);
-    // }
 
     this.loginForm = this.formBuilder.group({
       email: ['', Validators.required],
@@ -55,7 +47,7 @@ export class LoginPageComponent implements OnInit {
       error: (error: any) => {
         this.errorMessage = 'Error al iniciar sesión. Por favor, inténtalo de nuevo.';
       }
-    };
+    }
     this.http.post<any>(environment.apiUrl + 'login', this.loginForm.value).subscribe(observer);
   }
 
