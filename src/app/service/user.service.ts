@@ -5,7 +5,7 @@ import { Usuario } from '../modelo/usuario';
   providedIn: 'root'
 })
 export class UserService {
-private userData: Usuario;
+private userData: any;
 private perfilesUsuario: any[];
 
   constructor() { }
@@ -19,16 +19,16 @@ private perfilesUsuario: any[];
   // }
 
   getUserData(){
-
     return this.userData;
   }
 
   getPerfilesUsuario(){
     return this. perfilesUsuario;
-
   }
+
   setUserData(usuario:Usuario){
     this.userData = usuario
+    localStorage.setItem('user', JSON.stringify(usuario));
   }
 
   setPerfilesUsuario(perfilesUsuario:any[]){

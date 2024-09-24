@@ -15,10 +15,7 @@ import { ThemePalette } from '@angular/material/core';
 export class HomeComponent {
 
   constructor(private apiService: ApiService, private renderer: Renderer2,public dialog: MatDialog,) {
-    // this.renderer.setStyle(document.body, 'background', 'url("../../../assets/imgs/pista-baloncesto.png")');
-    // this.renderer.setStyle(document.body, 'background-size', 'cover');
-    // this.renderer.setStyle(document.body, 'background-repeat', 'no-repeat');
-    // this.renderer.setStyle(document.body, 'background-attachment', 'fixed');
+
   }
   idioma: string = 'es'; // valor inicial por defecto
   idUsuario: number
@@ -48,11 +45,10 @@ export class HomeComponent {
             this.primerPartido.tengoEntrada = true
           else
             this.primerPartido.tengoEntrada = false
-          console.log("Primer partido", this.primerPartido)
+          //console.log("Primer partido", this.primerPartido)
 
           proximosPartidos.splice(0, 1) //quitamos el primer partido para mostrarlo mas grande como siguiente partido
           this.partidos = proximosPartidos //el resto de partidos que se mostraran abajo mas pequeños
-          console.log("Próximos partidos:", this.partidos)
           this.partidos.forEach(partido => {
             if (this.misPartidosIds?.includes(partido.id))
               partido.tengoEntrada = true;
@@ -60,7 +56,7 @@ export class HomeComponent {
               partido.tengoEntrada = false;
           })
         }
-        console.log("Mis partidos ids: ", this.misPartidosIds)
+        //console.log("Mis partidos ids: ", this.misPartidosIds)
       });
     });
     this.getPartidosFuturos();
@@ -140,14 +136,13 @@ export class HomeComponent {
   getPartidosFuturos(){
     this.apiService.getProximosPartidosDisponibles().subscribe(partidosFuturos =>{
       this.partidosFuturos = partidosFuturos;
-      console.log('partidos futuros',this.partidosFuturos)
     });
   }
 
   descargarVarias(idPartido: number, nombrePartido: string, contentType = '') {
     this.apiService.getEntradasExtra(2, 1, 2).subscribe(entradaPdf => {
       entradaPdf.forEach(file => {
-        console.log("aaaaaaaaa "+file.data + file.fileName)
+        //console.log("aaaaaaaaa "+file.data + file.fileName)
         const byteCharacters = atob(file.data);
         const byteArrays = [];
 

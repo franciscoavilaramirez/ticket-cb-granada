@@ -95,7 +95,7 @@ export class AdminHomeComponent {
   getUsers(){
     this.apiService.getUsers().subscribe(data =>{
       this.usuarios = data
-      console.log('Usuarios', this.usuarios);
+      //console.log('Usuarios', this.usuarios);
     });
   }
 
@@ -176,7 +176,7 @@ export class AdminHomeComponent {
   getProximosPartidos(){
     this.apiService.getProximosPartidos().subscribe(data =>{
       this.proximosPartidos = data;
-      console.log('get Proximos Partidos',this.proximosPartidos);
+      //console.log('get Proximos Partidos',this.proximosPartidos);
       this.spinnerShow = false;
       this.idUsuario = this.getUsuarioId()
 
@@ -232,8 +232,7 @@ export class AdminHomeComponent {
       this.partidosPasados = partidosAnteriores;
       this.dataSource.data = partidosAnteriores;
       this.dataSource.data = this.partidosPasados;  // Asignar los datos al dataSource
-
-      console.log('partidos Anteriores', partidosAnteriores);
+      //console.log('partidos Anteriores', partidosAnteriores);
     });
   }
 
@@ -296,7 +295,7 @@ export class AdminHomeComponent {
   getPartidosFuturos(){
     this.apiService.getProximosPartidosDisponibles().subscribe(partidosFuturos =>{
       this.partidosFuturos = partidosFuturos;
-      console.log('partidos futuros',this.partidosFuturos)
+      //console.log('partidos futuros',this.partidosFuturos)
     });
   }
 }

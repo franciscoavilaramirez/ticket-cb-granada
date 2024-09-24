@@ -28,6 +28,15 @@ export class TokenService {
       //debugger;
       const tokenDecoded = jwt.decodeToken(token); // Pasamos la variable 'token' aquí
       console.log('Token decodificado:', tokenDecoded);
+
+
+      if (tokenDecoded && tokenDecoded.usuario) {
+        this.userService.setUserData(tokenDecoded.usuario); // Solo pasa los datos del usuario
+      } else {
+        console.log('El token no contiene datos de usuario válidos');
+      }
+
+
       this.userService.setUserData(tokenDecoded);
       resolve(true);
     } else {

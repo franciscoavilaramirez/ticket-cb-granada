@@ -38,7 +38,7 @@ export class LoginPageComponent implements OnInit {
         const tokenDecoded = jwt.decodeToken(response.token); // Pasamos la variable 'token' aquí
         //console.log('Token decodificado desde login-page:', tokenDecoded);
 
-        if(tokenDecoded.usuario.isAdmin) {
+        if(tokenDecoded.usuario.isAdmin == true) {
           this.router.navigate(['/admin-home'])
         }
         else

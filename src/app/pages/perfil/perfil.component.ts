@@ -30,7 +30,7 @@ export class PerfilComponent {
     else {
       let userJson = JSON.parse(user);
       this.idUsuario = userJson.id
-      console.log("id usuario perfil: " + this.idUsuario)
+      //console.log("id usuario perfil: " + this.idUsuario)
     }
     // Inicializa el FormGroup antes de cargar los datos del usuario para evitar errores de referencia
     this.editarPerfil = this.formBuilder.group({
@@ -42,7 +42,7 @@ export class PerfilComponent {
     this.apiService.getUsuarioById(this.idUsuario).subscribe(
       usuario => {
         this.usuario = usuario
-        console.log('this usuario',this.usuario)
+        //console.log('this usuario',this.usuario)
 
         // Actualiza el FormGroup con los datos del usuario una vez cargados
         this.editarPerfil.patchValue({
