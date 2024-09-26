@@ -27,6 +27,7 @@ export class RegisterAdminDialogComponent {
       repeatPassword: ['', Validators.required],
       _admin: false
     }, { validator: this.checkPasswords });
+    //this.registerForm.reset();
   }
 
   checkPasswords(group: FormGroup) {

@@ -2,7 +2,7 @@
   {{"registrarUsuario" | translate}}
 </div>
 
-<form [formGroup]="registerForm" (ngSubmit)="register()" class="form-container">
+<form [formGroup]="registerForm" (ngSubmit)="register()" class="form-container" autocomplete="off">
   <mat-form-field appearance="fill" class="form-field">
     <mat-label>{{"nombre" | translate}}</mat-label>
     <input matInput formControlName="nombre">
@@ -19,14 +19,14 @@
 
   <mat-form-field appearance="fill" class="form-field">
     <mat-label>{{"email" | translate}}</mat-label>
-    <input matInput formControlName="email">
+    <input matInput formControlName="email" autocomplete="off">
     <app-error-alert-form
       [errorMessage]="registerForm.get('email')?.invalid && registerForm.get('email')?.touched ? 'El email es requerido.' : ''"></app-error-alert-form>
   </mat-form-field>
 
   <mat-form-field appearance="fill" class="form-field">
     <mat-label>{{"contrasena" | translate}}</mat-label>
-    <input matInput formControlName="password" type="password">
+    <input matInput formControlName="password" type="password" autocomplete="new-password">
     <app-error-alert-form
       [errorMessage]="registerForm.get('password')?.invalid && registerForm.get('password')?.touched ? 'Debes poner una contraseña.' : ''"></app-error-alert-form>
   </mat-form-field>

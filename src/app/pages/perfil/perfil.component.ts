@@ -7,6 +7,8 @@ import { HttpClient } from '@angular/common/http';
 import { EditPasswordComponent } from '../../componentes/edit-password/edit-password.component';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
+import { UserService } from '../../service/user.service';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Component({
   selector: 'app-perfil',
@@ -19,18 +21,24 @@ export class PerfilComponent {
   idUsuario: number
   errorMessage: string = '';
 
-  constructor(private formBuilder: FormBuilder, private apiService: ApiService,
-              private router: Router, private http: HttpClient, public dialog: MatDialog) { }
+  constructor(private formBuilder: FormBuilder, private apiService: ApiService,private userService:UserService,
+              private router: Router, private http: HttpClient, public dialog: MatDialog, private jwtHelper:JwtHelperService) { }
 
 
   ngOnInit() {
-    let user = localStorage.getItem('user');
-    if (user == null)
-      this.idUsuario = -1
-    else {
-      let userJson = JSON.parse(user);
-      this.idUsuario = userJson.id
-      //console.log("id usuario perfil: " + this.idUsuario)
+    const token = localStorage.getItem('token');
+    if (token) {
+      console.log("token desde el perfil " + token);
+        // Decodifica el token
+        const tokenDecoded = this.jwtHelper.decodeToken(token);
+        // Configurar los datos del usuario en el UserService
+        this.userService.setUserData(tokenDecoded.usuario);
+        // Almacena el ID del usuario decodificado
+        this.idUsuario = tokenDecoded.usuario?.id;
+    } else {
+      console.log('No se encontró el token en el localStorage');
+      this.router.navigate(['/login']); // Si no hay token, redirigir al login
+      return;
     }
     // Inicializa el FormGroup antes de cargar los datos del usuario para evitar errores de referencia
     this.editarPerfil = this.formBuilder.group({
@@ -42,7 +50,7 @@ export class PerfilComponent {
     this.apiService.getUsuarioById(this.idUsuario).subscribe(
       usuario => {
         this.usuario = usuario
-        //console.log('this usuario',this.usuario)
+        console.log('this usuario',this.usuario)
 
         // Actualiza el FormGroup con los datos del usuario una vez cargados
         this.editarPerfil.patchValue({
@@ -50,26 +58,13 @@ export class PerfilComponent {
           apellidos: this.usuario.apellidos,
           email: this.usuario.email
         });
-
-
-
-        // this.usuario.id = this.idUsuario + "";
-        // console.log("usuario perfil: " + JSON.stringify(this.usuario))
-        // this.editarPerfil = this.formBuilder.group({
-        //   nombre: [this.usuario.nombre, Validators.required],
-        //   apellidos: [this.usuario.apellidos, Validators.required],
-        //   email: [this.usuario.email, [Validators.required, Validators.email]],
-
-        // });
       },
       error => {
         this.errorMessage = "Error al cargar el usuario";
         console.error(error);
       }
     )
-
   }
-
   async editar() {
     const usuario: Usuario = this.editarPerfil.value;
     usuario.id = this.idUsuario + "";
@@ -105,7 +100,6 @@ cancelar() {
   }else {
     //console.log('this usuario no es admin')
         this.router.navigate(['/home']);
-
   }
   }
   cerrarSesion() {

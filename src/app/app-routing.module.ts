@@ -13,21 +13,13 @@ import { AuthGuard } from './auth.guard';
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full'},
   { path:'home', component: HomeComponent, canActivate:[AuthGuard] },
-  { path: 'tickets', component: ArchivosPDFComponent},
+  { path: 'tickets', component: ArchivosPDFComponent, canActivate:[AuthGuard]},
   { path: 'login', component: LoginPageComponent},
   { path: 'signup', component: RegisterPageComponent},
   { path:'admin-home', component: AdminHomeComponent, canActivate:[AuthGuard] },
-  // {
-  //   path: 'admin-home',
-  //   loadComponent:() =>
-  //     import('./pages/admin/admin-home/admin-home.component').then(
-  //       (c) => c.AdminHomeComponent
-  //     ),
-  //     canActivate:[authGuard],
-  // },
-  { path: 'subir-entradas', component: SubirEntradasComponent},
-  { path: 'usuarios', component: UsuariosComponent},
-  { path: 'perfil', component: PerfilComponent}
+  { path: 'subir-entradas', component: SubirEntradasComponent, canActivate:[AuthGuard]},
+  { path: 'usuarios', component: UsuariosComponent, canActivate:[AuthGuard]},
+  { path: 'perfil', component: PerfilComponent, canActivate:[AuthGuard]}
 ];
 
 @NgModule({

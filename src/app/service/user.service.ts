@@ -28,7 +28,7 @@ private perfilesUsuario: any[];
 
   setUserData(usuario:Usuario){
     this.userData = usuario
-    localStorage.setItem('user', JSON.stringify(usuario));
+    //localStorage.setItem('user', JSON.stringify(usuario));
   }
 
   setPerfilesUsuario(perfilesUsuario:any[]){
