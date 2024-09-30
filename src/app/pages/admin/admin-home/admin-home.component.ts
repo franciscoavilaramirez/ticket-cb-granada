@@ -38,7 +38,7 @@ export class AdminHomeComponent {
   }
   partidosFuturos: Partido[] =[];
   misPartidosIds: number[]
-  idUsuario: number
+  idUsuario: number;
   activeLang = 'es';
   exportCsv = false;
   usuarios!: Usuario[];
@@ -237,11 +237,8 @@ export class AdminHomeComponent {
   }
 
   getUsuarioId(): number {
-    let userStr = localStorage.getItem('user');
-    if (userStr == null)
-      return -1
-    else
-      return JSON.parse(userStr).id
+    const userId = this.userService.getUserData();
+     return userId.id;
   }
   devolver(idPartido: number) {
     this.apiService.desasignarEntrada(this.idUsuario, idPartido).subscribe(() => {
@@ -256,8 +253,9 @@ export class AdminHomeComponent {
       this.getProximosPartidos()
   }
   apuntarse(idPartido: number) {
+    //debugger;
     this.apiService.asignarEntrada(this.idUsuario, idPartido).subscribe(response => {
-       if(response == true){
+       if(response){
         this.proximosPartidos.forEach(partido => {
               if (partido.id == idPartido){
                 partido.tengoEntrada = true;
@@ -270,6 +268,7 @@ export class AdminHomeComponent {
     })
     this.getProximosPartidos()
   }
+
   descargar(idPartido: number, nombrePartido: string) {
     this.apiService.getEntrada(this.idUsuario, idPartido).subscribe(entradaPdf => {
       entradaPdf.forEach(file => {

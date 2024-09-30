@@ -5,6 +5,7 @@ import { environment } from '../../../enviroments/environment';
 import { Router } from '@angular/router';
 import { UserService } from '../../service/user.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { TokenService } from '../../service/token.service';
 
 
 @Component({
@@ -17,7 +18,7 @@ export class LoginPageComponent implements OnInit {
   errorMessage: string = '';
   successMessage: string;
 
-  constructor(private formBuilder: FormBuilder, private http: HttpClient, private router: Router, private userService:UserService) { }
+  constructor(private tokenService: TokenService, private formBuilder: FormBuilder, private http: HttpClient, private router: Router, private userService:UserService) { }
 
   ngOnInit(): void {
 
@@ -37,7 +38,7 @@ export class LoginPageComponent implements OnInit {
         const jwt = new JwtHelperService();
         const tokenDecoded = jwt.decodeToken(response.token); // Pasamos la variable 'token' aquí
         //console.log('Token decodificado desde login-page:', tokenDecoded);
-
+        this.tokenService.token = response.token;
         if(tokenDecoded.usuario.isAdmin == true) {
           this.router.navigate(['/admin-home'])
         }

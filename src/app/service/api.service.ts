@@ -8,6 +8,7 @@ import { Pdf } from '../modelo/pdf';
 import { TranslateService } from '@ngx-translate/core';
 import { Router } from '@angular/router';
 import { FileInfo } from '../modelo/FileInfo';
+import { TokenService } from './token.service';
 
 @Injectable({
   providedIn: 'root'
@@ -17,13 +18,12 @@ export class ApiService {
   private idiomaActual = new BehaviorSubject<string>('es');
   idioma$ = this.idiomaActual.asObservable();
 
-  constructor(private http:HttpClient, private translate: TranslateService, private router: Router) {
+  constructor(private http:HttpClient, private translate: TranslateService, private router: Router,private tokenService: TokenService) {
     this.translate.setDefaultLang('es'); // idioma por defecto
+
    }
 
   apiUrl = environment.apiUrl
-  //Partidos cuya fecha sea posterior a la actual
-  //Cada partido tiene un campo extra que indica si quedan entradas disponibles (stockEntradas)
 
   cambiarIdioma(idioma: string) {
     this.idiomaActual.next(idioma);
@@ -32,39 +32,41 @@ export class ApiService {
   getProximosPartidos() {
     const reqHeader = new HttpHeaders({
       'Content-Type': 'application/json',
-      'Authorization': 'Bearer ' + localStorage.getItem('token')
-
+      'Authorization': 'Bearer ' + this.tokenService.token,
     });
-    //return this.http.get<Usuario[]>(`${this.apiUrl + 'getAllUsers'}`,{headers:reqHeader});
     return this.http.get<Partido[]>(`${this.apiUrl + 'getProximosPartidos'}`,{headers:reqHeader});
   }
   //Ids de los partidos donde tengo entrada
   getMisPartidosIds(userId: number) {
     const reqHeader = new HttpHeaders({
       'Content-Type': 'application/json',
-      'Authorization': 'Bearer ' + localStorage.getItem('token')
-
+      'Authorization': 'Bearer ' + this.tokenService.token,
     });
     return this.http.get<number[]>(`${this.apiUrl + 'getMisPartidosIds/'+userId}`,{headers:reqHeader});
   }
 
   asignarEntrada(idUsuario:number, idPartido:number) {
-    return this.http.post(this.apiUrl + 'saveUsuarioPartido/'+idUsuario+'/'+idPartido, {});
+    const reqHeader = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + this.tokenService.token,
+    });
+    return this.http.post(this.apiUrl + 'saveUsuarioPartido/'+idUsuario+'/'+idPartido,{},{headers:reqHeader});
   }
+
   desasignarEntrada(idUsuario:number, idPartido:number) {
-    return this.http.delete(this.apiUrl + 'deleteUsuarioFromPartido/'+idUsuario+'/'+idPartido, {});
+    const reqHeader = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + this.tokenService.token,
+    });
+    return this.http.delete(this.apiUrl + 'deleteUsuarioFromPartido/'+idUsuario+'/'+idPartido,{headers:reqHeader});
   }
 
   getUsers(){
     const reqHeader = new HttpHeaders({
       'Content-Type': 'application/json',
-      'Authorization': 'Bearer ' + localStorage.getItem('token')
-      //(`${this.apiUrl+'modificarUsuario'}/${usuarioId}`,usuario);
-
+      'Authorization': 'Bearer ' + this.tokenService.token,
     });
-    //return this.http.get<Usuario[]>(this.apiUrl + 'getAllUsers');
     return this.http.get<Usuario[]>(`${this.apiUrl + 'getAllUsers'}`,{headers:reqHeader});
-
   }
 
   insertLogin(usuario: Usuario): Observable<Usuario> {
@@ -73,22 +75,25 @@ export class ApiService {
 
   subirPartido(partidoForm: any):Observable<Partido> {
     const reqHeader = new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer ' + localStorage.getItem('token')
+      'Content-Type': 'multipart/form-data; boundary-XXX',
+      'Authorization': 'Bearer ' + this.tokenService.token,
     });
-    return this.http.post<Partido>(`${this.apiUrl}subirPartido`, partidoForm, { headers: reqHeader });
-
-    //Angel estas de lineas de abajo no me han funcionado
-    //return this.http.post<any>(`${this.apiUrl+'subirPartido'}/${partidoForm}`,{headers:reqHeader});
-    //return this.http.post<any>(`${this.apiUrl+'subirPartido', partidoForm}`,{headers:reqHeader});
-    //return this.http.post<any>(this.apiUrl+'subirPartido', partidoForm);
+    return this.http.post<Partido>(`${this.apiUrl}subirPartido`, partidoForm,{ headers: reqHeader });
   }
 
-  updateUser(usuarioId: string,usuario:any){
-    return this.http.put<Usuario>(`${this.apiUrl+'modificarUsuario'}/${usuarioId}`,usuario);
+  updateUser(usuarioId: number,usuario:any){
+    const reqHeader = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + this.tokenService.token,
+    });
+    return this.http.put<Usuario>(`${this.apiUrl+'modificarUsuario'}/${usuarioId}`,usuario,{ headers: reqHeader });
   }
   deleteUser(user: string) {
-    return this.http.delete<Usuario>(`${this.apiUrl+'borrarUsuario'}/${user}`);
+    const reqHeader = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + this.tokenService.token,
+        });
+    return this.http.delete<Usuario>(`${this.apiUrl+'borrarUsuario'}/${user}`, { headers: reqHeader });
   }
 
   Login(usuario: Usuario): Observable<Usuario> {
@@ -98,7 +103,7 @@ export class ApiService {
   getPartidos(){
     const reqHeader = new HttpHeaders({
       'Content-Type': 'application/json',
-      'Authorization': 'Bearer ' + localStorage.getItem('token')
+      'Authorization': 'Bearer ' + this.tokenService.token,
     });
     return this.http.get<Partido[]>(`${this.apiUrl + 'getPartidos'}`,{headers:reqHeader});
   }
@@ -106,7 +111,7 @@ export class ApiService {
   getUsuariosPartido(idPartido: number){
     const reqHeader = new HttpHeaders({
       'Content-Type': 'application/json',
-      'Authorization': 'Bearer ' + localStorage.getItem('token')
+      'Authorization': 'Bearer ' + this.tokenService.token,
     });
     return this.http.get<Usuario[]>(`${this.apiUrl + 'getUsuariosPartido'}/${idPartido}`,{headers:reqHeader});
   }
@@ -115,46 +120,66 @@ export class ApiService {
     return this.http.post<Partido>(this.apiUrl + 'addPartido', partido);
   }
 
-  modifyPartido(partido: Partido): Observable<Partido> {
-    return this.http.put<Partido>(`${this.apiUrl+'modificarPartido'}/${partido.id}`, partido);
-  }
+  // modifyPartido(partido: Partido): Observable<Partido> {
+  //   return this.http.put<Partido>(`${this.apiUrl+'modificarPartido'}/${partido.id}`, partido);
+  // }
 
-  deletePartido(partido: Partido): Observable<Partido> {
-    return this.http.delete<Partido>(`${this.apiUrl+'borrarPartido'}/${partido.id}`);
-  }
+  // deletePartido(partido: Partido): Observable<Partido> {
+  //   return this.http.delete<Partido>(`${this.apiUrl+'borrarPartido'}/${partido.id}`);
+  // }
 
   addUserMatch(usuarioId: number | undefined,partidoId: number){
-    return this.http.post<Usuario>(`${this.apiUrl+'saveUsuarioPartido'}/${usuarioId}/${partidoId}`,null);
+    const reqHeader = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + this.tokenService.token,
+    });
+    return this.http.post<Usuario>(`${this.apiUrl+'saveUsuarioPartido'}/${usuarioId}/${partidoId}`,null,{headers:reqHeader});
   }
 
   updateMatch(partido: any){
-    return this.http.put<Partido>(`${this.apiUrl + 'modificarPartido'}/${partido.id}`, partido);
+    const reqHeader = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + this.tokenService.token,
+    });
+    return this.http.put<Partido>(`${this.apiUrl + 'modificarPartido'}/${partido.id}`, partido,{headers:reqHeader});
   }
   deleteMatch(partido: Partido): Observable<Partido> {
     const reqHeader = new HttpHeaders({
       'Content-Type': 'application/json',
-      'Authorization': 'Bearer ' + localStorage.getItem('token')
+      'Authorization': 'Bearer ' + this.tokenService.token,
     });
     return this.http.delete<Partido>(`${this.apiUrl + 'borrarPartido'}/${partido.id}`,{headers:reqHeader});
   }
   deleteUserMatch(usuarioId: number | undefined,partidoId: Partido) {
-    return this.http.delete<Usuario>(`${this.apiUrl + 'deleteUsuarioFromPartido'}/${usuarioId}/${partidoId.id}`);
+    const reqHeader = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + this.tokenService.token,
+    });
+    return this.http.delete<Usuario>(`${this.apiUrl + 'deleteUsuarioFromPartido'}/${usuarioId}/${partidoId.id}`,{headers:reqHeader});
   }
 
   getUsuarioById(usuarioId: number){
     const reqHeader = new HttpHeaders({
       'Content-Type': 'application/json',
-      'Authorization': 'Bearer ' + localStorage.getItem('token')
+      'Authorization': 'Bearer ' + this.tokenService.token,
     });
     return this.http.get<Usuario>(`${this.apiUrl + 'userById/'+usuarioId}`,{headers:reqHeader});
   }
 
-  checkPasswords(usuarioId: string | undefined, password: string){
-    return this.http.get<Boolean>(this.apiUrl + 'checkPasswords/'+usuarioId+'/'+password);
+  checkPasswords(usuarioId: string | number, password: string){
+    const reqHeader = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + this.tokenService.token,
+    });
+    return this.http.get<Boolean>(this.apiUrl + 'checkPasswords/'+usuarioId+'/'+password,{headers:reqHeader});
   }
 
   modifyUser(usuario: Usuario): Observable<Partido> {
-    return this.http.put<Partido>(`${this.apiUrl+'modificarUsuario'}/${usuario.id}`, usuario);
+    const reqHeader = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + this.tokenService.token,
+    });
+    return this.http.put<Partido>(`${this.apiUrl+'modificarUsuario'}/${usuario.id}`, usuario,{headers:reqHeader});
   }
   getEntradasSobrantes(partidoId: number){
     return this.http.get<Partido>(this.apiUrl + 'entradasSobrantes/'+partidoId);
@@ -165,26 +190,31 @@ export class ApiService {
   getPartidosAnteriores(){
     const reqHeader = new HttpHeaders({
       'Content-Type': 'application/json',
-      'Authorization': 'Bearer ' + localStorage.getItem('token')
-
+      'Authorization': 'Bearer ' + this.tokenService.token,
     });
-    //return this.http.get<Usuario[]>(`${this.apiUrl + 'getAllUsers'}`,{headers:reqHeader});
-    //return this.http.get<Partido[]>(`${this.apiUrl + 'getProximosPartidos'}`,{headers:reqHeader});
     return this.http.get<Partido[]>(`${this.apiUrl + 'getPartidosAnteriores'}`,{headers:reqHeader});
   }
   getPartidosInscritos(idUsuario:number) {
-    return this.http.get<Partido[]>(this.apiUrl + 'listarPartidosUsuario/' + idUsuario);
+    const reqHeader = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + this.tokenService.token,
+    });
+    return this.http.get<Partido[]>(this.apiUrl + 'listarPartidosUsuario/' + idUsuario,{headers:reqHeader});
   }
   // getEntradasExtra(idUsuario:number, idPartido:number, nEntarda:number) {
   //   return this.http.get<any[]>(this.apiUrl + 'descargarEntradasAdicionales/'+idUsuario+'/'+idPartido+'/'+nEntarda)
   // }
   getEntrada(idUsuario:number, idPartido:number) {
-    return this.http.get<FileInfo[]>(this.apiUrl + 'descargarEntrada/'+idUsuario+'/'+idPartido)
+    const reqHeader = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + this.tokenService.token,
+    });
+    return this.http.get<FileInfo[]>(this.apiUrl + 'descargarEntrada/'+idUsuario+'/'+idPartido,{headers:reqHeader})
   }
   getProximosPartidosDisponibles() {
     const reqHeader = new HttpHeaders({
       'Content-Type': 'application/json',
-      'Authorization': 'Bearer ' + localStorage.getItem('token')
+      'Authorization': 'Bearer ' + this.tokenService.token,
     });
     return this.http.get<Partido[]>(`${this.apiUrl + 'getProximosPartidosDisponibles'}`,{headers:reqHeader});
   }

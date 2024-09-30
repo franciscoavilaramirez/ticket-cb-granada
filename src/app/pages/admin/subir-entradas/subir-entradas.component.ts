@@ -39,6 +39,7 @@ export class SubirEntradasComponent {
   }
   subirPartido() {
     let partido: Partido = this.form.value;
+
     partido.fechaPublicacion = partido.fechaPublicacion + this.getHoraActual()
     //console.log("partido", partido)
     //console.log(this.entradas)

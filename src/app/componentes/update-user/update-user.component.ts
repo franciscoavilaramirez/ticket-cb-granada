@@ -55,6 +55,7 @@ onSubmit(){
     this.userModify.password = bodyResponse.contrasena;
 
     console.log("bodyResponse",bodyResponse);
+    debugger;
     this.apiService.updateUser(bodyResponse.user_id,this.userModify).subscribe((data) =>{
       console.log('usuario update',data)
       this.closedModal();

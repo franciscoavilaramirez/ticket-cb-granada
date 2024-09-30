@@ -8,7 +8,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 })
 export class TokenService {
   private readonly jwtHelper = inject(JwtHelperService);
-
+  public token: string;
   constructor(private userService: UserService) { }
 
   // tokenConfig(){
@@ -23,6 +23,7 @@ export class TokenService {
     const promiseToken = new Promise<boolean>((resolve, reject) => {
       const token = localStorage.getItem('token');
     if (token) {
+      this.token = token;
       //console.log('Token decodificado:' );
       const jwt = new JwtHelperService();
       //debugger;
