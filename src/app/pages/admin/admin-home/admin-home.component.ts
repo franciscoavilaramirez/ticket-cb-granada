@@ -69,14 +69,7 @@ export class AdminHomeComponent {
     this.getProximosPartidos();
     this.getPartidosAnteriores();
     this.getPartidosFuturos();
-    //this.viewDataDecoded();
   }
-
-  // Creado para comprobar que viene bien los datos desde UserService
-// viewDataDecoded(){
-//    const dataUserDecoded = this.userService.getUserData();
-//    console.log('data user decoded', dataUserDecoded);
-// }
 
   applyFilter(event: Event): void {
     const filterValue = (event.target as HTMLInputElement).value;
@@ -95,7 +88,6 @@ export class AdminHomeComponent {
   getUsers(){
     this.apiService.getUsers().subscribe(data =>{
       this.usuarios = data
-      //console.log('Usuarios', this.usuarios);
     });
   }
 
@@ -176,7 +168,6 @@ export class AdminHomeComponent {
   getProximosPartidos(){
     this.apiService.getProximosPartidos().subscribe(data =>{
       this.proximosPartidos = data;
-      //console.log('get Proximos Partidos',this.proximosPartidos);
       this.spinnerShow = false;
       this.idUsuario = this.getUsuarioId()
 
@@ -226,13 +217,11 @@ export class AdminHomeComponent {
     });
   }
 
-
   getPartidosAnteriores(){
     this.apiService.getPartidosAnteriores().subscribe(partidosAnteriores =>{
       this.partidosPasados = partidosAnteriores;
       this.dataSource.data = partidosAnteriores;
       this.dataSource.data = this.partidosPasados;  // Asignar los datos al dataSource
-      //console.log('partidos Anteriores', partidosAnteriores);
     });
   }
 
@@ -245,7 +234,6 @@ export class AdminHomeComponent {
       this.proximosPartidos.forEach(partido => {
           if (partido.id == idPartido) {
             partido.tengoEntrada = false;
-            //partido.stockEntradas = true;
             partido.stockEntradas ++;
           }
         });
@@ -253,7 +241,6 @@ export class AdminHomeComponent {
       this.getProximosPartidos()
   }
   apuntarse(idPartido: number) {
-    //debugger;
     this.apiService.asignarEntrada(this.idUsuario, idPartido).subscribe(response => {
        if(response){
         this.proximosPartidos.forEach(partido => {
@@ -278,7 +265,6 @@ export class AdminHomeComponent {
           byteArrays.push(byteCharacters.charCodeAt(i));
         }
         const byteArray = new Uint8Array(byteArrays);
-        //return new Blob([byteArray], { type: 'application/pdf' });
         const blob = new Blob([byteArray], { type: 'application/pdf' });
         const url = window.URL.createObjectURL(blob);
         const link = document.createElement('a');
@@ -294,7 +280,6 @@ export class AdminHomeComponent {
   getPartidosFuturos(){
     this.apiService.getProximosPartidosDisponibles().subscribe(partidosFuturos =>{
       this.partidosFuturos = partidosFuturos;
-      //console.log('partidos futuros',this.partidosFuturos)
     });
   }
 }

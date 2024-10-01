@@ -23,8 +23,6 @@ export class MatchAssistUserComponent {
   ngOnInit(){
     this.contador = this.partidosInscritos.length || 0;
   }
-
-
   closedModal(): void {
     this.dialogRef.close();
   }

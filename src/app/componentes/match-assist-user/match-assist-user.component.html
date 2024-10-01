@@ -13,9 +13,6 @@
       <h1>{{"partidosInscritos" | translate }}</h1>
       <span>{{ this.contador}}</span>
     </div>
-    <!-- <div style="display: flex;">
-      <p>{{"partidosAsistidos" | translate }}</p>
-      <span>{{this.contador}}</span> -->
   </div>
     <div class="container__wrapper__content-wrapper" *ngFor="let partidoInscrito of partidosInscritos | filter:filterPost" >
       <mat-list role="list">

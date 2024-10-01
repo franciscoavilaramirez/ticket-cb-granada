@@ -6,6 +6,7 @@ import { Pdf } from '../../../modelo/pdf';
 import { ApiService } from '../../../service/api.service';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Partido } from '../../../modelo/partido';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-subir-entradas',
@@ -16,7 +17,7 @@ export class SubirEntradasComponent {
   public form: FormGroup;
   private b64: String = "";
   pdf: Pdf = new Pdf();
-  entradas: any//FormData = new FormData();
+  entradas: File//FormData = new FormData();
   noFiles = true
   @Output() actualizacionProximosPartidos: EventEmitter<any> = new EventEmitter<void>();
 
@@ -41,50 +42,36 @@ export class SubirEntradasComponent {
     let partido: Partido = this.form.value;
 
     partido.fechaPublicacion = partido.fechaPublicacion + this.getHoraActual()
-    //console.log("partido", partido)
-    //console.log(this.entradas)
     let form = new FormData()
     form.append('partido', JSON.stringify(partido))
     form.append('entradasPdf', this.entradas)
     this.apiService.subirPartido(form).subscribe({
       next: (r) => {console.log("partido creado",r),
            this.actualizacionProximosPartidos.emit();
-           //console.log('Evento emitido desde SubirEntradasComponent');
-
            this.dialogRef.close();
       },
       error: (error) => {
+        Swal.fire("No se ha podido generar el partido", "", "error");
         console.error("Error al crear el partido:", error);
       },
       complete: () => {
-        //console.log('Solicitud de creación de partido completada.');
       }
     }
     );
-
-    // this.apiService.getProximosPartidos().subscribe(data => {
-    //   console.log('dataaaa subir partido',data)
-    // })
-    //console.log('Emitiendo un nuevo partido');
     this.dialogRef.close();
-
   }
 
   subirArchivo(event: any): any {
-
     const file: File = (event.target.files as FileList)[0];
-
     const obserbable = new Observable((subscriber: Subscriber<any>) => {
       this.readFile(file, subscriber);
     })
-
     obserbable.subscribe((base64) => {
       this.b64 = new String(base64).valueOf();
       let firstHalf = this.b64.substring(0, this.b64.length/2)
       let secondHalf = this.b64.substring(this.b64.length/2)
 
       this.pdf = new Pdf();
-      // this.pdf.file = "" + this.b64;
       this.pdf.file1 = firstHalf
       this.pdf.file2 = secondHalf
     })
@@ -99,7 +86,6 @@ export class SubirEntradasComponent {
       subscriber.next(fileReader.result);
       subscriber.complete();
     }
-
     fileReader.onerror = () => {
       subscriber.error();
       subscriber.complete();

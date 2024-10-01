@@ -27,7 +27,6 @@ export class RegisterAdminDialogComponent {
       repeatPassword: ['', Validators.required],
       _admin: false
     }, { validator: this.checkPasswords });
-    //this.registerForm.reset();
   }
 
   checkPasswords(group: FormGroup) {
@@ -45,11 +44,9 @@ export class RegisterAdminDialogComponent {
   }
 
   register() {
-    //console.log(this.registerForm.value)
     if (this.registerForm.valid) {
       this.http.post(environment.apiUrl + 'addUser', this.registerForm.value).subscribe({
         next: (response) => {
-          //console.log('usuario',response)
           Swal.fire("Usuario registrado", "", "success");
           this.matDialogRef.close()
         },

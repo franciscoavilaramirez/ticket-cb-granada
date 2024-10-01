@@ -42,12 +42,7 @@ export class ModifyMatchComponent {
     if(this.updateMatchForm.valid){
       const bodyResponse: Partido = this.updateMatchForm.value;
 
-      // Aquí separamos la fecha, eliminando la hora si existe
-      //const fechaPartidoSoloFecha = bodyResponse.fechaPublicacion.split('T')[0];
       bodyResponse.fechaPublicacion = bodyResponse.fechaPublicacion + this.getHoraActual()
-
-      // Volvemos a asignar la fecha sin hora y añadimos la hora actual
-     //bodyResponse.fechaPublicacion = fechaPartidoSoloFecha + this.getHoraActual();
 
       this.apiService.updateMatch(bodyResponse).subscribe(data =>{
         console.log('update partido',data);

@@ -5,6 +5,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { AddEntradasUsuarioComponent } from '../../componentes/add-entradas-usuario/add-entradas-usuario.component';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { ThemePalette } from '@angular/material/core';
+import { UserService } from '../../service/user.service';
 
 
 @Component({
@@ -14,7 +15,7 @@ import { ThemePalette } from '@angular/material/core';
 })
 export class HomeComponent {
 
-  constructor(private apiService: ApiService, private renderer: Renderer2,public dialog: MatDialog,) {
+  constructor(private apiService: ApiService, private renderer: Renderer2,public dialog: MatDialog,private userService:UserService) {
 
   }
   idioma: string = 'es'; // valor inicial por defecto
@@ -45,7 +46,6 @@ export class HomeComponent {
             this.primerPartido.tengoEntrada = true
           else
             this.primerPartido.tengoEntrada = false
-          //console.log("Primer partido", this.primerPartido)
 
           proximosPartidos.splice(0, 1) //quitamos el primer partido para mostrarlo mas grande como siguiente partido
           this.partidos = proximosPartidos //el resto de partidos que se mostraran abajo mas pequeños
@@ -56,7 +56,6 @@ export class HomeComponent {
               partido.tengoEntrada = false;
           })
         }
-        //console.log("Mis partidos ids: ", this.misPartidosIds)
       });
     });
     this.getPartidosFuturos();
@@ -64,7 +63,7 @@ export class HomeComponent {
 
   apuntarse(idPartido: number) {
     this.apiService.asignarEntrada(this.idUsuario, idPartido).subscribe(response => {
-      if (response == true) {
+      if (response) {
         if (this.primerPartido.id == idPartido)
           this.primerPartido.tengoEntrada = true
         else {
@@ -83,13 +82,11 @@ export class HomeComponent {
     this.apiService.desasignarEntrada(this.idUsuario, idPartido).subscribe(() => {
       if (this.primerPartido.id == idPartido) {
         this.primerPartido.tengoEntrada = false
-        //this.primerPartido.stockEntradas = true
       }
       else {
         this.partidos.forEach(partido => {
           if (partido.id == idPartido) {
             partido.tengoEntrada = false;
-            //partido.stockEntradas = true;
           }
         });
       }
@@ -118,12 +115,10 @@ export class HomeComponent {
   }
 
   getUsuarioId(): number {
-    let userStr = localStorage.getItem('user');
-    if (userStr == null)
-      return -1
-    else
-      return JSON.parse(userStr).id
+    const userId = this.userService.getUserData();
+     return userId.id;
   }
+
   openAddTicketsUser() {
     const dialog = this.dialog.open(AddEntradasUsuarioComponent,{
       width:'30vw',

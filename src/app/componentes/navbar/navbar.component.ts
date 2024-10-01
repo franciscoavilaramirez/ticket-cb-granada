@@ -18,14 +18,11 @@ export class NavbarComponent implements OnInit {
   usuario:any
 
   ngOnInit(): void {
-    //this.isAdmin = this.userService.getMyUser().isAdmin
 
     const userData = this.userService.getUserData();
   if (userData) {
     this.isAdmin = userData.isAdmin;
-    //console.log('Usuario desde navbar', userData);
   } else {
-    //console.log('No se encontró el usuario');
   }
   }
 
@@ -33,15 +30,5 @@ export class NavbarComponent implements OnInit {
     const idiomaSeleccionado = event.target.value;
     this.apiService.cambiarIdioma(idiomaSeleccionado);
   }
-
   activeLang = 'es';
-  // cambiarIdioma(event: any) {
-  //   //console.log('Valor seleccionado:', event.target.value);
-
-  //   const lang = event.target.value;
-  //   this.activeLang = lang;
-  //   this.translate.use(lang);
-  // }
-
-
 }

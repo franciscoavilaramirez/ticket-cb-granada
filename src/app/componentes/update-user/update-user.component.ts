@@ -53,9 +53,7 @@ onSubmit(){
     this.userModify.apellidos = bodyResponse.apellidos;
     this.userModify.email = bodyResponse.email;
     this.userModify.password = bodyResponse.contrasena;
-
     console.log("bodyResponse",bodyResponse);
-    debugger;
     this.apiService.updateUser(bodyResponse.user_id,this.userModify).subscribe((data) =>{
       console.log('usuario update',data)
       this.closedModal();
@@ -74,7 +72,6 @@ checkPasswordsMatch(group: FormGroup) {
   }
   return { notSame: true };
 }
-
   closedModal(): void {
     this.dialogRef.close();
   }

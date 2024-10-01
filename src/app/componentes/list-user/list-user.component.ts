@@ -21,7 +21,6 @@ constructor(public apiService: ApiService,public dialog: MatDialog,
             @Inject(MAT_DIALOG_DATA) public usuariosPartido: Usuario[] = []){}
 
 ngOnInit(){
-  //this.contador = this.usuariosPartido.length || 0;
 }
 
 

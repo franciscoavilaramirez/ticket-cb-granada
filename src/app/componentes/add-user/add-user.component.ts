@@ -94,7 +94,6 @@ filterPost = '';
     getUsuariosPartido(idPartido:number){
       this.apiService.getUsuariosPartido(idPartido).subscribe(data =>{
         this.usuariosYaInscritos = data;
-        //console.log('usuarios inscritos',this.usuariosYaInscritos );
         this.getUsers();
       });
     }

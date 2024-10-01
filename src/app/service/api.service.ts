@@ -73,9 +73,8 @@ export class ApiService {
     return this.http.post<Usuario>(this.apiUrl+'addUser', usuario);
   }
 
-  subirPartido(partidoForm: any):Observable<Partido> {
+  subirPartido(partidoForm: FormData):Observable<Partido> {
     const reqHeader = new HttpHeaders({
-      'Content-Type': 'multipart/form-data; boundary-XXX',
       'Authorization': 'Bearer ' + this.tokenService.token,
     });
     return this.http.post<Partido>(`${this.apiUrl}subirPartido`, partidoForm,{ headers: reqHeader });
@@ -221,6 +220,5 @@ export class ApiService {
   getEntradasExtra(idUsuario:number, idPartido:number, nEntarda:number) {
     return this.http.get<FileInfo[]>(this.apiUrl + 'descargarEntradasAdicionales/'+idUsuario+'/'+idPartido+'/'+nEntarda)
   }
-
 
 }
