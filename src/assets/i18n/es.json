@@ -4,9 +4,14 @@
   "email": "Email",
   "registrarUsuario": "Registrar usuario",
   "contrasena": "Contraseña",
-  "repiteContrasena": "Repite la contraseña",
   "administrador": "Administrador",
   "contrasenaNoCoincide": "Las contraseñas no coinciden",
+  "editarContrasena": "Editar Contraseña",
+  "actualContrasena": "Contraseña actual",
+  "nuevaContrasena": "Contraseña nueva",
+  "repiteContrasena": "Repite la contraseña",
+
+
   "registrarse" : "Registrarse",
   "requisitosContrasena" : "La contraseña debe tener al menos 8 caracteres, una minúscula, una mayúscula y un caracter especial",
   "requisitosEmail":"El email debe contener @t-systems.com",

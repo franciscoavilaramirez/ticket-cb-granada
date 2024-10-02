@@ -50,7 +50,13 @@ export class EditPasswordComponent {
       this.service.checkPasswords(this.userModify.id, this.editPassword.get("contrasenaActual")?.value).subscribe(response => {
         if (response == true) {
           console.log("contraseña correcta");
-          let usuario: Usuario = this.userModify;
+          let usuario: Usuario = {id: this.userModify.id,
+            email: this.userModify.email,
+            password: this.userModify.password,
+            apellidos: this.userModify.apellidos,
+            partidosAsistidos: this.userModify.partidosAsistidos,
+            nombre: this.userModify.nombre,
+            _admin: this.userModify._admin}
           usuario.password = this.editPassword.get("contrasenaNueva")?.value;
           this.service.modifyUser(usuario).subscribe(() => { })
           this.closedModal();

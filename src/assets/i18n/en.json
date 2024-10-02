@@ -9,6 +9,10 @@
   "contrasena": "Password",
   "registrarUsuario": "Register User",
   "repiteContrasena": "Repeat Password",
+  "editarContrasena": "Edit Password",
+  "actualContrasena": "Current Password",
+  "nuevaContrasena": "New Password",
+
   "requisitosContrasena" : "The password must have at least 8 characters, one lowercase letter, one uppercase letter and one special character",
   "requisitosEmail":"The email must have @t-systems.com",
   "administrador": "Admin",

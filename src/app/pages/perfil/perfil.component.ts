@@ -86,19 +86,17 @@ export class PerfilComponent {
     this.dialog.open(EditPasswordComponent, {
       data: usuario,
       width: '450px',
-      height: '600px'
+      height: '550px'
     });
   }
 
-  // Con el metodo cancelar se pretende volver a la página home correspondiente al tipo de usuario
+  // Con el metodo cancelar vuelve a la página home correspondiente al tipo de usuario
   // que hay registrado en ese preciso momento
 cancelar() {
   if(this.usuario._admin === true){
-    //console.log('this usuario es admin')
         this.router.navigate(['/admin-home']);
 
   }else {
-    //console.log('this usuario no es admin')
         this.router.navigate(['/home']);
   }
   }
