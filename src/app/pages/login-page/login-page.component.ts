@@ -17,6 +17,9 @@ export class LoginPageComponent implements OnInit {
   loginForm: FormGroup;
   errorMessage: string = '';
   successMessage: string;
+  hidePassword: { [key: string]: boolean } = {
+    contrasena: true,
+  };
 
   constructor(private tokenService: TokenService, private formBuilder: FormBuilder, private http: HttpClient, private router: Router, private userService:UserService) { }
 
@@ -26,6 +29,12 @@ export class LoginPageComponent implements OnInit {
       email: ['', Validators.required],
       password: ['', Validators.required]
     });
+  }
+  clickEvent(field: string, event: MouseEvent) {
+    if (this.hidePassword.hasOwnProperty(field)) {
+      this.hidePassword[field] = !this.hidePassword[field];
+    }
+    event.stopPropagation();
   }
 
   onSubmit(): void {

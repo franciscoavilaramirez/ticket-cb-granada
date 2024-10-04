@@ -16,6 +16,11 @@ export class UpdateUserComponent {
 
 updateUserForm:FormGroup;
 usuarios!: Usuario[];
+hidePassword: { [key: string]: boolean } = {
+  contrasenaNueva: true,
+  contrasenaRepetida: true
+};
+
 
 constructor(private apiService:ApiService,public dialog: MatDialog,
             public dialogRef: MatDialogRef<AdminHomeComponent>,
@@ -25,6 +30,12 @@ constructor(private apiService:ApiService,public dialog: MatDialog,
 
 ngOnInit(){
   this.getUsers();
+}
+clickEvent(field: string, event: MouseEvent) {
+  if (this.hidePassword.hasOwnProperty(field)) {
+    this.hidePassword[field] = !this.hidePassword[field];
+  }
+  event.stopPropagation();
 }
 
 createFormUpdateUser(){

@@ -25,8 +25,15 @@
 
     <mat-form-field appearance="fill" class="form-field">
       <mat-label>Password</mat-label>
-      <input matInput formControlName="password" placeholder="Enter the password" type="password"
-        class="input-field">
+      <input matInput formControlName="password" placeholder="Enter the password" class="input-field"
+                      [type]="hidePassword['contrasena'] ? 'password' : 'text'" />
+      <button mat-icon-button
+              matSuffix
+              (click)="clickEvent('contrasena', $event)"
+              [attr.aria-label]="'Hide password'"
+              [attr.aria-pressed]="hidePassword['contrasena']">
+        <mat-icon>{{hidePassword['contrasena'] ? 'visibility_off' : 'visibility'}}</mat-icon>
+      </button>
     </mat-form-field>
 
     <button mat-raised-button color="primary" type="submit" [disabled]="!loginForm.valid" class="submit-button">{{"login" | translate }}</button>

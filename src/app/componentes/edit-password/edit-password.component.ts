@@ -1,10 +1,12 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, signal } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators, ValidatorFn, AbstractControl, ValidationErrors } from '@angular/forms';
 import { ApiService } from '../../service/api.service';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Usuario } from '../../modelo/usuario';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { PerfilComponent } from '../../pages/perfil/perfil.component';
+import {MatIconModule} from '@angular/material/icon';
+
 
 @Component({
   selector: 'app-edit-password',
@@ -14,8 +16,15 @@ import { PerfilComponent } from '../../pages/perfil/perfil.component';
 export class EditPasswordComponent {
 
   editPassword: FormGroup;
+  hide = signal(true);
+  escondido = signal(true);
+  hidePassword: { [key: string]: boolean } = {
+    actual: true,
+    nueva: true,
+    repetida: true
+  };
 
-  constructor(private service: ApiService, public dialog: MatDialog, private formBuilder: FormBuilder,
+  constructor(private service: ApiService, public dialog: MatDialog, private formBuilder: FormBuilder,private matIconModule: MatIconModule,
     public dialogRef: MatDialogRef<PerfilComponent>,
     @Inject(MAT_DIALOG_DATA) public userModify: Usuario) { }
 
@@ -25,10 +34,13 @@ export class EditPasswordComponent {
       contrasenaNueva: ['', [Validators.required, Validators.pattern("^(?=.*\\d)(?=.*[@#$%^&+=*_-])(?=.*[a-z])(?=.*[A-Z]).{8,}$")]],
       contrasenaRepetida: ['', [Validators.required, Validators.pattern("^(?=.*\\d)(?=.*[@#$%^&+=*_-])(?=.*[a-z])(?=.*[A-Z]).{8,}$")]]
     }, { validator: this.checkPasswordsMatch });
+    }
 
-      console.log("id usuario edit: "+ this.userModify.id)
-      console.log("usuario edit: "+ JSON.stringify(this.userModify))
-
+    clickEvent(field: string, event: MouseEvent) {
+      if (this.hidePassword.hasOwnProperty(field)) {
+        this.hidePassword[field] = !this.hidePassword[field];
+      }
+      event.stopPropagation();
     }
 
   checkPasswordsMatch(group: FormGroup) {
@@ -44,12 +56,9 @@ export class EditPasswordComponent {
   }
 
   checkPasswords() {
-    console.log("contraseña actual: " + this.editPassword.get("contrasenaActual")?.value);
-    console.log("passwird: " + this.userModify.id);
     if (this.userModify.id != null) {
       this.service.checkPasswords(this.userModify.id, this.editPassword.get("contrasenaActual")?.value).subscribe(response => {
         if (response == true) {
-          console.log("contraseña correcta");
           let usuario: Usuario = {id: this.userModify.id,
             email: this.userModify.email,
             password: this.userModify.password,
@@ -69,8 +78,6 @@ export class EditPasswordComponent {
       alert("Id usuario indefinido");
     }
   }
-
-
 
   closedModal() {
     this.dialogRef.close();

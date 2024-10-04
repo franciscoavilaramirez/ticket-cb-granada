@@ -15,6 +15,12 @@ export class RegisterAdminDialogComponent {
   registerForm: FormGroup;
   errorMessage: string = '';
   regex = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}/;
+  hidePassword: { [key: string]: boolean } = {
+    contrasenaNueva: true,
+    contrasenaRepetida: true
+  };
+
+
   constructor(private formBuilder: FormBuilder, private http: HttpClient, private router: Router, private matDialogRef: MatDialogRef<RegisterAdminDialogComponent>) { }
 
   ngOnInit() {
@@ -27,6 +33,12 @@ export class RegisterAdminDialogComponent {
       repeatPassword: ['', Validators.required],
       _admin: false
     }, { validator: this.checkPasswords });
+  }
+  clickEvent(field: string, event: MouseEvent) {
+    if (this.hidePassword.hasOwnProperty(field)) {
+      this.hidePassword[field] = !this.hidePassword[field];
+    }
+    event.stopPropagation();
   }
 
   checkPasswords(group: FormGroup) {

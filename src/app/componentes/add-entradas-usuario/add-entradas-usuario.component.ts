@@ -33,16 +33,12 @@ constructor(private apiService:ApiService,public dialogRef: MatDialogRef<HomeCom
     this.createAddTicketsForm();
 
     this.idUsuario = this.getUsuarioId();
-    //console.log('userid desde local storage',this.idUsuario) // user_id almacenado en local storage
     this.apiService.getProximosPartidos().subscribe(proximosPartidos =>{
-      //console.log('proximos partidos',proximosPartidos);
       if (proximosPartidos != null) {
         this.partidoId = proximosPartidos[0]
-        //console.log('partidoooooooID',this.partidoId.id);
       }
     });
     this.valueChangesSubscription = this.addTicketsForm.get('numeroTickets')?.valueChanges.subscribe(value => {
-      console.log('current', value); // Imprimir el valor actualizado en la consola
     });
   }
   ngOnDestroy() {
@@ -52,18 +48,18 @@ constructor(private apiService:ApiService,public dialogRef: MatDialogRef<HomeCom
     }
   }
 
-createAddTicketsForm(){
-  this.addTicketsForm = new FormGroup({
-    numeroTickets: new FormControl(1),
-  })
-}
-getUsuarioId(): number {
-  let userStr = localStorage.getItem('user');
-  if (userStr == null)
-    return -1
-  else
-    return JSON.parse(userStr).id
-}
+  createAddTicketsForm(){
+    this.addTicketsForm = new FormGroup({
+      numeroTickets: new FormControl(1),
+    })
+  }
+  getUsuarioId(): number {
+    let userStr = localStorage.getItem('user');
+    if (userStr == null)
+      return -1
+    else
+      return JSON.parse(userStr).id
+  }
 
 onSubmit(){
   const bodyResponse = this.addTicketsForm.value;

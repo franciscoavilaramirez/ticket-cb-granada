@@ -26,7 +26,14 @@
 
   <mat-form-field appearance="fill" class="form-field">
     <mat-label>{{"contrasena" | translate}}</mat-label>
-    <input matInput formControlName="password" type="password" autocomplete="new-password">
+    <input matInput formControlName="password" autocomplete="new-password" [type]="hidePassword['contrasenaNueva'] ? 'password' : 'text'" />
+    <button mat-icon-button
+            matSuffix
+            (click)="clickEvent('contrasenaNueva', $event)"
+            [attr.aria-label]="'Hide password'"
+            [attr.aria-pressed]="hidePassword['contrasenaNueva']">
+      <mat-icon>{{hidePassword['contrasenaNueva'] ? 'visibility_off' : 'visibility'}}</mat-icon>
+    </button>
     <app-error-alert-form
       [errorMessage]="registerForm.get('password')?.invalid && registerForm.get('password')?.touched ? 'Debes poner una contraseña.' : ''"></app-error-alert-form>
   </mat-form-field>
@@ -36,7 +43,14 @@
 
   <mat-form-field appearance="fill" class="form-field">
     <mat-label>{{"repiteContrasena" | translate}}</mat-label>
-    <input matInput formControlName="repeatPassword" type="password">
+    <input matInput formControlName="repeatPassword" [type]="hidePassword['contrasenaRepetida'] ? 'password' : 'text'" />
+    <button mat-icon-button
+            matSuffix
+            (click)="clickEvent('contrasenaRepetida', $event)"
+            [attr.aria-label]="'Hide password'"
+            [attr.aria-pressed]="hidePassword['contrasenaRepetida']">
+      <mat-icon>{{hidePassword['contrasenaRepetida'] ? 'visibility_off' : 'visibility'}}</mat-icon>
+    </button>
   </mat-form-field>
 
   <div *ngIf="registerForm.errors?.['notSame'] ? 'Las contraseñas no coinciden.' : ''" class="error-message">

@@ -20,11 +20,25 @@
         </mat-form-field>
         <mat-form-field >
           <mat-label>{{"contrasena" | translate }}</mat-label>
-          <input type="password" matInput formControlName ="contrasena" >
+          <input matInput formControlName="contrasena" [type]="hidePassword['contrasenaNueva'] ? 'password' : 'text'" />
+          <button mat-icon-button
+                  matSuffix
+                  (click)="clickEvent('contrasenaNueva', $event)"
+                  [attr.aria-label]="'Hide password'"
+                  [attr.aria-pressed]="hidePassword['contrasenaNueva']">
+            <mat-icon>{{hidePassword['contrasenaNueva'] ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
         </mat-form-field>
         <mat-form-field >
           <mat-label>{{"repiteContrasena" | translate }}</mat-label>
-          <input type="password" matInput formControlName ="repiteContrasena">
+          <input matInput formControlName="repiteContrasena" [type]="hidePassword['contrasenaRepetida'] ? 'password' : 'text'" />
+          <button mat-icon-button
+                  matSuffix
+                  (click)="clickEvent('contrasenaRepetida', $event)"
+                  [attr.aria-label]="'Hide password'"
+                  [attr.aria-pressed]="hidePassword['contrasenaRepetida']">
+            <mat-icon>{{hidePassword['contrasenaRepetida'] ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
         </mat-form-field>
       </mat-dialog-actions>
       <div class="div">
