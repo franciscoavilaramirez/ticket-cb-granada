@@ -1,0 +1,22 @@
+<div class="container" >
+  <div class="container__wrapper" >
+        <div [formGroup]="addTicketsForm" >
+          <h2 class="">{{"anadirEntradas" | translate }}</h2>
+            <div class="numero-entradas">
+              <button mat-icon-button class="decrement" (click)="decrementNumber()">
+                <mat-icon>remove</mat-icon>
+              </button>
+              <input class="input" type="number" formControlName="numeroTickets" min="1" pattern="^[0-9]+" required>
+              <button mat-icon-button class="increment" (click)="incrementNumber()">
+                <mat-icon>add</mat-icon>
+              </button>
+            </div>
+        </div>
+            <div class="buttons">
+            <button mat-raised-button class="buttons__guardar" (click)="onSubmit()" >{{"botones.guardar" | translate }}</button>
+            <button mat-raised-button class="buttons__cancelar" (click)="closedModal()">{{"botones.cancelar" | translate }}</button>
+          </div>
+  </div>
+</div>
+
+

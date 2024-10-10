@@ -1,17 +1,33 @@
 
 <div class="container">
   <div class="container__wrapper">
+    <div class="buscador">
+    <mat-form-field color="accent" >
+      <input matInput name="filterPost" [(ngModel)]="filterPost" placeholder="{{'terminoBuscar' | translate}}" >
+       <mat-icon matPrefix>
+        <img style="width: 25px; height: 25px;" src="../../../assets/imgs/search_grey.png" alt="Lupa">
+      </mat-icon>
+    </mat-form-field>
+  </div>
+    <div class="container__wrapper__contador">
+
     <h1>{{"modalAnadirUsuario.inscritos" | translate }}</h1>
-    <div class="container__wrapper__content-wrapper" *ngFor="let usuarioInscrito of usuariosPartido" >
+    <span>{{this.contador}}</span>
+    </div>
+    <div class="container__wrapper__content-wrapper" *ngFor="let usuarioInscrito of usuariosPartido | filter:filterPost" >
 
       <mat-list role="list">
-        <mat-list-item  role="listitem">
+        <mat-list-item  role="listitem" >
           {{usuarioInscrito.nombre }}
           {{usuarioInscrito.apellidos }}
         </mat-list-item>
       </mat-list>
     </div>
-
+    <mat-error>
+    <ng-container *ngIf="!usuariosPartido || usuariosPartido.length <= 0">
+      <p style="text-align: center;">{{"modalAnadirUsuario.noHayInscritos" | translate }}</p>
+    </ng-container>
+  </mat-error>
   </div>
   <div class="container__wrapper__content-wrapper">
     <div class="buttons">

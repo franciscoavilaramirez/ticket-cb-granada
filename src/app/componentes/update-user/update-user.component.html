@@ -7,25 +7,53 @@
         <h1>{{"modificarUsuario.titulo" | translate }}</h1>
         <mat-dialog-actions>
         <mat-form-field >
-          <mat-label>Nombre</mat-label>
+          <mat-label>{{"nombre" | translate }}</mat-label>
           <input type="text" matInput formControlName ="nombre" >
         </mat-form-field>
         <mat-form-field >
-          <mat-label>Apellido</mat-label>
+          <mat-label>{{"apellidos" | translate }}</mat-label>
           <input type="text" matInput formControlName ="apellidos" >
         </mat-form-field>
         <mat-form-field >
-          <mat-label>Email</mat-label>
+          <mat-label>{{"email" | translate }}</mat-label>
           <input type="email" matInput formControlName ="email" >
         </mat-form-field>
-
+        <mat-form-field >
+          <mat-label>{{"contrasena" | translate }}</mat-label>
+          <input matInput formControlName="contrasena" [type]="hidePassword['contrasenaNueva'] ? 'password' : 'text'" />
+          <button mat-icon-button
+                  matSuffix
+                  (click)="clickEvent('contrasenaNueva', $event)"
+                  [attr.aria-label]="'Hide password'"
+                  [attr.aria-pressed]="hidePassword['contrasenaNueva']">
+            <mat-icon>{{hidePassword['contrasenaNueva'] ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+        </mat-form-field>
+        <mat-form-field >
+          <mat-label>{{"repiteContrasena" | translate }}</mat-label>
+          <input matInput formControlName="repiteContrasena" [type]="hidePassword['contrasenaRepetida'] ? 'password' : 'text'" />
+          <button mat-icon-button
+                  matSuffix
+                  (click)="clickEvent('contrasenaRepetida', $event)"
+                  [attr.aria-label]="'Hide password'"
+                  [attr.aria-pressed]="hidePassword['contrasenaRepetida']">
+            <mat-icon>{{hidePassword['contrasenaRepetida'] ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+        </mat-form-field>
       </mat-dialog-actions>
-
-      </form>
-      <div class="container__wrapper__content-wrapper">
-      <button mat-raised-button class="buttons__guardar" color="primary"(click)="onSubmit()" >{{"botones.guardarCambios" | translate }}</button>
-      <button mat-raised-button class="buttons__cancelar" color="primary"(click)="closedModal()">{{"botones.cancelar" | translate }}</button>
+      <div class="div">
+      <div *ngIf="updateUserForm.get('contrasena')?.hasError('pattern')" class="container__wrapper__error-message">
+        {{"requisitosContrasena" | translate }}
+      </div>
+     <div *ngIf="updateUserForm.errors?.['notSame'] " class="container__wrapper__error-message">
+        {{"contrasenaNoCoincide" | translate }}
+      </div>
     </div>
+      </form>
+        <div class="container__wrapper__content-wrapper">
+        <button mat-raised-button class="buttons__guardar" color="primary"(click)="onSubmit()" >{{"botones.guardarCambios" | translate }}</button>
+        <button mat-raised-button class="buttons__cancelar" color="primary"(click)="closedModal()">{{"botones.cancelar" | translate }}</button>
+      </div>
     </div>
   </div>
 </div>

@@ -1,5 +1,11 @@
-<app-navbar [isAdmin]="true"></app-navbar>
+<app-navbar></app-navbar>
 <div class="subir-entradas-container">
+  <!-- <button mat-raised-button (click)="openHabilitarEntradas()" class="habilitar-entradas-btn">
+    <div class="subir-entradas-btn-content">
+      {{"entradas.habilitar" | translate }}
+      <img class="entrada-icon" src="assets/imgs/ticket.png">
+    </div>
+  </button> -->
   <button mat-raised-button (click)="openSubirEntradas()" class="subir-entradas-btn">
     <div class="subir-entradas-btn-content">
       {{"entradas.subir" | translate }}
@@ -7,39 +13,137 @@
     </div>
   </button>
 </div>
-<app-divisor [titulo]="'Próximos Partidos'"></app-divisor>
+<app-divisor [titulo]="'proximosPartidos'"></app-divisor>
 
 <div class="container">
   <div class="container__wrapper">
     <div class="container__wrapper__content-wrapper">
       <div class="cards-wrapper">
-          @for (proximoPartido of proximosPartidos; track $index) {
-            <mat-card  class="card"  >
-            <mat-card-header  >
-              <mat-card-title></mat-card-title>
-              <mat-card-subtitle>Granada - {{proximoPartido.equipoVisitante}}</mat-card-subtitle>
-              <mat-card-subtitle>{{proximoPartido.fechaPartido | date:'dd-MM-yyyy' }}</mat-card-subtitle>
-            </mat-card-header>
-            <mat-card-actions class="cards-wrapper__buttons">
-              <div class="buttons-card">
-              <button mat-raised-button class="buttons-card__mostrar" (click)="getUsuariosPartido(proximoPartido.id)" >{{"card.mostrarOcultar" | translate }}</button>
-              <button mat-raised-button class="buttons-card__modificar" (click)="openModifyMatch(proximoPartido)" >{{"card.modificarPartido" | translate }}</button>
-            </div>
-            <div class="buttons-card">
-              <button mat-raised-button class="buttons-card__aniadir" (click)="openAddUser(proximoPartido)" >{{"card.anadirUsuario" | translate }}</button>
-              <button mat-raised-button class="buttons-card__eliminar" (click)="deleteMatch(proximoPartido)" >{{"botones.eliminarPartido" | translate }}</button>
-            </div>
-              </mat-card-actions>
-            </mat-card>
-          }
+        <div *ngIf="spinnerShow" class="cards-wrapper__spinner">
+          <mat-spinner [color]="color"></mat-spinner>
         </div>
 
-    <!-- <div class="container__wrapper">
-        <div class="buttons">
-          <button mat-raised-button class="container__wrapper__buttons" color="primary" (click)="cambiarLenguaje('en')" > Traducir a Inglés</button>
-          <button mat-raised-button class="container__wrapper__buttons" color="primary" (click)="cambiarLenguaje('es')" > Traducir a Español</button>
-        </div>
-    </div> -->
+        @for (proximoPartido of proximosPartidos; track $index) {
+        <mat-card class="card">
+          <mat-card-header style="display: grid;width: -webkit-fill-available;">
+            <div class="card__entradas">
+              {{"quedan" | translate }} {{proximoPartido.stockEntradas}} {{"tickets" | translate }}
+            </div>
+            <div class="div">
+              <mat-card-title>Granada - {{proximoPartido.equipoVisitante}}</mat-card-title>
+              <mat-card-subtitle>{{"modificarPartido.fecha" | translate }} {{proximoPartido.fechaPartido |
+                date:'dd-MM-yyyy' }}</mat-card-subtitle>
+              <mat-card-subtitle>{{"modificarPartido.fechaPublicacion" | translate }} {{proximoPartido.fechaPublicacion|
+                date:'dd-MM-yyyy' }}</mat-card-subtitle>
+            </div>
+
+          </mat-card-header>
+          <mat-card-actions class="cards-wrapper__buttons">
+            <div class="buttons-card">
+              <button mat-raised-button class="buttons-card__mostrar"
+                (click)="getUsuariosPartido(proximoPartido.id)">{{"card.mostrarOcultar" | translate }}</button>
+              <button mat-raised-button class="buttons-card__modificar"
+                (click)="openModifyMatch(proximoPartido)">{{"card.modificarPartido" | translate }}</button>
+            </div>
+            <div class="buttons-card">
+              <button mat-raised-button class="buttons-card__aniadir"
+                (click)="openAddUser(proximoPartido)">{{"card.anadirUsuario" | translate }}</button>
+              <button mat-raised-button class="buttons-card__eliminar"
+                (click)="deleteMatch(proximoPartido)">{{"botones.eliminarPartido" | translate }}</button>
+            </div>
+            <div *ngIf=proximoPartido.tengoEntrada>
+              <div class="buttons-card">
+                <button mat-raised-button class="buttons-card__descargar-devolver"
+                  (click)="descargar(proximoPartido.id, proximoPartido.equipoVisitante)">
+                  {{"card.descargar" | translate }}
+                </button>
+                <button mat-raised-button class="buttons-card__descargar-devolver"
+                  (click)="devolver(proximoPartido.id)">
+                  {{"card.devolver" | translate }}
+                </button>
+              </div>
+            </div>
+            <div *ngIf="!proximoPartido.tengoEntrada && proximoPartido.stockEntradas > 0">
+              <div *ngIf=proximoPartido.stockEntradas (click)="apuntarse(proximoPartido.id)">
+                <button mat-raised-button class="buttons-card__aniadir-Admin">
+                  {{"card.anadirAdmin" | translate }}
+                </button>
+              </div>
+            </div>
+          </mat-card-actions>
+        </mat-card>
+        }
+      </div>
+    </div>
+  </div>
+</div>
+<app-divisor [titulo]="'partidosAnteriores'"></app-divisor>
+<div class="container">
+  <div class="container__table" #TABLE>
+    <div class="container__table__content-table">
+      <div class="buscador">
+        <mat-form-field color="accent">
+          <input matInput name="filterTerm" (input)="applyFilter($event)" placeholder="{{'terminoBuscar' | translate}}">
+          <mat-icon matPrefix>
+            <img style="width: 25px; height: 25px;" src="../../../assets/imgs/search_grey.png" alt="Lupa">
+          </mat-icon>
+        </mat-form-field>
+      </div>
+      <table mat-table [dataSource]="dataSource  | filter:filterTerm" class="mat-elevation-z8" #table>
+        <ng-container matColumnDef="partido">
+          <th mat-header-cell *matHeaderCellDef style="padding-left: 25px;">{{"partido" | translate }} </th>
+          <td mat-cell *matCellDef="let partido" style="padding-left: 25px;">Granada - {{partido.equipoVisitante}}</td>
+        </ng-container>
+        <ng-container matColumnDef="fecha">
+          <th mat-header-cell *matHeaderCellDef>{{"fecha" | translate }}</th>
+          <td mat-cell *matCellDef="let partido"> {{partido.fechaPartido | date:'dd-MM-yyyy'}} </td>
+        </ng-container>
+        <ng-container matColumnDef="usuarios">
+          <th mat-header-cell *matHeaderCellDef>{{"usuarios.usuarios" | translate }}</th>
+          <td mat-cell *matCellDef="let partido" (click)="getUsuariosPartido(partido.id)">
+            <button mat-icon-button class="" type="submit">
+              <img src="../../../../assets/imgs/users_black.png" width="80px" height="30px">
+            </button>
+          </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+      <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+    </div>
   </div>
 </div>
 
+<app-divisor [titulo]="'partidosFuturos'"></app-divisor>
+<div class="container">
+  <div class="container__table" #TABLE>
+    <div class="container__table__content-table">
+      <div class="buscador">
+        <mat-form-field color="accent">
+          <input matInput name="filterTerm" [(ngModel)]="filterTerm" placeholder="{{'terminoBuscar' | translate}}">
+          <mat-icon matPrefix>
+            <img style="width: 25px; height: 25px;" src="../../../assets/imgs/search_grey.png" alt="Lupa">
+          </mat-icon>
+        </mat-form-field>
+      </div>
+      <table mat-table [dataSource]="partidosFuturos | filter:filterTerm" class="mat-elevation-z8" #table>
+        <ng-container matColumnDef="partido">
+          <th mat-header-cell *matHeaderCellDef style="padding-left: 25px;">{{"partido" | translate }} </th>
+          <td mat-cell *matCellDef="let partido" style="padding-left: 25px;">Granada - {{partido.equipoVisitante}}</td>
+        </ng-container>
+        <ng-container matColumnDef="fechaDelPartido">
+          <th mat-header-cell *matHeaderCellDef>{{"fechaDelPartido" | translate }}</th>
+          <td mat-cell *matCellDef="let partido"> {{partido.fechaPartido | date:'dd-MM-yyyy'}} </td>
+        </ng-container>
+        <ng-container matColumnDef="editar">
+          <th mat-header-cell *matHeaderCellDef>{{"editar" | translate }}</th>
+          <td mat-cell *matCellDef="let partido" style="padding-left: 8px;"><button mat-icon-button
+              (click)="openModifyMatch(partido)"><mat-icon role="img" aria-hidden="true"
+                data-mat-icon-type="font">edit</mat-icon></button></td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayColumns;"></tr>
+      </table>
+    </div>
+  </div>
+</div>

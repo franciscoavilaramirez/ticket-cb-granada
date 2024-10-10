@@ -1,6 +1,12 @@
-import { Component, Renderer2 } from '@angular/core';
+import { ChangeDetectorRef, Component, Renderer2 } from '@angular/core';
 import { ApiService } from '../../service/api.service';
 import { Partido } from '../../modelo/partido';
+import { MatDialog } from '@angular/material/dialog';
+import { AddEntradasUsuarioComponent } from '../../componentes/add-entradas-usuario/add-entradas-usuario.component';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { ThemePalette } from '@angular/material/core';
+import { UserService } from '../../service/user.service';
+
 
 @Component({
   selector: 'app-home',
@@ -9,36 +15,40 @@ import { Partido } from '../../modelo/partido';
 })
 export class HomeComponent {
 
-  constructor(private apiService: ApiService, private renderer: Renderer2) {
-    // this.renderer.setStyle(document.body, 'background', 'url("../../../assets/imgs/pista-baloncesto.png")');
-    // this.renderer.setStyle(document.body, 'background-size', 'cover');
-    // this.renderer.setStyle(document.body, 'background-repeat', 'no-repeat');
-    // this.renderer.setStyle(document.body, 'background-attachment', 'fixed');
-  }
+  constructor(private apiService: ApiService, private renderer: Renderer2,public dialog: MatDialog,private userService:UserService) {
 
+  }
+  idioma: string = 'es'; // valor inicial por defecto
   idUsuario: number
   partidos: Partido[]
   misPartidosIds: number[]
   primerPartido: Partido
-  ngOnInit() {
-    this.idUsuario = this.getUsuarioId()
+  filterPost = '';
+  partidosFuturos: Partido[] =[];
+  spinnerShow = false;
+  color: ThemePalette = "accent";
 
+
+  ngOnInit() {
+
+    this.spinnerShow = true
+    this.apiService.idioma$.subscribe((nuevoIdioma: string) => {
+      this.idioma = nuevoIdioma;
+    });
+    this.idUsuario = this.getUsuarioId()
     this.apiService.getMisPartidosIds(this.idUsuario).subscribe(misPartidosIds => {
       this.misPartidosIds = misPartidosIds
       this.apiService.getProximosPartidos().subscribe(proximosPartidos => {
-
         if (proximosPartidos != null) {
           this.primerPartido = proximosPartidos[0]
+          this.spinnerShow = false;
           if (this.misPartidosIds?.includes(this.primerPartido.id))
             this.primerPartido.tengoEntrada = true
           else
             this.primerPartido.tengoEntrada = false
 
-          console.log("Primer partido", this.primerPartido)
-
           proximosPartidos.splice(0, 1) //quitamos el primer partido para mostrarlo mas grande como siguiente partido
           this.partidos = proximosPartidos //el resto de partidos que se mostraran abajo mas pequeños
-          console.log("Próximos partidos:", this.partidos)
           this.partidos.forEach(partido => {
             if (this.misPartidosIds?.includes(partido.id))
               partido.tengoEntrada = true;
@@ -46,15 +56,14 @@ export class HomeComponent {
               partido.tengoEntrada = false;
           })
         }
-        console.log("Partidos: ", this.partidos)
-        console.log("Mis partidos ids: ", this.misPartidosIds)
       });
     });
+    this.getPartidosFuturos();
   }
 
   apuntarse(idPartido: number) {
     this.apiService.asignarEntrada(this.idUsuario, idPartido).subscribe(response => {
-      if (response == true) {
+      if (response) {
         if (this.primerPartido.id == idPartido)
           this.primerPartido.tengoEntrada = true
         else {
@@ -64,61 +73,87 @@ export class HomeComponent {
           });
         }
       } else {
-        alert("No quedan entradas")
+          alert("No quedan entradas")
       }
     })
 
   }
-
   devolver(idPartido: number) {
     this.apiService.desasignarEntrada(this.idUsuario, idPartido).subscribe(() => {
       if (this.primerPartido.id == idPartido) {
         this.primerPartido.tengoEntrada = false
-        this.primerPartido.stockEntradas = true
       }
       else {
         this.partidos.forEach(partido => {
           if (partido.id == idPartido) {
             partido.tengoEntrada = false;
-            partido.stockEntradas = true;
           }
         });
       }
     })
-
   }
-
   descargar(idPartido: number, nombrePartido: string) {
-    this.apiService.getEntradaBase64(this.idUsuario, idPartido).subscribe(data => {
-      let blob = this.base64ToBlob(data, "application/pdf")
-      this.saveBlobAsTextFile(blob, 'Granada - ' + nombrePartido + '.pdf')
+    this.apiService.getEntrada(this.idUsuario, idPartido).subscribe(entradaPdf => {
+      entradaPdf.forEach(file => {
+        const byteCharacters = atob(file.data);
+        const byteArrays = [];
+        for (let i = 0; i < byteCharacters.length; i++) {
+          byteArrays.push(byteCharacters.charCodeAt(i));
+        }
+        const byteArray = new Uint8Array(byteArrays);
+        const blob = new Blob([byteArray], { type: 'application/pdf' });
+        const url = window.URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = 'Granada - ' + nombrePartido + '.pdf';
+        link.click();
+        window.URL.revokeObjectURL(url);
+
+      })
+
     });
   }
 
-  base64ToBlob(base64String: string, contentType = ''): Blob {
-    const byteCharacters = atob(base64String);
-    const byteArrays = [];
-
-    for (let i = 0; i < byteCharacters.length; i++) {
-      byteArrays.push(byteCharacters.charCodeAt(i));
-    }
-
-    const byteArray = new Uint8Array(byteArrays);
-    return new Blob([byteArray], { type: contentType });
-  }
-
-  saveBlobAsTextFile(blob: Blob, fileName: string): void {
-    const link = document.createElement('a');
-    link.href = URL.createObjectURL(blob);
-    link.download = fileName;
-    link.click();
-  }
-
   getUsuarioId(): number {
-    let userStr = localStorage.getItem('user');
-    if (userStr == null)
-      return -1
-    else
-      return JSON.parse(userStr).user_id
+    const userId = this.userService.getUserData();
+     return userId.id;
+  }
+
+  openAddTicketsUser() {
+    const dialog = this.dialog.open(AddEntradasUsuarioComponent,{
+      width:'30vw',
+      height:'60vh'
+    });
+    dialog.afterClosed().subscribe(result => {
+      this.ngOnInit();
+    });
+  }
+  getPartidosFuturos(){
+    this.apiService.getProximosPartidosDisponibles().subscribe(partidosFuturos =>{
+      this.partidosFuturos = partidosFuturos;
+    });
+  }
+
+  descargarVarias(idPartido: number, nombrePartido: string, contentType = '') {
+    this.apiService.getEntradasExtra(2, 1, 2).subscribe(entradaPdf => {
+      entradaPdf.forEach(file => {
+        //console.log("aaaaaaaaa "+file.data + file.fileName)
+        const byteCharacters = atob(file.data);
+        const byteArrays = [];
+
+        for (let i = 0; i < byteCharacters.length; i++) {
+          byteArrays.push(byteCharacters.charCodeAt(i));
+        }
+        const byteArray = new Uint8Array(byteArrays);
+        const blob = new Blob([byteArray], { type: 'application/pdf' });
+        const url = window.URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = 'Granada - ' + nombrePartido + '.pdf';
+        link.click();
+        window.URL.revokeObjectURL(url);
+
+      })
+    });
   }
 }

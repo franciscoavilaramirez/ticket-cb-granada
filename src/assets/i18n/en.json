@@ -1,10 +1,48 @@
 
 
 {
+  "nombre": "Name",
+  "apellidos":"Last Name",
+  "email": "Email",
+  "buscador": "Search",
+  "terminoBuscar":"Enter the search term",
+  "contrasena": "Password",
+  "registrarUsuario": "Register User",
+  "repiteContrasena": "Repeat Password",
+  "editarContrasena": "Edit Password",
+  "actualContrasena": "Current Password",
+  "nuevaContrasena": "New Password",
+
+  "requisitosContrasena" : "The password must have at least 8 characters, one lowercase letter, one uppercase letter and one special character",
+  "requisitosEmail":"The email must have @t-systems.com",
+  "administrador": "Admin",
+  "registrarse" : "Register",
+  "registro":"Register to create an account",
+  "usuarioRegistrado":"Do you have an account?",
+  "iniciaSesion":"Log In",
+  "anadirEntradas":"Add Tickets",
+  "partido":"Match",
+  "fecha":"Date",
+  "fechaDelPartido":"Date of Match",
+  "tickets": "tickets",
+  "quedan": "There are",
+  "partidosInscritos": "Attended Matches",
+  "noInscrito": "This user has not attended any games",
+  "editar":"Edit",
+  "siguientePartido":"Next Match",
+  "proximosPartidos":"Upcoming Matches",
+  "partidosAnteriores":"Last Matches",
+  "partidosFuturos":"Future matches",
+  "login":"Log In",
+
+
     "card":{
       "mostrarOcultar":"Show registered",
       "anadirUsuario": "Add user match",
-      "modificarPartido": "Update match"
+      "modificarPartido": "Update match",
+      "anadirAdmin": "Add like Admin",
+      "descargar": "Download Admin",
+      "devolver": "Restore"
       },
   "listadoUsuarios":{
     "nombre": "Name",
@@ -21,15 +59,19 @@
     "nombre": "Name",
     "apellido": "Last Name",
     "email": "Email",
+    "partidos": "Attend Match",
     "mostrar": "Show list users",
     "ocultar":"Hide list",
     "exportarXlsX": "Export Users to XLSX",
     "modificar": "Update",
-    "eliminar": "Delete"
+    "eliminar": "Delete",
+    "usuarios": "Users"
     },
   "modalAnadirUsuario":{
-    "inscritos": "Registered Users",
-    "pendientes":"Pending Registered Users",
+    "inscritos": "Registered Users:",
+    "yaInscritos": "Registered Users",
+    "noHayInscritos":"There are not registered users at this moment",
+    "pendientes":"Pending Users",
     "guardar": "Save",
     "cancelar": "Cancel"
     },
@@ -39,8 +81,9 @@
     "equipoVisitante": "Visiting Team",
     "guardar": "Save",
     "cancelar": "Cancel",
-    "fecha": "Match Date",
-    "fechaPublicacion": "Publication Date"
+    "fecha": "Match Date: ",
+    "fechaPublicacion": "Publication Date: ",
+    "entradas": "Available Tickets: "
     },
 
   "modificarUsuario":{
@@ -56,9 +99,12 @@
       "acciones": "Actions",
       "guardar": "Save",
       "guardarCambios":"Save",
+      "subir":"Upload",
       "eliminar": "Delete",
       "eliminarPartido": "Delete",
-      "cancelar":"Cancel"
+      "cancelar":"Cancel",
+      "cerrarSesion":"Log Out",
+      "cambiarContrasena":"Change Password"
 
     },
     "idioma":{
@@ -73,6 +119,15 @@
       "usuarios":"Users"
     },
     "entradas":{
-      "subir":"Upload Tickets"
+      "subir":"Upload Tickets",
+      "habilitar":"Enable Tickets"
+    },
+    "habilitarEntradas":{
+      "titulo":"Enable Tickets",
+      "numero":"Number of tickets",
+      "fechaPublicacion":"Publication date"
+    },
+    "perfil":{
+      "datosPerfil":"Data Profile"
     }
 	}

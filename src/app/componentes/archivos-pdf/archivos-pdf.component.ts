@@ -2,13 +2,28 @@ import { Component, OnInit } from '@angular/core';
 import { LoginUserService } from '../../login-user.service';
 import { Observable, Subscriber } from 'rxjs';
 
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Pdf } from '../../modelo/pdf';
+import { CommonModule } from '@angular/common';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-archivos-pdf',
   templateUrl: './archivos-pdf.component.html',
-  styleUrls: ['./archivos-pdf.component.scss']
+  styleUrls: ['./archivos-pdf.component.scss'],
+  standalone: true,
+  imports: [
+    CommonModule,
+    MatFormFieldModule,
+    MatInputModule,
+    ReactiveFormsModule,
+    FormsModule,
+    MatDatepickerModule,
+    TranslateModule
+  ],
 })
 export class ArchivosPDFComponent implements OnInit {
 
