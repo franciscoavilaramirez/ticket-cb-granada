@@ -11,6 +11,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { TranslateModule } from '@ngx-translate/core';
 import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
 
 
 @Component({
@@ -27,7 +28,8 @@ import { MatIconModule } from '@angular/material/icon';
     MatDatepickerModule,
     TranslateModule, 
     MatIconModule,
-    MatDialogModule
+    MatDialogModule,
+    MatButtonModule
   ],
 })
 export class UpdateUserComponent {

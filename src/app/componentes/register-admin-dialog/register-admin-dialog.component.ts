@@ -12,6 +12,7 @@ import { MatInputModule } from '@angular/material/input';
 import { TranslateModule } from '@ngx-translate/core';
 import { MatIconModule } from '@angular/material/icon';
 import { ErrorAlertFormComponent } from '../error-alert-form/error-alert-form.component';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-register-admin-dialog',
@@ -27,7 +28,8 @@ import { ErrorAlertFormComponent } from '../error-alert-form/error-alert-form.co
     MatDatepickerModule,
     TranslateModule, 
     MatIconModule,
-    ErrorAlertFormComponent
+    ErrorAlertFormComponent,
+    MatButtonModule
   ],
 })
 export class RegisterAdminDialogComponent {
