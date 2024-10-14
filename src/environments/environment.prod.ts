@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://entradascbgranada.t-systems.es:8446/cbgranada-api/v1/'
+  apiUrl: 'https://entradascbgranada-api.t-systems.es:8447/cbgranada-api/v1/'
 };
