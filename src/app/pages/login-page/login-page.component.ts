@@ -31,10 +31,10 @@ export class LoginPageComponent implements OnInit {
     });
   }
   clickEvent(field: string, event: MouseEvent) {
+    event.preventDefault();
     if (this.hidePassword.hasOwnProperty(field)) {
       this.hidePassword[field] = !this.hidePassword[field];
     }
-    event.stopPropagation();
   }
 
   onSubmit(): void {
