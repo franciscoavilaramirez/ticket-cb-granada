@@ -2,7 +2,7 @@
   {{"registrarUsuario" | translate}}
 </div>
 
-<form [formGroup]="registerForm" (ngSubmit)="register()" class="form-container">
+<form [formGroup]="registerForm" (ngSubmit)="register()" class="form-container" autocomplete="off">
   <mat-form-field appearance="fill" class="form-field">
     <mat-label>{{"nombre" | translate}}</mat-label>
     <input matInput formControlName="nombre">
@@ -19,25 +19,43 @@
 
   <mat-form-field appearance="fill" class="form-field">
     <mat-label>{{"email" | translate}}</mat-label>
-    <input matInput formControlName="email">
+    <input matInput formControlName="email" autocomplete="off">
     <app-error-alert-form
       [errorMessage]="registerForm.get('email')?.invalid && registerForm.get('email')?.touched ? 'El email es requerido.' : ''"></app-error-alert-form>
   </mat-form-field>
 
   <mat-form-field appearance="fill" class="form-field">
     <mat-label>{{"contrasena" | translate}}</mat-label>
-    <input matInput formControlName="password" type="password">
+    <input matInput formControlName="password" autocomplete="new-password" [type]="hidePassword['contrasenaNueva'] ? 'password' : 'text'" />
+    <button mat-icon-button
+            matSuffix
+            (click)="clickEvent('contrasenaNueva', $event)"
+            [attr.aria-label]="'Hide password'"
+            [attr.aria-pressed]="hidePassword['contrasenaNueva']">
+      <mat-icon>{{hidePassword['contrasenaNueva'] ? 'visibility_off' : 'visibility'}}</mat-icon>
+    </button>
     <app-error-alert-form
       [errorMessage]="registerForm.get('password')?.invalid && registerForm.get('password')?.touched ? 'Debes poner una contraseña.' : ''"></app-error-alert-form>
   </mat-form-field>
-  <div *ngIf="registerForm.get('password')?.invalid && registerForm.get('password')?.touched" class="error-message password-pattern"> 
+  <div *ngIf="registerForm.get('password')?.invalid && registerForm.get('password')?.touched" class="error-message password-pattern">
     {{"requisitosContrasena" | translate}}
   </div>
 
   <mat-form-field appearance="fill" class="form-field">
     <mat-label>{{"repiteContrasena" | translate}}</mat-label>
-    <input matInput formControlName="repeatPassword" type="password">
+    <input matInput formControlName="repeatPassword" [type]="hidePassword['contrasenaRepetida'] ? 'password' : 'text'" />
+    <button mat-icon-button
+            matSuffix
+            (click)="clickEvent('contrasenaRepetida', $event)"
+            [attr.aria-label]="'Hide password'"
+            [attr.aria-pressed]="hidePassword['contrasenaRepetida']">
+      <mat-icon>{{hidePassword['contrasenaRepetida'] ? 'visibility_off' : 'visibility'}}</mat-icon>
+    </button>
   </mat-form-field>
+
+  <div *ngIf="registerForm.errors?.['notSame'] ? 'Las contraseñas no coinciden.' : ''" class="error-message">
+    {{"contrasenaNoCoincide" | translate}}
+  </div>
 
   <div class="admin">
     <input formControlName="_admin" type="checkbox">
@@ -46,10 +64,6 @@
 
   <button mat-raised-button color="primary" type="submit" [disabled]="!registerForm.valid">{{"registrarse" |
     translate}}</button>
-
-  <div *ngIf="registerForm.errors?.['notSame'] ? 'Las contraseñas no coinciden.' : ''" class="error-message">
-    {{"contrasenaNoCoincide" | translate}}
-  </div>
 
   <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
 </form>

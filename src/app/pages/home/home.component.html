@@ -1,12 +1,14 @@
-<app-navbar [isAdmin]="false"></app-navbar>
+<app-navbar></app-navbar>
 
-<app-divisor [titulo]="'Siguiente Partido'"></app-divisor>
-
+<app-divisor [titulo]="'siguientePartido'"></app-divisor>
+<div *ngIf="spinnerShow"  class="container__spinner">
+  <mat-spinner [color]="color" ></mat-spinner>
+</div>
 <div *ngIf="primerPartido" class="ticket-wrapper">
     <div class="ticket">
         <div class="fecha">
-            <div>{{primerPartido.fechaPartido | date:'d MMM'}}.</div>
-            <div class="dia-semana">{{primerPartido.fechaPartido | date:'EEEE'}}</div>
+            <div>{{primerPartido.fechaPartido | date:'d MMM' : '' : idioma}}.</div>
+            <div class="dia-semana">{{primerPartido.fechaPartido | date:'EEEE' : '' : idioma}}</div>
             <div>{{primerPartido.fechaPartido | date:'HH:mm'}}H</div>
         </div>
         <div class="equipos-wrapper">
@@ -21,7 +23,13 @@
             <div (click)="descargar(primerPartido.id, primerPartido.equipoVisitante)" class="btn-descargar">
                 <img class="img-descargar" src="assets/imgs/descargar.png">
             </div>
-            <div (click)="devolver(primerPartido.id)" class="btn-devolver">
+
+           <!-- <div  class="btn-acompanante" >
+              <button mat-button (click)="openAddTicketsUser()" [disabled]="primerPartido.stockEntradas < 1" >
+                <img class="img-acompanante" [src]="primerPartido.stockEntradas >= 1 ? 'assets/imgs/btn_acompañante.png' : 'assets/imgs/btn_acompañante_deshab.png'">
+              </button>
+          </div> -->
+          <div (click)="devolver(primerPartido.id)" class="btn-devolver">
                 <img class="img-devolver" src="assets/imgs/devolver.png">
             </div>
         </div>
@@ -38,14 +46,14 @@
     </div>
 </div>
 
-<app-divisor [titulo]="'Próximos partidos'"></app-divisor>
+<app-divisor [titulo]="'proximosPartidos'"></app-divisor>
 
 <div class="ticket-wrapper">
     <div *ngFor="let partido of partidos" style="display: inline-block;">
         <div class="ticket ticket-small">
             <div class="fecha">
-                <div>{{partido.fechaPartido | date:'d MMM'}}.</div>
-                <div class="dia-semana">{{partido.fechaPartido | date:'EEEE'}}</div>
+                <div>{{partido.fechaPartido | date:'d MMM' : '' : idioma}}.</div>
+                <div class="dia-semana">{{partido.fechaPartido | date:'EEEE' : '' : idioma}}</div>
                 <div>{{partido.fechaPartido | date:'HH:mm'}}H</div>
             </div>
             <div class="equipos-wrapper">

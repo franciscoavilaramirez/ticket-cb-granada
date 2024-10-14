@@ -13,23 +13,30 @@
 
   <p class="form-description">
     "Don't have an account yet? "
-    <a routerLink="/signup">Sign up</a>
+    <a routerLink="/signup">SignUp</a>
   </p>
 
   <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">
 
     <mat-form-field appearance="fill" class="form-field">
       <mat-label>Email</mat-label>
-      <input matInput formControlName="email" placeholder="ejemplo@gmail.com" class="input-field">
+      <input matInput formControlName="email" placeholder="example@t-systems.com" class="input-field">
     </mat-form-field>
 
     <mat-form-field appearance="fill" class="form-field">
-      <mat-label>Contraseña</mat-label>
-      <input matInput formControlName="password" placeholder="Introduce una contraseña segura" type="password"
-        class="input-field">
+      <mat-label>Password</mat-label>
+      <input matInput formControlName="password" placeholder="Enter the password" class="input-field"
+                      [type]="hidePassword['contrasena'] ? 'password' : 'text'" />
+      <button mat-icon-button
+              matSuffix
+              (click)="clickEvent('contrasena', $event)"
+              [attr.aria-label]="'Hide password'"
+              [attr.aria-pressed]="hidePassword['contrasena']">
+        <mat-icon>{{hidePassword['contrasena'] ? 'visibility_off' : 'visibility'}}</mat-icon>
+      </button>
     </mat-form-field>
 
-    <button mat-raised-button color="primary" type="submit" [disabled]="!loginForm.valid" class="submit-button">Iniciar sesión</button>
+    <button mat-raised-button color="primary" type="submit" [disabled]="!loginForm.valid" class="submit-button">{{"login" | translate }}</button>
 
     <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
 

@@ -1,8 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
-import { environment } from '../../../enviroments/environment';
+import { environment } from '../../../environments/environment';
 import { Router } from '@angular/router';
+import { UserService } from '../../service/user.service';
+import { JwtHelperService } from '@auth0/angular-jwt';
+import { TokenService } from '../../service/token.service';
+
 
 @Component({
   selector: 'app-login-page',
@@ -13,29 +17,38 @@ export class LoginPageComponent implements OnInit {
   loginForm: FormGroup;
   errorMessage: string = '';
   successMessage: string;
+  hidePassword: { [key: string]: boolean } = {
+    contrasena: true,
+  };
 
-  constructor(private formBuilder: FormBuilder, private http: HttpClient, private router: Router) { }
+  constructor(private tokenService: TokenService, private formBuilder: FormBuilder, private http: HttpClient, private router: Router, private userService:UserService) { }
 
   ngOnInit(): void {
-    // Si el usuario ya ha iniciado sesión, redirige a la página de inicio
-    let userString = localStorage.getItem('user');
-    if (userString != null) {
-      let user = JSON.parse(userString);
-      user.isAdmin ? this.router.navigate(['/admin-home']) : this.router.navigate(['/home']);
-    }
 
     this.loginForm = this.formBuilder.group({
       email: ['', Validators.required],
       password: ['', Validators.required]
     });
   }
+  clickEvent(field: string, event: MouseEvent) {
+    if (this.hidePassword.hasOwnProperty(field)) {
+      this.hidePassword[field] = !this.hidePassword[field];
+    }
+    event.stopPropagation();
+  }
 
   onSubmit(): void {
     const observer = {
-      next: (user: any) => {
-        let userString = JSON.stringify(user);
-        localStorage.setItem('user', userString);
-        if(user.isAdmin) {
+      next: (response: any) => {
+        //debugger;
+        console.log('response desde login-page',response)
+        localStorage.setItem('token', response.token);
+
+        const jwt = new JwtHelperService();
+        const tokenDecoded = jwt.decodeToken(response.token); // Pasamos la variable 'token' aquí
+        //console.log('Token decodificado desde login-page:', tokenDecoded);
+        this.tokenService.token = response.token;
+        if(tokenDecoded.usuario.isAdmin == true) {
           this.router.navigate(['/admin-home'])
         }
         else
@@ -44,7 +57,8 @@ export class LoginPageComponent implements OnInit {
       error: (error: any) => {
         this.errorMessage = 'Error al iniciar sesión. Por favor, inténtalo de nuevo.';
       }
-    };
+    }
     this.http.post<any>(environment.apiUrl + 'login', this.loginForm.value).subscribe(observer);
   }
+
 }

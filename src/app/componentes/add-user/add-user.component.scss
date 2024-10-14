@@ -1,6 +1,6 @@
 
 .container{
-  height:150%;
+  height:180%;
   width: 100%;
   display: grid;
   //padding: 100px;
@@ -34,7 +34,8 @@
           column-gap: 10px;
           font-size: 15px;
           justify-content: center;
-          margin: 10px 0px 0px 10px;
+          //margin: 10px 0px 0px 10px;
+          padding: 20px;
 
           &__guardar{
             background-color: #36bf98;
@@ -60,6 +61,7 @@
   }
   h1{
     font: 700 30px/30px allerta;
+    margin-top: 20px;
   }
 
 }

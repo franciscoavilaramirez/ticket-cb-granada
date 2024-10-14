@@ -1,9 +1,10 @@
 export interface Usuario{
-  id?: string
+  id: string | number,
   nombre?: string,
   email?: string,
   apellidos?: string,
-  is_admin?: boolean,
+  _admin?: boolean,
   password?: string,
-  user_id?: number
+  user_id?: number,
+  partidosAsistidos?: number;
 }

@@ -1,15 +1,32 @@
 import { Component, Inject } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
-import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { AdminHomeComponent } from '../../pages/admin/admin-home/admin-home.component';
-import { TranslateService } from '@ngx-translate/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { ApiService } from '../../service/api.service';
 import { Partido } from '../../modelo/partido';
+import { CommonModule } from '@angular/common';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-modify-match',
   templateUrl: './modify-match.component.html',
-  styleUrl: './modify-match.component.scss'
+  styleUrl: './modify-match.component.scss',
+  standalone: true,
+  imports: [
+    CommonModule,
+    MatFormFieldModule,
+    MatInputModule,
+    ReactiveFormsModule,
+    FormsModule,
+    MatDatepickerModule,
+    TranslateModule,
+    MatDialogModule,
+    MatButtonModule
+  ],
 })
 export class ModifyMatchComponent {
 
@@ -30,7 +47,7 @@ export class ModifyMatchComponent {
 
       equipoVisitante: new FormControl(this.matchModify.equipoVisitante),
       fechaPartido: new FormControl(this.matchModify.fechaPartido),
-      fechaPublicacion: new FormControl(this.matchModify.fechaPublicacion),
+      fechaPublicacion: new FormControl(this.matchModify.fechaPublicacion.split('T')[0]),
       id:new FormControl(this.matchModify.id),
     });
   }
@@ -41,7 +58,9 @@ export class ModifyMatchComponent {
   onSubmit(){
     if(this.updateMatchForm.valid){
       const bodyResponse: Partido = this.updateMatchForm.value;
-      console.log("bodyResponse",bodyResponse);
+
+      bodyResponse.fechaPublicacion = bodyResponse.fechaPublicacion + this.getHoraActual()
+
       this.apiService.updateMatch(bodyResponse).subscribe(data =>{
         console.log('update partido',data);
         this.closedModal();
@@ -52,5 +71,14 @@ export class ModifyMatchComponent {
   closedModal(): void {
     this.dialogRef.close();
   }
+  getHoraActual(){
+    let fecha = new Date()
+    let hora:any = fecha.getHours()
+    let minutos:any = fecha.getMinutes()
 
+    if(hora < 10) hora = '0'+hora
+    if(minutos < 10) minutos = '0'+minutos
+
+    return "T"+ hora +":"+minutos
+  }
 }
