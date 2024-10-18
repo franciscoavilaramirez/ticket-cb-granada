@@ -6,9 +6,11 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 @font-face {
     font-family: 'Evogria';
+    font-display: swap;
     src: url('../src/assets/fonts/Evogria.otf');
 }
 @font-face {
     font-family: 'Allerta';
+    font-display: swap;
     src: url('../src/assets/fonts/Allerta-Regular.ttf');
 }

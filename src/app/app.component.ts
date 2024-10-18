@@ -9,7 +9,6 @@ import { TranslateService } from '@ngx-translate/core';
 export class AppComponent {
   router: any;
 logout() {
-  console.log('logout');
 
   // borrar usuario del localstorage
   localStorage.removeItem('user');

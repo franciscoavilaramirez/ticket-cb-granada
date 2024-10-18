@@ -28,7 +28,6 @@ export class PerfilComponent {
   ngOnInit() {
     const token = localStorage.getItem('token');
     if (token) {
-      console.log("token desde el perfil " + token);
         // Decodifica el token
         const tokenDecoded = this.jwtHelper.decodeToken(token);
         // Configurar los datos del usuario en el UserService
@@ -36,7 +35,6 @@ export class PerfilComponent {
         // Almacena el ID del usuario decodificado
         this.idUsuario = tokenDecoded.usuario?.id;
     } else {
-      console.log('No se encontró el token en el localStorage');
       this.router.navigate(['/login']); // Si no hay token, redirigir al login
       return;
     }
@@ -50,8 +48,6 @@ export class PerfilComponent {
     this.apiService.getUsuarioById(this.idUsuario).subscribe(
       usuario => {
         this.usuario = usuario
-        console.log('this usuario',this.usuario)
-
         // Actualiza el FormGroup con los datos del usuario una vez cargados
         this.editarPerfil.patchValue({
           nombre: this.usuario.nombre,

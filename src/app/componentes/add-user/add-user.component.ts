@@ -86,7 +86,7 @@ filterPost = '';
           //llamada al servicio
           this.apiService.addUserMatch(userId, this.partido.id).subscribe(success => {
             //this.closedModal();
-            console.log('success',success)
+            
             this.partido.stockEntradas--;
 
             this.getUsuariosPartido(this.partido.id);

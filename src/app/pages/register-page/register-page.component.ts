@@ -49,8 +49,6 @@ export class RegisterPageComponent implements OnInit {
           let userString = JSON.stringify(response);
           let userJson = JSON.parse(userString);
           let user = { "userEmail": userJson.email, "isAdmin": userJson._admin, "userName": userJson.nombre, "userId": userJson.user_id, "userApellidos": userJson.apellidos }
-          console.log("Usuario registrado correctamente. Response:", response);
-          console.log("User json: ", user)
           localStorage.setItem('user', JSON.stringify(user));
 
           // Redirige a la página de inicio 
@@ -59,7 +57,6 @@ export class RegisterPageComponent implements OnInit {
         },
         error: error => {
           // Maneja el error aquí
-          console.log("Error al registrar el usuario", error);
           this.errorMessage = 'Error al registrar el usuario. Email ya está en uso. Por favor, inténtalo de nuevo.';
         }
       });

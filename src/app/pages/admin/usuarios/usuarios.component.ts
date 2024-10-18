@@ -93,7 +93,6 @@ export class UsuariosComponent {
   getPartidosInscritosUser(idUsuario: number){
     this.apiService.getPartidosInscritos(idUsuario).subscribe(data =>{
       this.partidosInscritos = data;
-      console.log('partidos inscritos',this.partidosInscritos)
       const dialog = this.dialog.open(MatchAssistUserComponent,{
         data: this.partidosInscritos,
         width:'30vw',

@@ -62,11 +62,10 @@ export class ModifyMatchComponent {
       bodyResponse.fechaPublicacion = bodyResponse.fechaPublicacion + this.getHoraActual()
 
       this.apiService.updateMatch(bodyResponse).subscribe(data =>{
-        console.log('update partido',data);
         this.closedModal();
       });
 
-    }else(console.log('NO se actualiza partido'));
+    }else(console.log(this.updateMatchForm));
   }
   closedModal(): void {
     this.dialogRef.close();

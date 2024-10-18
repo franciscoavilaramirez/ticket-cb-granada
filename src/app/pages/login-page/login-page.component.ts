@@ -41,12 +41,10 @@ export class LoginPageComponent implements OnInit {
     const observer = {
       next: (response: any) => {
         //debugger;
-        console.log('response desde login-page',response)
         localStorage.setItem('token', response.token);
 
         const jwt = new JwtHelperService();
         const tokenDecoded = jwt.decodeToken(response.token); // Pasamos la variable 'token' aquí
-        //console.log('Token decodificado desde login-page:', tokenDecoded);
         this.tokenService.token = response.token;
         if(tokenDecoded.usuario.isAdmin == true) {
           this.router.navigate(['/admin-home'])
