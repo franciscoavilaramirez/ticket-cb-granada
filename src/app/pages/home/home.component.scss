@@ -84,7 +84,9 @@ div {
         position: absolute;
         bottom: 8px;
         left: 195px;
-        cursor: pointer;
+        //cursor: pointer;
+        pointer-events: none;
+        opacity: 0.5;
         .img-devolver {
             width: 152px;
             box-shadow: -5px 4px 17px -6px #000000;

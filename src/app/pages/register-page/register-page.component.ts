@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -53,10 +54,11 @@ export class RegisterPageComponent implements OnInit {
 
           // Redirige a la página de inicio 
           this.router.navigate(['/']);
-
+          Swal.fire("Usuario registrado correctamente", "", "success");
         },
         error: error => {
           // Maneja el error aquí
+          Swal.fire("Error al registrar usuario", "", "error");
           this.errorMessage = 'Error al registrar el usuario. Email ya está en uso. Por favor, inténtalo de nuevo.';
         }
       });
