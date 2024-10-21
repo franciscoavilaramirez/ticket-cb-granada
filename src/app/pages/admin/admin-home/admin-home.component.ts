@@ -59,7 +59,9 @@ export class AdminHomeComponent {
   displayColumns: string[] = ['partido','fechaDelPartido','editar'];
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   dataSource = new MatTableDataSource<Partido>([]);
-  filterTerm: string = '';  // Valor del input para la búsqueda
+  dataSourceFuturos = new MatTableDataSource<Partido>([]);
+  filterTermFuturo: string = '';  // Valor del input para la búsqueda
+  filterTerm: string = '';
 
 
   ngOnInit(){
@@ -72,6 +74,11 @@ export class AdminHomeComponent {
   applyFilter(event: Event): void {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();  // Filtrar los datos
+  }
+
+  applyFilterFuture(event: Event): void {
+    const filterValue = this.filterTermFuturo;
+    this.dataSourceFuturos.filter = filterValue.trim().toLowerCase();  // Filtrar los datos
   }
 
   ngAfterViewInit() {
@@ -281,6 +288,8 @@ export class AdminHomeComponent {
   getPartidosFuturos(){
     this.apiService.getProximosPartidosDisponibles().subscribe(partidosFuturos =>{
       this.partidosFuturos = partidosFuturos;
+      this.dataSourceFuturos.data = partidosFuturos;
+      this.dataSourceFuturos.data = this.partidosPasados;
     });
   }
 }
