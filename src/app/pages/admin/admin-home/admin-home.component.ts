@@ -112,7 +112,7 @@ export class AdminHomeComponent {
       apellidos: usuarioAny.apellidos,
       email:usuarioAny.email
      }
-    console.log('usuarioAny',usuarioAny, 'usuario',usuario);
+    
     const dialog = this.dialog.open(UpdateUserComponent,{
       data: usuario,
       width:'35vw',
@@ -165,6 +165,7 @@ export class AdminHomeComponent {
 
   getProximosPartidos(){
     this.apiService.getProximosPartidos().subscribe(data =>{
+      
       this.proximosPartidos = data;
       this.spinnerShow = false;
       this.idUsuario = this.getUsuarioId()
@@ -172,12 +173,14 @@ export class AdminHomeComponent {
       this.apiService.getMisPartidosIds(this.idUsuario).subscribe(misPartidosIds => {
         this.misPartidosIds = misPartidosIds
 
-        this.proximosPartidos.forEach(partido => {
-          if (this.misPartidosIds?.includes(partido.id))
-            partido.tengoEntrada = true;
-          else
-          partido.tengoEntrada = false;
-        })
+        if(this.proximosPartidos != null){
+          this.proximosPartidos.forEach(partido => {
+            if (this.misPartidosIds?.includes(partido.id))
+              partido.tengoEntrada = true;
+            else
+            partido.tengoEntrada = false;
+          })
+        }
       })
     });
   }

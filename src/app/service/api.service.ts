@@ -14,15 +14,18 @@ import { TokenService } from './token.service';
 })
 export class ApiService {
 
-  private idiomaActual = new BehaviorSubject<string>('es');
+  idiomaActual = new BehaviorSubject<string>('es');
   idioma$ = this.idiomaActual.asObservable();
 
   constructor(private http:HttpClient, private translate: TranslateService, private router: Router,private tokenService: TokenService) {
-    this.translate.setDefaultLang('es'); // idioma por defecto
 
-   }
+  }
 
   apiUrl = environment.apiUrl
+
+  getCurrentLenguage(){
+    return this.idioma$;
+  }
 
   cambiarIdioma(idioma: string) {
     this.idiomaActual.next(idioma);

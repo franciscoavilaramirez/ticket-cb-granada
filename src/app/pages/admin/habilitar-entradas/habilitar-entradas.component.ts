@@ -47,7 +47,7 @@ export class HabilitarEntradasComponent {
   onSubmit(){
     if(this.enableTicketsForm.valid){
       const bodyResponse = this.enableTicketsForm.value;
-      console.log("bodyResponse",bodyResponse);
+      
       // this.apiService.updateMatch(bodyResponse).subscribe(data =>{
       //   console.log('update partido',data);
       //   this.closedModal();

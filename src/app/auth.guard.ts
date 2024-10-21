@@ -27,7 +27,7 @@ export class AuthGuard implements CanActivate {
 
       // Verificar si el token ha expirado
       if (this.jwtHelper.isTokenExpired(token)) {
-        console.log('El token ha expirado, redirigiendo al login...');
+
         Swal.fire("Tiempo de sesión expirado", "", "info");
 
         this.router.navigate(['/login']);
@@ -36,17 +36,17 @@ export class AuthGuard implements CanActivate {
 
       // Decodificar el token si no ha expirado
       const tokenDecoded = this.jwtHelper.decodeToken(token);
-      console.log('Token decodificado:', tokenDecoded);
+      
       //Fecha en la que el expira el token
       const expirationDate = new Date(tokenDecoded.exp * 1000);
       const timeString = expirationDate.toLocaleTimeString();
-      console.log('El token expira a las: ',timeString); // Para quedarnos solo la hora, por ejemplo: "09:56:43"
-      //console.log('fecha expiración del token: ',expirationDate);
+      
+      
       // Configurar los datos del usuario en el UserService
       this.userService.setUserData(tokenDecoded.usuario);
-      console.log('setUserData:', tokenDecoded.usuario);
+
     } else {
-      console.log('No hay token en el localStorage, redirigiendo al login...');
+      
       this.router.navigate(['/login']);
       return false;
     }
@@ -57,7 +57,6 @@ export class AuthGuard implements CanActivate {
 
     // Si no hay usuario logueado, redirigir al login
     if (!isLoggedIn) {
-      console.log('Usuario no logueado, redirigiendo al login...');
       this.router.navigate(['/login']);
       return false;
     }

@@ -85,7 +85,6 @@ export class RegisterAdminDialogComponent {
         },
         error: error => {
           alert("Error de registro. Compruebe que el email no esté en uso")
-          console.log("Error al registrar el usuario.", error);
         }
       });
     }

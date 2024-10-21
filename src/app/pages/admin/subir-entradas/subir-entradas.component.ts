@@ -57,7 +57,7 @@ export class SubirEntradasComponent {
     form.append('partido', JSON.stringify(partido))
     form.append('entradasPdf', this.entradas)
     this.apiService.subirPartido(form).subscribe({
-      next: (r) => {console.log("partido creado",r),
+      next: (r) => {
            this.actualizacionProximosPartidos.emit();
            this.dialogRef.close();
       },

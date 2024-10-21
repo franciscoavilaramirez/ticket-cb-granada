@@ -24,17 +24,14 @@ export class TokenService {
       const token = localStorage.getItem('token');
     if (token) {
       this.token = token;
-      //console.log('Token decodificado:' );
       const jwt = new JwtHelperService();
-      //debugger;
       const tokenDecoded = jwt.decodeToken(token); // Pasamos la variable 'token' aquí
-      console.log('Token decodificado:', tokenDecoded);
 
 
       if (tokenDecoded && tokenDecoded.usuario) {
         this.userService.setUserData(tokenDecoded.usuario); // Solo pasa los datos del usuario
       } else {
-        console.log('El token no contiene datos de usuario válidos');
+        
       }
 
 
@@ -42,7 +39,6 @@ export class TokenService {
       resolve(true);
     } else {
       reject(false);
-      console.log('No hay token en el localStorage');
     }
     });
     return promiseToken;

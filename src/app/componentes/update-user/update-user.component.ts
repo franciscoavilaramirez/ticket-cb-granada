@@ -72,7 +72,6 @@ createFormUpdateUser(){
 getUsers(){
   this.apiService.getUsers().subscribe(data =>{
     this.usuarios = data
-    console.log('Usuarios desde update-users', this.usuarios);
   });
 }
 
@@ -84,9 +83,7 @@ onSubmit(){
     this.userModify.apellidos = bodyResponse.apellidos;
     this.userModify.email = bodyResponse.email;
     this.userModify.password = bodyResponse.contrasena;
-    console.log("bodyResponse",bodyResponse);
     this.apiService.updateUser(bodyResponse.user_id,this.userModify).subscribe((data) =>{
-      console.log('usuario update',data)
       this.closedModal();
     });
 

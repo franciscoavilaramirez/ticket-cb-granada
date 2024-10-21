@@ -82,7 +82,7 @@ onSubmit(){
   const bodyResponse = this.addTicketsForm.value;
   this.numEntradas = bodyResponse.numeroTickets;
   this.apiService.getDescargarEntradasAdi(this.idUsuario,this.partidoId.id,this.numEntradas).subscribe(entrada =>{
-  console.log('Entrada',entrada);
+  
     if(entrada == true ){
       Swal.fire("Entradas adicionales asignadas", "", "success");
     }
