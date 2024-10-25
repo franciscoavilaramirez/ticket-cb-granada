@@ -54,31 +54,37 @@ filterPost = '';
      this.getUsuariosPartido(this.partido.id);
 
     }
-    getUsers(){
-      this.apiService.getUsers().subscribe(data=>{
+   
+    getUsers() {
+      this.apiService.getUsers().subscribe(data => {
         this.usuarios = [];
-        data.forEach(usu =>{
-          const user = this.usuariosYaInscritos?.find(usuInscrito =>{
-           return  usu.user_id === usuInscrito.user_id
-          })
-          if(!Boolean(user)){
-            this.usuarios.push(usu)
+        data.forEach(usu => {
+          const user = this.usuariosYaInscritos?.find(usuInscrito => usu.user_id === usuInscrito.user_id);
+          if (!user) {
+            // Inicializar la propiedad selected
+            usu.selected = false;
+            this.usuarios.push(usu);
           }
-        })
-       });
+        });
+      });
     }
+    
     addUserToSorteo(userId: number | undefined) {
-      const index = this.usuariosParaAnadirAlPartido.indexOf(userId);
-
-      if (index === -1) {
-        // El usuario no está en el array, agregarlo
-        this.usuariosParaAnadirAlPartido.push(userId);
+      const usuario = this.usuarios.find(u => u.user_id === userId);
+      if (usuario?.selected) {
+        // Agregar si está seleccionado
+        if (!this.usuariosParaAnadirAlPartido.includes(userId)) {
+          this.usuariosParaAnadirAlPartido.push(userId);
+        }
       } else {
-        // El usuario está en el array, quitarlo
-        this.usuariosParaAnadirAlPartido.splice(index, 1);
+        // Quitar si está deseleccionado
+        const index = this.usuariosParaAnadirAlPartido.indexOf(userId);
+        if (index !== -1) {
+          this.usuariosParaAnadirAlPartido.splice(index, 1);
+        }
       }
     }
-
+    
     onSubmit() {
       this.usuariosParaAnadirAlPartido.forEach(userId => {
         // Verifica si el usuario ya está en el array
@@ -86,9 +92,7 @@ filterPost = '';
           //llamada al servicio
           this.apiService.addUserMatch(userId, this.partido.id).subscribe(success => {
             //this.closedModal();
-            
             this.partido.stockEntradas--;
-
             this.getUsuariosPartido(this.partido.id);
             if(success)
               this.snackBar.open('Usuario añadido a partido', 'Cerrar', {
@@ -118,7 +122,9 @@ filterPost = '';
     }
     getUsuariosPartido(idPartido:number){
       this.apiService.getUsuariosPartido(idPartido).subscribe(data =>{
+
         this.usuariosYaInscritos = data;
+
         this.getUsers();
       });
     }

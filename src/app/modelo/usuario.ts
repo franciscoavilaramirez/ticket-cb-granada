@@ -7,4 +7,5 @@ export interface Usuario{
   password?: string,
   user_id?: number,
   partidosAsistidos?: number;
+  selected?: boolean; 
 }

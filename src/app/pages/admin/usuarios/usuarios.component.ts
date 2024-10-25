@@ -122,7 +122,7 @@ export class UsuariosComponent {
   }
   ExportTOExcel() {
     const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(this.table.nativeElement);
-    ws["!ref"] = ws["!ref"]?.replace("A","B").replace("E","D") //Excel empieza en columna B (descarta la columna ID que solo es un indice, no corresponden a bbdd), y termina en D (E contiene la columna de los botones en la tabla)
+    ws["!ref"] = ws["!ref"]?.replace("A","B").replace("F","E") //Excel empieza en columna B (descarta la columna ID que solo es un indice, no corresponden a bbdd), y termina en D (E contiene la columna de los botones en la tabla)
     const wb: XLSX.WorkBook = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
     /* save to file */

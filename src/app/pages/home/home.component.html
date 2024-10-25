@@ -46,9 +46,10 @@
     </div>
 </div>
 
-<app-divisor [titulo]="'proximosPartidos'"></app-divisor>
+<!-- <app-divisor [titulo]="'proximosPartidos'"></app-divisor> -->
 
-<div class="ticket-wrapper">
+<!-- ESTE BLOQUE DE CODIGO HABILITA LOS PARTIDOS SIGUIENTES AL PRINCIPAL -->
+<!-- <div class="ticket-wrapper">
     <div *ngFor="let partido of partidos" style="display: inline-block;">
         <div class="ticket ticket-small">
             <div class="fecha">
@@ -62,8 +63,8 @@
                     <div class="nombre">{{partido.equipoVisitante}}</div>
                 </div>
             </div>
-            <!-- BOTONES -->
-            <!-- Si tengo la entrada, botones de descarga y devolucion -->
+             BOTONES
+             Si tengo la entrada, botones de descarga y devolucion 
             <div *ngIf=partido.tengoEntrada>
                 <div (click)="descargar(partido.id, partido.equipoVisitante)" class="btn-descargar">
                     <img class="img-descargar" src="assets/imgs/descargar.png">
@@ -72,7 +73,7 @@
                     <img class="img-devolver" src="assets/imgs/devolver.png">
                 </div>
             </div>
-            <!-- Si no tengo la entrada, boton de apuntarse si quedan -->
+             Si no tengo la entrada, boton de apuntarse si quedan 
             <div *ngIf=!partido.tengoEntrada>
 
                 <div *ngIf=partido.stockEntradas (click)="apuntarse(partido.id)" class="btn-apuntame">
@@ -84,4 +85,4 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->

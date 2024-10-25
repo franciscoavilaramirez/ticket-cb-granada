@@ -26,9 +26,10 @@
     <mat-form-field appearance="fill" class="form-field">
       <mat-label>Password</mat-label>
       <input matInput formControlName="password" placeholder="Enter the password" class="input-field"
-                      [type]="hidePassword['contrasena'] ? 'password' : 'text'" />
+                      [type]="hidePassword['contrasena'] ? 'password' : 'text'" (keydown.enter)="onSubmit()" />
       <button mat-icon-button
               matSuffix
+              type="button"
               (click)="clickEvent('contrasena', $event)"
               [attr.aria-label]="'Hide password'"
               [attr.aria-pressed]="hidePassword['contrasena']">
