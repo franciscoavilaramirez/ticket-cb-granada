@@ -28,7 +28,7 @@ export class NavbarComponent implements OnInit {
   usuario:any
 
   ngOnInit(): void {
-    console.log("El idioma actual es: ", this.apiService.getCurrentLenguage());
+    //console.log("El idioma actual es: ", this.apiService.getCurrentLenguage());
     const userData = this.userService.getUserData();
   if (userData) {
     this.isAdmin = userData.isAdmin;

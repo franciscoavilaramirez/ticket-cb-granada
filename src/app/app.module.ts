@@ -23,6 +23,7 @@ import { ModifyMatchComponent } from './componentes/modify-match/modify-match.co
 import { RegisterAdminDialogComponent } from './componentes/register-admin-dialog/register-admin-dialog.component';
 import { HabilitarEntradasComponent } from './pages/admin/habilitar-entradas/habilitar-entradas.component';
 import { TranslationComponent } from './translation/translation.component';
+import { EmailConfirmacionComponent } from './pages/email-confirmacion/email-confirmacion.component';
 registerLocaleData(localeEs, 'es');
 
 
@@ -34,6 +35,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 @NgModule({
   declarations: [
     AppComponent,
+    EmailConfirmacionComponent,
   ],
   imports: [
     // CommonModule,

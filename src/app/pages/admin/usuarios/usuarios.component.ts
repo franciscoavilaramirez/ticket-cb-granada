@@ -121,10 +121,16 @@ export class UsuariosComponent {
     });
   }
   ExportTOExcel() {
-    const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(this.table.nativeElement);
-    ws["!ref"] = ws["!ref"]?.replace("A","B").replace("F","E") //Excel empieza en columna B (descarta la columna ID que solo es un indice, no corresponden a bbdd), y termina en D (E contiene la columna de los botones en la tabla)
+    const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(this.usuarios.map( usuario =>({
+      Nombre: usuario.nombre,
+      Apellidos: usuario.apellidos,
+      Email: usuario.email,
+      PartidosAsistidos: usuario.partidosAsistidos
+    })
+
+    ));
     const wb: XLSX.WorkBook = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+    XLSX.utils.book_append_sheet(wb, ws, 'Listado_Usuarios');
     /* save to file */
     XLSX.writeFile(wb, 'Listado_Usuarios.xlsx');
   }

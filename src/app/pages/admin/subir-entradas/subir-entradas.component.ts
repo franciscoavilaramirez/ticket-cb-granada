@@ -38,7 +38,7 @@ export class SubirEntradasComponent {
   ngOnInit() {
     let fechaActual = this.getFechaActual()
     this.form = this.formBuilder.group({
-      granada: [{ value:'Granada', disabled: true }],
+      granada: [{ value:' CB Granada', disabled: true }],
       equipoVisitante: [''],
       fechaPartido: [''],
       fechaPublicacion: fechaActual,

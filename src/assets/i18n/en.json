@@ -119,7 +119,7 @@
       "usuarios":"Users"
     },
     "entradas":{
-      "subir":"Upload Tickets",
+      "subir":"Create Match",
       "habilitar":"Enable Tickets"
     },
     "habilitarEntradas":{
