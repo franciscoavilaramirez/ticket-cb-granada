@@ -54,6 +54,11 @@ const routes: Routes = [
     loadChildren: () =>
       import('./pages/perfil/perfil.module').then((m) => m.PerfilModule),
   },
+  {
+    path: 'email',
+    loadChildren: () =>
+      import('./pages/email-confirmacion/email-confirmacion.module').then((m) => m.EmailConfirmacionModule),
+  },
   // {
   //   path: 'tickets',
   //   component: ArchivosPDFComponent,
