@@ -15,7 +15,7 @@ import { UserService } from '../../service/user.service';
 })
 export class HomeComponent {
 
-  constructor(private apiService: ApiService, private renderer: Renderer2,public dialog: MatDialog,private userService:UserService) {
+  constructor(private apiService: ApiService, private renderer: Renderer2,public dialog: MatDialog,private userService:UserService, private cdr: ChangeDetectorRef) {
 
   }
   idioma: string = 'es'; // valor inicial por defecto
@@ -27,6 +27,7 @@ export class HomeComponent {
   partidosFuturos: Partido[] =[];
   spinnerShow = false;
   color: ThemePalette = "accent";
+  infoUserNoMatch: boolean = false;
 
 
   ngOnInit() {
@@ -55,6 +56,15 @@ export class HomeComponent {
             else
               partido.tengoEntrada = false;
           })
+        }
+        if (!this.primerPartido) {
+          this.infoUserNoMatch = true;
+          this.spinnerShow = false;
+          this.cdr.detectChanges();// Forzamos para que detecte cambios y asegurarnos de que muestra el mensaje al usuario
+          console.log('primer partido',this.primerPartido) 
+        }else {this.infoUserNoMatch = false
+          console.log('info user a false') 
+
         }
       });
     });

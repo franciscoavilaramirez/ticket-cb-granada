@@ -121,14 +121,6 @@ export class ApiService {
     return this.http.post<Partido>(this.apiUrl + 'addPartido', partido);
   }
 
-  // modifyPartido(partido: Partido): Observable<Partido> {
-  //   return this.http.put<Partido>(`${this.apiUrl+'modificarPartido'}/${partido.id}`, partido);
-  // }
-
-  // deletePartido(partido: Partido): Observable<Partido> {
-  //   return this.http.delete<Partido>(`${this.apiUrl+'borrarPartido'}/${partido.id}`);
-  // }
-
   addUserMatch(usuarioId: number | undefined,partidoId: number){
     const reqHeader = new HttpHeaders({
       'Content-Type': 'application/json',
@@ -224,12 +216,13 @@ export class ApiService {
   }
 
   confirmarEmail(email: String): Observable<any> {
-    const reqHeader = new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer ' + this.tokenService.token,
-    });
-    console.log(`${this.apiUrl+'confirmacionEmail'}/${email}`);
-    return this.http.post(`${this.apiUrl+'confirmacionEmail'}/${email}`,{headers:reqHeader});
+    // const reqHeader = new HttpHeaders({
+    //   'Content-Type': 'application/json',
+    //   'Authorization': 'Bearer ' + this.tokenService.token,
+    // });
+    console.log(`${this.apiUrl + 'confirmacionEmail'}/${email}`);
+    return this.http.get(`${this.apiUrl + 'confirmacionEmail'}/${email}`);
   }
+  
 
 }

@@ -4,6 +4,13 @@
 <div *ngIf="spinnerShow"  class="container__spinner">
   <mat-spinner [color]="color" ></mat-spinner>
 </div>
+
+
+<div *ngIf="infoUserNoMatch" class="ticket-wrapper__info-user">
+    <h2 style="font-size: 30px">ESTA JORNADA NO HAY PARTIDO</h2>
+</div>
+
+
 <div *ngIf="primerPartido" class="ticket-wrapper">
     <div class="ticket">
         <div class="fecha">
@@ -13,13 +20,13 @@
         </div>
         <div class="equipos-wrapper">
             <div class="equipos">
-                <div class="nombre">Granada</div>
+                <div class="nombre">CB Granada</div>
                 <div class="nombre">{{primerPartido.equipoVisitante}}</div>
             </div>
         </div>
         <!-- BOTONES -->
         <!-- Si tengo la entrada, botones de descarga y devolucion -->
-        <div *ngIf=primerPartido.tengoEntrada>
+        <div class="botoness" *ngIf=primerPartido.tengoEntrada>
             <div (click)="descargar(primerPartido.id, primerPartido.equipoVisitante)" class="btn-descargar">
                 <img class="img-descargar" src="assets/imgs/descargar.png">
             </div>

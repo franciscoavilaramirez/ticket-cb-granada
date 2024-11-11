@@ -16,7 +16,6 @@ export class EmailConfirmacionComponent implements OnInit{
   href: String = '';
 
   constructor(private http: HttpClient, private router: Router, private translate: TranslateService, private apiService: ApiService){
-    debugger;
     this.href = this.router.url;
     if(this.href.includes('=')){
       this.email = this.href.substring(this.href.lastIndexOf('?')+1,this.href.length-1);
@@ -27,7 +26,7 @@ export class EmailConfirmacionComponent implements OnInit{
 
   ngOnInit(): void {
     Swal.fire({
-      title: 'El email ha sido confirmado !',
+      title: 'El email ha sido validado correctamente',
       confirmButtonText: 'Finalizar',
       confirmButtonColor: 'green',
     }).then((response) => {

@@ -13,6 +13,7 @@ import { RegisterPageRoutingModule } from './register-page-routing.module';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { EmailConfirmacionModule } from '../email-confirmacion/email-confirmacion.module';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [ RegisterPageComponent ],
@@ -25,6 +26,7 @@ import { EmailConfirmacionModule } from '../email-confirmacion/email-confirmacio
     TranslateModule,
     MatInputModule,
     MatButtonModule,
+    MatIconModule,
     EmailConfirmacionModule
   ],
   providers:[]

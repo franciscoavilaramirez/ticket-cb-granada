@@ -39,9 +39,18 @@
 
   <mat-form-field appearance="fill" class="form-field">
     <mat-label>{{"contrasena" | translate}}</mat-label>
-    <input matInput formControlName="password" type="password">
+    <input matInput formControlName="password" type="password" class="input-field"
+                    [type]="hidePassword.contrasena ? 'password' : 'text'" >
+    <button mat-icon-button matSuffix
+              type="button"
+              (click)="clickEvent('contrasena', $event)"
+              [attr.aria-label]="'Hide password'"
+              [attr.aria-pressed]="hidePassword.contrasena">
+        <mat-icon>{{hidePassword.contrasena ? 'visibility_off' : 'visibility'}}</mat-icon>
+      </button>
     <app-error-alert-form
-      [errorMessage]="registerForm.get('password')?.invalid && registerForm.get('password')?.touched ? 'The password is required.' : ''"></app-error-alert-form>
+      [errorMessage]="registerForm.get('password')?.invalid && registerForm.get('password')?.touched ? 'The password is required.' : ''">
+    </app-error-alert-form>
   </mat-form-field>
   <div *ngIf="registerForm.get('password')?.invalid && registerForm.get('password')?.touched"
     class="error-message password-pattern">
@@ -50,7 +59,15 @@
 
   <mat-form-field appearance="fill" class="form-field">
     <mat-label>{{"repiteContrasena" | translate}}</mat-label>
-    <input matInput formControlName="repeatPassword" type="password">
+    <input matInput formControlName="repeatPassword" type="password" class="input-field"
+                    [type]="hidePassword.repiteContrasena ? 'password' : 'text'">
+    <button mat-icon-button matSuffix
+              type="button"
+              (click)="clickEvent('repiteContrasena', $event)"
+              [attr.aria-label]="'Hide repeat password'"
+              [attr.aria-pressed]="hidePassword.repiteContrasena">
+        <mat-icon>{{hidePassword.repiteContrasena ? 'visibility_off' : 'visibility'}}</mat-icon>
+      </button>                 
   </mat-form-field>
   
   <div *ngIf="registerForm.errors?.['notSame'] ? 'The passwords no match.' : ''" class="error-message">

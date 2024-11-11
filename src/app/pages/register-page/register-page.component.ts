@@ -15,7 +15,10 @@ import Swal from 'sweetalert2';
 export class RegisterPageComponent implements OnInit {
   registerForm: FormGroup;
   errorMessage: string = '';
-
+  hidePassword: { contrasena: boolean; repiteContrasena: boolean } = {
+    contrasena: true,
+    repiteContrasena: true
+  };
   constructor(private formBuilder: FormBuilder, private http: HttpClient, private router: Router, private translate: TranslateService) { }
 
   ngOnInit() {
@@ -27,6 +30,11 @@ export class RegisterPageComponent implements OnInit {
       repeatPassword: ['', Validators.required]
     }, { validator: this.checkPasswords });
     this.translate.use('en');
+  }
+
+  clickEvent(field: 'contrasena' | 'repiteContrasena', event: MouseEvent) {
+    event.preventDefault();
+    this.hidePassword[field] = !this.hidePassword[field];
   }
 
   checkPasswords(group: FormGroup) {
@@ -54,7 +62,7 @@ export class RegisterPageComponent implements OnInit {
 
           // Redirige a la página de inicio 
           this.router.navigate(['/']);
-          Swal.fire("Usuario registrado correctamente", "", "success");
+          Swal.fire("Usuario registrado correctamente, diríjase a la bandeja de entrada del correo que ha usado para validarlo", "", "success");
         },
         error: error => {
           // Maneja el error aquí
