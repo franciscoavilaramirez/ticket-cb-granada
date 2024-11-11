@@ -12,10 +12,14 @@ import { ApiService } from '../../service/api.service';
 })
 export class EmailConfirmacionComponent implements OnInit{
   
-  email: String = '';
-  href: String = '';
+  email: string = '';
+  href: string = '';
 
   constructor(private http: HttpClient, private router: Router, private translate: TranslateService, private apiService: ApiService){
+<<<<<<< HEAD
+=======
+    
+>>>>>>> feature/jfgarrido
     this.href = this.router.url;
     if(this.href.includes('=')){
       this.email = this.href.substring(this.href.lastIndexOf('?')+1,this.href.length-1);
@@ -26,11 +30,14 @@ export class EmailConfirmacionComponent implements OnInit{
 
   ngOnInit(): void {
     Swal.fire({
+<<<<<<< HEAD
       title: 'El email ha sido validado correctamente',
+=======
+      title: 'Por favor pulse el boton para confirmar el email',
+>>>>>>> feature/jfgarrido
       confirmButtonText: 'Finalizar',
       confirmButtonColor: 'green',
     }).then((response) => {
-      debugger;
       if (response.isConfirmed) {
         this.apiService.confirmarEmail(this.email).subscribe( (success) =>{
           this.router.navigate(['/']);

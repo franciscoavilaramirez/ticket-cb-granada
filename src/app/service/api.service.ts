@@ -215,6 +215,7 @@ export class ApiService {
     return this.http.get<FileInfo[]>(this.apiUrl + 'descargarEntradasAdicionales/'+idUsuario+'/'+idPartido+'/'+nEntarda)
   }
 
+<<<<<<< HEAD
   confirmarEmail(email: String): Observable<any> {
     // const reqHeader = new HttpHeaders({
     //   'Content-Type': 'application/json',
@@ -222,6 +223,16 @@ export class ApiService {
     // });
     console.log(`${this.apiUrl + 'confirmacionEmail'}/${email}`);
     return this.http.get(`${this.apiUrl + 'confirmacionEmail'}/${email}`);
+=======
+  confirmarEmail(email: string) {
+    const reqHeader = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + this.tokenService.token,
+    });
+    console.log(`${this.apiUrl+'confirmacionEmail'}/${email}`);
+    return this.http.put<Usuario>(`${this.apiUrl + 'confirmacionEmail'}/${email}`,{headers:reqHeader});
+    
+>>>>>>> feature/jfgarrido
   }
   
 
