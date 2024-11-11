@@ -223,13 +223,14 @@ export class ApiService {
     return this.http.get<FileInfo[]>(this.apiUrl + 'descargarEntradasAdicionales/'+idUsuario+'/'+idPartido+'/'+nEntarda)
   }
 
-  confirmarEmail(email: String): Observable<any> {
+  confirmarEmail(email: string) {
     const reqHeader = new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + this.tokenService.token,
     });
     console.log(`${this.apiUrl+'confirmacionEmail'}/${email}`);
-    return this.http.post(`${this.apiUrl+'confirmacionEmail'}/${email}`,{headers:reqHeader});
+    return this.http.put<Usuario>(`${this.apiUrl + 'confirmacionEmail'}/${email}`,{headers:reqHeader});
+    
   }
 
 }

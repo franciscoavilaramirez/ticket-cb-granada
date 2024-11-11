@@ -8,4 +8,5 @@ export interface Usuario{
   user_id?: number,
   partidosAsistidos?: number;
   selected?: boolean; 
+  validado?: boolean
 }
