@@ -3,19 +3,38 @@ div {
 }
 
 .ticket-wrapper {
-    width: fit-content;
-    margin: 40px auto;
+    margin: 0 auto;
+    position: relative;
+    display: flex;
+    width: 40%;
+    justify-content: center;
+    flex-direction: column;
 
-    &__info-user{
-        background-color: #e20074;
+    img {
+        width: 80%;
+        height: auto;
+        display: block;
+        border-radius: 20px;
+         }
+      
+    .info-user{
         display: flex;
         justify-content: center;
-        border-radius: 30px;
-        border: ridge gold;
-        border-radius: 13em / 14em;
-        width: 60%;
-        padding: 30px;
-        margin-top: 50px;
+        text-align: center;
+        font-size: 30px;
+        width: 70%;
+        max-width: 80%;
+        overflow: hidden;
+        position: absolute;
+        top: 10%;
+        left: 40%;
+        transform: translate(-50%, -50%);
+        font-size: 1.8rem;
+        font-weight: bold;
+        color: rgb(255, 255, 255);
+        text-shadow: 0 0 5px rgba(255, 153, 0, 0.712), 0 0 10px rgb(230, 153, 12),
+                    0 0 15px rgb(211, 126, 15), 0 0 20px #0ff, 0 0 30px #00f, 0 0 40px #00f, 0 0 50px #00f;
+
     }
 }
 
@@ -78,6 +97,7 @@ div {
             width: 170px;
             box-shadow: -5px 4px 17px -6px #000000;
             border-radius: 6px;
+            margin-bottom: 10px;
         }
 
         .img-apuntame:hover {
@@ -94,6 +114,7 @@ div {
             width: 150px;
             box-shadow: -5px 4px 17px -6px #000000;
             border-radius: 6px;
+            margin-bottom: 10px;
         }
 
         .img-descargar:hover {
@@ -111,6 +132,7 @@ div {
             width: 152px;
             box-shadow: -5px 4px 17px -6px #000000;
             border-radius: 6px;
+            margin-bottom: 10px;
         }
 
         .img-devolver:hover {
@@ -186,6 +208,7 @@ div {
         position: absolute;
         left: 64px;
         width: 40%;
+
 
         .img-apuntame {
             width: 170px;

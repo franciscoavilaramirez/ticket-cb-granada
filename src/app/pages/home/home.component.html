@@ -4,13 +4,10 @@
 <div *ngIf="spinnerShow"  class="container__spinner">
   <mat-spinner [color]="color" ></mat-spinner>
 </div>
-
-
-<div *ngIf="infoUserNoMatch" class="ticket-wrapper__info-user">
-    <h2 style="font-size: 30px">ESTA JORNADA NO HAY PARTIDO</h2>
+<div *ngIf="infoUserNoMatch" class="ticket-wrapper">
+        <img alt="Tablero de basket" src="assets/imgs/tablero3.png">
+    <h2 class="info-user">{{"infoUsuario" | translate }}</h2>
 </div>
-
-
 <div *ngIf="primerPartido" class="ticket-wrapper">
     <div class="ticket">
         <div class="fecha">
