@@ -75,7 +75,9 @@
 
 .error-message {
   color: red;
-}
+  display: flex;
+  width: 150%;
+  justify-content: center;}
 
 .password-pattern {
   position: relative;

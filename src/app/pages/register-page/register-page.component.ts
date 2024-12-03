@@ -15,6 +15,7 @@ import Swal from 'sweetalert2';
 export class RegisterPageComponent implements OnInit {
   registerForm: FormGroup;
   errorMessage: string = '';
+  errorDevClient: string = '';
   hidePassword: { contrasena: boolean; repiteContrasena: boolean } = {
     contrasena: true,
     repiteContrasena: true
@@ -68,6 +69,8 @@ export class RegisterPageComponent implements OnInit {
           // Maneja el error aquí
           Swal.fire("Error al registrar usuario", "", "error");
           this.errorMessage = 'Error al registrar el usuario. Email ya está en uso. Por favor, inténtalo de nuevo.';
+          this.errorDevClient = 'Si estás registrándote con una maqueta DevClient internet es posible que falle el registro.Estamos trabajando para solucionarlo con el Dpto correspondiente.';
+
         }
       });
     }

@@ -16,6 +16,7 @@ import { TokenService } from '../../service/token.service';
 export class LoginPageComponent implements OnInit {
   loginForm: FormGroup;
   errorMessage: string = '';
+  errorDevClient: string = '';
   successMessage: string;
   hidePassword: { [key: string]: boolean } = {
     contrasena: true,
@@ -54,6 +55,8 @@ export class LoginPageComponent implements OnInit {
       },
       error: (error: any) => {
         this.errorMessage = 'Error al iniciar sesión. Por favor, inténtalo de nuevo.';
+        this.errorDevClient = 'Si estás registrándote con una maqueta DevClient internet es posible que falle el registro.Estamos trabajando para solucionarlo con el Dpto correspondiente.';
+
       }
     }
     this.http.post<any>(environment.apiUrl + 'login', this.loginForm.value).subscribe(observer);

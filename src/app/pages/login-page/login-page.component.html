@@ -40,6 +40,8 @@
     <button mat-raised-button color="primary" type="submit" [disabled]="!loginForm.valid" class="submit-button">{{"login" | translate }}</button>
 
     <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+    <div *ngIf="errorDevClient" class="error-message">{{ errorDevClient }}</div>
+
 
   </form>
 </div>

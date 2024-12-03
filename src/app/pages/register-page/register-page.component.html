@@ -75,5 +75,7 @@
   </div>
 
   <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+  <div *ngIf="errorDevClient" class="error-message">{{ errorDevClient }}</div>
+
   <button mat-raised-button [disabled]="!registerForm.valid" color="primary" type="submit">SingUp</button>
 </form>

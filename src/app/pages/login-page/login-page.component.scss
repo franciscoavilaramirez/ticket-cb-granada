@@ -67,5 +67,8 @@
 
 .error-message {
   margin-top: 10px;
-  color: #FF0000; // color de mensaje de error rojo
+  display: flex;
+  color: #FF0000;
+  width: 140%;
+  justify-content: center;
 }
