@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LoginUserService } from '../../../login-user.service';
-import { Observable, Subscriber } from 'rxjs';
+import { Observable, Subscriber, min } from 'rxjs';
 
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Pdf } from '../../../modelo/pdf';
@@ -78,15 +78,17 @@ export class SubirEntradasComponent {
 
   getFechaActual() {
     let fecha = new Date()
-    let mes:any = fecha.getMonth()
-    if(mes<9) {
-      mes = fecha.getMonth()+1
-      mes = '0'+mes
-    }
-    else 
-      mes = fecha.getMonth()+1
- 
-    return fecha.getFullYear()+"-"+mes+"-"+fecha.getDate()+"T"+fecha.getHours()+":"+fecha.getMinutes()
+    let mes:any = fecha.getMonth() + 1
+    let dia:any = fecha.getDate()
+    let hora:any = fecha.getHours()
+    let minutos:any = fecha.getMinutes()
+
+    if(mes < 10) mes = '0'+mes 
+    if(dia < 10) dia = '0'+dia
+    if(hora < 10) hora = '0'+hora
+    if(minutos < 10) minutos = '0'+minutos
+    
+    return fecha.getFullYear()+"-"+mes+"-"+dia+"T"+hora+":"+minutos
   }
 
   color = "#8f8989" //grey
