@@ -21,19 +21,19 @@ export class PerfilComponent {
   idUsuario: number
   errorMessage: string = '';
 
-  constructor(private formBuilder: FormBuilder, private apiService: ApiService,private userService:UserService,
-              private router: Router, private http: HttpClient, public dialog: MatDialog, private jwtHelper:JwtHelperService) { }
+  constructor(private formBuilder: FormBuilder, private apiService: ApiService, private userService: UserService,
+    private router: Router, private http: HttpClient, public dialog: MatDialog, private jwtHelper: JwtHelperService) { }
 
 
   ngOnInit() {
     const token = localStorage.getItem('token');
     if (token) {
-        // Decodifica el token
-        const tokenDecoded = this.jwtHelper.decodeToken(token);
-        // Configurar los datos del usuario en el UserService
-        this.userService.setUserData(tokenDecoded.usuario);
-        // Almacena el ID del usuario decodificado
-        this.idUsuario = tokenDecoded.usuario?.id;
+      // Decodifica el token
+      const tokenDecoded = this.jwtHelper.decodeToken(token);
+      // Configurar los datos del usuario en el UserService
+      this.userService.setUserData(tokenDecoded.usuario);
+      // Almacena el ID del usuario decodificado
+      this.idUsuario = tokenDecoded.usuario?.id;
     } else {
       this.router.navigate(['/login']); // Si no hay token, redirigir al login
       return;
@@ -88,16 +88,21 @@ export class PerfilComponent {
 
   // Con el metodo cancelar vuelve a la página home correspondiente al tipo de usuario
   // que hay registrado en ese preciso momento
-cancelar() {
-  if(this.usuario._admin === true){
-        this.router.navigate(['/admin-home']);
+  cancelar() {
+    if (this.usuario._admin === true) {
+      this.router.navigate(['/admin-home']);
 
-  }else {
-        this.router.navigate(['/home']);
+    } else {
+      this.router.navigate(['/home']);
+    }
   }
-  }
+  
   cerrarSesion() {
-    localStorage.removeItem('user')
-    this.router.navigate(['/login']);
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+
+    this.router.navigate(['/login']).then(() => {
+      window.location.reload();
+    });
   }
 }
