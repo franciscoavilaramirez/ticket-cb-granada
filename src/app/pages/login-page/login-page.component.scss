@@ -1,5 +1,10 @@
 @import '../../../styles/palette';
 
+input[type="password"]::-ms-reveal,
+input[type="password"]::-webkit-textfield-decoration-container {
+  display: none;
+}
+
 .form-container {
   display: flex;
   flex-direction: column;
