@@ -1,38 +1,64 @@
 <app-navbar></app-navbar>
 
-<div>
-    <img src="../../assets/foto_perfil.png" alt="logo" class="avatar" alt="avatar">
+<div class="perfil-wrapper">
+  <img src="../../assets/foto_perfil.png" alt="avatar" class="avatar">
+
+  <form [formGroup]="editarPerfil" class="perfil-container">
+    <h2>{{ "perfil.datosPerfil" | translate }}</h2>
+
+    <div class="form-center" *ngIf="usuario">
+      <div class="form-group">
+        <label class="txt-label">{{ "nombre" | translate }}</label>
+        <input
+          class="input-form"
+          type="text"
+          formControlName="nombre"
+          [value]="usuario.nombre"
+        />
+        <img class="icon-edit" src="../../assets/edit_grey.png" alt="edit">
+      </div>
+
+      <div class="form-group">
+        <label class="txt-label">{{ "apellidos" | translate }}</label>
+        <input
+          class="input-form"
+          type="text"
+          formControlName="apellidos"
+          [value]="usuario.apellidos"
+        />
+        <img class="icon-edit" src="../../assets/edit_grey.png" alt="edit">
+      </div>
+
+      <div class="form-group">
+        <label class="txt-label">{{ "email" | translate }}</label>
+        <input
+          class="input-form"
+          type="email"
+          formControlName="email"
+          [value]="usuario.email"
+        />
+        <img class="icon-edit" src="../../assets/edit_grey.png" alt="edit">
+      </div>
+    </div>
+
+    <div class="button-group">
+      <button type="submit" class="btn btn-guardar" (click)="editar()">
+        {{ "botones.guardarCambios" | translate }}
+      </button>
+
+      <button type="button" class="btn btn-cerrar" (click)="cerrarSesion()">
+        {{ "botones.cerrarSesion" | translate }}
+      </button>
+
+      <button type="button" class="btn btn-cancelar" (click)="cancelar()">
+        {{ "botones.cancelar" | translate }}
+      </button>
+    </div>
+
+    <div class="password-section">
+      <h3 class="cambiar-password" (click)="cambiarPassword(usuario)">
+        {{ "botones.cambiarContrasena" | translate }}
+      </h3>
+    </div>
+  </form>
 </div>
-
-<form [formGroup]="editarPerfil" class="container"  >
-  <h2>{{"perfil.datosPerfil" | translate }}</h2>
-  <div class="form-center" *ngIf="usuario">
-  <div class="form-container">
-    <label class="txt-label">{{"nombre" | translate }}</label>
-    <input class="input-form" type="text" formControlName="nombre" value="{{usuario.nombre}}">
-    <img class="icon-edit" src="../../assets/edit_grey.png" >
-  </div>
-  <div class="form-container">
-    <label class="txt-label">{{"apellidos" | translate }}</label>
-    <input class="input-form" type="text" formControlName="apellidos" value="{{usuario.apellidos}}" >
-    <img class="icon-edit" src="../../assets/edit_grey.png">
-  </div>
-  <div class="form-container">
-    <label class="txt-label">{{"email" | translate }}</label>
-    <input class="input-form" type="email" formControlName="email" value="{{usuario.email}}">
-    <img class="icon-edit" src="../../assets/edit_grey.png">
-  </div>
-</div>
-  <div class="button-container">
-    <button type="submit" class="submit-button" (click)="editar()">{{"botones.guardarCambios" | translate }}</button>
-    <button type="submit" class="submit-button-cerrar-sesion" (click)="cerrarSesion()">{{"botones.cerrarSesion" | translate }}</button>
-  </div>
-  <div class="button-container">
-    <button class="submit-button-cancelar"(click)="cancelar()">{{"botones.cancelar" | translate }}</button>
-  </div>
-  <div class="form-container">
-    <h2 class="cambiar-contraseña" (click)="cambiarPassword(usuario)">{{"botones.cambiarContrasena" | translate }}</h2>
-  </div>
-</form>
-
-
