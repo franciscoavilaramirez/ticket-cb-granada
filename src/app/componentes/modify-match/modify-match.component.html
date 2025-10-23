@@ -1,29 +1,36 @@
-
 <div class="container">
-  <div class="container__wrapper">
-    <div mat-dialog-actions>
-      <form  [formGroup]="updateMatchForm" >
-        <h1>{{"modificarPartido.titulo" | translate }}</h1>
-        <mat-dialog-actions>
-          <mat-form-field >
-            <mat-label>{{"modificarPartido.equipoLocal" | translate }}</mat-label>
-            <input type="text"value="Granada" [disabled]="true" matInput >
-          </mat-form-field>
-        <mat-form-field >
-          <mat-label>{{"modificarPartido.equipoVisitante" | translate }}</mat-label>
-          <input type="text" matInput formControlName ="equipoVisitante">
-        </mat-form-field>
-          <mat-label>{{"modificarPartido.fecha" | translate }}</mat-label>
-          <input class="datetime-picker" type="datetime-local" formControlName ="fechaPartido">
-          <mat-label>{{"modificarPartido.fechaPublicacion" | translate }}</mat-label>
-          <input class="datetime-picker" type="date" formControlName ="fechaPublicacion">
-      </mat-dialog-actions>
-      </form>
-      <div class="container__wrapper__buttons">
-      <button mat-raised-button class="guardar" (click)="onSubmit()" >{{"botones.guardarCambios" | translate }}</button>
-      <button mat-raised-button class="cancelar" (click)="closedModal()">{{"botones.cancelar" | translate }}</button>
+  <form [formGroup]="updateMatchForm">
+    <h1>{{ "modificarPartido.titulo" | translate }}</h1>
+
+    <div class="content">
+      <div>
+        <label class="label">{{ "modificarPartido.equipoLocal" | translate }}</label>
+        <input type="text" value="Granada" class="input-disabled" disabled />
+      </div>
+
+      <div>
+        <label class="label">{{ "modificarPartido.equipoVisitante" | translate }}</label>
+        <input type="text" formControlName="equipoVisitante" placeholder="Equipo visitante" />
+      </div>
+
+      <div>
+        <label class="label">{{ "modificarPartido.fecha" | translate }}</label>
+        <input type="datetime-local" class="datetime-picker" formControlName="fechaPartido" />
+      </div>
+
+      <div>
+        <label class="label">{{ "modificarPartido.fechaPublicacion" | translate }}</label>
+        <input type="date" class="datetime-picker" formControlName="fechaPublicacion" />
       </div>
     </div>
-  </div>
-</div>
 
+    <div class="buttons">
+      <button mat-raised-button class="guardar" (click)="onSubmit()">
+        {{"botones.guardarCambios" | translate}}
+      </button>
+      <button mat-raised-button class="cancelar" (click)="closedModal()">
+        {{"botones.cancelar" | translate}}
+      </button>
+    </div>
+  </form>
+</div>
