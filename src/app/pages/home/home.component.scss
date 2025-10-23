@@ -4,20 +4,22 @@ div {
 
 .ticket-wrapper {
     margin: 0 auto;
+    margin-top: 50px;
     position: relative;
     display: flex;
-    width: 40%;
+    width: auto;
     justify-content: center;
     flex-direction: column;
+    max-width: 500px;
 
     img {
-        width: 80%;
+        width: auto;
         height: auto;
         display: block;
         border-radius: 20px;
-         }
-      
-    .info-user{
+    }
+
+    .info-user {
         display: flex;
         justify-content: center;
         text-align: center;
@@ -26,16 +28,23 @@ div {
         max-width: 80%;
         overflow: hidden;
         position: absolute;
-        top: 10%;
-        left: 40%;
+        top: 12%;
+        left: 50%;
         transform: translate(-50%, -50%);
         font-size: 1.8rem;
         font-weight: bold;
         color: rgb(255, 255, 255);
         text-shadow: 0 0 5px rgba(255, 153, 0, 0.712), 0 0 10px rgb(230, 153, 12),
-                    0 0 15px rgb(211, 126, 15), 0 0 20px #0ff, 0 0 30px #00f, 0 0 40px #00f, 0 0 50px #00f;
+            0 0 15px rgb(211, 126, 15), 0 0 20px #0ff, 0 0 30px #00f, 0 0 40px #00f, 0 0 50px #00f;
 
     }
+}
+
+@media (max-width: 480px) {
+  .ticket-wrapper .info-user {
+    font-size: clamp(0.9rem, 5vw, 1.3rem);
+    padding: 0 8%;
+  }
 }
 
 .ticket {
@@ -49,7 +58,7 @@ div {
     display: flex;
     background-repeat: no-repeat;
 
-    
+
 
     .fecha {
         position: absolute;
@@ -104,12 +113,13 @@ div {
             box-shadow: -5px 4px 17px -6px #e20074;
         }
     }
-   
+
     .btn-descargar {
         position: absolute;
         bottom: 7px;
         left: 20px;
         cursor: pointer;
+
         .img-descargar {
             width: 150px;
             box-shadow: -5px 4px 17px -6px #000000;
@@ -121,10 +131,12 @@ div {
             box-shadow: -5px 4px 17px -6px #e20074;
         }
     }
+
     .btn-devolver {
         position: absolute;
         bottom: 8px;
         left: 195px;
+
         .img-devolver {
             width: 152px;
             box-shadow: -5px 4px 17px -6px #000000;
@@ -136,24 +148,24 @@ div {
             box-shadow: -5px 4px 17px -6px #e20074;
         }
     }
-    
-    .btn-acompanante{
-      position: absolute;
-      bottom: 7px;
-      left: 190px;
-      cursor: pointer;
 
-      .img-acompanante {
-          width: 152px;
-          box-shadow: -5px 4px 17px -6px #000000;
-          border-radius: 6px;
-          margin-left: -8px;
-      }
+    .btn-acompanante {
+        position: absolute;
+        bottom: 7px;
+        left: 190px;
+        cursor: pointer;
 
-      .img-acompanante:hover {
-          box-shadow: -5px 4px 17px -6px #e20074;
-      }
-  }
+        .img-acompanante {
+            width: 152px;
+            box-shadow: -5px 4px 17px -6px #000000;
+            border-radius: 6px;
+            margin-left: -8px;
+        }
+
+        .img-acompanante:hover {
+            box-shadow: -5px 4px 17px -6px #e20074;
+        }
+    }
 
     .btn-apuntame:hover {
         cursor: pointer;
@@ -228,6 +240,7 @@ div {
         bottom: 7px;
         left: 6px;
         cursor: pointer;
+
         .img-descargar {
             width: 115px;
             box-shadow: -5px 4px 17px -6px #000000;
@@ -238,11 +251,13 @@ div {
             box-shadow: -5px 4px 17px -6px #e20074;
         }
     }
+
     .btn-devolver {
         position: absolute;
         bottom: 8px;
         left: 125px;
         cursor: pointer;
+
         .img-devolver {
             width: 116px;
             box-shadow: -5px 4px 17px -6px #000000;
@@ -261,45 +276,47 @@ div {
         font-size: 23px;
     }
 }
-.container{
-  //height:150%;
-  width: 100%;
-  display: grid;
- // padding: 100px;
- padding: 50px 0px 70px 30px;
 
-  &__spinner{
-    display: flex;
-    justify-content: center;
-  }
+.container {
+    //height:150%;
+    width: 100%;
+    display: grid;
+    // padding: 100px;
+    padding: 50px 0px 70px 30px;
 
-  &__table{
-    display: flex;
-    //flex-direction: column;
-    padding: 50px,50px,0px,50px;
-    justify-content: space-around;
-    //width: 81px;
-    .buscador{
-      display: flex;
-      flex-direction: column;
-    }
-
-    &__content-table{
-      display: flex;
-      justify-content: center;
-      margin-top: 50px;
-      width: 70%;
-      padding-left: initial;
-      padding-top: inherit;
-      flex-direction: column;
-      align-items: flex-end;
-      width: 70%;
-
-      .buscador{
+    &__spinner {
         display: flex;
-        flex-direction: column;
-        width: 50%;
-      }
+        justify-content: center;
     }
-  }
+
+    &__table {
+        display: flex;
+        //flex-direction: column;
+        padding: 50px, 50px, 0px, 50px;
+        justify-content: space-around;
+
+        //width: 81px;
+        .buscador {
+            display: flex;
+            flex-direction: column;
+        }
+
+        &__content-table {
+            display: flex;
+            justify-content: center;
+            margin-top: 50px;
+            width: 70%;
+            padding-left: initial;
+            padding-top: inherit;
+            flex-direction: column;
+            align-items: flex-end;
+            width: 70%;
+
+            .buscador {
+                display: flex;
+                flex-direction: column;
+                width: 50%;
+            }
+        }
+    }
 }
