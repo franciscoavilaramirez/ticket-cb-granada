@@ -1,8 +1,8 @@
-import { Component, ViewChild, AfterViewInit, ElementRef } from '@angular/core';
+import { Component, ViewChild, AfterViewInit, ElementRef, TemplateRef } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Partido } from '../../../modelo/partido';
 import { Router } from '@angular/router';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import Swal from 'sweetalert2';
 import { Usuario } from '../../../modelo/usuario';
 import { UpdateUserComponent } from '../../../componentes/update-user/update-user.component';
@@ -23,19 +23,22 @@ import { UserService } from '../../../service/user.service';
   templateUrl: './admin-home.component.html',
   styleUrls: ['./admin-home.component.scss']
 })
-export class AdminHomeComponent {
-[x: string]: any;
+export class AdminHomeComponent implements AfterViewInit {
+  [x: string]: any;
 
-  constructor(private snackBar: MatSnackBar,public apiService: ApiService,
-              private router: Router,public dialog: MatDialog,
-              private userService:UserService,
-              private translate: TranslateService) {
-              this.translate.setDefaultLang(this.activeLang,
-              );
-
+  constructor(
+    private snackBar: MatSnackBar,
+    public apiService: ApiService,
+    private router: Router,
+    public dialog: MatDialog,
+    private userService: UserService,
+    private translate: TranslateService
+  ) {
+    this.translate.setDefaultLang(this.activeLang);
   }
-  partidosFuturos: Partido[] =[];
-  misPartidosIds: number[]
+
+  partidosFuturos: Partido[] = [];
+  misPartidosIds: number[];
   idUsuario: number;
   activeLang = 'es';
   exportCsv = false;
@@ -44,41 +47,33 @@ export class AdminHomeComponent {
   partido!: Partido[];
   proximosPartidos!: Partido[];
   usuariosPartido!: Usuario[];
-  fechaPartido:string;
+  fechaPartido: string;
   idPartido!: string;
   entradasSobrantes!: any;
   entradas: number;
-  partidosPasados: Partido[] =[];
+  partidosPasados: Partido[] = [];
   spinnerShow = true;
-  color: ThemePalette = "accent";
+  color: ThemePalette = 'accent';
   @ViewChild('TABLE') table!: ElementRef;
   private subscription: Subscription;
 
-  ColumnsInscritos: string[] = ['id','nombre','apellidos','email'];
-  displayedColumns: string[] = ['partido','fecha','usuarios'];
-  displayColumns: string[] = ['partido','fechaDelPartido','editar'];
+  ColumnsInscritos: string[] = ['id', 'nombre', 'apellidos', 'email'];
+  displayedColumns: string[] = ['partido', 'fecha', 'usuarios'];
+  displayColumns: string[] = ['partido', 'fechaDelPartido', 'editar'];
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   dataSource = new MatTableDataSource<Partido>([]);
   dataSourceFuturos = new MatTableDataSource<Partido>([]);
-  filterTermFuturo: string = '';  // Valor del input para la búsqueda
+  filterTermFuturo: string = '';
   filterTerm: string = '';
 
+  @ViewChild('confirmDialog') confirmDialog!: TemplateRef<any>;
+  dialogRef!: MatDialogRef<any>;
 
-  ngOnInit(){
+  ngOnInit() {
     this.getUsers();
     this.getProximosPartidos();
     this.getPartidosAnteriores();
     this.getPartidosFuturos();
-  }
-
-  applyFilter(event: Event): void {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();  // Filtrar los datos
-  }
-
-  applyFilterFuture(event: Event): void {
-    const filterValue = this.filterTermFuturo;
-    this.dataSourceFuturos.filter = filterValue.trim().toLowerCase();  // Filtrar los datos
   }
 
   ngAfterViewInit() {
@@ -90,44 +85,53 @@ export class AdminHomeComponent {
     this.translate.use(lang);
   }
 
-  getUsers(){
-    this.apiService.getUsers().subscribe(data =>{
-      this.usuarios = data
+  applyFilter(event: Event): void {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
+  applyFilterFuture(event: Event): void {
+    const filterValue = this.filterTermFuturo;
+    this.dataSourceFuturos.filter = filterValue.trim().toLowerCase();
+  }
+
+  getUsers() {
+    this.apiService.getUsers().subscribe(data => {
+      this.usuarios = data;
     });
   }
 
   deleteUser(userId: string): void {
-    this.apiService.deleteUser(userId).subscribe(async data => {
-      const dataUser = await Swal.fire({
-        title: '¿Seguro que desea eliminar este usuario?',
-        showDenyButton: true,
-        confirmButtonText: 'Eliminar',
-        denyButtonText: 'Cancelar',
-        confirmButtonColor:'red',
-        denyButtonColor:'grey',
-      });
-      if (dataUser.isConfirmed) {
-        Swal.fire("Usuario Eliminado", "", "success");      }
-      this.getUsers();
-    });
+    this.openConfirmDialog(
+      'Eliminar usuario',
+      '¿Seguro que deseas eliminar este usuario?',
+      'Eliminar',
+      'Cancelar',
+      () => {
+        this.apiService.deleteUser(userId).subscribe(() => {
+          this.getUsers();
+          this.snackBar.open('Usuario eliminado correctamente', 'Cerrar', {
+            duration: 3000,
+          });
+        });
+      }
+    );
   }
-  openDialog(usuarioAny:any) {
 
-     let usuario:Usuario = {
-      id:usuarioAny.user_id,
-      nombre:usuarioAny.nombre,
+  openDialog(usuarioAny: any) {
+    let usuario: Usuario = {
+      id: usuarioAny.user_id,
+      nombre: usuarioAny.nombre,
       apellidos: usuarioAny.apellidos,
-      email:usuarioAny.email
-     }
-    
-    const dialog = this.dialog.open(UpdateUserComponent,{
+      email: usuarioAny.email
+    };
+
+    const dialog = this.dialog.open(UpdateUserComponent, {
       data: usuario,
-      width:'35vw',
-      height:'85vh'
+      width: '35vw',
+      height: '85vh'
     });
-    dialog.afterClosed().subscribe(result => {
-      this.getUsers();
-    });
+    dialog.afterClosed().subscribe(() => this.getUsers());
   }
 
   openSubirEntradas() {
@@ -136,132 +140,128 @@ export class AdminHomeComponent {
       height: '85vh',
       autoFocus: false
     });
+
     const instance = dialog.componentInstance;
     instance.actualizacionProximosPartidos.subscribe(() => {
       this.spinnerShow = true;
       this.getProximosPartidos();
     });
 
-    dialog.afterClosed().subscribe(result => {
+    dialog.afterClosed().subscribe(() => {
       this.getProximosPartidos();
       this.getPartidosFuturos();
     });
-
   }
+
   openAddUser(partido: Partido) {
-    const dialog = this.dialog.open(AddUserComponent,{
+    const dialog = this.dialog.open(AddUserComponent, {
       data: partido,
-      width:'35vw',
-      height:'85vh'
+      width: '35vw',
+      height: '85vh'
     });
-    dialog.afterClosed().subscribe(result => {
-      this.getProximosPartidos()
-    });
+    dialog.afterClosed().subscribe(() => this.getProximosPartidos());
   }
+
   openModifyMatch(partido: Partido) {
-    const dialog = this.dialog.open(ModifyMatchComponent,{
+    const dialog = this.dialog.open(ModifyMatchComponent, {
       data: partido,
-      width:'35vw',
-      height:'90vh'
+      width: '35vw',
+      height: '90vh'
     });
-    dialog.afterClosed().subscribe(result => {
+    dialog.afterClosed().subscribe(() => {
       this.getProximosPartidos();
       this.getPartidosFuturos();
     });
   }
 
-  getProximosPartidos(){
-    this.apiService.getProximosPartidos().subscribe(data =>{
-      
+  getProximosPartidos() {
+    this.apiService.getProximosPartidos().subscribe(data => {
       this.proximosPartidos = data;
       this.spinnerShow = false;
-      this.idUsuario = this.getUsuarioId()
+      this.idUsuario = this.getUsuarioId();
 
       this.apiService.getMisPartidosIds(this.idUsuario).subscribe(misPartidosIds => {
-        this.misPartidosIds = misPartidosIds
+        this.misPartidosIds = misPartidosIds;
 
-        if(this.proximosPartidos != null){
+        if (this.proximosPartidos) {
           this.proximosPartidos.forEach(partido => {
-            if (this.misPartidosIds?.includes(partido.id))
-              partido.tengoEntrada = true;
-            else
-            partido.tengoEntrada = false;
-          })
+            partido.tengoEntrada = this.misPartidosIds?.includes(partido.id);
+          });
         }
-      })
+      });
     });
   }
-  getUsuariosPartido(idPartido:any){
-    this.apiService.getUsuariosPartido(idPartido).subscribe(data =>{
+
+  getUsuariosPartido(idPartido: any) {
+    this.apiService.getUsuariosPartido(idPartido).subscribe(data => {
       this.usuariosPartido = data;
 
-      const dialog = this.dialog.open(ListUserComponent,{
+      const dialog = this.dialog.open(ListUserComponent, {
         data: this.usuariosPartido,
-        width:'35vw',
-        height:'75vh',
+        width: '35vw',
+        height: '75vh'
       });
-      dialog.afterClosed().subscribe(result => {
-        this.getUsers();
-      });
-    });
-
-    }
-
-  deleteMatch(partidoId: Partido){
-    Swal.fire({
-      title: '¿Seguro que desea eliminar este partido?',
-      showDenyButton: true,
-      confirmButtonText: 'Eliminar',
-      denyButtonText: 'Cancelar',
-      confirmButtonColor: 'red',
-      denyButtonColor: 'grey',
-    }).then((response) => {
-      if (response.isConfirmed) {
-        this.apiService.deleteMatch(partidoId).subscribe( (success) =>{
-          Swal.fire("Partido Eliminado", "", "success");
-            this.getProximosPartidos();
-        });
-      }
+      dialog.afterClosed().subscribe(() => this.getUsers());
     });
   }
 
-  getPartidosAnteriores(){
-    this.apiService.getPartidosAnteriores().subscribe(partidosAnteriores =>{
+  deleteMatch(partidoId: Partido) {
+    this.openConfirmDialog(
+      'Eliminar partido',
+      '¿Seguro que deseas eliminar este partido?',
+      'Eliminar',
+      'Cancelar',
+      () => {
+        this.apiService.deleteMatch(partidoId).subscribe(() => {
+          this.getProximosPartidos();
+          this.snackBar.open('Partido eliminado correctamente', 'Cerrar', {
+            duration: 3000,
+          });
+        });
+      }
+    );
+  }
+
+  getPartidosAnteriores() {
+    this.apiService.getPartidosAnteriores().subscribe(partidosAnteriores => {
       this.partidosPasados = partidosAnteriores;
-      this.dataSource.data = partidosAnteriores;
-      this.dataSource.data = this.partidosPasados;  // Asignar los datos al dataSource
+      this.dataSource.data = this.partidosPasados;
     });
   }
 
   getUsuarioId(): number {
     const userId = this.userService.getUserData();
-     return userId.id;
+    return userId.id;
   }
+
   devolver(idPartido: number) {
     this.apiService.desasignarEntrada(this.idUsuario, idPartido).subscribe(() => {
       this.proximosPartidos.forEach(partido => {
-          if (partido.id == idPartido) {
-            partido.tengoEntrada = false;
-            partido.stockEntradas ++;
-          }
-        });
-      })
-      this.getProximosPartidos()
+        if (partido.id == idPartido) {
+          partido.tengoEntrada = false;
+          partido.stockEntradas++;
+        }
+      });
+      this.getProximosPartidos();
+    });
   }
+
   apuntarse(idPartido: number) {
     this.apiService.asignarEntrada(this.idUsuario, idPartido).subscribe(response => {
-       if(response){
+      if (response) {
         this.proximosPartidos.forEach(partido => {
-              if (partido.id == idPartido){
-                partido.tengoEntrada = true;
-                partido.stockEntradas --;
-              }
-            });
-        } else {
-          alert("No quedan entradas")
-        }
-    })
-    this.getProximosPartidos()
+          if (partido.id == idPartido) {
+            partido.tengoEntrada = true;
+            partido.stockEntradas--;
+          }
+        });
+      } else {
+        this.snackBar.open('No quedan entradas disponibles', 'Cerrar', {
+          duration: 3000,
+        });
+      }
+      this.getProximosPartidos();
+    });
   }
 
   descargar(idPartido: number, nombrePartido: string) {
@@ -280,23 +280,36 @@ export class AdminHomeComponent {
         link.download = 'Granada - ' + nombrePartido + '.pdf';
         link.click();
         window.URL.revokeObjectURL(url);
-
-      })
-
+      });
     });
   }
-  getPartidosFuturos(){
-    this.apiService.getProximosPartidosDisponibles().subscribe(partidosFuturos =>{
+
+  getPartidosFuturos() {
+    this.apiService.getProximosPartidosDisponibles().subscribe(partidosFuturos => {
       this.partidosFuturos = partidosFuturos;
-      this.dataSourceFuturos.data = partidosFuturos;
       this.dataSourceFuturos.data = this.partidosPasados;
     });
   }
+  
+  openConfirmDialog(
+    title: string,
+    message: string,
+    confirmText: string,
+    cancelText: string,
+    onConfirm: () => void
+  ) {
+    this.dialogRef = this.dialog.open(this.confirmDialog, {
+      width: '400px',
+      data: { title, message, confirmText, cancelText },
+      panelClass: 'custom-dialog-container'
+    });
+
+    this.dialogRef.afterClosed().subscribe(result => {
+      if (result) onConfirm();
+    });
+  }
+
+  closeDialog(result: boolean) {
+    this.dialogRef.close(result);
+  }
 }
-
-
-
-
-
-
-

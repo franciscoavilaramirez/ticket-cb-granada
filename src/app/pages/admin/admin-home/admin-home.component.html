@@ -39,36 +39,36 @@
 
           </mat-card-header>
           <mat-card-actions class="cards-wrapper__buttons">
-            <div class="buttons-card">
-              <button mat-raised-button class="buttons-card__mostrar"
+            <div class="buttons-row pair">
+              <button mat-raised-button class="btn btn--info buttons-card__mostrar"
                 (click)="getUsuariosPartido(proximoPartido.id)">{{"card.mostrarOcultar" | translate }}</button>
-              <button mat-raised-button class="buttons-card__modificar"
+              <button mat-raised-button class="btn btn--update buttons-card__modificar"
                 (click)="openModifyMatch(proximoPartido)">{{"card.modificarPartido" | translate }}</button>
             </div>
-            <div class="buttons-card">
-              <button mat-raised-button class="buttons-card__aniadir"
+
+            <div class="buttons-row pair">
+              <button mat-raised-button class="btn btn--success buttons-card__aniadir"
                 (click)="openAddUser(proximoPartido)">{{"card.anadirUsuario" | translate }}</button>
-              <button mat-raised-button class="buttons-card__eliminar"
+              <button mat-raised-button class="btn btn--danger buttons-card__eliminar"
                 (click)="deleteMatch(proximoPartido)">{{"botones.eliminarPartido" | translate }}</button>
             </div>
-            <div *ngIf=proximoPartido.tengoEntrada>
-              <div class="buttons-card">
-                <button mat-raised-button class="buttons-card__descargar-devolver"
-                  (click)="descargar(proximoPartido.id, proximoPartido.equipoVisitante)">
-                  {{"card.descargar" | translate }}
-                </button>
-                <button mat-raised-button class="buttons-card__descargar-devolver"
-                  (click)="devolver(proximoPartido.id)">
-                  {{"card.devolver" | translate }}
-                </button>
-              </div>
+
+            <div *ngIf="proximoPartido.tengoEntrada" class="buttons-row pair">
+              <button mat-raised-button class="btn btn--accent buttons-card__descargar-devolver"
+                (click)="descargar(proximoPartido.id, proximoPartido.equipoVisitante)">
+                {{"card.descargar" | translate }}
+              </button>
+              <button mat-raised-button class="btn btn--accent buttons-card__descargar-devolver"
+                (click)="devolver(proximoPartido.id)">
+                {{"card.devolver" | translate }}
+              </button>
             </div>
-            <div *ngIf="!proximoPartido.tengoEntrada && proximoPartido.stockEntradas > 0">
-              <div *ngIf=proximoPartido.stockEntradas (click)="apuntarse(proximoPartido.id)">
-                <button mat-raised-button class="buttons-card__aniadir-Admin">
-                  {{"card.anadirAdmin" | translate }}
-                </button>
-              </div>
+
+            <div *ngIf="!proximoPartido.tengoEntrada && proximoPartido.stockEntradas > 0" class="buttons-row single">
+              <button mat-raised-button class="btn btn--accent buttons-card__aniadir-Admin"
+                (click)="apuntarse(proximoPartido.id)">
+                {{"card.anadirAdmin" | translate }}
+              </button>
             </div>
           </mat-card-actions>
         </mat-card>
@@ -147,3 +147,18 @@
     </div>
   </div>
 </div>
+
+<ng-template #confirmDialog let-data>
+  <div class="custom-dialog">
+    <h2>{{ data.title }}</h2>
+    <p>{{ data.message }}</p>
+    <div class="dialog-actions">
+      <button mat-raised-button class="btn confirmar" (click)="closeDialog(true)">
+        {{ data.confirmText }}
+      </button>
+      <button mat-raised-button class="btn cancelar" (click)="closeDialog(false)">
+        {{ data.cancelText }}
+      </button>
+    </div>
+  </div>
+</ng-template>
