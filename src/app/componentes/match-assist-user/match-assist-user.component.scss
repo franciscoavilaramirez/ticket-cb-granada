@@ -1,83 +1,245 @@
-
-.container{
-  height:180%;
-  width: 100%;
+.modal-wrapper {
   display: flex;
-  flex-direction: column;
-  //padding: 100px;
-  background-color: rgb(0 0 0 / 7%);
+  justify-content: center;
+  align-items: center;
+  font-family: "Allerta", sans-serif;
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 30px 35px;
+  width: 100%;
+  max-width: 550px;
+  max-height: 90vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  animation: fadeIn 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+  box-sizing: border-box;
 
-
-  &__wrapper{
+  .wrapper {
     display: flex;
     flex-direction: column;
-    //padding: 50px,50px,0px,50px;
-    width: auto;
-    justify-content: center;
-    margin: 20px;
+    width: 100%;
+    gap: 25px;
+  }
 
-    .buscador{
-      display: flex;
-      flex-direction: column;
-    }
+  .buscador {
+    width: 100%;
 
-    &__contador{
-      display: flex;
-      font: 700 30px / 30px allerta;
-      /* text-align: center; */
-      /* width: max-content; */
+    .buscador__field-mat {
       width: 100%;
-      justify-content: flex-start;
-    }
 
-      &__content-wrapper{
-        height: 50px;
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    font-size: 15px;
-
-
-        .buttons{
-          height: 40px;
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    column-gap: 10px;
-    font-size: 15px;
-    /* margin: 10px 0px 0px 10px; */
-    justify-content: center;
-    background-color: rgba(0, 0, 0, 0.07);
-
-          &__cancelar{
-            background-color: #8c1f1f;
-            color:#ffffff;
-            font-family: allerta;
-            font-size: 15px;
-            margin-bottom: 20px;
-          }
-        }
+      ::ng-deep .mat-mdc-text-field-wrapper {
+        background-color: #fafafa;
+        border: 1px solid #e0e0e0;
+        border-radius: 12px !important;
+        height: 48px;
+        min-height: 48px;
+        padding: 0 14px;
+        transition: all 0.25s ease;
+        box-shadow: none !important;
       }
 
+      ::ng-deep .mat-mdc-text-field-wrapper:hover {
+        border-color: #36bf98;
+        background-color: #f0fff0;
+      }
+
+      ::ng-deep .mat-mdc-text-field-wrapper.mdc-text-field--focused {
+        border-color: #36bf98;
+        box-shadow: 0 0 0 2px rgba(54, 191, 152, 0.1) !important;
+        background-color: #fff;
+      }
+
+      ::ng-deep .mat-mdc-form-field-flex {
+        align-items: center;
+        padding-top: 0 !important;
+        padding-bottom: 0 !important;
+        height: 100%;
+      }
+
+      ::ng-deep .mat-mdc-floating-label,
+      ::ng-deep .mdc-line-ripple {
+        display: none !important;
+      }
+
+      ::ng-deep .mat-mdc-form-field-subscript-wrapper {
+        display: none !important;
+      }
+
+      ::ng-deep input.mat-mdc-input-element {
+        border: none;
+        outline: none;
+        background: transparent;
+        font-family: "Allerta";
+        font-size: 15px;
+        color: #333;
+        padding: 0 !important;
+      }
+    }
+
+    .buscador__icon-mat {
+      width: 22px;
+      height: 22px;
+      font-size: 22px;
+      opacity: 0.9;
+      margin-right: 12px;
+      color: #666;
+    }
   }
 
-  .mdc-list {
-    margin: 0px;
-    padding: 0px 0;
-    list-style-type: none;
-    align-self: center;
-  }
-  h1{
-    font: 700 30px/30px allerta;
-    text-align: start;
+  .contador {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font: 700 22px/24px "Allerta";
+    color: #333;
+    padding-bottom: 5px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+
+    span {
+      font-size: 18px;
+      background-color: #36bf98;
+      color: #fff;
+      padding: 4px 12px;
+      border-radius: 8px;
+      min-width: 36px;
+      text-align: center;
+      font-weight: 600;
+    }
   }
 
+  .lista {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    max-height: 50vh;
+    overflow-y: auto;
+    padding-right: 6px;
+
+    &::-webkit-scrollbar {
+      width: 5px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: rgba(0, 0, 0, 0.15);
+      border-radius: 10px;
+    }
+
+    mat-list {
+      background-color: #f9f9f9;
+      border-radius: 12px;
+      padding: 10px 15px;
+      transition: all 0.2s ease;
+      cursor: pointer;
+      display: block;
+      border-left: 5px solid transparent;
+
+      ::ng-deep .mat-mdc-list-base {
+        --mdc-list-list-item-leading-space: 0;
+        --mdc-list-list-item-trailing-space: 0;
+        padding-top: 0;
+        padding-bottom: 0;
+      }
+
+      &:hover {
+        background-color: #f0f0f0;
+        transform: translateY(-1px);
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        border-left-color: #36bf98;
+      }
+    }
+
+    .list-item {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 0 !important;
+      width: 100%;
+      height: auto !important;
+
+      ::ng-deep .mat-mdc-list-item-unscoped-content {
+        width: 100%;
+      }
+    }
+
+    .user-info {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+    }
+
+    .partido-main {
+      font-weight: 600;
+      color: #36bf98;
+      font-size: 16px;
+    }
+
+    .partido-date {
+      font-size: 13px;
+      color: #666;
+      margin-top: 2px;
+    }
+
+    .no-users {
+      text-align: center;
+      font-size: 15px;
+      color: #555;
+      margin-top: 10px;
+      padding: 15px;
+      background: #f0fff0;
+      border-radius: 12px;
+    }
+  }
+
+  .buttons {
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+    padding-bottom: 10px;
+
+    .cancelar {
+      background: linear-gradient(135deg, #404040, #707070);
+      color: #fff;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+      border-radius: 25px;
+      font-family: "Allerta";
+      font-size: 15px;
+      padding: 12px 28px;
+      transition: all 0.25s ease;
+      border: none;
+      font-weight: 600;
+    }
+
+    .cancelar:hover {
+      transform: scale(1.03);
+      box-shadow: 0 6px 14px rgba(0, 0, 0, 0.25);
+    }
+  }
 }
 
-.list-item{
-  display: flex;
-  justify-content: space-between;
+::ng-deep .cdk-overlay-pane {
+  display: flex !important;
+  justify-content: center;
   align-items: center;
+  width: 100%;
+  max-width: 550px !important;
+  height: auto !important;
+  max-height: 90vh !important;
+}
+
+::ng-deep .mat-mdc-dialog-container {
+  background: #fff;
+  border-radius: 20px !important;
+  overflow: hidden;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

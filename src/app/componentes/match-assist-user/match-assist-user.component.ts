@@ -11,6 +11,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
 import { FilterPipe } from '../../pipes/filter.pipe';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-match-assist-user',
@@ -24,6 +25,7 @@ import { FilterPipe } from '../../pipes/filter.pipe';
     ReactiveFormsModule,
     FormsModule,
     MatDatepickerModule,
+    MatIconModule,
     TranslateModule,
     MatListModule,
     FilterPipe
