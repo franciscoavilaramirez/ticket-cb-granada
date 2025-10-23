@@ -22,6 +22,7 @@ import { TranslationComponent } from './translation/translation.component';
 import { EmailConfirmacionComponent } from './pages/email-confirmacion/email-confirmacion.component';
 import { Router } from '@angular/router';
 import { TokenService } from './service/token.service';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 registerLocaleData(localeEs, 'es');
 
@@ -52,6 +53,7 @@ export function initApp(tokenService: TokenService, router: Router) {
     EditPasswordComponent,
     ModifyMatchComponent,
     TranslationComponent,
+    MatCheckboxModule,
     RegisterAdminDialogComponent,
     ListUserComponent,
     HabilitarEntradasComponent,

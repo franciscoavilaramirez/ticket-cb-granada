@@ -11,6 +11,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { LoginPageRoutingModule } from './login-page-routing.module';
 import { LoginPageComponent } from './login-page.component';
 import { MatInputModule } from '@angular/material/input';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @NgModule({
   declarations: [ LoginPageComponent ],
@@ -22,7 +23,8 @@ import { MatInputModule } from '@angular/material/input';
     MatIconModule,
     ReactiveFormsModule,
     TranslateModule,
-    MatInputModule
+    MatInputModule,
+    MatCheckboxModule
   ],
   providers:[]
 })
