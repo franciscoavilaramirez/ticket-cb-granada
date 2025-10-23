@@ -1,33 +1,40 @@
 <div class="navbar">
-    <img class="icono tsystems" src="assets/imgs/Logo_Tsystems.png">
-    <div class="x">&</div>
-    <img class="icono granada" src="assets/imgs/logo_granada.png">
-    <div class="right">
-        <a *ngIf="!isAdmin" routerLink="/home">
-            <div class="titulo">{{"navbar.inicio" | translate }}</div>
-            <img class="icono" src="assets/imgs/home.png">
-        </a>
-        <a *ngIf="isAdmin" routerLink="/admin-home">
-            <div class="titulo">{{"navbar.inicio" | translate }}</div>
-            <img class="icono" src="assets/imgs/home.png">
-        </a>
-        <a routerLink="/perfil">
-            <div class="titulo">{{"navbar.perfil" | translate }}</div>
-            <img class="icono" src="assets/imgs/user.png">
-        </a>
-        <a *ngIf="isAdmin" routerLink="/usuarios">
-            <div class="titulo">{{"navbar.usuarios" | translate }}</div>
-            <img class="icono users-icon" src="assets/imgs/users.png">
-        </a>
-        <a>
-        <div class="titulo">{{"idioma.titulo" | translate }}</div>
-          <select class="select" (change)="cambiarIdioma($event)">
-              <option value="es">{{"idioma.espanol" | translate }}</option>
-              <option value="en">{{"idioma.ingles" | translate }}</option>
-          </select>
-        </a>
-        </div>
+  <img class="icono tsystems" src="assets/imgs/Logo_Tsystems.png">
+  <div class="x">&</div>
+  <img class="icono granada" src="assets/imgs/logo_granada.png">
+
+  <button class="menu-toggle" (click)="toggleMenu()">
+    <span class="bar"></span>
+    <span class="bar"></span>
+    <span class="bar"></span>
+  </button>
+
+  <div class="right" [class.active]="menuAbierto">
+    <a *ngIf="!isAdmin" routerLink="/home" (click)="cerrarMenu()">
+      <div class="titulo">{{"navbar.inicio" | translate }}</div>
+      <img class="icono" src="assets/imgs/home.png">
+    </a>
+    <a *ngIf="isAdmin" routerLink="/admin-home" (click)="cerrarMenu()">
+      <div class="titulo">{{"navbar.inicio" | translate }}</div>
+      <img class="icono" src="assets/imgs/home.png">
+    </a>
+    <a routerLink="/perfil" (click)="cerrarMenu()">
+      <div class="titulo">{{"navbar.perfil" | translate }}</div>
+      <img class="icono" src="assets/imgs/user.png">
+    </a>
+    <a *ngIf="isAdmin" routerLink="/usuarios" (click)="cerrarMenu()">
+      <div class="titulo">{{"navbar.usuarios" | translate }}</div>
+      <img class="icono users-icon" src="assets/imgs/users.png">
+    </a>
+    <a>
+      <div class="titulo">{{"idioma.titulo" | translate }}</div>
+      <select
+        class="select desplegable"
+        [value]="activeLang"
+        (change)="cambiarIdioma($event)">
+        <option value="es">{{ 'idioma.espanol' | translate }}</option>
+        <option value="en">{{ 'idioma.ingles' | translate }}</option>
+      </select>
+    </a>
+  </div>
 </div>
-
-
-

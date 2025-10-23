@@ -1,44 +1,61 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { UserService } from '../../service/user.service';
 import { ApiService } from '../../service/api.service';
-import { Usuario } from '../../modelo/usuario';
 import { CommonModule } from '@angular/common';
-import { BrowserModule } from '@angular/platform-browser';
 import { RouterLink } from '@angular/router';
-
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-navbar',
-  templateUrl: './navbar.component.html',
-  styleUrl: './navbar.component.scss',
   standalone: true,
+  templateUrl: './navbar.component.html',
+  styleUrls: ['./navbar.component.scss'],
   imports: [
     TranslateModule,
     CommonModule,
-    RouterLink
-    // BrowserModule
+    RouterLink,
+    FormsModule
   ]
 })
 export class NavbarComponent implements OnInit {
 
-  constructor(private translate: TranslateService, public userService: UserService, public apiService: ApiService) { }
+  isAdmin = false;
+  usuario: any;
+  activeLang: string = 'es';
+  menuAbierto: boolean = false;
 
-  isAdmin = false
-  usuario:any
+  constructor(
+    private translate: TranslateService,
+    public userService: UserService,
+    public apiService: ApiService
+  ) { }
 
   ngOnInit(): void {
-    //console.log("El idioma actual es: ", this.apiService.getCurrentLenguage());
     const userData = this.userService.getUserData();
-  if (userData) {
-    this.isAdmin = userData.isAdmin;
-  } else {
-  }
+    if (userData) this.isAdmin = userData.isAdmin;
+
+    const savedLang = localStorage.getItem('lang');
+    const currentLang = this.translate.currentLang || this.translate.getDefaultLang() || 'es';
+    this.activeLang = savedLang || currentLang;
+
+    this.translate.use(this.activeLang);
+    this.apiService.cambiarIdioma(this.activeLang);
   }
 
-  cambiarIdioma(event: any) {
-    const idiomaSeleccionado = event.target.value;
-    this.apiService.cambiarIdioma(idiomaSeleccionado);
+  toggleMenu() {
+    this.menuAbierto = !this.menuAbierto;
   }
-  activeLang = 'es';
+
+  cerrarMenu() {
+    this.menuAbierto = false;
+  }
+
+  cambiarIdioma(event: Event): void {
+    const lang = (event.target as HTMLSelectElement).value;
+    this.activeLang = lang;
+    this.translate.use(lang);
+    this.apiService.cambiarIdioma(lang);
+    localStorage.setItem('lang', lang);
+  }
 }
