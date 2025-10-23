@@ -1,43 +1,61 @@
-<div class="form-container">
-  <div>
-    <img class="logo" src="../../assets/T-SYSTEMS-LOGO.svg" alt="logo">
-  </div>
+<div class="login-wrapper">
+  <div class="form-container">
+    <img class="logo" src="../../assets/T-SYSTEMS-LOGO.svg" alt="logo" />
 
-  <h2 class="form-title">
-    Welcome to Magenta Basket!
-  </h2>
+    <h2 class="form-title">Welcome to Magenta Basket!</h2>
 
-  <p class="form-description">
-    "Don't have an account yet? "
-    <a routerLink="/signup">SignUp</a>
-  </p>
+    <p class="form-description">
+      Don't have an account yet?
+      <a routerLink="/signup">Sign Up</a>
+    </p>
 
-  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">
+      <mat-form-field appearance="fill" class="form-field">
+        <mat-label>Email</mat-label>
+        <input
+          matInput
+          formControlName="email"
+          placeholder="example@t-systems.com"
+          class="input-field"
+        />
+      </mat-form-field>
 
-    <mat-form-field appearance="fill" class="form-field">
-      <mat-label>Email</mat-label>
-      <input matInput formControlName="email" placeholder="example@t-systems.com" class="input-field">
-    </mat-form-field>
+      <mat-form-field appearance="fill" class="form-field">
+        <mat-label>Password</mat-label>
+        <input
+          matInput
+          formControlName="password"
+          placeholder="Enter your password"
+          class="input-field"
+          [type]="hidePassword['contrasena'] ? 'password' : 'text'"
+          (keydown.enter)="onSubmit()"
+        />
+        <button
+          mat-icon-button
+          matSuffix
+          type="button"
+          (click)="clickEvent('contrasena', $event)"
+          [attr.aria-label]="'Hide password'"
+          [attr.aria-pressed]="hidePassword['contrasena']"
+        >
+          <mat-icon>
+            {{ hidePassword['contrasena'] ? 'visibility_off' : 'visibility' }}
+          </mat-icon>
+        </button>
+      </mat-form-field>
 
-    <mat-form-field appearance="fill" class="form-field">
-      <mat-label>Password</mat-label>
-      <input matInput formControlName="password" placeholder="Enter the password" class="input-field"
-                      [type]="hidePassword['contrasena'] ? 'password' : 'text'" (keydown.enter)="onSubmit()" />
-      <button mat-icon-button
-              matSuffix
-              type="button"
-              (click)="clickEvent('contrasena', $event)"
-              [attr.aria-label]="'Hide password'"
-              [attr.aria-pressed]="hidePassword['contrasena']">
-        <mat-icon>{{hidePassword['contrasena'] ? 'visibility_off' : 'visibility'}}</mat-icon>
+      <button
+        mat-raised-button
+        color="primary"
+        type="submit"
+        [disabled]="!loginForm.valid"
+        class="submit-button"
+      >
+        {{ "login" | translate }}
       </button>
-    </mat-form-field>
 
-    <button mat-raised-button color="primary" type="submit" [disabled]="!loginForm.valid" class="submit-button">{{"login" | translate }}</button>
-
-    <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
-    <div *ngIf="errorDevClient" class="error-message">{{ errorDevClient }}</div>
-
-
-  </form>
+      <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+      <div *ngIf="errorDevClient" class="error-message">{{ errorDevClient }}</div>
+    </form>
+  </div>
 </div>
