@@ -14,7 +14,7 @@ import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-subir-entradas',
   templateUrl: './subir-entradas.component.html',
-  styleUrl: './subir-entradas.component.css',
+  styleUrl: './subir-entradas.component.scss',
   standalone: true,
   imports: [
     CommonModule,
@@ -28,7 +28,7 @@ export class SubirEntradasComponent {
   public form: FormGroup;
   private b64: String = "";
   pdf: Pdf = new Pdf();
-  entradas: File//FormData = new FormData();
+  entradas: File
   noFiles = true
   @Output() actualizacionProximosPartidos: EventEmitter<any> = new EventEmitter<void>();
 
@@ -122,14 +122,14 @@ export class SubirEntradasComponent {
     return "T"+ hora +":"+minutos
   }
 
-  color = "lightgray" //grey
+  color = "lightgray"
   inputValue = ''
   onFocus() {
-    this.color = "black"//"#3f51b5"//blue
+    this.color = "black"
   }
   onBlur() {
     if(this.inputValue == '')
-      this.color = "lightgray" //grey
+      this.color = "lightgray"
     else
       this.color = "black"
   }
