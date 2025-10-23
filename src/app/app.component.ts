@@ -17,12 +17,7 @@ export class AppComponent {
   router: any;
   title = 'ticket-cb-granada';
 
-  ngOnInit() {
-    if (this.router.url !== '/login') {
-      this.tokenService.tokenConfig()
-        .catch(() => this.router.navigate(['/login']));
-    }
-  }
+  
 
   logout() {
     localStorage.removeItem('token');

@@ -8,39 +8,32 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 })
 export class TokenService {
   private readonly jwtHelper = inject(JwtHelperService);
-  public token: string;
+  public token: string | null = null;
   constructor(private userService: UserService) { }
 
-  // tokenConfig(){
-  //   const token = localStorage.getItem('token');
-  //   const jwt = new JwtHelperService();
-  //   const tokenDecoded = jwt.decodeToken('token');
-  //   console.log('tokennnnnnnn',tokenDecoded);
-  //   this.userService.setUserData(tokenDecoded);
-  // }
-
-  tokenConfig():Promise<boolean> {
-    const promiseToken = new Promise<boolean>((resolve, reject) => {
+  tokenConfig(): Promise<boolean> {
+    return new Promise((resolve, reject) => {
       const token = localStorage.getItem('token');
-    if (token) {
-      this.token = token;
-      const jwt = new JwtHelperService();
-      const tokenDecoded = jwt.decodeToken(token); // Pasamos la variable 'token' aquí
 
+      if (token) {
+        this.token = token;
+        const jwt = new JwtHelperService();
+        const tokenDecoded = jwt.decodeToken(token);
 
-      if (tokenDecoded && tokenDecoded.usuario) {
-        this.userService.setUserData(tokenDecoded.usuario); // Solo pasa los datos del usuario
+        if (tokenDecoded && tokenDecoded.usuario) {
+          this.userService.setUserData(tokenDecoded.usuario);
+        }
+
+        resolve(true);
       } else {
-        
+        reject(false);
       }
-
-
-      this.userService.setUserData(tokenDecoded);
-      resolve(true);
-    } else {
-      reject(false);
-    }
     });
-    return promiseToken;
   }
+
+  clearToken() {
+    this.token = null;
+    localStorage.removeItem('token');
+  }
+
 }
