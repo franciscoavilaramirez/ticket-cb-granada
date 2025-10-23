@@ -22,16 +22,16 @@ export class UsuariosComponent {
 
   constructor(public apiService: ApiService, public dialog: MatDialog, public userService: UserService) {
 
-   }
+  }
   @ViewChild('TABLE') table!: ElementRef;
   usuarios: Usuario[] = [];
-  displayedColumns: string[] = ['id', 'nombre', 'apellidos', 'email','partidos', 'botones'];
+  displayedColumns: string[] = ['id', 'nombre', 'apellidos', 'email', 'partidos', 'botones'];
   filterPost = '';
   myId: number;
   partidosInscritos: Partido[] = [];
   usuariosMostrar: Usuario[] = [];
   cantidadPorPagina = 10;
-  opcionesDeCantidades = [10,20,30];
+  opcionesDeCantidades = [10, 20, 30];
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   usuariosDataSource = new MatTableDataSource<Usuario>([]); // Inicializar el dataSource
   filterTerm: string = '';
@@ -39,7 +39,6 @@ export class UsuariosComponent {
 
   ngOnInit() {
     this.getUsers()
-    //this.myId = this.userService.getMyUser().user_id
   }
   // Método para aplicar el filtro
   applyFilter(event: Event): void {
@@ -67,8 +66,8 @@ export class UsuariosComponent {
   openRegistrarUsuario() {
     this.dialog.open(RegisterAdminDialogComponent, {
       width: '40vw',
-      height:'95vh',
-    }).afterClosed().subscribe(()=>{
+      height: '95vh',
+    }).afterClosed().subscribe(() => {
       this.getUsers()
     });
   }
@@ -90,38 +89,85 @@ export class UsuariosComponent {
       this.getUsers();
     });
   }
-  getPartidosInscritosUser(idUsuario: number){
-    this.apiService.getPartidosInscritos(idUsuario).subscribe(data =>{
+  getPartidosInscritosUser(idUsuario: number) {
+    this.apiService.getPartidosInscritos(idUsuario).subscribe(data => {
       this.partidosInscritos = data;
-      const dialog = this.dialog.open(MatchAssistUserComponent,{
+      const dialog = this.dialog.open(MatchAssistUserComponent, {
         data: this.partidosInscritos,
-        width:'30vw',
-        height:'75vh',
+        width: '30vw',
+        height: '75vh',
       });
       dialog.afterClosed().subscribe(result => {
       });
     });
-    }
+  }
 
   deleteUser(userId: string): void {
     Swal.fire({
-      title: '¿Seguro que desea eliminar este usuario?',
-      showDenyButton: true,
+      title: '¿Eliminar usuario?',
+      html: `
+      <div style="font-size:15px;color:#555;margin-top:6px;">
+        Esta acción no se puede deshacer. El usuario será eliminado del sistema.
+      </div>
+    `,
+      icon: 'warning',
+      iconColor: '#e11010',
+      showCancelButton: true,
       confirmButtonText: 'Eliminar',
-      denyButtonText: 'Cancelar',
-      confirmButtonColor: 'red',
-      denyButtonColor: 'grey',
-    }).then((response) => {
-      if (response.isConfirmed) {
-        this.apiService.deleteUser(userId).subscribe((success)=>{
-            Swal.fire("Usuario Eliminado", "", "success");
-            this.getUsers()
+      cancelButtonText: 'Cancelar',
+      background: '#ffffff',
+      color: '#333',
+      customClass: {
+        popup: 'custom-swal-popup',
+        title: 'custom-swal-title',
+        htmlContainer: 'custom-swal-html',
+        confirmButton: 'custom-swal-confirm',
+        cancelButton: 'custom-swal-cancel'
+      },
+      showClass: {
+        popup: 'swal2-show'
+      },
+      hideClass: {
+        popup: 'swal2-hide'
+      }
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.apiService.deleteUser(userId).subscribe(() => {
+          Swal.fire({
+            title: 'Usuario eliminado',
+            text: 'El usuario se eliminó correctamente.',
+            icon: 'success',
+            confirmButtonText: 'Aceptar',
+            background: '#ffffff',
+            color: '#333',
+            customClass: {
+              popup: 'custom-swal-popup',
+              confirmButton: 'custom-swal-confirm'
+            }
+          }).then(() => {
+            this.getUsers();
+          });
+        }, () => {
+          Swal.fire({
+            title: 'Error',
+            text: 'No se pudo eliminar el usuario.',
+            icon: 'error',
+            confirmButtonText: 'Aceptar',
+            background: '#ffffff',
+            color: '#333',
+            customClass: {
+              popup: 'custom-swal-popup',
+              confirmButton: 'custom-swal-confirm'
+            }
+          });
         });
+      } else {
+        Swal.close();
       }
     });
   }
   ExportTOExcel() {
-    const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(this.usuarios.map( usuario =>({
+    const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(this.usuarios.map(usuario => ({
       Nombre: usuario.nombre,
       Apellidos: usuario.apellidos,
       Email: usuario.email,
