@@ -1,5 +1,10 @@
 @import '../../../styles/palette';
 
+input[type="password"]::-ms-reveal,
+input[type="password"]::-webkit-textfield-decoration-container {
+  display: none !important;
+}
+
 ::ng-deep .mat-mdc-dialog-container,
 ::ng-deep .cdk-overlay-pane {
   width: auto !important;
@@ -120,14 +125,27 @@
 .password-pattern {
   color: #e20017;
   background: #ffe8eb;
-  padding: 10px 15px;
-  border-radius: 16px;
+  padding: 8px 12px;
+  border-radius: 8px;
   font-size: 0.9rem;
   font-weight: 500;
-  margin-top: 5px;
-  text-align: center;
+  margin-top: 6px;
   width: 100%;
+  text-align: center;
   animation: fadeIn 0.25s ease;
+  box-sizing: border-box;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 .button-group {
@@ -178,16 +196,5 @@
   &:hover {
     transform: scale(1.03);
     box-shadow: 0 6px 14px rgba(0, 0, 0, 0.25);
-  }
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: scale(0.9);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
   }
 }
