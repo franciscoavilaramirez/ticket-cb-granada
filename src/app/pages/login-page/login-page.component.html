@@ -2,30 +2,30 @@
   <div class="form-container">
     <img class="logo" src="../../assets/T-SYSTEMS-LOGO.svg" alt="logo" />
 
-    <h2 class="form-title">Welcome to Magenta Basket!</h2>
+    <h2 class="form-title">{{ "bienvenidaMagentaBasket" | translate }}</h2>
 
     <p class="form-description">
-      Don't have an account yet?
-      <a routerLink="/signup">Sign Up</a>
+      {{ "noTienesCuenta" | translate }}
+      <a routerLink="/signup">{{ "registrate" | translate }}</a>
     </p>
 
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">
       <mat-form-field appearance="fill" class="form-field">
-        <mat-label>Email</mat-label>
+        <mat-label>{{ "email" | translate }}</mat-label>
         <input
           matInput
           formControlName="email"
-          placeholder="example@t-systems.com"
+          [placeholder]="'placeholderEmail' | translate"
           class="input-field"
         />
       </mat-form-field>
 
       <mat-form-field appearance="fill" class="form-field">
-        <mat-label>Password</mat-label>
+        <mat-label>{{ "contrasena" | translate }}</mat-label>
         <input
           matInput
           formControlName="password"
-          placeholder="Enter your password"
+          [placeholder]="'placeholderContrasena' | translate"
           class="input-field"
           [type]="hidePassword['contrasena'] ? 'password' : 'text'"
           (keydown.enter)="onSubmit()"
@@ -46,7 +46,7 @@
 
       <div class="remember-container">
         <mat-checkbox formControlName="rememberMe" color="primary">
-          Remember me
+          {{ "recordarme" | translate }}
         </mat-checkbox>
       </div>
 
@@ -57,11 +57,11 @@
         [disabled]="!loginForm.valid"
         class="submit-button"
       >
-        {{ "login" | translate }}
+        {{ "iniciarSesion" | translate }}
       </button>
 
-      <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
-      <div *ngIf="errorDevClient" class="error-message">{{ errorDevClient }}</div>
+      <div *ngIf="errorMessage" class="error-message">{{ errorMessage | translate }}</div>
+      <div *ngIf="errorDevClient" class="error-message">{{ errorDevClient | translate }}</div>
     </form>
   </div>
 </div>
