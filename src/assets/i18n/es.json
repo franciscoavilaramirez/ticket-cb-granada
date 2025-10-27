@@ -1,6 +1,6 @@
 {
   "nombre": "Nombre",
-  "apellidos":"Apellidos",
+  "apellidos": "Apellidos",
   "email": "Email",
   "registrarUsuario": "Registrar usuario",
   "contrasena": "Contraseña",
@@ -11,77 +11,80 @@
   "actualContrasena": "Contraseña actual",
   "nuevaContrasena": "Contraseña nueva",
   "repiteContrasena": "Repite la contraseña",
-
-
-  "registrarse" : "Registrarse",
-  "requisitosContrasena" : "La contraseña debe tener al menos 8 caracteres, una minúscula, una mayúscula y un caracter especial",
-  "requisitosEmail":"El email debe contener @t-systems.com",
+  "registrarse": "Registrarse",
+  "requisitosContrasena": "La contraseña debe tener al menos 8 caracteres, una minúscula, una mayúscula y un caracter especial",
+  "requisitosEmail": "El email debe contener @t-systems.com",
   "buscador": "Buscar",
   "terminoBuscar": "Introduce el término de búsqueda",
-  "registro":"Registrate para crear una cuenta",
-  "usuarioRegistrado":"Ya tienes una cuenta?",
-  "iniciaSesion":"Inicia sesión",
-  "anadirEntradas":"Añadir Entradas",
-  "partido":"Partido",
-  "fecha":"Fecha",
-  "fechaDelPartido":"Fecha Del Partido",
+  "registro": "Registrate para crear una cuenta",
+  "usuarioRegistrado": "Ya tienes una cuenta?",
+  "iniciaSesion": "Inicia sesión",
+  "anadirEntradas": "Añadir Entradas",
+  "partido": "Partido",
+  "fecha": "Fecha",
+  "fechaDelPartido": "Fecha Del Partido",
   "fechaPublicacion": "Fecha Publicación",
   "tickets": "entradas",
   "quedan": "Quedan",
   "partidosInscritos": "Partidos Inscritos: ",
   "noInscrito": "Este usuario no ha asistido a ningún partido",
-  "editar":"Editar",
-  "siguientePartido":"Siguiente Partido",
-  "proximosPartidos":"Próximos Partidos",
-  "partidosAnteriores":"Partidos Anteriores",
-  "partidosFuturos":"Partidos Futuros",
-  "login":"Acceder",
-  "infoUsuario":"Esta semana nuestro CB Granada no juega en casa",
-
-
-	"card":{
-    "mostrarOcultar":"Mostrar Inscritos",
+  "editar": "Editar",
+  "siguientePartido": "Siguiente Partido",
+  "proximosPartidos": "Próximos Partidos",
+  "partidosAnteriores": "Partidos Anteriores",
+  "partidosFuturos": "Partidos Futuros",
+  "login": "Acceder",
+  "infoUsuario": "Esta semana nuestro CB Granada no juega en casa",
+  "card": {
+    "mostrarOcultar": "Mostrar Inscritos",
     "anadirUsuario": "Añadir Usuario",
     "modificarPartido": "Modificar Partido",
     "anadirAdmin": "Añadirme como Administrador",
     "descargar": "Descargar Admin",
     "devolver": "Devolver"
-
-
-		},
-  "listadoUsuarios":{
+  },
+  "listadoUsuarios": {
     "nombre": "Nombre",
-    "apellidos":"Apellidos",
+    "apellidos": "Apellidos",
     "email": "Email"
-    },
-  "usuariosInscritos":{
+  },
+  "usuariosInscritos": {
     "nombre": "Nombre",
-    "apellidos":"Apellidos",
+    "apellidos": "Apellidos",
     "email": "Email"
-    },
-  "usuarios":{
+  },
+  "usuarios": {
     "nombre": "Nombre",
     "apellido": "Apellidos",
     "email": "Email",
     "partidos": "Partidos Asistidos",
     "acciones": "Acciones",
     "mostrar": "Mostrar listado usuarios",
-    "ocultar":"Ocultar listado",
+    "ocultar": "Ocultar listado",
     "exportarXlsX": "Exportar Usarios a XLSX",
     "modificar": "Modificar",
     "eliminar": "Eliminar",
     "registrados": "Usuarios registrados",
-    "usuarios": "Usuarios"
-    },
-  "modalAnadirUsuario":{
+    "usuarios": "Usuarios",
+    "eliminarTitulo": "¿Eliminar usuario?",
+    "eliminarDescripcion": "Esta acción no se puede deshacer. El usuario será eliminado del sistema.",
+    "eliminarConfirmar": "Eliminar",
+    "cancelar": "Cancelar",
+    "eliminadoTitulo": "Usuario eliminado",
+    "eliminadoTexto": "El usuario se eliminó correctamente.",
+    "errorTitulo": "Error",
+    "errorTexto": "No se pudo eliminar el usuario.",
+    "aceptar": "Aceptar"
+  },
+  "modalAnadirUsuario": {
     "inscritos": "Usuarios Inscritos:",
     "yaInscritos": "Usuarios Inscritos",
-    "noHayInscritos":"No hay usuarios registrados en este partido",
-    "pendientes":"Usuarios Pendientes",
+    "noHayInscritos": "No hay usuarios registrados en este partido",
+    "pendientes": "Usuarios Pendientes",
     "guardar": "Guardar",
     "cancelar": "Cancelar"
-    },
-  "modificarPartido":{
+  },
+  "modificarPartido": {
     "equipoLocal": "Equipo Local",
     "titulo": "Modificar Partido",
     "guardar": "Guardar Cambios",
@@ -90,50 +93,87 @@
     "fecha": "Fecha Partido: ",
     "fechaPublicacion": "Fecha Publicación: ",
     "entradas": "Entradas Disponibles: "
-
-
-    },
-  "modificarUsuario":{
+  },
+  "modificarUsuario": {
     "titulo": "Modificar Usuario",
     "inputNombre": "Nombre",
     "inputApellido": "Apellido",
     "inputEmail": "Email",
     "guardar": "Guardar Cambios",
     "cancelar": "Cancelar"
-    },
-    "botones":{
-      "acciones": "Acciones",
-      "guardar": "Guardar",
-      "guardarCambios":"Guardar Cambios",
-      "subir":"Subir",
-      "eliminar": "Eliminar",
-      "eliminarPartido": "Eliminar Partido",
-      "cancelar":"Cancelar",
-      "cerrar": "Cerrar",
-      "cerrarSesion":"Cerrar Sesión",
-      "cambiarContrasena":"Cambiar Contraseña"
-    },
-    "idioma":{
-      "titulo":"Idioma",
-      "espanol":"Español",
-      "ingles":"Inglés",
-      "ruso":"Ruso"
-    },
-    "navbar":{
-      "inicio":"Inicio",
-      "perfil":"Perfil",
-      "usuarios":"Usuarios"
-    },
-    "entradas":{
-      "subir":"Crear Partido",
-      "habilitar":"Habilitar Entradas"
-    },
-    "habilitarEntradas":{
-      "titulo":"Habilitar Entradas",
-      "numero":"Número de entradas",
-      "dias":"Días de antelación"
-    },
-    "perfil":{
-      "datosPerfil":"Datos del Perfil"
-    }
-	}
+  },
+  "botones": {
+    "acciones": "Acciones",
+    "guardar": "Guardar",
+    "guardarCambios": "Guardar Cambios",
+    "subir": "Subir",
+    "eliminar": "Eliminar",
+    "eliminarPartido": "Eliminar Partido",
+    "cancelar": "Cancelar",
+    "cerrar": "Cerrar",
+    "cerrarSesion": "Cerrar Sesión",
+    "cambiarContrasena": "Cambiar Contraseña"
+  },
+  "idioma": {
+    "titulo": "Idioma",
+    "espanol": "Español",
+    "ingles": "Inglés",
+    "ruso": "Ruso"
+  },
+  "navbar": {
+    "inicio": "Inicio",
+    "perfil": "Perfil",
+    "usuarios": "Usuarios"
+  },
+  "entradas": {
+    "subir": "Crear Partido",
+    "habilitar": "Habilitar Entradas"
+  },
+  "habilitarEntradas": {
+    "titulo": "Habilitar Entradas",
+    "numero": "Número de entradas",
+    "dias": "Días de antelación"
+  },
+  "perfil": {
+    "datosPerfil": "Datos del Perfil",
+    "errorCargarUsuario": "Error al cargar el usuario",
+    "guardarCambios": "¿Guardar cambios?",
+    "aceptar": "Aceptar",
+    "cancelar": "Cancelar"
+  },
+  "errores": {
+    "nombreRequerido": "El nombre es obligatorio.",
+    "apellidosRequeridos": "Los apellidos son obligatorios.",
+    "emailRequerido": "El correo electrónico es obligatorio.",
+    "emailInvalido": "El formato del correo electrónico no es válido.",
+    "contrasenaRequerida": "La contraseña es obligatoria.",
+    "repiteContrasenaRequerida": "Debes repetir la contraseña.",
+    "contrasenasNoCoinciden": "Las contraseñas no coinciden.",
+    "formularioInvalido": "Por favor, corrige los errores del formulario.",
+    "registroError": "Error al registrar el usuario. El email puede estar en uso.",
+    "registroDevClient": "Si estás usando un entorno DevClient, el registro podría fallar temporalmente.",
+    "registroExitoso": "Usuario registrado correctamente. Revisa tu bandeja de entrada para validarlo.",
+    "errorLogin": "Error al iniciar sesión. Por favor, inténtalo de nuevo.",
+    "errorDevClient": "Si estás iniciando sesión desde una maqueta DevClient internet, es posible que falle la conexión. Estamos trabajando para solucionarlo con el departamento correspondiente.",
+    "errorRegistro": "Error al registrar el usuario. El email puede estar ya en uso.",
+    "errorRegistroSwal": "Error al registrar el usuario",
+    "usuarioRegistradoExito": "Usuario registrado correctamente",
+    "usuarioRegistradoVerificarCorreo": "Dirígete a la bandeja de entrada del correo que has usado para validarlo."
+  },
+  "bienvenidaMagentaBasket": "¡Bienvenido a Magenta Basket!",
+  "noTienesCuenta": "¿Aún no tienes una cuenta?",
+  "registrate": "Regístrate",
+  "recordarme": "Recuérdame",
+  "iniciarSesion": "Iniciar sesión",
+  "placeholderEmail": "ejemplo@t-systems.com",
+  "placeholderContrasena": "Introduce tu contraseña",
+  "descargar": "Descargar",
+  "devolver": "Devolver",
+  "apuntame": "Apúntame",
+  "agotadas": "AGOTADAS",
+  "alertas": {
+    "entradasAgotadasTitulo": "Entradas agotadas",
+    "entradasAgotadasTexto": "Lo sentimos, no quedan entradas disponibles para este partido.",
+    "aceptar": "Aceptar"
+  }
+}

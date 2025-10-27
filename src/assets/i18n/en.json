@@ -1,11 +1,9 @@
-
-
 {
   "nombre": "Name",
-  "apellidos":"Last Name",
+  "apellidos": "Last Name",
   "email": "Email",
   "buscador": "Search",
-  "terminoBuscar":"Enter the search term",
+  "terminoBuscar": "Enter the search term",
   "contrasena": "Password",
   "registrarUsuario": "Register User",
   "repiteContrasena": "Repeat Password",
@@ -13,70 +11,77 @@
   "actualContrasena": "Current Password",
   "nuevaContrasena": "New Password",
 
-  "requisitosContrasena" : "The password must have at least 8 characters, one lowercase letter, one uppercase letter and one special character",
-  "requisitosEmail":"The email must have @t-systems.com",
+  "requisitosContrasena": "The password must have at least 8 characters, one lowercase letter, one uppercase letter and one special character",
+  "requisitosEmail": "The email must have @t-systems.com",
   "administrador": "Admin",
-  "registrarse" : "Register",
-  "registro":"Register to create an account",
-  "usuarioRegistrado":"Do you have an account?",
-  "iniciaSesion":"Log In",
-  "anadirEntradas":"Add Tickets",
-  "partido":"Match",
-  "fecha":"Date",
-  "fechaDelPartido":"Date of Match",
+  "registrarse": "Register",
+  "registro": "Register to create an account",
+  "usuarioRegistrado": "Do you have an account?",
+  "iniciaSesion": "Log In",
+  "anadirEntradas": "Add Tickets",
+  "partido": "Match",
+  "fecha": "Date",
+  "fechaDelPartido": "Date of Match",
   "tickets": "tickets",
   "quedan": "There are",
   "partidosInscritos": "Attended Matches",
   "noInscrito": "This user has not attended any games",
-  "editar":"Edit",
-  "siguientePartido":"Next Match",
-  "proximosPartidos":"Upcoming Matches",
-  "partidosAnteriores":"Last Matches",
-  "partidosFuturos":"Future matches",
-  "login":"Log In",
-  "infoUsuario":"This week our CB Granada does not play at home",
+  "editar": "Edit",
+  "siguientePartido": "Next Match",
+  "proximosPartidos": "Upcoming Matches",
+  "partidosAnteriores": "Last Matches",
+  "partidosFuturos": "Future matches",
+  "login": "Log In",
+  "infoUsuario": "This week our CB Granada does not play at home",
 
-
-    "card":{
-      "mostrarOcultar":"Show registered",
-      "anadirUsuario": "Add user match",
-      "modificarPartido": "Update match",
-      "anadirAdmin": "Add like Admin",
-      "descargar": "Download Admin",
-      "devolver": "Restore"
-      },
-  "listadoUsuarios":{
+  "card": {
+    "mostrarOcultar": "Show registered",
+    "anadirUsuario": "Add user match",
+    "modificarPartido": "Update match",
+    "anadirAdmin": "Add like Admin",
+    "descargar": "Download Admin",
+    "devolver": "Restore"
+  },
+  "listadoUsuarios": {
     "nombre": "Name",
-    "apellidos":"Last Name",
-    "email":"Email"
-    },
-
-  "usuariosInscritos":{
+    "apellidos": "Last Name",
+    "email": "Email"
+  },
+  "usuariosInscritos": {
     "nombre": "Name",
-    "apellidos":"Last Name",
-    "email":"Email"
-    },
-  "usuarios":{
+    "apellidos": "Last Name",
+    "email": "Email"
+  },
+  "usuarios": {
     "nombre": "Name",
     "apellido": "Last Name",
     "email": "Email",
     "partidos": "Attend Match",
     "mostrar": "Show list users",
-    "ocultar":"Hide list",
+    "ocultar": "Hide list",
     "exportarXlsX": "Export Users to XLSX",
     "modificar": "Update",
     "eliminar": "Delete",
-    "usuarios": "Users"
-    },
-  "modalAnadirUsuario":{
+    "usuarios": "Users",
+    "eliminarTitulo": "Delete user?",
+    "eliminarDescripcion": "This action cannot be undone. The user will be permanently removed from the system.",
+    "eliminarConfirmar": "Delete",
+    "cancelar": "Cancel",
+    "eliminadoTitulo": "User deleted",
+    "eliminadoTexto": "The user has been successfully removed.",
+    "errorTitulo": "Error",
+    "errorTexto": "The user could not be deleted.",
+    "aceptar": "OK"
+  },
+  "modalAnadirUsuario": {
     "inscritos": "Registered Users:",
     "yaInscritos": "Registered Users",
-    "noHayInscritos":"There are not registered users at this moment",
-    "pendientes":"Pending Users",
+    "noHayInscritos": "There are not registered users at this moment",
+    "pendientes": "Pending Users",
     "guardar": "Save",
     "cancelar": "Cancel"
-    },
-  "modificarPartido":{
+  },
+  "modificarPartido": {
     "titulo": "Update Match",
     "equipoLocal": "Local Team",
     "equipoVisitante": "Visiting Team",
@@ -85,50 +90,87 @@
     "fecha": "Match Date: ",
     "fechaPublicacion": "Publication Date: ",
     "entradas": "Available Tickets: "
-    },
-
-  "modificarUsuario":{
+  },
+  "modificarUsuario": {
     "titulo": "Update User",
     "inputNombre": "Name",
     "inputApellido": "Last Name",
     "inputEmail": "Email",
     "guardar": "Save",
     "cancelar": "Cancel"
-    },
+  },
+  "botones": {
+    "acciones": "Actions",
+    "guardar": "Save",
+    "guardarCambios": "Save",
+    "subir": "Upload",
+    "eliminar": "Delete",
+    "eliminarPartido": "Delete",
+    "cancelar": "Cancel",
+    "cerrarSesion": "Log Out",
+    "cambiarContrasena": "Change Password"
+  },
+  "idioma": {
+    "titulo": "Language",
+    "espanol": "Spanish",
+    "ingles": "English",
+    "ruso": "Russian"
+  },
+  "navbar": {
+    "inicio": "Home",
+    "perfil": "Profile",
+    "usuarios": "Users"
+  },
+  "entradas": {
+    "subir": "Create Match",
+    "habilitar": "Enable Tickets"
+  },
+  "habilitarEntradas": {
+    "titulo": "Enable Tickets",
+    "numero": "Number of tickets",
+    "fechaPublicacion": "Publication date"
+  },
+  "perfil": {
+    "datosPerfil": "Data Profile",
+    "errorCargarUsuario": "Error loading user data",
+    "guardarCambios": "Save changes?",
+    "aceptar": "Accept",
+    "cancelar": "Cancel"
+  },
 
-    "botones":{
-      "acciones": "Actions",
-      "guardar": "Save",
-      "guardarCambios":"Save",
-      "subir":"Upload",
-      "eliminar": "Delete",
-      "eliminarPartido": "Delete",
-      "cancelar":"Cancel",
-      "cerrarSesion":"Log Out",
-      "cambiarContrasena":"Change Password"
-
-    },
-    "idioma":{
-      "titulo":"Language",
-      "espanol":"Spanish",
-      "ingles":"English",
-      "ruso":"Russian"
-    },
-    "navbar":{
-      "inicio":"Home",
-      "perfil":"Profile",
-      "usuarios":"Users"
-    },
-    "entradas":{
-      "subir":"Create Match",
-      "habilitar":"Enable Tickets"
-    },
-    "habilitarEntradas":{
-      "titulo":"Enable Tickets",
-      "numero":"Number of tickets",
-      "fechaPublicacion":"Publication date"
-    },
-    "perfil":{
-      "datosPerfil":"Data Profile"
-    }
-	}
+  "errores": {
+    "nombreRequerido": "The name is required.",
+    "apellidosRequeridos": "The last name is required.",
+    "emailRequerido": "The email is required.",
+    "emailInvalido": "The email format is invalid.",
+    "contrasenaRequerida": "The password is required.",
+    "repiteContrasenaRequerida": "You must repeat the password.",
+    "contrasenasNoCoinciden": "Passwords do not match.",
+    "formularioInvalido": "Please correct the errors in the form.",
+    "registroError": "Error registering user. The email may already be in use.",
+    "registroDevClient": "If you are registering using DevClient, it may temporarily fail.",
+    "registroExitoso": "User registered successfully. Check your inbox to validate it.",
+    "errorLogin": "Login failed. Please try again.",
+    "errorDevClient": "If you are logging in through a DevClient internet, it may fail. We are working with the corresponding department to fix it.",
+    "errorRegistro": "Error registering user. The email may already be in use.",
+    "errorRegistroSwal": "Error registering user",
+    "usuarioRegistradoExito": "User successfully registered",
+    "usuarioRegistradoVerificarCorreo": "Check your inbox to validate your account."
+  },
+  "bienvenidaMagentaBasket": "Welcome to Magenta Basket!",
+  "noTienesCuenta": "Don't have an account yet?",
+  "registrate": "Sign Up",
+  "recordarme": "Remember me",
+  "iniciarSesion": "Log In",
+  "placeholderEmail": "example@t-systems.com",
+  "placeholderContrasena": "Enter your password",
+  "descargar": "Download",
+  "devolver": "Return",
+  "apuntame": "Join",
+  "agotadas": "SOLD OUT",
+  "alertas": {
+    "entradasAgotadasTitulo": "Tickets sold out",
+    "entradasAgotadasTexto": "Sorry, there are no tickets available for this match.",
+    "aceptar": "OK"
+  }
+}
