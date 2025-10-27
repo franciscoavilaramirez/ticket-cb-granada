@@ -10,6 +10,7 @@ import { HomeComponent } from './home.component';
 import { HomeRoutingModule } from './home-routing.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { MatInputModule } from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [ HomeComponent ],
@@ -21,7 +22,8 @@ import { MatInputModule } from '@angular/material/input';
     TranslateModule,
     MatButtonModule,
     HomeRoutingModule,
-    MatInputModule
+    MatInputModule,
+    MatIconModule
   ],
   providers:[]
 })

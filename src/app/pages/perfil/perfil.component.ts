@@ -9,6 +9,7 @@ import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
 import { UserService } from '../../service/user.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-perfil',
@@ -22,7 +23,8 @@ export class PerfilComponent {
   errorMessage: string = '';
 
   constructor(private formBuilder: FormBuilder, private apiService: ApiService, private userService: UserService,
-    private router: Router, private http: HttpClient, public dialog: MatDialog, private jwtHelper: JwtHelperService) { }
+    private router: Router, private http: HttpClient, public dialog: MatDialog, private jwtHelper: JwtHelperService,
+    private translate: TranslateService) { }
 
 
   ngOnInit() {
@@ -65,10 +67,10 @@ export class PerfilComponent {
     const usuario: Usuario = this.editarPerfil.value;
     usuario.id = this.idUsuario + "";
     await Swal.fire({
-      title: '¿Guardar cambios?',
+      title: this.translate.instant('perfil.guardarCambios'),
       showDenyButton: true,
-      confirmButtonText: 'Aceptar',
-      denyButtonText: 'Cancelar',
+      confirmButtonText: this.translate.instant('perfil.aceptar'),
+      denyButtonText: this.translate.instant('perfil.cancelar'),
       confirmButtonColor: '#36BF98',
       denyButtonColor: 'grey',
     }).then((response) => {
