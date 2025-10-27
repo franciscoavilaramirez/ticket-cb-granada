@@ -11,6 +11,7 @@ import { Partido } from '../../../modelo/partido';
 import { MatchAssistUserComponent } from '../../../componentes/match-assist-user/match-assist-user.component';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { TranslateService } from '@ngx-translate/core';
 
 
 @Component({
@@ -20,7 +21,7 @@ import { MatTableDataSource } from '@angular/material/table';
 })
 export class UsuariosComponent {
 
-  constructor(public apiService: ApiService, public dialog: MatDialog, public userService: UserService) {
+  constructor(public apiService: ApiService, public dialog: MatDialog, public userService: UserService, private translate: TranslateService) {
 
   }
   @ViewChild('TABLE') table!: ElementRef;
@@ -104,17 +105,17 @@ export class UsuariosComponent {
 
   deleteUser(userId: string): void {
     Swal.fire({
-      title: '¿Eliminar usuario?',
+      title: this.translate.instant('usuarios.eliminarTitulo'),
       html: `
       <div style="font-size:15px;color:#555;margin-top:6px;">
-        Esta acción no se puede deshacer. El usuario será eliminado del sistema.
+        ${this.translate.instant('usuarios.eliminarDescripcion')}
       </div>
     `,
       icon: 'warning',
       iconColor: '#e11010',
       showCancelButton: true,
-      confirmButtonText: 'Eliminar',
-      cancelButtonText: 'Cancelar',
+      confirmButtonText: this.translate.instant('usuarios.eliminarConfirmar'),
+      cancelButtonText: this.translate.instant('usuarios.cancelar'),
       background: '#ffffff',
       color: '#333',
       customClass: {
@@ -124,20 +125,16 @@ export class UsuariosComponent {
         confirmButton: 'custom-swal-confirm',
         cancelButton: 'custom-swal-cancel'
       },
-      showClass: {
-        popup: 'swal2-show'
-      },
-      hideClass: {
-        popup: 'swal2-hide'
-      }
+      showClass: { popup: 'swal2-show' },
+      hideClass: { popup: 'swal2-hide' }
     }).then((result) => {
       if (result.isConfirmed) {
         this.apiService.deleteUser(userId).subscribe(() => {
           Swal.fire({
-            title: 'Usuario eliminado',
-            text: 'El usuario se eliminó correctamente.',
+            title: this.translate.instant('usuarios.eliminadoTitulo'),
+            text: this.translate.instant('usuarios.eliminadoTexto'),
             icon: 'success',
-            confirmButtonText: 'Aceptar',
+            confirmButtonText: this.translate.instant('usuarios.aceptar'),
             background: '#ffffff',
             color: '#333',
             customClass: {
@@ -149,10 +146,10 @@ export class UsuariosComponent {
           });
         }, () => {
           Swal.fire({
-            title: 'Error',
-            text: 'No se pudo eliminar el usuario.',
+            title: this.translate.instant('usuarios.errorTitulo'),
+            text: this.translate.instant('usuarios.errorTexto'),
             icon: 'error',
-            confirmButtonText: 'Aceptar',
+            confirmButtonText: this.translate.instant('usuarios.aceptar'),
             background: '#ffffff',
             color: '#333',
             customClass: {
