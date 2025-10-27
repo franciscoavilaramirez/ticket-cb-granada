@@ -1,53 +1,68 @@
 <app-navbar></app-navbar>
 
 <app-divisor [titulo]="'siguientePartido'"></app-divisor>
-<div *ngIf="spinnerShow"  class="container__spinner">
-  <mat-spinner [color]="color" ></mat-spinner>
+<div *ngIf="spinnerShow" class="container__spinner">
+  <mat-spinner [color]="color"></mat-spinner>
 </div>
+
 <div *ngIf="infoUserNoMatch" class="ticket-wrapper">
-        <img alt="Tablero de basket" src="assets/imgs/tablero3.png">
-    <h2 class="info-user">{{"infoUsuario" | translate }}</h2>
+  <img alt="Tablero de basket" src="assets/imgs/tablero3.png">
+  <h2 class="info-user">{{ "infoUsuario" | translate }}</h2>
 </div>
+
 <div *ngIf="primerPartido" class="ticket-wrapper">
-    <div class="ticket">
-        <div class="fecha">
-            <div>{{primerPartido.fechaPartido | date:'d MMM' : '' : idioma}}.</div>
-            <div class="dia-semana">{{primerPartido.fechaPartido | date:'EEEE' : '' : idioma}}</div>
-            <div>{{primerPartido.fechaPartido | date:'HH:mm'}}H</div>
-        </div>
-        <div class="equipos-wrapper">
-            <div class="equipos">
-                <div class="nombre">CB Granada</div>
-                <div class="nombre">{{primerPartido.equipoVisitante}}</div>
-            </div>
-        </div>
-        <!-- BOTONES -->
-        <!-- Si tengo la entrada, botones de descarga y devolucion -->
-        <div class="botoness" *ngIf=primerPartido.tengoEntrada>
-            <div (click)="descargar(primerPartido.id, primerPartido.equipoVisitante)" class="btn-descargar">
-                <img class="img-descargar" src="assets/imgs/descargar.png">
-            </div>
-
-           <!-- <div  class="btn-acompanante" >
-              <button mat-button (click)="openAddTicketsUser()" [disabled]="primerPartido.stockEntradas < 1" >
-                <img class="img-acompanante" [src]="primerPartido.stockEntradas >= 1 ? 'assets/imgs/btn_acompañante.png' : 'assets/imgs/btn_acompañante_deshab.png'">
-              </button>
-          </div> -->
-          <div (click)="devolver(primerPartido.id)" class="btn-devolver">
-                <img class="img-devolver" src="assets/imgs/devolver.png">
-            </div>
-        </div>
-        <!-- Si no tengo la entrada, boton de apuntarse si quedan -->
-        <div *ngIf=!primerPartido.tengoEntrada>
-
-            <div *ngIf=primerPartido.stockEntradas (click)="apuntarse(primerPartido.id)" class="btn-apuntame">
-                <img class="img-apuntame" src="assets/imgs/apuntame.png">
-            </div>
-            <div *ngIf=!primerPartido.stockEntradas class="agotadas">
-                AGOTADAS
-            </div>
-        </div>
+  <div class="ticket">
+    <div class="fecha">
+      <div>{{ primerPartido.fechaPartido | date:'d MMM' : '' : idioma }}.</div>
+      <div class="dia-semana">{{ primerPartido.fechaPartido | date:'EEEE' : '' : idioma }}</div>
+      <div>{{ primerPartido.fechaPartido | date:'HH:mm' }}H</div>
     </div>
+
+    <div class="equipos-wrapper">
+      <div class="equipos">
+        <div class="nombre">CB Granada</div>
+        <div class="nombre">{{ primerPartido.equipoVisitante }}</div>
+      </div>
+    </div>
+
+    <!-- BOTONES -->
+    <!-- Si tengo la entrada -->
+    <div class="botoness" *ngIf="primerPartido.tengoEntrada">
+
+      <!-- Descargar -->
+      <button mat-raised-button color="primary" class="btn-descargar"
+        (click)="descargar(primerPartido.id, primerPartido.equipoVisitante)">
+        <mat-icon>download</mat-icon>
+        {{ 'descargar' | translate }}
+      </button>
+
+      <!-- Devolver -->
+      <button mat-raised-button color="warn" class="btn-devolver"
+        (click)="devolver(primerPartido.id)">
+        <mat-icon>undo</mat-icon>
+        {{ 'devolver' | translate }}
+      </button>
+
+    </div>
+
+    <!-- Si no tengo la entrada -->
+    <div class="container-apuntarme" *ngIf="!primerPartido.tengoEntrada">
+
+      <!-- Apuntarse -->
+      <button *ngIf="primerPartido.stockEntradas"
+        mat-raised-button color="accent" class="btn-apuntame"
+        (click)="apuntarse(primerPartido.id)">
+        <mat-icon>sports_basketball</mat-icon>
+        {{ 'apuntame' | translate }}
+      </button>
+
+      <!-- Agotadas -->
+      <div *ngIf="!primerPartido.stockEntradas" class="agotadas">
+        {{ 'agotadas' | translate }}
+      </div>
+
+    </div>
+  </div>
 </div>
 
 <!-- <app-divisor [titulo]="'proximosPartidos'"></app-divisor> -->

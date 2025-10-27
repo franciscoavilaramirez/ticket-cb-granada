@@ -1,43 +1,42 @@
 div {
-    color: white;
+  color: white;
 }
 
 .ticket-wrapper {
-    margin: 0 auto;
-    margin-top: 50px;
-    position: relative;
-    display: flex;
+  margin: 0 auto;
+  margin-top: 50px;
+  position: relative;
+  display: flex;
+  width: auto;
+  justify-content: center;
+  flex-direction: column;
+  max-width: 500px;
+
+  img {
     width: auto;
+    height: auto;
+    display: block;
+    border-radius: 20px;
+  }
+
+  .info-user {
+    display: flex;
     justify-content: center;
-    flex-direction: column;
-    max-width: 500px;
-
-    img {
-        width: auto;
-        height: auto;
-        display: block;
-        border-radius: 20px;
-    }
-
-    .info-user {
-        display: flex;
-        justify-content: center;
-        text-align: center;
-        font-size: 30px;
-        width: 70%;
-        max-width: 80%;
-        overflow: hidden;
-        position: absolute;
-        top: 12%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        font-size: 1.8rem;
-        font-weight: bold;
-        color: rgb(255, 255, 255);
-        text-shadow: 0 0 5px rgba(255, 153, 0, 0.712), 0 0 10px rgb(230, 153, 12),
-            0 0 15px rgb(211, 126, 15), 0 0 20px #0ff, 0 0 30px #00f, 0 0 40px #00f, 0 0 50px #00f;
-
-    }
+    text-align: center;
+    font-size: 30px;
+    width: 70%;
+    max-width: 80%;
+    overflow: hidden;
+    position: absolute;
+    top: 12%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: rgb(255, 255, 255);
+    text-shadow: 0 0 5px rgba(255, 153, 0, 0.712), 0 0 10px rgb(230, 153, 12),
+      0 0 15px rgb(211, 126, 15), 0 0 20px #0ff, 0 0 30px #00f, 0 0 40px #00f, 0 0 50px #00f;
+  }
 }
 
 @media (max-width: 480px) {
@@ -48,275 +47,221 @@ div {
 }
 
 .ticket {
-    background-image: url(/assets/imgs/ticket.svg);
-    background-size: contain;
-    position: relative;
-    width: 485px;
-    height: 220px;
-    margin: 10px;
-    padding: 0% 15% 8% 2%;
-    display: flex;
-    background-repeat: no-repeat;
+  background-image: url(/assets/imgs/ticket.svg);
+  background-size: contain;
+  position: relative;
+  width: 485px;
+  height: 220px;
+  margin: 10px;
+  padding: 0% 15% 8% 2%;
+  display: flex;
+  background-repeat: no-repeat;
 
+  .fecha {
+    position: absolute;
+    top: 6%;
+    left: 7%;
+    font-family: Evogria;
+    font-size: 22px;
+    font-style: italic;
 
+    .dia-semana {
+      font-size: 14px;
+      margin: -2px 37px;
+    }
+  }
 
-    .fecha {
-        position: absolute;
-        top: 6%;
-        left: 7%;
+  .equipos-wrapper {
+    width: 69%;
+    position: absolute;
+    top: 37%;
+
+    .equipos {
+      width: fit-content;
+      margin-left: auto;
+      margin-top: 3px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+
+      .nombre {
+        width: fit-content;
+        font-size: 29px;
+        margin-bottom: 9%;
         font-family: Evogria;
-        font-size: 22px;
-        font-style: italic;
-
-        .dia-semana {
-            font-size: 14px;
-            margin: -2px 37px;
-        }
+      }
     }
+  }
 
-    .equipos-wrapper {
-        width: 69%;
-        position: absolute;
-        top: 37%;
+  /* === BOTONES MAT === */
+  button.btn-descargar,
+  button.btn-devolver,
+  button.btn-apuntame {
+    font-family: 'Evogria', sans-serif;
+    font-size: 14px;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    box-shadow: -5px 4px 17px -6px #000000;
+    border-radius: 6px;
+    transition: all 0.2s ease-in-out;
+    width: 150px;
+    border: 3px solid #fff;
+  }
 
-        .equipos {
-            width: fit-content;
-            margin-left: auto;
-            margin-top: 3px;
-            display: flex;
-            flex-direction: column;
-            align-items: flex-end;
+  button.btn-descargar:hover,
+  button.btn-devolver:hover,
+  button.btn-apuntame:hover {
+    box-shadow: -5px 4px 17px -6px #e20074;
+    transform: scale(1.03);
+  }
 
-            .nombre {
-                width: fit-content;
-                font-size: 29px;
-                margin-bottom: 9%;
-                font-family: Evogria;
-            }
-        }
-    }
+  .btn-descargar {
+    position: absolute;
+    bottom: 20px;
+    left: 50px;
+  }
 
-    .btn-apuntame {
-        position: absolute;
-        bottom: 7px;
-        left: 115px;
-        cursor: pointer;
+  .btn-devolver {
+    position: absolute;
+    bottom: 20px;
+    left: 225px;
+  }
 
-        .img-apuntame {
-            width: 170px;
-            box-shadow: -5px 4px 17px -6px #000000;
-            border-radius: 6px;
-            margin-bottom: 10px;
-        }
+  .btn-apuntame {
+    position: absolute;
+    bottom: 20px;
+    left: 140px;
+  }
 
-        .img-apuntame:hover {
-            box-shadow: -5px 4px 17px -6px #e20074;
-        }
-    }
-
-    .btn-descargar {
-        position: absolute;
-        bottom: 7px;
-        left: 20px;
-        cursor: pointer;
-
-        .img-descargar {
-            width: 150px;
-            box-shadow: -5px 4px 17px -6px #000000;
-            border-radius: 6px;
-            margin-bottom: 10px;
-        }
-
-        .img-descargar:hover {
-            box-shadow: -5px 4px 17px -6px #e20074;
-        }
-    }
-
-    .btn-devolver {
-        position: absolute;
-        bottom: 8px;
-        left: 195px;
-
-        .img-devolver {
-            width: 152px;
-            box-shadow: -5px 4px 17px -6px #000000;
-            border-radius: 6px;
-            margin-bottom: 10px;
-        }
-
-        .img-devolver:hover {
-            box-shadow: -5px 4px 17px -6px #e20074;
-        }
-    }
-
-    .btn-acompanante {
-        position: absolute;
-        bottom: 7px;
-        left: 190px;
-        cursor: pointer;
-
-        .img-acompanante {
-            width: 152px;
-            box-shadow: -5px 4px 17px -6px #000000;
-            border-radius: 6px;
-            margin-left: -8px;
-        }
-
-        .img-acompanante:hover {
-            box-shadow: -5px 4px 17px -6px #e20074;
-        }
-    }
-
-    .btn-apuntame:hover {
-        cursor: pointer;
-    }
-
-    .agotadas {
-        position: absolute;
-        top: 61%;
-        left: 65%;
-        rotate: -28deg;
-        color: red;
-        font-weight: bold;
-        font-size: 30px;
-        background-color: #0a0a0a;
-        box-shadow: 0 0 8px 8px #292727;
-    }
+  .agotadas {
+    position: absolute;
+    top: 61%;
+    left: 65%;
+    rotate: -28deg;
+    color: red;
+    font-weight: bold;
+    font-size: 30px;
+    background-color: #0a0a0a;
+    box-shadow: 0 0 8px 8px #292727;
+  }
 }
 
 .ticket-small {
-    background-image: url("/assets/imgs/ticket.svg");
-    background-size: contain;
-    position: relative;
-    width: 328px;
-    height: 149px;
-    margin: 30px 20px 20px 75px;
+  background-image: url("/assets/imgs/ticket.svg");
+  background-size: contain;
+  position: relative;
+  width: 328px;
+  height: 149px;
+  margin: 30px 20px 20px 75px;
 
-    .fecha {
-        font-size: 14px;
+  .fecha {
+    font-size: 14px;
 
-        .dia-semana {
-            margin: -6px 22px;
-            font-size: 12px;
-        }
+    .dia-semana {
+      margin: -6px 22px;
+      font-size: 12px;
     }
+  }
 
-    .equipos-wrapper {
-        position: absolute;
-        top: 34%;
+  .equipos-wrapper {
+    position: absolute;
+    top: 34%;
 
-        .equipos {
-            .nombre {
-                font-size: 18px;
-                margin-bottom: 1px;
-            }
-        }
+    .equipos {
+      .nombre {
+        font-size: 18px;
+        margin-bottom: 1px;
+      }
     }
+  }
 
-    .btn-apuntame {
-        position: absolute;
-        left: 64px;
-        width: 40%;
+  /* === BOTONES PEQUEÑOS MAT === */
+  button.btn-apuntame,
+  button.btn-descargar,
+  button.btn-devolver {
+    font-family: 'Evogria', sans-serif;
+    font-size: 11px;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    box-shadow: -5px 4px 17px -6px #000000;
+    border-radius: 6px;
+    transition: all 0.2s ease-in-out;
+  }
 
+  button.btn-apuntame:hover,
+  button.btn-descargar:hover,
+  button.btn-devolver:hover {
+    box-shadow: -5px 4px 17px -6px #e20074;
+    transform: scale(1.03);
+  }
 
-        .img-apuntame {
-            width: 170px;
-            box-shadow: -5px 4px 17px -6px #000000;
-            border-radius: 6px;
-            width: 100%;
-        }
+  .btn-descargar {
+    position: absolute;
+    bottom: 7px;
+    left: 6px;
+  }
 
-        .img-apuntame:hover {
-            box-shadow: -5px 4px 17px -6px #e20074;
-        }
-    }
+  .btn-devolver {
+    position: absolute;
+    bottom: 8px;
+    left: 125px;
+  }
 
-    .btn-apuntame:hover {
-        cursor: pointer;
-    }
+  .btn-apuntame {
+    position: absolute;
+    left: 64px;
+    bottom: 7px;
+    width: 40%;
+  }
 
-    .btn-descargar {
-        position: absolute;
-        bottom: 7px;
-        left: 6px;
-        cursor: pointer;
-
-        .img-descargar {
-            width: 115px;
-            box-shadow: -5px 4px 17px -6px #000000;
-            border-radius: 6px;
-        }
-
-        .img-descargar:hover {
-            box-shadow: -5px 4px 17px -6px #e20074;
-        }
-    }
-
-    .btn-devolver {
-        position: absolute;
-        bottom: 8px;
-        left: 125px;
-        cursor: pointer;
-
-        .img-devolver {
-            width: 116px;
-            box-shadow: -5px 4px 17px -6px #000000;
-            border-radius: 6px;
-        }
-
-        .img-devolver:hover {
-            box-shadow: -5px 4px 17px -6px #e20074;
-        }
-    }
-
-    .agotadas {
-        position: absolute;
-        top: 58%;
-        left: 61%;
-        font-size: 23px;
-    }
+  .agotadas {
+    position: absolute;
+    top: 58%;
+    left: 61%;
+    font-size: 23px;
+  }
 }
 
 .container {
-    //height:150%;
-    width: 100%;
-    display: grid;
-    // padding: 100px;
-    padding: 50px 0px 70px 30px;
+  width: 100%;
+  display: grid;
+  padding: 50px 0px 70px 30px;
 
-    &__spinner {
-        display: flex;
-        justify-content: center;
+  &__spinner {
+    display: flex;
+    justify-content: center;
+  }
+
+  &__table {
+    display: flex;
+    padding: 50px, 50px, 0px, 50px;
+    justify-content: space-around;
+
+    .buscador {
+      display: flex;
+      flex-direction: column;
     }
 
-    &__table {
+    &__content-table {
+      display: flex;
+      justify-content: center;
+      margin-top: 50px;
+      width: 70%;
+      padding-left: initial;
+      padding-top: inherit;
+      flex-direction: column;
+      align-items: flex-end;
+      width: 70%;
+
+      .buscador {
         display: flex;
-        //flex-direction: column;
-        padding: 50px, 50px, 0px, 50px;
-        justify-content: space-around;
-
-        //width: 81px;
-        .buscador {
-            display: flex;
-            flex-direction: column;
-        }
-
-        &__content-table {
-            display: flex;
-            justify-content: center;
-            margin-top: 50px;
-            width: 70%;
-            padding-left: initial;
-            padding-top: inherit;
-            flex-direction: column;
-            align-items: flex-end;
-            width: 70%;
-
-            .buscador {
-                display: flex;
-                flex-direction: column;
-                width: 50%;
-            }
-        }
+        flex-direction: column;
+        width: 50%;
+      }
     }
+  }
 }
