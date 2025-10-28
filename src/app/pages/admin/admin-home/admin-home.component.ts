@@ -70,6 +70,10 @@ export class AdminHomeComponent implements AfterViewInit {
   dialogRef!: MatDialogRef<any>;
 
   ngOnInit() {
+    const userData = this.userService.getUserData();
+    if (!userData.isAdmin){
+      this.router.navigate(['/home']);
+    };
     this.getUsers();
     this.getProximosPartidos();
     this.getPartidosAnteriores();

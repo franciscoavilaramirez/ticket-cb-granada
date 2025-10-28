@@ -12,6 +12,7 @@ import { MatchAssistUserComponent } from '../../../componentes/match-assist-user
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { TranslateService } from '@ngx-translate/core';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -21,7 +22,7 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class UsuariosComponent {
 
-  constructor(public apiService: ApiService, public dialog: MatDialog, public userService: UserService, private translate: TranslateService) {
+  constructor(private router: Router, public apiService: ApiService, public dialog: MatDialog, public userService: UserService, private translate: TranslateService) {
 
   }
   @ViewChild('TABLE') table!: ElementRef;
@@ -39,6 +40,10 @@ export class UsuariosComponent {
 
 
   ngOnInit() {
+    const userData = this.userService.getUserData();
+    if (!userData.isAdmin){
+      this.router.navigate(['/home']);
+    };
     this.getUsers()
   }
   // Método para aplicar el filtro
