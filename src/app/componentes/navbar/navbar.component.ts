@@ -3,7 +3,7 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { UserService } from '../../service/user.service';
 import { ApiService } from '../../service/api.service';
 import { CommonModule } from '@angular/common';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 
 @Component({
@@ -28,7 +28,8 @@ export class NavbarComponent implements OnInit {
   constructor(
     private translate: TranslateService,
     public userService: UserService,
-    public apiService: ApiService
+    public apiService: ApiService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -57,5 +58,14 @@ export class NavbarComponent implements OnInit {
     this.translate.use(lang);
     this.apiService.cambiarIdioma(lang);
     localStorage.setItem('lang', lang);
+  }
+
+  logout() {
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+
+    this.router.navigate(['/login']).then(() => {
+      window.location.reload();
+    });
   }
 }

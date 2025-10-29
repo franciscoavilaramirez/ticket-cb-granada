@@ -11,23 +11,23 @@
 
   <div class="right" [class.active]="menuAbierto">
     <a *ngIf="!isAdmin" routerLink="/home" (click)="cerrarMenu()">
-      <div class="titulo">{{"navbar.inicio" | translate }}</div>
+      <div class="titulo">{{ "navbar.inicio" | translate }}</div>
       <img class="icono" src="assets/imgs/home.png">
     </a>
     <a *ngIf="isAdmin" routerLink="/admin-home" (click)="cerrarMenu()">
-      <div class="titulo">{{"navbar.inicio" | translate }}</div>
+      <div class="titulo">{{ "navbar.inicio" | translate }}</div>
       <img class="icono" src="assets/imgs/home.png">
     </a>
     <a routerLink="/perfil" (click)="cerrarMenu()">
-      <div class="titulo">{{"navbar.perfil" | translate }}</div>
+      <div class="titulo">{{ "navbar.perfil" | translate }}</div>
       <img class="icono" src="assets/imgs/user.png">
     </a>
     <a *ngIf="isAdmin" routerLink="/usuarios" (click)="cerrarMenu()">
-      <div class="titulo">{{"navbar.usuarios" | translate }}</div>
+      <div class="titulo">{{ "navbar.usuarios" | translate }}</div>
       <img class="icono users-icon" src="assets/imgs/users.png">
     </a>
     <a>
-      <div class="titulo">{{"idioma.titulo" | translate }}</div>
+      <div class="titulo">{{ "idioma.titulo" | translate }}</div>
       <select
         class="select desplegable"
         [value]="activeLang"
@@ -37,4 +37,12 @@
       </select>
     </a>
   </div>
+
+  <button class="logout-btn" (click)="logout()">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 22 24"
+         stroke="white" stroke-width="2" class="logout-icon">
+      <path stroke-linecap="round" stroke-linejoin="round"
+        d="M15.75 9V5.25A2.25 2.25 0 0013.5 3H6.75A2.25 2.25 0 004.5 5.25v13.5A2.25 2.25 0 006.75 21H13.5a2.25 2.25 0 002.25-2.25V15m3-3h-9m0 0l3-3m-3 3l3 3" />
+    </svg>
+  </button>
 </div>

@@ -16,27 +16,35 @@
   font-family: 'Allerta';
   font-size: 18px;
   padding: 5px 0;
+  justify-content: center;
+
   .right {
     display: flex;
     margin-left: auto;
-    margin-right: 40px;
   }
+
   .icono {
     width: 25px;
     margin-left: 10px;
   }
+
   .users-icon {
     width: 35px;
   }
+
   .tsystems {
     margin-left: 31px;
   }
-  .tsystems, .granada {
+
+  .tsystems,
+  .granada {
     width: 30px;
   }
+
   .x {
     margin-left: 15px;
   }
+
   a {
     text-decoration: none;
     display: flex;
@@ -46,13 +54,16 @@
     width: fit-content;
     border-radius: 50px;
   }
+
   a:hover {
     background-color: $magenta-light;
   }
-  .select{
+
+  .select {
     margin-left: 15px;
     height: 35px;
   }
+
   .desplegable {
     border-radius: 50px;
   }
@@ -98,8 +109,8 @@
   display: none;
   flex-direction: column;
   justify-content: space-between;
-  width: 26px;
-  height: 18px;
+  width: 35px;
+  height: 25px;
   background: transparent;
   border: none;
   cursor: pointer;
@@ -151,7 +162,9 @@
       display: flex;
     }
 
-    .icono.tsyste, .x, .granada {
+    .icono.tsyste,
+    .x,
+    .granada {
       flex-shrink: 0;
     }
   }
@@ -161,9 +174,42 @@
       opacity: 0;
       transform: translateY(-8px);
     }
+
     to {
       opacity: 1;
       transform: translateY(0);
     }
+  }
+}
+
+.logout-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  margin-right: 40px;
+  height: 100%;
+  width: auto;
+  border-radius: 50%;
+  padding: 9px 11px;
+}
+
+.logout-btn:hover {
+  background-color: #F25EA3;
+  transform: scale(0.9);
+}
+
+.logout-icon {
+  width: 28px;
+  height: 28px;
+  stroke: white;
+}
+
+@media (max-width: 900px) {
+  .logout-btn {
+    margin-right: 15px;
   }
 }
