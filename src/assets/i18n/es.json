@@ -74,7 +74,11 @@
     "eliminadoTexto": "El usuario se eliminó correctamente.",
     "errorTitulo": "Error",
     "errorTexto": "No se pudo eliminar el usuario.",
-    "aceptar": "Aceptar"
+    "aceptar": "Aceptar",
+    "actualizadoTitulo": "Usuario actualizado",
+    "actualizadoTexto": "Los datos del usuario se han guardado correctamente.",
+    "errorActualizarTitulo": "Error al actualizar",
+    "errorActualizarTexto": "No se pudo actualizar el usuario. Inténtalo de nuevo más tarde."
   },
   "modalAnadirUsuario": {
     "inscritos": "Usuarios Inscritos:",
@@ -200,7 +204,9 @@
       "tokenExpiredTitle": "Enlace caducado",
       "tokenExpiredText": "Tu enlace de recuperación ha caducado. Solicita uno nuevo.",
       "errorTitleEmail": "Error al enviar el correo",
-      "errorEmailNotFound": "El correo electrónico introducido no está registrado. Por favor, comprueba que esté bien escrito."
+      "errorEmailNotFound": "El correo electrónico introducido no está registrado. Por favor, comprueba que esté bien escrito.",
+      "errorCurrentPasswordTitle": "Contraseña incorrecta",
+      "errorCurrentPasswordText": "La contraseña actual que has introducido no es válida. Por favor, verifica tus datos e inténtalo de nuevo."
     }
   },
   "hasOlvidadoContrasena": "¿Has olvidado tu contraseña?",

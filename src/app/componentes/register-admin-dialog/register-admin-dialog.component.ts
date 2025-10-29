@@ -47,7 +47,6 @@ export class RegisterAdminDialogComponent implements OnInit {
   private readonly passwordPattern =
     /^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~`]).{8,}$/;
 
-  // 🔧 Claves corregidas para coincidir con el HTML
   hidePassword: { [key: string]: boolean } = {
     contrasenaNueva: true,
     contrasenaRepetida: true,

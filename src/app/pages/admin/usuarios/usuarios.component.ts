@@ -41,7 +41,7 @@ export class UsuariosComponent {
 
   ngOnInit() {
     const userData = this.userService.getUserData();
-    if (!userData.isAdmin){
+    if (!userData.isAdmin) {
       this.router.navigate(['/home']);
     };
     this.getUsers()
@@ -95,16 +95,26 @@ export class UsuariosComponent {
       this.getUsers();
     });
   }
+
   getPartidosInscritosUser(idUsuario: number) {
-    this.apiService.getPartidosInscritos(idUsuario).subscribe(data => {
-      this.partidosInscritos = data;
-      const dialog = this.dialog.open(MatchAssistUserComponent, {
-        data: this.partidosInscritos,
-        width: '30vw',
-        height: '75vh',
-      });
-      dialog.afterClosed().subscribe(result => {
-      });
+    this.apiService.getPartidosInscritos(idUsuario).subscribe({
+      next: (data) => {
+        if (!data || (Array.isArray(data) && data.length === 0)) {
+          this.partidosInscritos = [];
+        } else {
+          this.partidosInscritos = Array.isArray(data) ? data : [data];
+        }
+
+        this.dialog.open(MatchAssistUserComponent, {
+          data: this.partidosInscritos,
+          width: '30vw',
+          height: '75vh',
+        });
+      },
+      error: (err) => {
+        console.error('Error obteniendo partidos inscritos:', err);
+        this.partidosInscritos = [];
+      }
     });
   }
 

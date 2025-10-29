@@ -69,7 +69,11 @@
     "eliminadoTexto": "The user has been successfully removed.",
     "errorTitulo": "Error",
     "errorTexto": "The user could not be deleted.",
-    "aceptar": "OK"
+    "aceptar": "OK",
+    "actualizadoTitulo": "User updated",
+    "actualizadoTexto": "The user information has been successfully saved.",
+    "errorActualizarTitulo": "Update failed",
+    "errorActualizarTexto": "The user could not be updated. Please try again later."
   },
   "modalAnadirUsuario": {
     "inscritos": "Registered Users:",
@@ -195,7 +199,9 @@
       "tokenExpiredTitle": "Expired link",
       "tokenExpiredText": "Your recovery link has expired. Please request a new one.",
       "errorTitleEmail": "Error sending email",
-    "errorEmailNotFound": "The email address is not registered. Please check that it is spelled correctly."
+      "errorEmailNotFound": "The email address is not registered. Please check that it is spelled correctly.",
+      "errorCurrentPasswordTitle": "Incorrect password",
+      "errorCurrentPasswordText": "The current password you entered is not valid. Please check your information and try again."
     }
   },
   "hasOlvidadoContrasena": "Forgot your password?",
