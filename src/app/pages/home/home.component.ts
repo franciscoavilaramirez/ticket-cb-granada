@@ -22,7 +22,7 @@ export class HomeComponent {
     private userService: UserService,
     private cdr: ChangeDetectorRef,
     private translate: TranslateService
-  ) {}
+  ) { }
 
   idioma: string = 'es';
   idUsuario: number;
@@ -76,37 +76,49 @@ export class HomeComponent {
   }
 
   apuntarse(idPartido: number) {
-  this.apiService.asignarEntrada(this.idUsuario, idPartido).subscribe(response => {
-    if (response) {
-      this.actualizarPartidoLocal(idPartido, true);
-    } else {
-      // Usamos ngx-translate para los textos
-      const titulo = this.translate.instant('alertas.entradasAgotadasTitulo');
-      const texto = this.translate.instant('alertas.entradasAgotadasTexto');
-      const confirmar = this.translate.instant('alertas.aceptar');
+    this.apiService.asignarEntrada(this.idUsuario, idPartido).subscribe(response => {
+      if (response) {
+        this.actualizarPartidoLocal(idPartido, true);
+      } else {
+        // Usamos ngx-translate para los textos
+        const titulo = this.translate.instant('alertas.entradasAgotadasTitulo');
+        const texto = this.translate.instant('alertas.entradasAgotadasTexto');
+        const confirmar = this.translate.instant('alertas.aceptar');
 
-      Swal.fire({
-        title: titulo,
-        text: texto,
-        icon: 'warning',
-        confirmButtonText: confirmar,
-        confirmButtonColor: '#36BF98',
-        background: '#fff',
-        color: '#333',
-        showClass: {
-          popup: 'animate__animated animate__fadeInDown'
-        },
-        hideClass: {
-          popup: 'animate__animated animate__fadeOutUp'
-        }
-      });
-    }
-  });
-}
+        Swal.fire({
+          title: titulo,
+          text: texto,
+          icon: 'warning',
+          confirmButtonText: confirmar,
+          confirmButtonColor: '#36BF98',
+          background: '#fff',
+          color: '#333',
+          showClass: {
+            popup: 'animate__animated animate__fadeInDown'
+          },
+          hideClass: {
+            popup: 'animate__animated animate__fadeOutUp'
+          }
+        });
+      }
+    });
+  }
 
   devolver(idPartido: number) {
     this.apiService.desasignarEntrada(this.idUsuario, idPartido).subscribe(() => {
       this.actualizarPartidoLocal(idPartido, false);
+      this.getPartidosFuturos();
+      this.apiService.getProximosPartidos().subscribe(proximosPartidos => {
+        if (proximosPartidos && proximosPartidos.length > 0) {
+          this.primerPartido = proximosPartidos[0];
+          proximosPartidos.splice(0, 1);
+          this.partidos = proximosPartidos.map(p => ({
+            ...p,
+            tengoEntrada: this.misPartidosIds.includes(p.id)
+          }));
+          this.cdr.detectChanges();
+        }
+      });
     });
   }
 
