@@ -10,8 +10,14 @@ import { TokenService } from './service/token.service';
 export class AppComponent {
 
   constructor(translate: TranslateService, private tokenService: TokenService) {
+    translate.addLangs(['es', 'en']);
+    const storedLang = localStorage.getItem('lang');
+    const browserLang = navigator.language || navigator.languages[0] || 'es';
+    const shortLang = browserLang.split('-')[0];
+    const selectedLang = storedLang || (['es', 'en'].includes(shortLang) ? shortLang : 'es');
+
     translate.setDefaultLang('es');
-    translate.use('es');
+    translate.use(selectedLang);
   }
 
   router: any;
