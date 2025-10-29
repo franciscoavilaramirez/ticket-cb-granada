@@ -175,5 +175,34 @@
     "entradasAgotadasTitulo": "Entradas agotadas",
     "entradasAgotadasTexto": "Lo sentimos, no quedan entradas disponibles para este partido.",
     "aceptar": "Aceptar"
-  }
+  },
+  "passwordReset": {
+    "request": {
+      "title": "Recuperar contraseña",
+      "info": "Introduce el correo con el que te registraste y te enviaremos un enlace para restablecer la contraseña.",
+      "send": "Enviar enlace",
+      "successTitle": "Correo enviado",
+      "successHtml": "Hemos enviado un correo con instrucciones para restablecer la contraseña. Comprueba tu bandeja de entrada.",
+      "errorTitle": "Error al enviar correo",
+      "errorHtml": "No se ha podido enviar el correo de restablecimiento. Comprueba el email y vuelve a intentarlo.",
+      "back": "Volver al inicio de sesión"
+    },
+    "reset": {
+      "title": "Restablecer contraseña",
+      "info": "Introduce una nueva contraseña y confírmala.",
+      "change": "Cambiar contraseña",
+      "invalidTokenTitle": "Enlace inválido",
+      "invalidTokenText": "El enlace de restablecimiento no es válido o ha caducado.",
+      "successTitle": "Contraseña cambiada",
+      "successHtml": "Tu contraseña ha sido actualizada correctamente. Ya puedes iniciar sesión con la nueva contraseña.",
+      "errorTitle": "Error al cambiar contraseña",
+      "errorHtml": "No se ha podido cambiar la contraseña. El enlace puede haber caducado o ser inválido.",
+      "tokenExpiredTitle": "Enlace caducado",
+      "tokenExpiredText": "Tu enlace de recuperación ha caducado. Solicita uno nuevo.",
+      "errorTitleEmail": "Error al enviar el correo",
+      "errorEmailNotFound": "El correo electrónico introducido no está registrado. Por favor, comprueba que esté bien escrito."
+    }
+  },
+  "hasOlvidadoContrasena": "¿Has olvidado tu contraseña?",
+  "recuperarContrasena": "Recupérala aquí"
 }

@@ -175,6 +175,11 @@
       font-weight: 500;
     }
 
+    .user-email {
+      color: #717171;
+      font-weight: 300;
+    }
+
     .no-users {
       text-align: center;
       font-size: 15px;
@@ -217,10 +222,11 @@
   display: flex !important;
   justify-content: center;
   align-items: center;
-  width: 100%;
+  width: 100% !important;
   max-width: 550px !important;
   height: auto !important;
   max-height: 90vh !important;
+  padding: 0 30px;
 }
 
 ::ng-deep .mat-mdc-dialog-container {

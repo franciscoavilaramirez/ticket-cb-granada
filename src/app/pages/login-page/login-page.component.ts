@@ -76,13 +76,22 @@ export class LoginPageComponent implements OnInit, OnDestroy {
     this.http.post<any>(environment.apiUrl + 'login', { email, password }).subscribe({
       next: (response: any) => {
         localStorage.setItem('token', response.token);
-        const jwt = new JwtHelperService();
-        const tokenDecoded = jwt.decodeToken(response.token); // Pasamos la variable 'token' aquí
         this.tokenService.token = response.token;
 
-        if (tokenDecoded.usuario.isAdmin) {
-          this.router.navigate(['/admin-home']);
+        const jwt = new JwtHelperService();
+        const tokenDecoded = jwt.decodeToken(response.token);
+
+        if (tokenDecoded?.usuario) {
+          this.userService.setUserData(tokenDecoded.usuario);
+          localStorage.setItem('user', JSON.stringify(tokenDecoded.usuario));
+
+          if (tokenDecoded.usuario.isAdmin) {
+            this.router.navigate(['/admin-home']);
+          } else {
+            this.router.navigate(['/home']);
+          }
         } else {
+          console.warn('Token no contiene datos de usuario', tokenDecoded);
           this.router.navigate(['/home']);
         }
       },

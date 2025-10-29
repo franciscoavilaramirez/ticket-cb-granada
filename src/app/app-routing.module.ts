@@ -3,9 +3,13 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './auth.guard';
 import { ArchivosPDFComponent } from './componentes/archivos-pdf/archivos-pdf.component';
 import { SubirEntradasComponent } from './pages/admin/subir-entradas/subir-entradas.component';
+import { ForgotPasswordComponent } from './componentes/forgot-password/forgot-password.component';
+import { ResetPasswordComponent } from './componentes/reset-password/reset-password.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: 'forgot-password', component: ForgotPasswordComponent },
+  { path: 'reset-password', component: ResetPasswordComponent },
   {
     path: 'home',
     loadChildren: () =>

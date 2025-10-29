@@ -23,6 +23,13 @@ import { EmailConfirmacionComponent } from './pages/email-confirmacion/email-con
 import { Router } from '@angular/router';
 import { TokenService } from './service/token.service';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { ResetPasswordComponent } from './componentes/reset-password/reset-password.component';
+import { ForgotPasswordComponent } from './componentes/forgot-password/forgot-password.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatFormFieldModule } from "@angular/material/form-field";
+import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
+import { MatIconModule } from "@angular/material/icon";
 
 registerLocaleData(localeEs, 'es');
 
@@ -31,17 +38,26 @@ export function HttpLoaderFactory(http: HttpClient) {
 }
 
 export function initApp(tokenService: TokenService, router: Router) {
-  return () =>
-    tokenService.tokenConfig().catch(() => {
+  return () => {
+    const publicRoutes = ['/login', '/signup', '/forgot-password', '/reset-password', '/email'];
+    const currentUrl = window.location.pathname;
+
+    if (publicRoutes.includes(currentUrl)) {
+      return Promise.resolve(true);
+    }
+
+    return tokenService.tokenConfig().catch(() => {
       router.navigate(['/login']);
       return Promise.resolve(false);
     });
+  };
 }
 
 @NgModule({
   declarations: [
     AppComponent,
     EmailConfirmacionComponent,
+    ResetPasswordComponent
   ],
   imports: [
     HttpClientModule,
@@ -59,20 +75,31 @@ export function initApp(tokenService: TokenService, router: Router) {
     HabilitarEntradasComponent,
     AddEntradasUsuarioComponent,
     MatchAssistUserComponent,
+    FormsModule,
+    BrowserAnimationsModule,
+    ReactiveFormsModule,
+    TranslateModule,
+    BrowserModule,
+    ReactiveFormsModule,
+    FormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
     TranslateModule.forRoot({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: HttpLoaderFactory,
-        deps: [HttpClient],
-      },
+        loader: {
+            provide: TranslateLoader,
+            useFactory: HttpLoaderFactory,
+            deps: [HttpClient],
+        },
     }),
-
     JwtModule.forRoot({
-      config: {
-        tokenGetter: () => localStorage.getItem('token'),
-      },
+        config: {
+            tokenGetter: () => localStorage.getItem('token'),
+        },
     }),
-  ],
+    MatFormFieldModule,
+    MatIconModule
+],
   providers: [
     { provide: LOCALE_ID, useValue: 'es' },
     {

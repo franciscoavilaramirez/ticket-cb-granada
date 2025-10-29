@@ -15,9 +15,16 @@ export class AuthGuard implements CanActivate {
     private tokenService: TokenService,
     private userService: UserService,
     private jwtHelper: JwtHelperService
-  ) {}
+  ) { }
 
   canActivate(): boolean {
+    const publicRoutes = ['/login', '/signup', '/forgot-password', '/reset-password', '/email'];
+
+    const currentUrl = this.router.url.split('?')[0];
+    if (publicRoutes.includes(currentUrl)) {
+      return true;
+    }
+
     const token = this.tokenService.token;
 
     if (!token) {

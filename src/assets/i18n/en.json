@@ -10,7 +10,6 @@
   "editarContrasena": "Edit Password",
   "actualContrasena": "Current Password",
   "nuevaContrasena": "New Password",
-
   "requisitosContrasena": "The password must have at least 8 characters, one lowercase letter, one uppercase letter and one special character",
   "requisitosEmail": "The email must have @t-systems.com",
   "administrador": "Admin",
@@ -33,7 +32,6 @@
   "partidosFuturos": "Future matches",
   "login": "Log In",
   "infoUsuario": "This week our CB Granada does not play at home",
-
   "card": {
     "mostrarOcultar": "Show registered",
     "anadirUsuario": "Add user match",
@@ -137,7 +135,6 @@
     "aceptar": "Accept",
     "cancelar": "Cancel"
   },
-
   "errores": {
     "nombreRequerido": "The name is required.",
     "apellidosRequeridos": "The last name is required.",
@@ -155,7 +152,8 @@
     "errorRegistro": "Error registering user. The email may already be in use.",
     "errorRegistroSwal": "Error registering user",
     "usuarioRegistradoExito": "User successfully registered",
-    "usuarioRegistradoVerificarCorreo": "Check your inbox to validate your account."
+    "usuarioRegistradoVerificarCorreo": "Check your inbox to validate your account.",
+    "emailInvalid": "Email is invalid"
   },
   "bienvenidaMagentaBasket": "Welcome to Magenta Basket!",
   "noTienesCuenta": "Don't have an account yet?",
@@ -172,5 +170,34 @@
     "entradasAgotadasTitulo": "Tickets sold out",
     "entradasAgotadasTexto": "Sorry, there are no tickets available for this match.",
     "aceptar": "OK"
-  }
+  },
+  "passwordReset": {
+    "request": {
+      "title": "Recover password",
+      "info": "Enter the email you used to register and we'll send you a link to reset your password.",
+      "send": "Send link",
+      "successTitle": "Email sent",
+      "successHtml": "We have sent an email with instructions to reset your password. Please check your inbox.",
+      "errorTitle": "Error sending email",
+      "errorHtml": "Could not send the reset email. Please check the address and try again.",
+      "back": "Back to Login"
+    },
+    "reset": {
+      "title": "Reset password",
+      "info": "Enter a new password and confirm it.",
+      "change": "Change password",
+      "invalidTokenTitle": "Invalid link",
+      "invalidTokenText": "The reset link is invalid or has expired.",
+      "successTitle": "Password changed",
+      "successHtml": "Your password has been updated. You can now log in with your new password.",
+      "errorTitle": "Error changing password",
+      "errorHtml": "Could not update the password. The link may have expired or be invalid.",
+      "tokenExpiredTitle": "Expired link",
+      "tokenExpiredText": "Your recovery link has expired. Please request a new one.",
+      "errorTitleEmail": "Error sending email",
+    "errorEmailNotFound": "The email address is not registered. Please check that it is spelled correctly."
+    }
+  },
+  "hasOlvidadoContrasena": "Forgot your password?",
+  "recuperarContrasena": "Recover it here"
 }

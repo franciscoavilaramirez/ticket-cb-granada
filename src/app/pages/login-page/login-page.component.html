@@ -63,5 +63,14 @@
       <div *ngIf="errorMessage" class="error-message">{{ errorMessage | translate }}</div>
       <div *ngIf="errorDevClient" class="error-message">{{ errorDevClient | translate }}</div>
     </form>
+
+    <div class="forgot-password-container">
+      <p class="forgot-password-text">
+        {{ "hasOlvidadoContrasena" | translate }}
+        <a routerLink="/forgot-password" class="forgot-password-link">
+          {{ "recuperarContrasena" | translate }}
+        </a>
+      </p>
+    </div>
   </div>
 </div>

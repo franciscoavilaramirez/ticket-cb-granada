@@ -36,9 +36,8 @@ import { Subscription } from 'rxjs';
     MatDatepickerModule,
     TranslateModule,
     MatIconModule,
-    ErrorAlertFormComponent,
-    MatButtonModule,
-  ],
+    MatButtonModule
+],
 })
 export class RegisterAdminDialogComponent implements OnInit {
   registerForm!: FormGroup;
