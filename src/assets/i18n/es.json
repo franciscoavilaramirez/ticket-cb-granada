@@ -86,7 +86,13 @@
     "noHayInscritos": "No hay usuarios registrados en este partido",
     "pendientes": "Usuarios Pendientes",
     "guardar": "Guardar",
-    "cancelar": "Cancelar"
+    "cancelar": "Cancelar",
+    "noDisponibles": "No hay más usuarios para añadir",
+    "errorNoSeleccionados": "No hay usuarios seleccionados",
+    "exitoAnadir": "{{count}} usuario(s) añadido(s) correctamente",
+    "errorAnadir": "Error al añadir los usuarios seleccionados",
+    "exitoEliminar": "Usuario eliminado correctamente del partido",
+    "errorEliminar": "Error al eliminar el usuario"
   },
   "modificarPartido": {
     "equipoLocal": "Equipo Local",

@@ -9,7 +9,7 @@ import { CommonModule } from '@angular/common';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslateService, TranslateModule } from '@ngx-translate/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatCheckboxModule } from '@angular/material/checkbox';
@@ -40,7 +40,7 @@ import { catchError, concatMap, map, toArray } from 'rxjs/operators';
 })
 export class AddUserComponent implements OnInit {
   usuariosYaInscritos: Usuario[] = [];
-  usuarios: Usuario[] = [];
+  usuarios: (Usuario & { selected?: boolean })[] = [];
   usuariosParaAnadirAlPartido: number[] = [];
   filterPost = '';
   cargando = false;
@@ -49,7 +49,8 @@ export class AddUserComponent implements OnInit {
     private apiService: ApiService,
     public dialogRef: MatDialogRef<AddUserComponent>,
     @Inject(MAT_DIALOG_DATA) public partido: Partido,
-    public snackBar: MatSnackBar
+    public snackBar: MatSnackBar,
+    private translate: TranslateService
   ) {}
 
   ngOnInit(): void {
@@ -76,29 +77,45 @@ export class AddUserComponent implements OnInit {
           .filter(u => !inscritosIds.has(u.user_id))
           .map(u => ({ ...u, selected: !!u.selected }));
 
-        const availableIds = new Set(this.usuarios.map(u => u.user_id));
-        this.usuariosParaAnadirAlPartido = Array.from(new Set(
-          this.usuariosParaAnadirAlPartido.filter(id => id != null && availableIds.has(id))
-        ));
+        this.cleanSelections();
+        this.cargando = false;
       });
+  }
+
+  private cleanSelections(): void {
+    const availableIds = new Set(this.usuarios.map(u => u.user_id));
+    this.usuariosParaAnadirAlPartido = Array.from(new Set(
+      this.usuariosParaAnadirAlPartido.filter(id => availableIds.has(id))
+    ));
   }
 
   trackByUserId(index: number, item: Usuario): any {
     return item?.user_id ?? index;
   }
 
+  get maxSelectable(): number {
+    return Math.max(0, (this.partido.stockEntradas || 0));
+  }
+
+  get selectedCount(): number {
+    return this.usuariosParaAnadirAlPartido.length;
+  }
+
+  isCheckboxDisabled(usuario: Usuario): boolean {
+    return this.selectedCount >= this.maxSelectable && !usuario.selected;
+  }
+
   addUserToSorteo(userId: number | undefined): void {
     if (userId == null) return;
 
     const usuario = this.usuarios.find(u => u.user_id === userId);
-    if (!usuario) {
-      this.usuariosParaAnadirAlPartido = this.usuariosParaAnadirAlPartido.filter(id => id !== userId);
-      return;
-    }
+    if (!usuario) return;
 
     if (usuario.selected) {
-      if (!this.usuariosParaAnadirAlPartido.includes(userId)) {
+      if (this.selectedCount < this.maxSelectable && !this.usuariosParaAnadirAlPartido.includes(userId)) {
         this.usuariosParaAnadirAlPartido.push(userId);
+      } else {
+        usuario.selected = false;
       }
     } else {
       this.usuariosParaAnadirAlPartido = this.usuariosParaAnadirAlPartido.filter(id => id !== userId);
@@ -108,7 +125,11 @@ export class AddUserComponent implements OnInit {
   onSubmit(): void {
     const ids = Array.from(new Set(this.usuariosParaAnadirAlPartido.filter(id => typeof id === 'number'))) as number[];
     if (ids.length === 0) {
-      this.snackBar.open('No hay usuarios seleccionados', 'Cerrar', { duration: 3000 });
+      this.snackBar.open(
+        this.translate.instant('modalAnadirUsuario.errorNoSeleccionados'),
+        this.translate.instant('botones.cerrar'),
+        { duration: 3000 }
+      );
       return;
     }
 
@@ -124,31 +145,23 @@ export class AddUserComponent implements OnInit {
       toArray()
     ).subscribe({
       next: results => {
-        let added = 0;
-        results.forEach(r => {
-          const res = r.res;
-          if (res == null) return;
-          if (typeof res === 'boolean') {
-            if (res === true) added++;
-          } else {
-            added++;
-          }
-        });
-
-        if (added > 0) {
-          this.partido.stockEntradas = Math.max(0, (this.partido.stockEntradas || 0) - added);
-          this.snackBar.open(`${added} usuario(s) añadido(s) correctamente`, 'Cerrar', { duration: 3500 });
-        } else {
-          this.snackBar.open('No se pudieron añadir los usuarios seleccionados', 'Cerrar', { duration: 3500 });
-        }
-
+        const added = results.filter(r => r.res != null).length;
+        this.partido.stockEntradas = Math.max(0, (this.partido.stockEntradas || 0) - added);
+        this.snackBar.open(
+          this.translate.instant('modalAnadirUsuario.exitoAnadir', { count: added }),
+          this.translate.instant('botones.cerrar'),
+          { duration: 3500 }
+        );
         this.usuarios.forEach(u => u.selected = false);
         this.usuariosParaAnadirAlPartido = [];
-
         this.refreshAll();
       },
       error: () => {
-        this.snackBar.open('Error al añadir usuarios', 'Cerrar', { duration: 3500 });
+        this.snackBar.open(
+          this.translate.instant('modalAnadirUsuario.errorAnadir'),
+          this.translate.instant('botones.cerrar'),
+          { duration: 3500 }
+        );
         this.refreshAll();
       },
       complete: () => {
@@ -159,13 +172,30 @@ export class AddUserComponent implements OnInit {
 
   deleteUserInscrito(userId: number | undefined, partidoArg?: Partido): void {
     if (userId == null) return;
-    const partidoToUse = partidoArg && (partidoArg as Partido).id ? partidoArg : this.partido;
+    const partidoToUse = partidoArg?.id ? partidoArg : this.partido;
+
+    this.partido.stockEntradas = (this.partido.stockEntradas || 0) + 1;
 
     this.apiService.deleteUserMatch(userId, partidoToUse)
       .pipe(catchError(() => of(null)))
-      .subscribe(() => {
-        this.partido.stockEntradas = (this.partido.stockEntradas || 0) + 1;
-        this.refreshAll();
+      .subscribe({
+        next: () => {
+          this.usuariosYaInscritos = this.usuariosYaInscritos.filter(u => u.user_id !== userId);
+          this.loadAvailableUsers();
+          this.snackBar.open(
+            this.translate.instant('modalAnadirUsuario.exitoEliminar'),
+            this.translate.instant('botones.cerrar'),
+            { duration: 3000 }
+          );
+        },
+        error: () => {
+          this.partido.stockEntradas = Math.max(0, (this.partido.stockEntradas || 1) - 1);
+          this.snackBar.open(
+            this.translate.instant('modalAnadirUsuario.errorEliminar'),
+            this.translate.instant('botones.cerrar'),
+            { duration: 3000 }
+          );
+        }
       });
   }
 

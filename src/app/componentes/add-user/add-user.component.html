@@ -4,67 +4,72 @@
     <div class="buscador">
       <div class="buscador__field">
         <img class="buscador__icon" src="../../../assets/imgs/search_grey.png" alt="Lupa" />
-        <input
-          type="text"
-          [(ngModel)]="filterPost"
-          placeholder="{{'terminoBuscar' | translate}}"
-        />
+        <input type="text" [(ngModel)]="filterPost" placeholder="{{ 'terminoBuscar' | translate }}" />
       </div>
     </div>
 
     <div class="listas-container">
-  <div class="lista-wrapper">
-    <h1>{{ "modalAnadirUsuario.yaInscritos" | translate }}</h1>
-    <div class="lista">
-      <mat-list role="list">
-        <mat-list-item
-          *ngFor="let usuarioYaInscrito of usuariosYaInscritos | filter: filterPost"
-          role="listitem"
-        >
-          <div class="list-item">
-            <div class="user-details">
-              <span class="user-name">{{ usuarioYaInscrito.nombre }} {{ usuarioYaInscrito.apellidos }}</span>
-              <span class="user-email">{{ usuarioYaInscrito.email }}</span>
+      <!-- Usuarios ya inscritos -->
+      <div class="lista-wrapper">
+        <h1>{{ 'modalAnadirUsuario.yaInscritos' | translate }}</h1>
+        <div class="lista">
+          <ng-container *ngIf="usuariosYaInscritos.length > 0; else noInscritos">
+            <mat-list role="list">
+              <mat-list-item *ngFor="let usuarioYaInscrito of usuariosYaInscritos | filter: filterPost" role="listitem">
+                <div class="list-item">
+                  <div class="user-details">
+                    <span class="user-name">{{ usuarioYaInscrito.nombre }} {{ usuarioYaInscrito.apellidos }}</span>
+                    <span class="user-email">{{ usuarioYaInscrito.email }}</span>
+                  </div>
+                  <div class="user-actions">
+                    <button mat-icon-button color="warn"
+                      (click)="deleteUserInscrito(usuarioYaInscrito.user_id, partido)"
+                      title="{{ 'usuarios.eliminar' | translate }}">
+                      <mat-icon>delete_forever</mat-icon>
+                    </button>
+                  </div>
+                </div>
+              </mat-list-item>
+            </mat-list>
+          </ng-container>
+          <ng-template #noInscritos>
+            <div class="empty-state">
+              <mat-icon class="empty-icon">person_off</mat-icon>
+              <p>{{ 'modalAnadirUsuario.noHayInscritos' | translate }}</p>
             </div>
-            <div class="user-actions">
-              <button
-                mat-icon-button
-                color="warn"
-                (click)="deleteUserInscrito(usuarioYaInscrito.user_id, partido)"
-                title="Eliminar Usuario"
-              >
-                <mat-icon>delete_forever</mat-icon>
-              </button>
+          </ng-template>
+        </div>
+      </div>
+
+      <!-- Usuarios pendientes -->
+      <div class="lista-wrapper">
+        <h1>{{ 'modalAnadirUsuario.pendientes' | translate }}</h1>
+        <div class="lista">
+          <ng-container *ngIf="usuarios.length > 0; else noDisponibles">
+            <section *ngFor="let usuario of usuarios | filter: filterPost; trackBy: trackByUserId">
+              <mat-checkbox [(ngModel)]="usuario.selected" [disabled]="isCheckboxDisabled(usuario)"
+                (ngModelChange)="addUserToSorteo(usuario.user_id)">
+                {{ usuario.nombre }} {{ usuario.apellidos }} ({{ usuario.email }})
+              </mat-checkbox>
+            </section>
+          </ng-container>
+          <ng-template #noDisponibles>
+            <div class="empty-state">
+              <mat-icon class="empty-icon">group_add</mat-icon>
+              <p>{{ 'modalAnadirUsuario.noDisponibles' | translate }}</p>
             </div>
-          </div>
-        </mat-list-item>
-      </mat-list>
+          </ng-template>
+        </div>
+      </div>
     </div>
-  </div>
-
-  <div class="lista-wrapper">
-    <h1>{{ "modalAnadirUsuario.pendientes" | translate }}</h1>
-    <div class="lista">
-      <section *ngFor="let usuario of usuarios | filter: filterPost">
-        <mat-checkbox
-          [(ngModel)]="usuario.selected"
-          (ngModelChange)="addUserToSorteo(usuario.user_id)"
-        >
-          {{ usuario.nombre }} {{ usuario.apellidos }} ({{ usuario.email }})
-        </mat-checkbox>
-      </section>
-    </div>
-  </div>
-</div>
-
 
     <!-- Botones -->
     <div class="buttons">
       <button mat-raised-button class="guardar" (click)="onSubmit()">
-        {{ "botones.guardar" | translate }}
+        {{ 'botones.guardar' | translate }}
       </button>
       <button mat-raised-button class="cancelar" (click)="closedModal()">
-        {{ "botones.cancelar" | translate }}
+        {{ 'botones.cancelar' | translate }}
       </button>
     </div>
   </div>

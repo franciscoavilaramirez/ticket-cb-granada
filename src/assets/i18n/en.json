@@ -81,7 +81,13 @@
     "noHayInscritos": "There are not registered users at this moment",
     "pendientes": "Pending Users",
     "guardar": "Save",
-    "cancelar": "Cancel"
+    "cancelar": "Cancel",
+    "noDisponibles": "There are no more users available to add",
+    "errorNoSeleccionados": "No users selected",
+    "exitoAnadir": "{{count}} user(s) added successfully",
+    "errorAnadir": "Error adding selected users",
+    "exitoEliminar": "User successfully removed from the match",
+    "errorEliminar": "Error removing user"
   },
   "modificarPartido": {
     "titulo": "Update Match",
