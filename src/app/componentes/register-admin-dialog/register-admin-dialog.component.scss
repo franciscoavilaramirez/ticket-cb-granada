@@ -11,9 +11,9 @@ input[type='password']::-webkit-textfield-decoration-container {
 
 ::ng-deep .mat-mdc-dialog-container,
 ::ng-deep .cdk-overlay-pane {
-  width: auto !important;
+  width: 90vw !important;
   max-height: 90vh !important;
-  max-width: 95vw !important;
+  max-width: 400px !important;
   position: static !important;
   height: auto !important;
 }
@@ -30,6 +30,7 @@ input[type='password']::-webkit-textfield-decoration-container {
   align-items: center;
   overflow-y: auto;
   max-height: 90vh;
+  max-width: 400px;
 }
 
 .title {
@@ -60,7 +61,7 @@ input[type='password']::-webkit-textfield-decoration-container {
 
   .form-field {
     width: 100%;
-    min-width: 400px;
+    max-width: 400px;
 
     ::ng-deep .mat-mdc-text-field-wrapper {
       background: #f9f9f9;

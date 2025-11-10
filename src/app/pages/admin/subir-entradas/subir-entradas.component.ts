@@ -8,8 +8,9 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { Partido } from '../../../modelo/partido';
 import Swal from 'sweetalert2';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { CommonModule } from '@angular/common';
+import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 
 @Component({
   selector: 'app-subir-entradas',
@@ -21,24 +22,26 @@ import { CommonModule } from '@angular/common';
     MatFormFieldModule,
     ReactiveFormsModule,
     FormsModule,
-    TranslateModule
-  ]
+    TranslateModule,
+    MatProgressSpinnerModule
+]
 })
 export class SubirEntradasComponent {
   public form: FormGroup;
   private b64: String = "";
   pdf: Pdf = new Pdf();
-  entradas: File
-  noFiles = true
+  entradas: File;
+  noFiles = true;
+  subiendo = false;
   @Output() actualizacionProximosPartidos: EventEmitter<any> = new EventEmitter<void>();
 
 
-  constructor(private apiService: ApiService, private formBuilder: FormBuilder, private dialogRef: MatDialogRef<SubirEntradasComponent>) { }
+  constructor(private apiService: ApiService, private formBuilder: FormBuilder, private dialogRef: MatDialogRef<SubirEntradasComponent>, private translate: TranslateService) { }
 
   ngOnInit() {
     let fechaActual = this.getFechaActual()
     this.form = this.formBuilder.group({
-      granada: [{ value:' CB Granada', disabled: true }],
+      granada: [{ value: ' CB Granada', disabled: true }],
       equipoVisitante: [''],
       fechaPartido: [''],
       fechaPublicacion: fechaActual,
@@ -49,27 +52,32 @@ export class SubirEntradasComponent {
     this.entradas = event.target.files[0];
     this.noFiles = false
   }
-  subirPartido() {
-    let partido: Partido = this.form.value;
 
-    partido.fechaPublicacion = partido.fechaPublicacion + this.getHoraActual()
-    let form = new FormData()
-    form.append('partido', JSON.stringify(partido))
-    form.append('entradasPdf', this.entradas)
+  subirPartido() {
+    this.subiendo = true;
+
+    const partido: Partido = this.form.value;
+    partido.fechaPublicacion = partido.fechaPublicacion + this.getHoraActual();
+
+    const form = new FormData();
+    form.append('partido', JSON.stringify(partido));
+    form.append('entradasPdf', this.entradas);
+
     this.apiService.subirPartido(form).subscribe({
-      next: (r) => {
-           this.actualizacionProximosPartidos.emit();
-           this.dialogRef.close();
+      next: () => {
+        this.actualizacionProximosPartidos.emit();
+        this.subiendo = false;
+        this.dialogRef.close();
       },
-      error: (error) => {
-        Swal.fire("No se ha podido generar el partido", "", "error");
-        console.error("Error al crear el partido:", error);
-      },
-      complete: () => {
+      error: () => {
+        this.subiendo = false;
+        Swal.fire(this.translate.instant('partidos.errorSubir'), '', 'error');
       }
-    }
-    );
-    this.dialogRef.close();
+    });
+  }
+
+  cerrarModal() {
+    if (!this.subiendo) this.dialogRef.close();
   }
 
   subirArchivo(event: any): any {
@@ -79,8 +87,8 @@ export class SubirEntradasComponent {
     })
     obserbable.subscribe((base64) => {
       this.b64 = new String(base64).valueOf();
-      let firstHalf = this.b64.substring(0, this.b64.length/2)
-      let secondHalf = this.b64.substring(this.b64.length/2)
+      let firstHalf = this.b64.substring(0, this.b64.length / 2)
+      let secondHalf = this.b64.substring(this.b64.length / 2)
 
       this.pdf = new Pdf();
       this.pdf.file1 = firstHalf
@@ -105,21 +113,21 @@ export class SubirEntradasComponent {
 
   getFechaActual() {
     let fecha = new Date()
-    let mes:any = fecha.getMonth() + 1
-    let dia:any = fecha.getDate()
-    if(mes < 10) mes = '0'+mes
-    if(dia < 10) dia = '0'+dia
+    let mes: any = fecha.getMonth() + 1
+    let dia: any = fecha.getDate()
+    if (mes < 10) mes = '0' + mes
+    if (dia < 10) dia = '0' + dia
 
-    return fecha.getFullYear()+"-"+mes+"-"+dia
+    return fecha.getFullYear() + "-" + mes + "-" + dia
   }
-  getHoraActual(){
+  getHoraActual() {
     let fecha = new Date()
-    let hora:any = fecha.getHours()
-    let minutos:any = fecha.getMinutes()
-    if(hora < 10) hora = '0'+hora
-    if(minutos < 10) minutos = '0'+minutos
+    let hora: any = fecha.getHours()
+    let minutos: any = fecha.getMinutes()
+    if (hora < 10) hora = '0' + hora
+    if (minutos < 10) minutos = '0' + minutos
 
-    return "T"+ hora +":"+minutos
+    return "T" + hora + ":" + minutos
   }
 
   color = "lightgray"
@@ -128,7 +136,7 @@ export class SubirEntradasComponent {
     this.color = "black"
   }
   onBlur() {
-    if(this.inputValue == '')
+    if (this.inputValue == '')
       this.color = "lightgray"
     else
       this.color = "black"

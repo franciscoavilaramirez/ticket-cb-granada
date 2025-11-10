@@ -11,7 +11,7 @@ form {
   background-color: #fff;
   border-radius: 20px;
   padding: 35px 45px;
-  width: 100%;
+  width: 90vw;
   max-width: 550px !important;
   display: flex;
   flex-direction: column;
@@ -162,7 +162,7 @@ input[type="datetime-local"]:focus::after {
   display: flex !important;
   justify-content: center;
   align-items: center;
-  width: 100%;
+  width: 90vw !important;
   max-width: 550px !important;
   height: auto !important;
   max-height: 90vh !important;
@@ -170,7 +170,7 @@ input[type="datetime-local"]:focus::after {
 }
 
 ::ng-deep .mat-mdc-dialog-container {
-  width: 100% !important;
+  width: 90vw !important;
   height: auto !important;
   max-width: 550px !important;
   max-height: 90vh !important;

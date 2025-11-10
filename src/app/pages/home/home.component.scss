@@ -11,6 +11,7 @@ div {
   justify-content: center;
   flex-direction: column;
   max-width: 500px;
+  width: 90vw;
 
   img {
     width: auto;
@@ -74,7 +75,7 @@ div {
   .equipos-wrapper {
     width: 69%;
     position: absolute;
-    top: 37%;
+    top: 38%;
 
     .equipos {
       width: fit-content;
@@ -110,10 +111,18 @@ div {
     border: 3px solid #fff;
   }
 
-  button.btn-descargar:hover,
-  button.btn-devolver:hover,
   button.btn-apuntame:hover {
     box-shadow: -5px 4px 17px -6px #e20074;
+    transform: scale(1.03);
+  }
+
+  button.btn-descargar:hover {
+    box-shadow: -5px 4px 17px -6px #4758b8;
+    transform: scale(1.03);
+  }
+
+  button.btn-devolver:hover {
+    box-shadow: -5px 4px 17px -6px #f44a3e;
     transform: scale(1.03);
   }
 
@@ -192,10 +201,18 @@ div {
     transition: all 0.2s ease-in-out;
   }
 
-  button.btn-apuntame:hover,
-  button.btn-descargar:hover,
-  button.btn-devolver:hover {
+  button.btn-apuntame:hover {
     box-shadow: -5px 4px 17px -6px #e20074;
+    transform: scale(1.03);
+  }
+
+  button.btn-descargar:hover {
+    box-shadow: -5px 4px 17px -6px #4758b8;
+    transform: scale(1.03);
+  }
+
+  button.btn-devolver:hover {
+    box-shadow: -5px 4px 17px -6px #f44a3e;
     transform: scale(1.03);
   }
 
@@ -263,5 +280,158 @@ div {
         width: 50%;
       }
     }
+  }
+}
+
+@media (max-width: 1024px) {
+  .ticket {
+    transform: scale(0.9);
+    transform-origin: center;
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 768px) {
+  .ticket {
+    width: 70%;
+    height: auto;
+    aspect-ratio: 485 / 220;
+    background-size: contain;
+    padding: 5% 10%;
+    margin: 10px auto;
+  }
+
+  .ticket .fecha {
+    font-size: 18px;
+    left: 6%;
+    top: 8%;
+
+    .dia-semana {
+      margin: -2px 20px;
+      font-size: 12px;
+    }
+  }
+
+  .ticket .equipos-wrapper {
+    top: 35.5%;
+    width: 60%;
+
+    .equipos .nombre {
+      font-size: 22px;
+      margin-bottom: 8%;
+    }
+  }
+
+  .ticket button.btn-descargar,
+  .ticket button.btn-devolver,
+  .ticket button.btn-apuntame {
+    width: 120px;
+    font-size: 12px;
+    border-width: 2px;
+    padding: 6px 8px;
+  }
+
+  .ticket .btn-descargar {
+    left: 30px;
+  }
+
+  .ticket .btn-devolver {
+    left: 180px;
+  }
+
+  .ticket .btn-apuntame {
+    left: 100px;
+  }
+
+  .ticket .agotadas {
+    left: 58%;
+    font-size: 22px;
+  }
+}
+
+@media (max-width: 400px) {
+  .ticket {
+    padding: 5% 10%;
+  }
+
+  .ticket .equipos-wrapper {
+    top: 30%;
+    width: 60%;
+
+    .equipos .nombre {
+      margin-bottom: 5%;
+    }
+  }
+
+  .ticket button.btn-descargar,
+  .ticket button.btn-devolver {
+    width: 100px !important;
+    font-size: 10px !important;
+    padding: 4px 6px;
+    border-width: 2px;
+  }
+}
+
+@media (max-width: 480px) {
+  .ticket {
+    width: 80%;
+    height: auto;
+    aspect-ratio: 485 / 220;
+    background-size: contain;
+    padding: 6% 8%;
+  }
+
+  .ticket .fecha {
+    font-size: 14px;
+    top: 5%;
+    left: 10%;
+
+    .dia-semana {
+      font-size: 10px;
+      margin: -2px 14px;
+    }
+  }
+
+  .ticket .equipos-wrapper {
+    top: 31%;
+    width: 60%;
+
+    .equipos .nombre {
+      font-size: 18px;
+    }
+  }
+
+  .ticket button.btn-descargar,
+  .ticket button.btn-devolver,
+  .ticket button.btn-apuntame {
+    width: 115px;
+    font-size: 11px;
+    padding: 4px 6px;
+    border-width: 2px;
+  }
+
+  .ticket .btn-descargar {
+    left: 20px;
+    bottom: 30px;
+  }
+
+  .ticket .btn-devolver {
+    left: 140px;
+    bottom: 30px;
+  }
+
+  .ticket .btn-apuntame {
+    left: 70px;
+    bottom: 30px;
+  }
+
+  .ticket .agotadas {
+    left: 55%;
+    font-size: 18px;
+    top: 63%;
+  }
+
+  .ticket-wrapper {
+    margin-top: 25px;
   }
 }

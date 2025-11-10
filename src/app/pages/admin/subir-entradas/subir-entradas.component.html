@@ -1,31 +1,47 @@
 <div class="container">
 
     <form [formGroup]="form" (submit)="subirPartido()">
-      <h2>{{"entradas.subir" | translate }}</h2>
-        <div class="content">
+        <h2>{{"entradas.subir" | translate }}</h2>
+        <div class="content" *ngIf="!subiendo; else spinnerTemplate">
             <div>
-                <div class="label">{{"modificarPartido.equipoLocal" | translate }}<span style="color: rgb(221, 37, 37);">*</span></div>
+                <div class="label">{{"modificarPartido.equipoLocal" | translate }}<span
+                        style="color: rgb(221, 37, 37);">*</span></div>
                 <input formControlName="granada" class="input-disabled" required>
             </div>
             <div>
-                <div class="label">{{"modificarPartido.equipoVisitante" | translate }}<span style="color: rgb(221, 37, 37);">*</span></div>
+                <div class="label">{{"modificarPartido.equipoVisitante" | translate }}<span
+                        style="color: rgb(221, 37, 37);">*</span></div>
                 <input formControlName="equipoVisitante" class="equipo" placeholder="Equipo visitante" required>
             </div>
             <div>
-                <div class="label">{{"modificarPartido.fecha" | translate }}<span style="color: rgb(221, 37, 37);">*</span></div>
-                <input [(ngModel)]="inputValue" [ngStyle]="{color:color}" (focus)="onFocus()" (blur)="onBlur()" type="datetime-local" class="datetime-picker" formControlName="fechaPartido" required>
+                <div class="label">{{"modificarPartido.fecha" | translate }}<span
+                        style="color: rgb(221, 37, 37);">*</span></div>
+                <input [(ngModel)]="inputValue" [ngStyle]="{color:color}" (focus)="onFocus()" (blur)="onBlur()"
+                    type="datetime-local" class="datetime-picker" formControlName="fechaPartido" required>
             </div>
             <div>
-                <div class="label">{{"modificarPartido.fechaPublicacion" | translate }}<span style="color: rgb(221, 37, 37);">*</span></div>
-                <input (focus)="onFocus()" (blur)="onBlur()" type="date" class="datetime-picker" formControlName="fechaPublicacion" required>
+                <div class="label">{{"modificarPartido.fechaPublicacion" | translate }}<span
+                        style="color: rgb(221, 37, 37);">*</span></div>
+                <input (focus)="onFocus()" (blur)="onBlur()" type="date" class="datetime-picker"
+                    formControlName="fechaPublicacion" required>
             </div>
 
-        <div>
-            <input type="file" (change)="uploadPdfFile($event)" class="input-file" required>
+            <div>
+                <input type="file" (change)="uploadPdfFile($event)" class="input-file" required>
+            </div>
+            <div class="div-buttons">
+                <button mat-raised-button class="button" type="submit"
+                    [disabled]="!form.valid || noFiles">{{"botones.subir" | translate }}</button>
+                <button mat-raised-button color="warn" class="button cancel-button" type="button"
+                    (click)="cerrarModal()">{{"botones.cancelar" | translate}}
+                </button>
+            </div>
         </div>
-        <div>
-            <button mat-raised-button class="button" type="submit" [disabled]="!form.valid || noFiles">{{"botones.subir" | translate }}</button>
-        </div>
-        </div>
+        <ng-template #spinnerTemplate>
+            <div class="spinner-container">
+                <mat-spinner color="accent"></mat-spinner>
+                <p>{{ "entradas.subiendo" | translate }}</p>
+            </div>
+        </ng-template>
     </form>
 </div>

@@ -45,7 +45,7 @@ export class AdminHomeComponent implements AfterViewInit {
   usuarios!: Usuario[];
   bodyResponse: Usuario;
   partido!: Partido[];
-  proximosPartidos!: Partido[];
+  proximosPartidos: Partido[] = [];
   usuariosPartido!: Usuario[];
   fechaPartido: string;
   idPartido!: string;
@@ -71,7 +71,7 @@ export class AdminHomeComponent implements AfterViewInit {
 
   ngOnInit() {
     const userData = this.userService.getUserData();
-    if (!userData.isAdmin){
+    if (!userData.isAdmin) {
       this.router.navigate(['/home']);
     };
     this.getUsers();
@@ -211,16 +211,27 @@ export class AdminHomeComponent implements AfterViewInit {
 
   deleteMatch(partidoId: Partido) {
     this.openConfirmDialog(
-      'Eliminar partido',
-      '¿Seguro que deseas eliminar este partido?',
-      'Eliminar',
-      'Cancelar',
+      this.translate.instant('partidos.eliminarTitulo'),
+      this.translate.instant('partidos.eliminarDescripcion'),
+      this.translate.instant('partidos.eliminarConfirmar'),
+      this.translate.instant('partidos.cancelar'),
       () => {
-        this.apiService.deleteMatch(partidoId).subscribe(() => {
-          this.getProximosPartidos();
-          this.snackBar.open('Partido eliminado correctamente', 'Cerrar', {
-            duration: 3000,
-          });
+        this.apiService.deleteMatch(partidoId).subscribe({
+          next: () => {
+            this.getProximosPartidos();
+            this.snackBar.open(
+              this.translate.instant('partidos.eliminadoTexto'),
+              this.translate.instant('botones.cerrar'),
+              { duration: 3000 }
+            );
+          },
+          error: () => {
+            this.snackBar.open(
+              this.translate.instant('partidos.errorTexto'),
+              this.translate.instant('botones.cerrar'),
+              { duration: 3000 }
+            );
+          },
         });
       }
     );
@@ -260,7 +271,9 @@ export class AdminHomeComponent implements AfterViewInit {
           }
         });
       } else {
-        this.snackBar.open('No quedan entradas disponibles', 'Cerrar', {
+        this.snackBar.open(
+          this.translate.instant('alertas.entradasAgotadasTitulo'),
+          this.translate.instant('botones.cerrar'), {
           duration: 3000,
         });
       }
@@ -294,7 +307,7 @@ export class AdminHomeComponent implements AfterViewInit {
       this.dataSourceFuturos.data = this.partidosPasados;
     });
   }
-  
+
   openConfirmDialog(
     title: string,
     message: string,

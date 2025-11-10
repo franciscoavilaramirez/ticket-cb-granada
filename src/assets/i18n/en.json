@@ -131,7 +131,8 @@
   },
   "entradas": {
     "subir": "Create Match",
-    "habilitar": "Enable Tickets"
+    "habilitar": "Enable Tickets",
+    "subiendo": "Uploading Tickets..."
   },
   "habilitarEntradas": {
     "titulo": "Enable Tickets",
@@ -211,5 +212,16 @@
     }
   },
   "hasOlvidadoContrasena": "Forgot your password?",
-  "recuperarContrasena": "Recover it here"
+  "recuperarContrasena": "Recover it here",
+  "partidos": {
+    "eliminarTitulo": "Delete match",
+    "eliminarDescripcion": "Are you sure you want to delete this match?",
+    "eliminarConfirmar": "Delete",
+    "cancelar": "Cancel",
+    "eliminadoTitulo": "Match deleted",
+    "eliminadoTexto": "The match was successfully deleted.",
+    "errorTitulo": "Error",
+    "errorTexto": "The match could not be deleted. Please try again later.",
+    "errorSubir": "The match could not be generated"
+  }
 }

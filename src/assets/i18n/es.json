@@ -137,7 +137,8 @@
   },
   "entradas": {
     "subir": "Crear Partido",
-    "habilitar": "Habilitar Entradas"
+    "habilitar": "Habilitar Entradas",
+    "subiendo": "Subiendo entradas..."
   },
   "habilitarEntradas": {
     "titulo": "Habilitar Entradas",
@@ -216,5 +217,16 @@
     }
   },
   "hasOlvidadoContrasena": "¿Has olvidado tu contraseña?",
-  "recuperarContrasena": "Recupérala aquí"
+  "recuperarContrasena": "Recupérala aquí",
+  "partidos": {
+    "eliminarTitulo": "Eliminar partido",
+    "eliminarDescripcion": "¿Seguro que deseas eliminar este partido?",
+    "eliminarConfirmar": "Eliminar",
+    "cancelar": "Cancelar",
+    "eliminadoTitulo": "Partido eliminado",
+    "eliminadoTexto": "El partido se eliminó correctamente.",
+    "errorTitulo": "Error",
+    "errorTexto": "No se pudo eliminar el partido. Inténtalo de nuevo más tarde.",
+    "errorSubir": "No se ha podido generar el partido"
+  }
 }
