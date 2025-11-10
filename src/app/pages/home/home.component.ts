@@ -7,6 +7,7 @@ import { ThemePalette } from '@angular/material/core';
 import { UserService } from '../../service/user.service';
 import Swal from 'sweetalert2';
 import { TranslateService } from '@ngx-translate/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -21,6 +22,7 @@ export class HomeComponent {
     public dialog: MatDialog,
     private userService: UserService,
     private cdr: ChangeDetectorRef,
+    private router: Router,
     private translate: TranslateService
   ) { }
 
@@ -37,6 +39,11 @@ export class HomeComponent {
 
   ngOnInit() {
     this.cargarDatos();
+
+    const userData = this.userService.getUserData();
+    if (userData.isAdmin) {
+      this.router.navigate(['/admin-home']);
+    };
   }
 
   cargarDatos() {

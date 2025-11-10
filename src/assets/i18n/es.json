@@ -169,7 +169,13 @@
     "errorRegistro": "Error al registrar el usuario. El email puede estar ya en uso.",
     "errorRegistroSwal": "Error al registrar el usuario",
     "usuarioRegistradoExito": "Usuario registrado correctamente",
-    "usuarioRegistradoVerificarCorreo": "Dirígete a la bandeja de entrada del correo que has usado para validarlo."
+    "usuarioRegistradoVerificarCorreo": "Dirígete a la bandeja de entrada del correo que has usado para validarlo.",
+    "sesionExpiradaTitulo": "Sesión expirada",
+    "sesionExpiradaTexto": "Tu sesión ha caducado o el token ya no es válido. Por favor, inicia sesión nuevamente.",
+    "sesionExpiradaAceptar": "Aceptar",
+    "sinPermisosTitulo": "Acceso denegado",
+    "sinPermisosTexto": "No tienes permisos para acceder a esta página. Serás redirigido al inicio.",
+    "sinPermisosAceptar": "Aceptar"
   },
   "bienvenidaMagentaBasket": "¡Bienvenido a Magenta Basket!",
   "noTienesCuenta": "¿Aún no tienes una cuenta?",

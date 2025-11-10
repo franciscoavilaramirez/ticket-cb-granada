@@ -63,6 +63,11 @@ const routes: Routes = [
     loadChildren: () =>
       import('./pages/email-confirmacion/email-confirmacion.module').then((m) => m.EmailConfirmacionModule),
   },
+  {
+    path: '**',
+    redirectTo: '/home',
+    pathMatch: 'full'
+  }
   // {
   //   path: 'tickets',
   //   component: ArchivosPDFComponent,
@@ -84,4 +89,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

@@ -164,7 +164,13 @@
     "errorRegistroSwal": "Error registering user",
     "usuarioRegistradoExito": "User successfully registered",
     "usuarioRegistradoVerificarCorreo": "Check your inbox to validate your account.",
-    "emailInvalid": "Email is invalid"
+    "emailInvalid": "Email is invalid",
+    "sesionExpiradaTitulo": "Session expired",
+    "sesionExpiradaTexto": "Your session has expired or the token is no longer valid. Please log in again.",
+    "sesionExpiradaAceptar": "OK",
+    "sinPermisosTitulo": "Access denied",
+    "sinPermisosTexto": "You do not have permission to access this page. You will be redirected to the home page.",
+    "sinPermisosAceptar": "OK"
   },
   "bienvenidaMagentaBasket": "Welcome to Magenta Basket!",
   "noTienesCuenta": "Don't have an account yet?",

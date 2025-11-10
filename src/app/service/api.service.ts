@@ -239,4 +239,9 @@ export class ApiService {
     });
   }
 
+  logout() {
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+  }
+
 }
